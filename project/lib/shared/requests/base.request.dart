@@ -1,0 +1,3 @@
+class BaseRequest {
+  String name;
+}
