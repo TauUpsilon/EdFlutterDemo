@@ -1,4 +1,4 @@
-import 'package:project/store/actions/api_req.action.dart';
+import 'package:project/store/actions/data_request.action.dart';
 import 'package:redux/redux.dart';
 
 void loggingMiddleware<State>(
@@ -6,7 +6,7 @@ void loggingMiddleware<State>(
   dynamic action,
   NextDispatcher next,
 ) {
-  if (action is ApiRequestAction) {
+  if (action is DataRequestAction) {
     print(
         "{\n\tAction: ${action.type},\n\tPayload: ${action.payload != null}\n}");
   }

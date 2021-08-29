@@ -1,11 +1,11 @@
-import 'package:project/shared/models/api_response.model.dart';
+import 'package:project/shared/models/data_room.model.dart';
 
 class AppState {
-  final ApiResponse apiResponse;
+  final DataRoom dataRoom;
 
-  AppState({this.apiResponse});
+  AppState({this.dataRoom});
 
   factory AppState.initial() => AppState(
-        apiResponse: ApiResponse.initial(),
+        dataRoom: DataRoom.initial(),
       );
 }
