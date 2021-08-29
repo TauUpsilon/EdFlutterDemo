@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:project/featured/pages/user/user.service.dart';
 import 'package:project/featured/pages/user/user_detail.page.dart';
 import 'package:project/main.locator.dart';
-import 'package:project/shared/models/api_response.model.dart';
+import 'package:project/shared/models/api_data.model.dart';
+import 'package:project/shared/models/data_room.model.dart';
 import 'package:project/shared/models/user.model.dart';
 
 var lastOffset = 0.0;
 
 class UserListPageModel {
-  final Stream<ApiResponse<User>> getUsers;
+  final Stream<ApiData<User>> getUsers;
 
   UserListPageModel({this.getUsers});
 }
@@ -36,14 +37,14 @@ class _UserListPageState extends State<UserListPage>
         ),
         body: StreamBuilder<UserListPageModel>(
             stream: Stream<UserListPageModel>.value(UserListPageModel(
-                getUsers: locator.get<UserService>().getUserDataStore())),
+                getUsers: locator.get<UserService>().getUsers('page=1'))),
             builder: (BuildContext context,
                 AsyncSnapshot<UserListPageModel> snapshot) {
               if (snapshot.hasData) {
-                return StreamBuilder<ApiResponse<User>>(
+                return StreamBuilder<ApiData<User>>(
                     stream: snapshot.data.getUsers,
                     builder: (BuildContext context,
-                        AsyncSnapshot<ApiResponse<User>> snapshot) {
+                        AsyncSnapshot<ApiData<User>> snapshot) {
                       if (snapshot.hasData) {
                         var res = snapshot.data;
 
@@ -56,7 +57,7 @@ class _UserListPageState extends State<UserListPage>
                             );
 
                           case ResponseStatus.SUCCESS:
-                            var dataSet = res.body.data;
+                            var dataSet = res.collection.data;
 
                             return Container(
                                 padding: EdgeInsets.all(4),
