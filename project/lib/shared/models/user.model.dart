@@ -2,23 +2,26 @@ import 'package:project/shared/decorators/imitable.decorator.dart';
 
 @imitable
 class User {
-  int id;
-  String name;
-  String email;
-  String gender;
-  String status;
-  bool selected;
+  int ID;
+  String NAME;
+  String EMAIL;
+  String GENDER;
+  String STATUS;
 
-  User(this.id, this.name, this.email, this.gender, this.status);
+  User({this.ID, this.NAME, this.EMAIL, this.GENDER, this.STATUS});
 
   static fromJson(Map<String, dynamic> json) => User(
-      json['id'], json['name'], json['email'], json['gender'], json['status']);
+      ID: json['id'],
+      NAME: json['name'],
+      EMAIL: json['email'],
+      GENDER: json['gender'],
+      STATUS: json['status']);
 
   Map<String, dynamic> toJson() => {
-        'id': id,
-        'name': name,
-        'email': email,
-        'gender': gender,
-        'status': status
+        'id': ID,
+        'name': NAME,
+        'email': EMAIL,
+        'gender': GENDER,
+        'status': STATUS
       };
 }

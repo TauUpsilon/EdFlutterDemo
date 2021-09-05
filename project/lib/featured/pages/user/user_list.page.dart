@@ -80,7 +80,7 @@ class _UserListPageState extends State<UserListPage>
                                           padding: const EdgeInsets.all(8.0),
                                           child: ListTile(
                                             title: Text(
-                                              'User $index - ${dataSet[index].name}',
+                                              'User $index - ${dataSet[index].NAME}',
                                               style: TextStyle(
                                                   fontSize: 20,
                                                   color: index % 2 == 0

@@ -20,7 +20,7 @@ class UserDetailPage extends StatelessWidget {
           padding: EdgeInsets.all(2),
           child: Container(
             child: Center(
-              child: Text(user.name),
+              child: Text(user.NAME),
             ),
           )),
     );
