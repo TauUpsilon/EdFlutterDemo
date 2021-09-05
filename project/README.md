@@ -16,9 +16,11 @@ With the FVM installed, you want install the flutter version with the commend be
 
 ------------
 
-You may want to see more detail through this link https://fvm.app/docs/guides/basic_commands
+You may want to see more detail through link below
+https://fvm.app/docs/guides/basic_commands
 
-For more setup including vscode config, you may want to watch this vedio https://www.youtube.com/watch?v=v9iRjM-K1SM&list=PLVnlSO6aQelAAddOFQVJNoaRGZ1mMsj2Q&t=14s
+For more setup including vscode config, you may want to watch vedio below
+https://www.youtube.com/watch?v=v9iRjM-K1SM&list=PLVnlSO6aQelAAddOFQVJNoaRGZ1mMsj2Q&t=14s
 
 ## Setup Reflectable
 
