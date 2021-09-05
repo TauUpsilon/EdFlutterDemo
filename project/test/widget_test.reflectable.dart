@@ -2,15 +2,21 @@
 // https://github.com/dart-lang/reflectable.
 
 import 'dart:core';
-
 import 'package:project/shared/decorators/imitable.decorator.dart' as prefix0;
+import 'package:project/shared/models/api_data.model.dart' as prefix2;
 import 'package:project/shared/models/user.model.dart' as prefix1;
+
+// ignore_for_file: prefer_adjacent_string_concatenation
+// ignore_for_file: prefer_collection_literals
+// ignore_for_file: unnecessary_const
+// ignore_for_file: implementation_imports
+
 // ignore:unused_import
 import 'package:reflectable/mirrors.dart' as m;
 // ignore:unused_import
-import 'package:reflectable/reflectable.dart' as r show Reflectable;
-// ignore:unused_import
 import 'package:reflectable/src/reflectable_builder_based.dart' as r;
+// ignore:unused_import
+import 'package:reflectable/reflectable.dart' as r show Reflectable;
 
 final _data = <r.Reflectable, r.ReflectorData>{
   const prefix0.Imitable(): r.ReflectorData(
@@ -28,8 +34,14 @@ final _data = <r.Reflectable, r.ReflectorData>{
             {r'fromJson': () => prefix1.User.fromJson},
             {},
             {
-              r'': (bool b) => (id, name, email, gender, status, selected) =>
-                  b ? prefix1.User(id, name, email, gender, status) : null
+              r'': (bool b) => ({ID, NAME, EMAIL, GENDER, STATUS}) => b
+                  ? prefix1.User(
+                      EMAIL: EMAIL,
+                      GENDER: GENDER,
+                      ID: ID,
+                      NAME: NAME,
+                      STATUS: STATUS)
+                  : null
             },
             -1,
             -1,
@@ -42,25 +54,58 @@ final _data = <r.Reflectable, r.ReflectorData>{
               r'hashCode': 1,
               r'runtimeType': 1,
               r'toJson': 1,
-              r'id': 1,
-              r'id=': 0,
-              r'name': 1,
-              r'name=': 0,
-              r'email': 1,
-              r'email=': 0,
-              r'gender': 1,
-              r'gender=': 0,
+              r'ID': 1,
+              r'ID=': 0,
+              r'NAME': 1,
+              r'NAME=': 0,
+              r'EMAIL': 1,
+              r'EMAIL=': 0,
+              r'GENDER': 1,
+              r'GENDER=': 0,
+              r'STATUS': 1,
+              r'STATUS=': 0,
+              r'fromJson': 0
+            }),
+        r.GenericClassMirrorImpl(
+            r'ApiData',
+            r'.ApiData',
+            7,
+            1,
+            const prefix0.Imitable(),
+            const <int>[-1],
+            null,
+            null,
+            -1,
+            {},
+            {},
+            {
+              r'': (bool b) => (status, collection) =>
+                  b ? prefix2.ApiData(status, collection) : null
+            },
+            -1,
+            -1,
+            const <int>[-1],
+            null,
+            {
+              r'==': 0,
+              r'toString': 1,
+              r'noSuchMethod': 0,
+              r'hashCode': 1,
+              r'runtimeType': 1,
               r'status': 1,
               r'status=': 0,
-              r'selected': 1,
-              r'selected=': 0,
-              r'fromJson': 0
-            })
+              r'collection': 1,
+              r'collection=': 0
+            }, (o) {
+          return o is prefix2.ApiData;
+        }, null, 1),
+        r.TypeVariableMirrorImpl(
+            r'T', r'.ApiData.T', const prefix0.Imitable(), -1, 1, null)
       ],
       null,
       null,
-      <Type>[prefix1.User],
-      1,
+      <Type>[prefix1.User, prefix2.ApiData],
+      2,
       {
         r'==': (dynamic instance) => (x) => instance == x,
         r'toString': (dynamic instance) => instance.toString,
@@ -68,26 +113,33 @@ final _data = <r.Reflectable, r.ReflectorData>{
         r'hashCode': (dynamic instance) => instance.hashCode,
         r'runtimeType': (dynamic instance) => instance.runtimeType,
         r'toJson': (dynamic instance) => instance.toJson,
-        r'id': (dynamic instance) => instance.id,
-        r'name': (dynamic instance) => instance.name,
-        r'email': (dynamic instance) => instance.email,
-        r'gender': (dynamic instance) => instance.gender,
+        r'ID': (dynamic instance) => instance.ID,
+        r'NAME': (dynamic instance) => instance.NAME,
+        r'EMAIL': (dynamic instance) => instance.EMAIL,
+        r'GENDER': (dynamic instance) => instance.GENDER,
+        r'STATUS': (dynamic instance) => instance.STATUS,
         r'status': (dynamic instance) => instance.status,
-        r'selected': (dynamic instance) => instance.selected
+        r'collection': (dynamic instance) => instance.collection
       },
       {
-        r'id=': (dynamic instance, value) => instance.id = value,
-        r'name=': (dynamic instance, value) => instance.name = value,
-        r'email=': (dynamic instance, value) => instance.email = value,
-        r'gender=': (dynamic instance, value) => instance.gender = value,
+        r'ID=': (dynamic instance, value) => instance.ID = value,
+        r'NAME=': (dynamic instance, value) => instance.NAME = value,
+        r'EMAIL=': (dynamic instance, value) => instance.EMAIL = value,
+        r'GENDER=': (dynamic instance, value) => instance.GENDER = value,
+        r'STATUS=': (dynamic instance, value) => instance.STATUS = value,
         r'status=': (dynamic instance, value) => instance.status = value,
-        r'selected=': (dynamic instance, value) => instance.selected = value
+        r'collection=': (dynamic instance, value) => instance.collection = value
       },
       null,
       [
         const [1, 0, null],
         const [0, 0, null],
-        const [6, 0, null]
+        const [
+          0,
+          0,
+          const [#ID, #NAME, #EMAIL, #GENDER, #STATUS]
+        ],
+        const [2, 0, null]
       ])
 };
 
