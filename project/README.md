@@ -1,16 +1,29 @@
-# project
+# Getting Started
 
-A new Flutter project.
+The flutter is managed by FVM (Flutter Version Management) so the FVM should be installed to setup this project. You may find the way of installation through this link https://fvm.app/docs/getting_started/installation.
 
-## Getting Started
+## Setup FVM
 
-This project is a starting point for a Flutter application.
+With the FVM installed, you want install the flutter version with the commend below:
 
-A few resources to get you started if this is your first Flutter project:
+### Install
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+	fvm install {version} - # Installs specific version.
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### Use
+
+	fvm use {version} - # Set cuurent use version
+
+------------
+
+You may want to see more detail through this link https://fvm.app/docs/guides/basic_commands
+
+For more setup including vscode config, you may want to watch this vedio https://www.youtube.com/watch?v=v9iRjM-K1SM&list=PLVnlSO6aQelAAddOFQVJNoaRGZ1mMsj2Q&t=14s
+
+## Setup Reflectable
+
+Before you run this project, you may want to build the Reflectable classes set in this project. This project uses a mirror technology to call static methods when it comes to a function taking generic type input.
+
+As we use FVM to manage our flutter version so you may want run the commend below to generate the Reflectable script.
+
+    fvm flutter packages pub run build_runner build lib
