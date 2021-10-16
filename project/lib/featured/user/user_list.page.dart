@@ -66,11 +66,9 @@ class _UserListPageState extends State<UserListPage>
                                   itemBuilder: (context, index) {
                                     return InkWell(
                                       onTap: () {
-                                        Navigator.of(context)
-                                            .push(MaterialPageRoute(
-                                                builder: (_) => UserDetailPage(
-                                                      user: dataSet[index],
-                                                    )));
+                                        Navigator.of(context).pushNamed(
+                                            '/user/user_detail',
+                                            arguments: dataSet[index]);
                                       },
                                       child: Card(
                                         color: index % 2 == 0

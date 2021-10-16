@@ -26,6 +26,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _onTap(int index) {
+    print('Tap is on ${index}');
     this._pageCtrl.jumpToPage(index);
   }
 
@@ -69,13 +70,13 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           BottomNavigationBarItem(
-            label: 'Setting',
+            label: 'Playground',
             icon: Icon(
-              Icons.settings,
+              Icons.play_circle,
               color: Colors.blueGrey[400],
             ),
             activeIcon: Icon(
-              Icons.settings,
+              Icons.play_circle,
               color: Colors.blueGrey[100],
             ),
           ),

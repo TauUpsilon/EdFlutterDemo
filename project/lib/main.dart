@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
       onGenerateRoute: RouteGenerator.generateRoute,
       theme: ThemeData(
           primaryColor: Colors.grey[900],
-          buttonColor: Colors.blueGrey,
+          // buttonColor: Colors.blueGrey,
           floatingActionButtonTheme: FloatingActionButtonThemeData(
               backgroundColor: Colors.blueGrey,
               foregroundColor: Colors.grey[200])),

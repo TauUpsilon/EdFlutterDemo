@@ -8,7 +8,7 @@ class SettingsWidget extends StatelessWidget {
       appBar: AppBar(
         centerTitle: true,
         title: Text(
-          'Settings',
+          'Playground',
           style: TextStyle(fontSize: 13),
         ),
       ),
