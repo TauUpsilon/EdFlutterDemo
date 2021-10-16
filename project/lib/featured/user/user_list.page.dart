@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:project/featured/user/user.service.dart';
 import 'package:project/featured/user/user_detail.page.dart';
 import 'package:project/main.locator.dart';
+import 'package:project/shared/bases/base_widget.state.dart';
 import 'package:project/shared/models/api_data.model.dart';
 import 'package:project/shared/models/data_room.model.dart';
 import 'package:project/shared/models/user.model.dart';
-
-var lastOffset = 0.0;
 
 class UserListPageModel {
   final Stream<ApiData<User>> getUsers;
@@ -19,7 +18,7 @@ class UserListPage extends StatefulWidget {
   _UserListPageState createState() => _UserListPageState();
 }
 
-class _UserListPageState extends State<UserListPage>
+class _UserListPageState extends BaseWidgetState<UserListPage>
     with AutomaticKeepAliveClientMixin {
   // var _scrollCtrl = ScrollController();
 

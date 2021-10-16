@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:project/featured/home/widgets/home.widget.dart';
 import 'package:project/featured/home/widgets/profile.widget.dart';
-import 'package:project/featured/home/widgets/settings.widget.dart';
+import 'package:project/featured/home/widgets/playground.widget.dart';
+import 'package:project/shared/bases/base_widget.state.dart';
 
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends BaseWidgetState<HomePage> {
   static int _selectedTap = 1;
 
   PageController _pageCtrl = PageController(initialPage: _selectedTap);
@@ -16,7 +17,7 @@ class _HomePageState extends State<HomePage> {
   List<Widget> _tapWidgets = <Widget>[
     ProfileWidget(),
     HomeWidget(),
-    SettingsWidget()
+    PlaygroundWidget()
   ];
 
   void _onPageChanged(int index) {
@@ -26,14 +27,14 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _onTap(int index) {
-    print('Tap is on ${index}');
+    print('Home tap is on ${_tapWidgets[index]}');
     this._pageCtrl.jumpToPage(index);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blueGrey[50],
+      backgroundColor: Colors.black87,
       body: PageView(
         controller: this._pageCtrl,
         children: this._tapWidgets,
@@ -41,23 +42,22 @@ class _HomePageState extends State<HomePage> {
         physics: NeverScrollableScrollPhysics(),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.black87,
         showSelectedLabels: false,
         showUnselectedLabels: false,
         currentIndex: _selectedTap,
         onTap: this._onTap,
         items: [
           BottomNavigationBarItem(
-            label: 'Profile',
-            icon: Icon(
-              Icons.person,
-              color: Colors.blueGrey[400],
-            ),
-            activeIcon: Icon(
-              Icons.person,
-              color: Colors.blueGrey[100],
-            ),
-          ),
+              label: 'Profile',
+              icon: Icon(
+                Icons.person,
+                color: Colors.blueGrey[400],
+              ),
+              activeIcon: Icon(
+                Icons.person,
+                color: Colors.blueGrey[100],
+              )),
           BottomNavigationBarItem(
             label: 'Home',
             icon: Icon(

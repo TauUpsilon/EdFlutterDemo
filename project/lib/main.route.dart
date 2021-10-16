@@ -9,7 +9,7 @@ class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     final args = settings.arguments;
 
-    print('Router settings name is - ${settings.name}');
+    print('Route is at - ${settings.name}');
 
     switch (settings.name) {
       case '/':
