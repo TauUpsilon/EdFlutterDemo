@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:project/featured/pages/user/user.service.dart';
-import 'package:project/featured/pages/user/user_detail.page.dart';
+import 'package:project/featured/user/user.service.dart';
+import 'package:project/featured/user/user_detail.page.dart';
 import 'package:project/main.locator.dart';
 import 'package:project/shared/models/api_data.model.dart';
 import 'package:project/shared/models/data_room.model.dart';

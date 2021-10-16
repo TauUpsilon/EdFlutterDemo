@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:project/featured/pages/home/home.page.dart';
-import 'package:project/featured/pages/user/user_list.page.dart';
+import 'package:project/featured/home/home.page.dart';
+import 'package:project/featured/user/user_list.page.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {

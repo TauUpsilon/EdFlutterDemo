@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:project/featured/pages/home/widgets/home.widget.dart';
-import 'package:project/featured/pages/home/widgets/profile.widget.dart';
-import 'package:project/featured/pages/home/widgets/settings.widget.dart';
+import 'package:project/featured/home/widgets/home.widget.dart';
+import 'package:project/featured/home/widgets/profile.widget.dart';
+import 'package:project/featured/home/widgets/settings.widget.dart';
 
 class HomePage extends StatefulWidget {
   @override
