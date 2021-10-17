@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:project/featured/demo/pages/demo_list.page.dart';
 import 'package:project/featured/demo/pages/rx/rx_behaviour_subject.page.dart';
 import 'package:project/featured/demo/pages/rx/rx_list.page.dart';
+import 'package:project/featured/demo/pages/rx/rx_combine_latest_stream.page.dart';
 import 'package:project/featured/home/home.page.dart';
 import 'package:project/featured/user/pages/user_detail.page.dart';
 import 'package:project/featured/user/pages/user_list.page.dart';
@@ -54,6 +55,9 @@ class RouteGenerator {
 
       case '/demo/rx/behaviour_subject':
         return MaterialPageRoute(builder: (_) => RXBehaviourSubjectPage());
+
+      case '/demo/rx/conbine_latest_stream':
+        return MaterialPageRoute(builder: (_) => RXCombineLatestStreamPage());
 
       default:
         return MaterialPageRoute(builder: (_) => ErrorPage());

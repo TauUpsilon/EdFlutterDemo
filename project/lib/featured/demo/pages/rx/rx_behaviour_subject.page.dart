@@ -19,8 +19,6 @@ class _RXBehaviourSubjectPageState
   var figureSubject =
       new BehaviorSubject<Map<String, String>>.seeded(figures['king']);
 
-  var d = new PublishSubject<int>();
-
   var figure = new Map<String, String>.from(figures['king']);
 
   @override
