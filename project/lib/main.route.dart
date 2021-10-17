@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:project/featured/demo/pages/demo_list.page.dart';
+import 'package:project/featured/demo/pages/rx/rx_behaviour_subject.page.dart';
+import 'package:project/featured/demo/pages/rx/rx_list.page.dart';
 import 'package:project/featured/home/home.page.dart';
-import 'package:project/featured/user/user_detail.page.dart';
-import 'package:project/featured/user/user_list.page.dart';
+import 'package:project/featured/user/pages/user_detail.page.dart';
+import 'package:project/featured/user/pages/user_list.page.dart';
 import 'package:project/shared/models/user.model.dart';
 import 'package:project/shared/pages/error.page.dart';
 
@@ -14,6 +17,7 @@ class RouteGenerator {
     switch (settings.name) {
       case '/':
         return MaterialPageRoute(builder: (_) => HomePage());
+
       case '/user':
         return MaterialPageRoute(builder: (_) => UserListPage());
       // return PageRouteBuilder(
@@ -42,8 +46,17 @@ class RouteGenerator {
 
         return MaterialPageRoute(builder: (_) => ErrorPage());
 
+      case '/demo':
+        return MaterialPageRoute(builder: (_) => DemoListPage());
+
+      case '/demo/rx':
+        return MaterialPageRoute(builder: (_) => RXListPage());
+
+      case '/demo/rx/behaviour_subject':
+        return MaterialPageRoute(builder: (_) => RXBehaviourSubjectPage());
+
       default:
-        return MaterialPageRoute(builder: (_) => HomePage());
+        return MaterialPageRoute(builder: (_) => ErrorPage());
     }
   }
 }

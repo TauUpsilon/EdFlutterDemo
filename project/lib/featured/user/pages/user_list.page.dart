@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:project/featured/user/user.service.dart';
-import 'package:project/featured/user/user_detail.page.dart';
 import 'package:project/main.locator.dart';
 import 'package:project/shared/bases/base_widget.state.dart';
 import 'package:project/shared/models/api_data.model.dart';
@@ -18,17 +17,13 @@ class UserListPage extends StatefulWidget {
   _UserListPageState createState() => _UserListPageState();
 }
 
-class _UserListPageState extends BaseWidgetState<UserListPage>
-    with AutomaticKeepAliveClientMixin {
-  // var _scrollCtrl = ScrollController();
-
+class _UserListPageState extends BaseWidgetState<UserListPage> {
   @override
   Widget build(BuildContext context) {
-    super.build(context);
-
     return Scaffold(
         appBar: AppBar(
           centerTitle: true,
+          backgroundColor: Colors.black87,
           title: Text(
             'User List',
             style: TextStyle(fontSize: 13),
@@ -118,7 +113,4 @@ class _UserListPageState extends BaseWidgetState<UserListPage>
               );
             }));
   }
-
-  @override
-  bool get wantKeepAlive => true;
 }

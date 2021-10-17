@@ -17,6 +17,7 @@ class _UserDetailPageState extends BaseWidgetState<UserDetailPage> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
+        backgroundColor: Colors.black87,
         title: Text(
           'User List',
           style: TextStyle(fontSize: 13),

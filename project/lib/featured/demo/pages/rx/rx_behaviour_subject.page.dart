@@ -1,0 +1,110 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:project/shared/bases/base_widget.state.dart';
+import 'package:rxdart/rxdart.dart';
+
+class RXBehaviourSubjectPage extends StatefulWidget {
+  @override
+  _RXBehaviourSubjectPageState createState() => _RXBehaviourSubjectPageState();
+}
+
+class _RXBehaviourSubjectPageState
+    extends BaseWidgetState<RXBehaviourSubjectPage> {
+  static const figures = {
+    'king': {'name': 'king', 'said': 'Protect the people'},
+    'queen': {'name': 'queen', 'said': 'Love the people'},
+    'knight': {'name': 'knight', 'said': 'Charge...'},
+  };
+
+  var figureSubject =
+      new BehaviorSubject<Map<String, String>>.seeded(figures['king']);
+
+  var d = new PublishSubject<int>();
+
+  var figure = new Map<String, String>.from(figures['king']);
+
+  @override
+  void initState() {
+    super.initState();
+    this.figureSubject.listen((value) {
+      setState(() {
+        this.figure = value;
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+
+    this.figureSubject.close();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: Text(
+          'RX Behaviour Subject',
+          style: TextStyle(fontSize: 13),
+        ),
+        backgroundColor: Colors.black87,
+      ),
+      body: Container(
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.15,
+                  child: ListView.builder(
+                      itemCount: figures.length,
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (context, index) => Container(
+                            height: 100,
+                            width: 105,
+                            margin: EdgeInsets.all(10),
+                            color: Colors.blueGrey[900],
+                            child: TextButton(
+                              style: TextButton.styleFrom(
+                                padding: const EdgeInsets.all(16.0),
+                                // primary: Colors.white,
+                                textStyle: const TextStyle(fontSize: 13),
+                              ),
+                              onPressed: () {
+                                figureSubject.add(
+                                    figures[figures.keys.elementAt(index)]);
+                              },
+                              child: Text(
+                                '${figures[figures.keys.elementAt(index)]['name'].toUpperCase()}',
+                                style: TextStyle(color: Colors.white),
+                              ),
+                            ),
+                          ))),
+              Container(
+                height: MediaQuery.of(context).size.height * 0.60,
+                margin: EdgeInsets.all(10),
+                color: Colors.black45,
+                child: Center(
+                    child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      '${this.figure['name'].toUpperCase()}',
+                      style: TextStyle(fontSize: 70, color: Colors.white),
+                    ),
+                    SizedBox(height: 10),
+                    Text(
+                      '${this.figure['said']}',
+                      style: TextStyle(fontSize: 35, color: Colors.white),
+                    ),
+                  ],
+                )),
+              )
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
