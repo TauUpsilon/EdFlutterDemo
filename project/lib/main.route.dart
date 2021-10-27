@@ -3,6 +3,7 @@ import 'package:project/featured/demo/pages/demo_list.page.dart';
 import 'package:project/featured/demo/pages/rx/rx_behaviour_subject.page.dart';
 import 'package:project/featured/demo/pages/rx/rx_list.page.dart';
 import 'package:project/featured/demo/pages/rx/rx_combine_latest_stream.page.dart';
+import 'package:project/featured/demo/pages/rx/rx_skip_while.page.dart';
 import 'package:project/featured/home/home.page.dart';
 import 'package:project/featured/user/pages/user_detail.page.dart';
 import 'package:project/featured/user/pages/user_list.page.dart';
@@ -58,6 +59,9 @@ class RouteGenerator {
 
       case '/demo/rx/conbine_latest_stream':
         return MaterialPageRoute(builder: (_) => RXCombineLatestStreamPage());
+
+      case '/demo/rx/skip_while_operator':
+        return MaterialPageRoute(builder: (_) => RXSkipWhileOperatorPage());
 
       default:
         return MaterialPageRoute(builder: (_) => ErrorPage());

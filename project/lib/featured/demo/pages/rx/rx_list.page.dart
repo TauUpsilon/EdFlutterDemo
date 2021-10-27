@@ -10,6 +10,7 @@ class _RXListPageState extends BaseWidgetState<RXListPage> {
   static const tabList = [
     {'name': 'Bahaviour Subject', 'url': '/demo/rx/behaviour_subject'},
     {'name': 'Conbine Latest Stream', 'url': '/demo/rx/conbine_latest_stream'},
+    {'name': 'Skip While Operator', 'url': '/demo/rx/skip_while_operator'},
   ];
 
   @override

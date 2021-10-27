@@ -9,6 +9,11 @@ class PlaygroundWidget extends StatefulWidget {
 
 class _PlaygroundWidgetState extends BaseWidgetState<PlaygroundWidget> {
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(

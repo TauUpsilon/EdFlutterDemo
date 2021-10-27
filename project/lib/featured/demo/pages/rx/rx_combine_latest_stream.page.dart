@@ -27,7 +27,7 @@ class _RXCombineLatestStreamPageState
 
     this
         .mergeSubject
-        .switchMap((value) => CombineLatestStream.combine2(
+        .switchMap((_) => CombineLatestStream.combine2(
                 this.figureStream, this.carryStream, (figure, carry) {
               return '${figure['name']} - ${carry['name']}';
             }))
@@ -51,7 +51,7 @@ class _RXCombineLatestStreamPageState
       appBar: AppBar(
         centerTitle: true,
         title: Text(
-          'RX Merge Stream',
+          'RX Combine Latest Stream',
           style: TextStyle(fontSize: 13),
         ),
         backgroundColor: Colors.black87,
