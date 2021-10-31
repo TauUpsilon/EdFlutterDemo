@@ -12,14 +12,32 @@ class RXSkipWhileOperatorPage extends StatefulWidget {
 class _RXSkipWhileOperatorPageState
     extends BaseWidgetState<RXSkipWhileOperatorPage> {
   static const source = [
-    {'status': 'loading', 'value': null},
+    {
+      'status': 'loading',
+      'value': null,
+    },
     {
       'status': 'done',
-      'value': {'name': 'Edward', 'gender': 'Male'}
+      'value': {
+        'name': 'Edward',
+        'gender': 'Male',
+      },
     }
   ];
 
   var userSubject = new BehaviorSubject();
+
+  formatUserData(Map<String, Object> res) {
+    String outputString;
+
+    if (res['status'] == 'done') {
+      var value = res['value'] as Map<String, Object>;
+
+      outputString = '${value['name']} - ${value['gender']}';
+    }
+
+    return Stream.value(outputString);
+  }
 
   @override
   void initState() {
@@ -29,26 +47,9 @@ class _RXSkipWhileOperatorPageState
 
     userSubject
         .switchMap((value) => userStream
-                .skipWhile((element) => element['status'] == 'loading')
-                .switchMap((res) {
-              String outputString;
-
-              if (res['status'] == 'done') {
-                var value = res['value'] as Map<String, Object>;
-
-                outputString = '${value['name']} - ${value['gender']}';
-              }
-
-              return Stream.value(outputString);
-            }))
-        .listen((event) {
-      print('---------');
-      print('--------');
-      print('---------');
-      print('--------');
-      print('---------');
-      print(event);
-    });
+            .skipWhile((element) => element['status'] == 'loading')
+            .switchMap((res) => formatUserData(res)))
+        .listen((event) => print(event));
 
     userSubject.add(null);
   }

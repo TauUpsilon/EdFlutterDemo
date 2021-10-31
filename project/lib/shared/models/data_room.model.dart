@@ -3,19 +3,35 @@ import 'package:project/shared/models/meta.model.dart';
 enum ResponseStatus { SUCCESS, FAILURE, LOADING }
 
 class DataRoom {
-  ResponseStatus status;
-  Map<String, Collection<dynamic>> collections;
+  ResponseStatus STATUS;
+  Map<String, Collection<dynamic>> COLLECTIONS;
 
-  DataRoom({this.status, this.collections});
+  DataRoom({
+    this.STATUS,
+    this.COLLECTIONS,
+  });
 
-  factory DataRoom.initial() => DataRoom(status: null, collections: new Map());
+  static initial() {
+    return DataRoom(
+      STATUS: null,
+      COLLECTIONS: new Map(),
+    );
+  }
 }
 
 class Collection<T> {
-  Meta meta;
-  List<T> data;
+  Meta META;
+  List<T> DATA;
 
-  Collection({this.meta, this.data});
+  Collection({
+    this.META,
+    this.DATA,
+  });
 
-  factory Collection.initial() => Collection(meta: new Meta(), data: []);
+  static initial() {
+    return Collection(
+      META: new Meta(),
+      DATA: [],
+    );
+  }
 }

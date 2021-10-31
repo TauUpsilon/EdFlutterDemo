@@ -16,34 +16,37 @@ class _HomeWidgetState extends BaseWidgetState<HomeWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          centerTitle: true,
-          backgroundColor: Colors.black87,
-          title: Text(
-            'Home',
-            style: TextStyle(fontSize: 13),
-          ),
+      appBar: AppBar(
+        centerTitle: true,
+        backgroundColor: Colors.black87,
+        title: Text(
+          'Home',
+          style: TextStyle(fontSize: 13),
         ),
-        body: Center(
-            child: ListView.builder(
-                itemCount: tabList.length,
-                itemBuilder: (context, index) {
-                  return InkWell(
-                    onTap: () {
-                      Navigator.of(context).pushNamed(tabList[index]['url']);
-                    },
-                    child: Card(
-                      child: Padding(
-                        padding: const EdgeInsets.all(12),
-                        child: Center(
-                          child: Text(
-                            '${tabList[index]['name']} List',
-                            style: TextStyle(fontSize: 20),
-                          ),
-                        ),
-                      ),
+      ),
+      body: Center(
+        child: ListView.builder(
+          itemCount: tabList.length,
+          itemBuilder: (context, index) {
+            return InkWell(
+              onTap: () {
+                Navigator.of(context).pushNamed(tabList[index]['url']);
+              },
+              child: Card(
+                child: Padding(
+                  padding: const EdgeInsets.all(12),
+                  child: Center(
+                    child: Text(
+                      '${tabList[index]['name']} List',
+                      style: TextStyle(fontSize: 20),
                     ),
-                  );
-                })));
+                  ),
+                ),
+              ),
+            );
+          },
+        ),
+      ),
+    );
   }
 }

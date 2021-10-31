@@ -10,32 +10,35 @@ class RXBehaviourSubjectPage extends StatefulWidget {
 
 class _RXBehaviourSubjectPageState
     extends BaseWidgetState<RXBehaviourSubjectPage> {
-  static const figures = {
+  static const sources = {
     'king': {'name': 'king', 'said': 'Protect the people'},
     'queen': {'name': 'queen', 'said': 'Love the people'},
     'knight': {'name': 'knight', 'said': 'Charge...'},
   };
 
-  var figureSubject =
-      new BehaviorSubject<Map<String, String>>.seeded(figures['king']);
+  var sourceSubject =
+      new BehaviorSubject<Map<String, String>>.seeded(sources['king']);
 
-  var figure = new Map<String, String>.from(figures['king']);
+  var source = new Map<String, String>.from(sources['king']);
 
   @override
   void initState() {
     super.initState();
-    this.figureSubject.listen((value) {
-      setState(() {
-        this.figure = value;
-      });
-    });
+
+    this.sourceSubject.listen(
+          (value) => setState(
+            () {
+              this.source = value;
+            },
+          ),
+        );
   }
 
   @override
   void dispose() {
     super.dispose();
 
-    this.figureSubject.close();
+    this.sourceSubject.close();
   }
 
   @override
@@ -54,50 +57,60 @@ class _RXBehaviourSubjectPageState
           child: Column(
             children: [
               SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.15,
-                  child: ListView.builder(
-                      itemCount: figures.length,
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) => Container(
-                            height: 100,
-                            width: 105,
-                            margin: EdgeInsets.all(10),
-                            color: Colors.blueGrey[900],
-                            child: TextButton(
-                              style: TextButton.styleFrom(
-                                padding: const EdgeInsets.all(16.0),
-                                // primary: Colors.white,
-                                textStyle: const TextStyle(fontSize: 13),
-                              ),
-                              onPressed: () {
-                                figureSubject.add(
-                                    figures[figures.keys.elementAt(index)]);
-                              },
-                              child: Text(
-                                '${figures[figures.keys.elementAt(index)]['name'].toUpperCase()}',
-                                style: TextStyle(color: Colors.white),
-                              ),
-                            ),
-                          ))),
+                height: MediaQuery.of(context).size.height * 0.15,
+                child: ListView.builder(
+                  itemCount: sources.length,
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (context, index) => Container(
+                    height: 100,
+                    width: 105,
+                    margin: EdgeInsets.all(10),
+                    color: Colors.blueGrey[900],
+                    child: TextButton(
+                      style: TextButton.styleFrom(
+                        padding: const EdgeInsets.all(16.0),
+                        // primary: Colors.white,
+                        textStyle: const TextStyle(fontSize: 13),
+                      ),
+                      onPressed: () {
+                        sourceSubject.add(
+                          sources[sources.keys.elementAt(index)],
+                        );
+                      },
+                      child: Text(
+                        '${sources[sources.keys.elementAt(index)]['name'].toUpperCase()}',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
               Container(
                 height: MediaQuery.of(context).size.height * 0.60,
                 margin: EdgeInsets.all(10),
                 color: Colors.black45,
                 child: Center(
-                    child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      '${this.figure['name'].toUpperCase()}',
-                      style: TextStyle(fontSize: 70, color: Colors.white),
-                    ),
-                    SizedBox(height: 10),
-                    Text(
-                      '${this.figure['said']}',
-                      style: TextStyle(fontSize: 35, color: Colors.white),
-                    ),
-                  ],
-                )),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        '${this.source['name'].toUpperCase()}',
+                        style: TextStyle(
+                          fontSize: 70,
+                          color: Colors.white,
+                        ),
+                      ),
+                      SizedBox(height: 10),
+                      Text(
+                        '${this.source['said']}',
+                        style: TextStyle(
+                          fontSize: 35,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               )
             ],
           ),

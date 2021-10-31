@@ -14,12 +14,13 @@ class ErrorPage extends StatelessWidget {
         ),
       ),
       body: Container(
-          padding: EdgeInsets.all(2),
-          child: Container(
-            child: Center(
-              child: Text('ERROR'),
-            ),
-          )),
+        padding: EdgeInsets.all(2),
+        child: Container(
+          child: Center(
+            child: Text('ERROR'),
+          ),
+        ),
+      ),
     );
   }
 }

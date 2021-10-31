@@ -5,7 +5,10 @@ import 'package:project/shared/models/user.model.dart';
 class UserDetailPage extends StatefulWidget {
   final User user;
 
-  const UserDetailPage({Key key, this.user}) : super(key: key);
+  const UserDetailPage({
+    Key key,
+    this.user,
+  }) : super(key: key);
 
   @override
   State<UserDetailPage> createState() => _UserDetailPageState();
@@ -24,12 +27,13 @@ class _UserDetailPageState extends BaseWidgetState<UserDetailPage> {
         ),
       ),
       body: Container(
-          padding: EdgeInsets.all(2),
-          child: Container(
-            child: Center(
-              child: Text(widget.user.NAME),
-            ),
-          )),
+        padding: EdgeInsets.all(2),
+        child: Container(
+          child: Center(
+            child: Text(widget.user.NAME),
+          ),
+        ),
+      ),
     );
   }
 }

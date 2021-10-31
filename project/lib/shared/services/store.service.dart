@@ -1,16 +1,16 @@
 import 'package:project/shared/middlewares/logger.middleware.dart';
-import 'package:project/store/reducers/app.reducer.dart';
-import 'package:project/store/states/app.state.dart';
+import 'package:project/store/app/app.reducer.dart';
+import 'package:project/shared/models/app.model.dart';
 import 'package:redux/redux.dart';
 
 class StoreService {
-  final _store = Store<AppState>(
+  final _store = Store<AppModel>(
     appReducer,
-    initialState: AppState.initial(),
+    initialState: AppModel.initial(),
     middleware: [loggingMiddleware],
   );
 
-  Store<AppState> get store {
+  Store<AppModel> get store {
     return _store;
   }
 }

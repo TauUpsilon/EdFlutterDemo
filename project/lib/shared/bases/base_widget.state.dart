@@ -9,7 +9,9 @@ class BaseWidgetState<T extends StatefulWidget> extends State<T> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(
+    BuildContext context,
+  ) {
     throw UnimplementedError();
   }
 }

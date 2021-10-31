@@ -36,9 +36,9 @@ dependencies:
   # State Management
   flutter_redux: ^0.8.2
 
-  reflectable: ^2.2.9
+  reflectable: ^3.0.4
 
-  build_runner: ^1.10.0
+  build_runner: ^2.0.1
 
 dev_dependencies:
   flutter_test:

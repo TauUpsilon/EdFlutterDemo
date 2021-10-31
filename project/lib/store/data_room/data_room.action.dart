@@ -3,11 +3,16 @@ import 'package:reflectable/reflectable.dart';
 
 enum ActionType { LOADING, SUCCESS, FAILURE }
 
-class DataRequestAction {
+class DataRoomAction {
   ActionType type;
   Map<String, dynamic> payload;
   BaseRequest request;
   ClassMirror mirror;
 
-  DataRequestAction({this.type, this.payload, this.request, this.mirror});
+  DataRoomAction({
+    this.type,
+    this.payload,
+    this.request,
+    this.mirror,
+  });
 }

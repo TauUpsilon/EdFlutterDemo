@@ -12,18 +12,22 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends BaseWidgetState<HomePage> {
   static int _selectedTap = 1;
 
-  PageController _pageCtrl = PageController(initialPage: _selectedTap);
+  PageController _pageCtrl = PageController(
+    initialPage: _selectedTap,
+  );
 
   List<Widget> _tapWidgets = <Widget>[
     ProfileWidget(),
     HomeWidget(),
-    PlaygroundWidget()
+    PlaygroundWidget(),
   ];
 
   void _onPageChanged(int index) {
-    setState(() {
-      _selectedTap = index;
-    });
+    setState(
+      () {
+        _selectedTap = index;
+      },
+    );
   }
 
   void _onTap(int index) {
@@ -49,15 +53,16 @@ class _HomePageState extends BaseWidgetState<HomePage> {
         onTap: this._onTap,
         items: [
           BottomNavigationBarItem(
-              label: 'Profile',
-              icon: Icon(
-                Icons.person,
-                color: Colors.blueGrey[400],
-              ),
-              activeIcon: Icon(
-                Icons.person,
-                color: Colors.blueGrey[100],
-              )),
+            label: 'Profile',
+            icon: Icon(
+              Icons.person,
+              color: Colors.blueGrey[400],
+            ),
+            activeIcon: Icon(
+              Icons.person,
+              color: Colors.blueGrey[100],
+            ),
+          ),
           BottomNavigationBarItem(
             label: 'Home',
             icon: Icon(

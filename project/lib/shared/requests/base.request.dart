@@ -1,7 +1,12 @@
-enum RequestMethod { GET, POST, PUT, DELETE }
+enum RequestMethod {
+  GET,
+  POST,
+  PUT,
+  DELETE,
+}
 
 class BaseRequest {
-  RequestMethod method;
-  String name;
-  String uri;
+  RequestMethod METHOD;
+  String NAME;
+  String URI;
 }

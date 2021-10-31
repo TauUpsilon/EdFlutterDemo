@@ -1,51 +1,85 @@
 class Meta {
-  final Pagination pagination;
+  final Pagination PAGINATION;
 
-  Meta({this.pagination});
+  Meta({
+    this.PAGINATION,
+  });
 
-  Meta.fromJson(Map<String, dynamic> json)
-      : pagination = Pagination.fromJson(json['pagination']);
+  static fromJson(Map<String, dynamic> json) {
+    return Meta(
+      PAGINATION: Pagination.fromJson(
+        json['pagination'],
+      ),
+    );
+  }
 
-  Map<String, dynamic> toJson() => {'pagination': pagination.toJson()};
+  Map<String, dynamic> toJson() {
+    return {
+      'pagination': PAGINATION.toJson(),
+    };
+  }
 }
 
 class Pagination {
-  final int total;
-  final int pages;
-  final int page;
-  final int limit;
-  final Links links;
+  final int TOTAL;
+  final int PAGES;
+  final int PAGE;
+  final int LIMIT;
+  final Links LINKS;
 
-  Pagination({this.total, this.pages, this.page, this.limit, this.links});
+  Pagination({
+    this.TOTAL,
+    this.PAGES,
+    this.PAGE,
+    this.LIMIT,
+    this.LINKS,
+  });
 
-  Pagination.fromJson(Map<String, dynamic> json)
-      : total = json['total'],
-        pages = json['pages'],
-        page = json['page'],
-        limit = json['limit'],
-        links = Links.fromJson(json['links']);
+  static fromJson(Map<String, dynamic> json) {
+    return Pagination(
+      TOTAL: json['total'],
+      PAGES: json['pages'],
+      PAGE: json['page'],
+      LIMIT: json['limit'],
+      LINKS: Links.fromJson(json['links']),
+    );
+  }
 
-  Map<String, dynamic> toJson() => {
-        'total': total,
-        'pages': pages,
-        'page': page,
-        'limit': limit,
-        'links': links.toJson()
-      };
+  Map<String, dynamic> toJson() {
+    return {
+      'total': TOTAL,
+      'pages': PAGES,
+      'page': PAGE,
+      'limit': LIMIT,
+      'links': LINKS.toJson(),
+    };
+  }
 }
 
 class Links {
-  final String previous;
-  final String current;
-  final String next;
+  final String PREVIOUS;
+  final String CURRENT;
+  final String NEXT;
 
-  Links({this.previous, this.current, this.next});
+  Links({
+    this.PREVIOUS,
+    this.CURRENT,
+    this.NEXT,
+  });
 
-  Links.fromJson(Map<String, dynamic> json)
-      : previous = json['previous'],
-        current = json['current'],
-        next = json['next'];
+  static fromJson(Map<String, dynamic> json) {
+    return Links(
+      PREVIOUS: json['previous'],
+      CURRENT: json['current'],
+      NEXT: json['next'],
+    );
+  }
 
-  Map<String, dynamic> toJson() =>
-      {'previous': previous, 'current': current, 'next': next};
+  Map<String, dynamic> toJson() {
+    return {
+      'previous': PREVIOUS,
+      'current': CURRENT,
+      'next': NEXT,
+    };
+  }
 }

@@ -18,10 +18,12 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       onGenerateRoute: RouteGenerator.generateRoute,
       theme: ThemeData(
-          primaryColor: Colors.grey[900],
-          floatingActionButtonTheme: FloatingActionButtonThemeData(
-              backgroundColor: Colors.blueGrey,
-              foregroundColor: Colors.grey[200])),
+        primaryColor: Colors.grey[900],
+        floatingActionButtonTheme: FloatingActionButtonThemeData(
+          backgroundColor: Colors.blueGrey,
+          foregroundColor: Colors.grey[200],
+        ),
+      ),
     );
   }
 }

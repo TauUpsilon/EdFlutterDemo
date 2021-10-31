@@ -1,4 +1,4 @@
-import 'package:project/store/actions/data_request.action.dart';
+import 'package:project/store/data_room/data_room.action.dart';
 import 'package:redux/redux.dart';
 
 void loggingMiddleware<State>(
@@ -6,9 +6,10 @@ void loggingMiddleware<State>(
   dynamic action,
   NextDispatcher next,
 ) {
-  if (action is DataRequestAction) {
+  if (action is DataRoomAction) {
     print(
-        "{\n\tAction: ${action.type},\n\tPayload: ${action.payload != null}\n}");
+      "{\n\tAction: ${action.type},\n\tPayload: ${action.payload != null}\n}",
+    );
   }
 
   next(action);

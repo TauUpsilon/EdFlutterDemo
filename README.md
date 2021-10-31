@@ -6,10 +6,10 @@ The Flutter version is managed by FVM and the application of Redux and Rx is ava
 
 ### Packages
 
-  - build_runner: ^1.10.0
+  - build_runner: ^2.0.1
   - cupertino_icons: ^0.1.2
   - http: ^0.13.3
   - rxdart: ^0.27.1
   - flutter_redux: ^0.8.2
   - get_it: ^7.2.0 
-  - reflectable: ^2.2.9
+  - reflectable: ^3.0.4
