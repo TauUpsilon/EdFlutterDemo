@@ -10,6 +10,8 @@ import 'package:project/featured/user/pages/user_list.page.dart';
 import 'package:project/shared/models/user.model.dart';
 import 'package:project/shared/pages/error.page.dart';
 
+import 'featured/demo/pages/rx/rx_scan.page.dart';
+
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     final args = settings.arguments;
@@ -62,6 +64,9 @@ class RouteGenerator {
 
       case '/demo/rx/skip_while_operator':
         return MaterialPageRoute(builder: (_) => RXSkipWhileOperatorPage());
+
+      case '/demo/rx/scan_operator':
+        return MaterialPageRoute(builder: (_) => RXScanOperatorPage());
 
       default:
         return MaterialPageRoute(builder: (_) => ErrorPage());

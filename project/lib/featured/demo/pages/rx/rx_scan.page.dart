@@ -3,41 +3,31 @@ import 'package:flutter/material.dart';
 import 'package:project/shared/bases/base_widget.state.dart';
 import 'package:rxdart/rxdart.dart';
 
-class RXSkipWhileOperatorPage extends StatefulWidget {
+class RXScanOperatorPage extends StatefulWidget {
   @override
-  _RXSkipWhileOperatorPageState createState() =>
-      _RXSkipWhileOperatorPageState();
+  _RXScanOperatorPageState createState() => _RXScanOperatorPageState();
 }
 
-class _RXSkipWhileOperatorPageState
-    extends BaseWidgetState<RXSkipWhileOperatorPage> {
+class _RXScanOperatorPageState extends BaseWidgetState<RXScanOperatorPage> {
   static const source = [
     {
-      'status': 'loading',
-      'value': null,
+      'name': 'Taiwan',
+      'year': '2020',
+      'population': 23816775,
     },
     {
-      'status': 'done',
-      'value': {
-        'name': 'Edward',
-        'gender': 'Male',
-      },
-    }
+      'name': 'Australia',
+      'year': '2020',
+      'population': 25499884,
+    },
+    {
+      'name': 'Japan',
+      'year': '2020',
+      'population': 126476461,
+    },
   ];
 
   var sourceSubject = new BehaviorSubject();
-
-  formatUserData(Map<String, Object> res) {
-    String outputString;
-
-    if (res['status'] == 'done') {
-      var value = res['value'] as Map<String, Object>;
-
-      outputString = '${value['name']} - ${value['gender']}';
-    }
-
-    return Stream.value(outputString);
-  }
 
   @override
   void initState() {
@@ -46,10 +36,15 @@ class _RXSkipWhileOperatorPageState
     var sourceStream = new Stream.fromIterable(source);
 
     sourceSubject
-        .switchMap((value) => sourceStream
-            .skipWhile((element) => element['status'] == 'loading')
-            .switchMap((res) => formatUserData(res)))
-        .listen((event) => print(event));
+        .switchMap(
+          (value) => sourceStream.scan(
+            (accumulated, value, index) => accumulated + value['population'],
+            0,
+          ),
+        )
+        .listen(
+          (event) => print(event),
+        );
 
     sourceSubject.add(null);
   }
@@ -67,7 +62,7 @@ class _RXSkipWhileOperatorPageState
       appBar: AppBar(
         centerTitle: true,
         title: Text(
-          'RX Skip While Operator',
+          'RX Scan Operator',
           style: TextStyle(fontSize: 13),
         ),
         backgroundColor: Colors.black87,

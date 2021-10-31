@@ -20,6 +20,10 @@ class _RXListPageState extends BaseWidgetState<RXListPage> {
       'name': 'Skip While Operator',
       'url': '/demo/rx/skip_while_operator',
     },
+    {
+      'name': 'Scan Operator',
+      'url': '/demo/rx/scan_operator',
+    },
   ];
 
   @override
