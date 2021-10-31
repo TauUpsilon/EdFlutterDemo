@@ -59,7 +59,7 @@ class _RXCombineLatestStreamPageState
         centerTitle: true,
         title: Text(
           'RX Combine Latest Stream',
-          style: TextStyle(fontSize: 13),
+          style: TextStyle(fontSize: 20),
         ),
         backgroundColor: Colors.black87,
       ),

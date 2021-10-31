@@ -16,10 +16,13 @@ class _RXBehaviourSubjectPageState
     'knight': {'name': 'knight', 'said': 'Charge...'},
   };
 
-  var sourceSubject =
-      new BehaviorSubject<Map<String, String>>.seeded(sources['king']);
+  var sourceSubject = new BehaviorSubject<Map<String, String>>.seeded(
+    sources['king'],
+  );
 
-  var source = new Map<String, String>.from(sources['king']);
+  var source = new Map<String, String>.from(
+    sources['king'],
+  );
 
   @override
   void initState() {
@@ -48,7 +51,7 @@ class _RXBehaviourSubjectPageState
         centerTitle: true,
         title: Text(
           'RX Behaviour Subject',
-          style: TextStyle(fontSize: 13),
+          style: TextStyle(fontSize: 20),
         ),
         backgroundColor: Colors.black87,
       ),

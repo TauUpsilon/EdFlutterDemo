@@ -43,9 +43,10 @@ class RouteGenerator {
       case '/user/user_detail':
         if (args is User) {
           return MaterialPageRoute(
-              builder: (_) => UserDetailPage(
-                    user: args,
-                  ));
+            builder: (_) => UserDetailPage(
+              user: args,
+            ),
+          );
         }
 
         return MaterialPageRoute(builder: (_) => ErrorPage());
