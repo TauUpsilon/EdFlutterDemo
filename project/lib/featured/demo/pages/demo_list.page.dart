@@ -22,7 +22,7 @@ class _DemoListPageState extends BaseWidgetState<DemoListPage> {
         backgroundColor: Colors.black87,
         title: Text(
           'Demo List',
-          style: TextStyle(fontSize: 13),
+          style: TextStyle(fontSize: 20),
         ),
       ),
       body: Container(
@@ -39,7 +39,7 @@ class _DemoListPageState extends BaseWidgetState<DemoListPage> {
               child: Card(
                 color: index % 2 == 0 ? Colors.grey[200] : Colors.grey[800],
                 child: Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(8),
                   child: ListTile(
                     title: Text(
                       '${tabList[index]['name']} Demo',

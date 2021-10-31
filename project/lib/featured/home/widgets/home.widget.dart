@@ -21,7 +21,7 @@ class _HomeWidgetState extends BaseWidgetState<HomeWidget> {
         backgroundColor: Colors.black87,
         title: Text(
           'Home',
-          style: TextStyle(fontSize: 13),
+          style: TextStyle(fontSize: 20),
         ),
       ),
       body: Center(
@@ -34,7 +34,7 @@ class _HomeWidgetState extends BaseWidgetState<HomeWidget> {
               },
               child: Card(
                 child: Padding(
-                  padding: const EdgeInsets.all(12),
+                  padding: const EdgeInsets.all(25),
                   child: Center(
                     child: Text(
                       '${tabList[index]['name']} List',

@@ -34,7 +34,7 @@ class _RXListPageState extends BaseWidgetState<RXListPage> {
         backgroundColor: Colors.black87,
         title: Text(
           'RX List',
-          style: TextStyle(fontSize: 13),
+          style: TextStyle(fontSize: 20),
         ),
       ),
       body: Container(

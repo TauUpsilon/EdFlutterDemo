@@ -16,7 +16,7 @@ class _ProfileWidgetState extends BaseWidgetState<ProfileWidget> {
         backgroundColor: Colors.black87,
         title: Text(
           'Profile',
-          style: TextStyle(fontSize: 13),
+          style: TextStyle(fontSize: 20),
         ),
       ),
     );

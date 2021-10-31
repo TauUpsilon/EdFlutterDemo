@@ -20,7 +20,7 @@ class _PlaygroundWidgetState extends BaseWidgetState<PlaygroundWidget> {
         centerTitle: true,
         title: Text(
           'Playground',
-          style: TextStyle(fontSize: 13),
+          style: TextStyle(fontSize: 20),
         ),
         backgroundColor: Colors.black87,
       ),

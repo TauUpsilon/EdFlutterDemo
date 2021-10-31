@@ -28,7 +28,7 @@ class _UserListPageState extends BaseWidgetState<UserListPage> {
         backgroundColor: Colors.black87,
         title: Text(
           'User List',
-          style: TextStyle(fontSize: 13),
+          style: TextStyle(fontSize: 20),
         ),
       ),
       body: StreamBuilder<UserListPageModel>(

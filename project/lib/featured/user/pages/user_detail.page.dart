@@ -23,7 +23,7 @@ class _UserDetailPageState extends BaseWidgetState<UserDetailPage> {
         backgroundColor: Colors.black87,
         title: Text(
           'User List',
-          style: TextStyle(fontSize: 13),
+          style: TextStyle(fontSize: 20),
         ),
       ),
       body: Container(
