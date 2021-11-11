@@ -13,8 +13,11 @@ DataRoom dataRoomReducer(DataRoom state, DataRoomAction action) {
 
     case ActionType.SUCCESS:
       newState.STATUS = ResponseStatus.SUCCESS;
+
       newState.COLLECTIONS![action.request!.NAME!] = Collection(
-        META: Meta.fromJson(action.payload!['meta']),
+        META: action.payload!['meta'] == null
+            ? null
+            : Meta.fromJson(action.payload!['meta']),
         DATA: action.payload!['data']
             .map((item) => action.mirror!.invoke("fromJson", [item]))
             .toList(),

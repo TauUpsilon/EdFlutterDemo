@@ -4,7 +4,8 @@
 
 import 'dart:core';
 import 'package:project/shared/decorators/imitable.decorator.dart' as prefix0;
-import 'package:project/shared/models/api_data.model.dart' as prefix2;
+import 'package:project/shared/models/api_data.model.dart' as prefix3;
+import 'package:project/shared/models/ubike_stop.model.dart' as prefix2;
 import 'package:project/shared/models/user.model.dart' as prefix1;
 
 // ignore_for_file: prefer_adjacent_string_concatenation
@@ -67,11 +68,98 @@ final _data = <r.Reflectable, r.ReflectorData>{
               r'STATUS=': 0,
               r'fromJson': 0
             }),
+        r.NonGenericClassMirrorImpl(
+            r'UBikeStop',
+            r'.UBikeStop',
+            7,
+            1,
+            const prefix0.Imitable(),
+            const <int>[-1],
+            null,
+            null,
+            -1,
+            {r'fromJson': () => prefix2.UBikeStop.fromJson},
+            {},
+            {
+              r'': (bool b) => (
+                      {SNO,
+                      SNA,
+                      TOT,
+                      SBI,
+                      SAREA,
+                      MDAY,
+                      LAT,
+                      LNG,
+                      AR,
+                      SAREAEN,
+                      SNAEN,
+                      AREN,
+                      BEMP,
+                      ACT}) =>
+                  b
+                      ? prefix2.UBikeStop(
+                          ACT: ACT,
+                          AR: AR,
+                          AREN: AREN,
+                          BEMP: BEMP,
+                          LAT: LAT,
+                          LNG: LNG,
+                          MDAY: MDAY,
+                          SAREA: SAREA,
+                          SAREAEN: SAREAEN,
+                          SBI: SBI,
+                          SNA: SNA,
+                          SNAEN: SNAEN,
+                          SNO: SNO,
+                          TOT: TOT)
+                      : null
+            },
+            -1,
+            -1,
+            const <int>[-1],
+            null,
+            {
+              r'==': 0,
+              r'toString': 1,
+              r'noSuchMethod': 0,
+              r'hashCode': 1,
+              r'runtimeType': 1,
+              r'toJson': 1,
+              r'SNO': 1,
+              r'SNO=': 0,
+              r'SNA': 1,
+              r'SNA=': 0,
+              r'TOT': 1,
+              r'TOT=': 0,
+              r'SBI': 1,
+              r'SBI=': 0,
+              r'SAREA': 1,
+              r'SAREA=': 0,
+              r'MDAY': 1,
+              r'MDAY=': 0,
+              r'LAT': 1,
+              r'LAT=': 0,
+              r'LNG': 1,
+              r'LNG=': 0,
+              r'AR': 1,
+              r'AR=': 0,
+              r'SAREAEN': 1,
+              r'SAREAEN=': 0,
+              r'SNAEN': 1,
+              r'SNAEN=': 0,
+              r'AREN': 1,
+              r'AREN=': 0,
+              r'BEMP': 1,
+              r'BEMP=': 0,
+              r'ACT': 1,
+              r'ACT=': 0,
+              r'fromJson': 0
+            }),
         r.GenericClassMirrorImpl(
             r'ApiData',
             r'.ApiData',
             7,
-            1,
+            2,
             const prefix0.Imitable(),
             const <int>[-1],
             null,
@@ -81,7 +169,7 @@ final _data = <r.Reflectable, r.ReflectorData>{
             {},
             {
               r'': (bool b) => ({STATUS, COLLECTION}) => b
-                  ? prefix2.ApiData(COLLECTION: COLLECTION, STATUS: STATUS)
+                  ? prefix3.ApiData(COLLECTION: COLLECTION, STATUS: STATUS)
                   : null
             },
             -1,
@@ -99,15 +187,15 @@ final _data = <r.Reflectable, r.ReflectorData>{
               r'COLLECTION': 1,
               r'COLLECTION=': 0
             }, (o) {
-          return o is prefix2.ApiData;
-        }, null, 1),
+          return o is prefix3.ApiData;
+        }, null, 2),
         r.TypeVariableMirrorImpl(
-            r'T', r'.ApiData.T', const prefix0.Imitable(), -1, 1, null)
+            r'T', r'.ApiData.T', const prefix0.Imitable(), -1, 2, null)
       ],
       null,
       null,
-      <Type>[prefix1.User, prefix2.ApiData],
-      2,
+      <Type>[prefix1.User, prefix2.UBikeStop, prefix3.ApiData],
+      3,
       {
         r'==': (dynamic instance) => (x) => instance == x,
         r'toString': (dynamic instance) => instance.toString,
@@ -120,6 +208,20 @@ final _data = <r.Reflectable, r.ReflectorData>{
         r'EMAIL': (dynamic instance) => instance.EMAIL,
         r'GENDER': (dynamic instance) => instance.GENDER,
         r'STATUS': (dynamic instance) => instance.STATUS,
+        r'SNO': (dynamic instance) => instance.SNO,
+        r'SNA': (dynamic instance) => instance.SNA,
+        r'TOT': (dynamic instance) => instance.TOT,
+        r'SBI': (dynamic instance) => instance.SBI,
+        r'SAREA': (dynamic instance) => instance.SAREA,
+        r'MDAY': (dynamic instance) => instance.MDAY,
+        r'LAT': (dynamic instance) => instance.LAT,
+        r'LNG': (dynamic instance) => instance.LNG,
+        r'AR': (dynamic instance) => instance.AR,
+        r'SAREAEN': (dynamic instance) => instance.SAREAEN,
+        r'SNAEN': (dynamic instance) => instance.SNAEN,
+        r'AREN': (dynamic instance) => instance.AREN,
+        r'BEMP': (dynamic instance) => instance.BEMP,
+        r'ACT': (dynamic instance) => instance.ACT,
         r'COLLECTION': (dynamic instance) => instance.COLLECTION
       },
       {
@@ -128,6 +230,20 @@ final _data = <r.Reflectable, r.ReflectorData>{
         r'EMAIL=': (dynamic instance, value) => instance.EMAIL = value,
         r'GENDER=': (dynamic instance, value) => instance.GENDER = value,
         r'STATUS=': (dynamic instance, value) => instance.STATUS = value,
+        r'SNO=': (dynamic instance, value) => instance.SNO = value,
+        r'SNA=': (dynamic instance, value) => instance.SNA = value,
+        r'TOT=': (dynamic instance, value) => instance.TOT = value,
+        r'SBI=': (dynamic instance, value) => instance.SBI = value,
+        r'SAREA=': (dynamic instance, value) => instance.SAREA = value,
+        r'MDAY=': (dynamic instance, value) => instance.MDAY = value,
+        r'LAT=': (dynamic instance, value) => instance.LAT = value,
+        r'LNG=': (dynamic instance, value) => instance.LNG = value,
+        r'AR=': (dynamic instance, value) => instance.AR = value,
+        r'SAREAEN=': (dynamic instance, value) => instance.SAREAEN = value,
+        r'SNAEN=': (dynamic instance, value) => instance.SNAEN = value,
+        r'AREN=': (dynamic instance, value) => instance.AREN = value,
+        r'BEMP=': (dynamic instance, value) => instance.BEMP = value,
+        r'ACT=': (dynamic instance, value) => instance.ACT = value,
         r'COLLECTION=': (dynamic instance, value) => instance.COLLECTION = value
       },
       null,
@@ -138,6 +254,26 @@ final _data = <r.Reflectable, r.ReflectorData>{
           0,
           0,
           const [#ID, #NAME, #EMAIL, #GENDER, #STATUS]
+        ],
+        const [
+          0,
+          0,
+          const [
+            #SNO,
+            #SNA,
+            #TOT,
+            #SBI,
+            #SAREA,
+            #MDAY,
+            #LAT,
+            #LNG,
+            #AR,
+            #SAREAEN,
+            #SNAEN,
+            #AREN,
+            #BEMP,
+            #ACT
+          ]
         ],
         const [
           0,

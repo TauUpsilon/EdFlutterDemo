@@ -9,9 +9,12 @@ class BikeStopWidget extends StatelessWidget {
   final int? canGive;
 
   const BikeStopWidget(
-      this.stopName, this.updateTimeStr, this.canBuy, this.canGive,
-      {Key? key})
-      : super(key: key);
+    this.stopName,
+    this.updateTimeStr,
+    this.canBuy,
+    this.canGive, {
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

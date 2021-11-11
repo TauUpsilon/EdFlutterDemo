@@ -6,6 +6,7 @@ class UBikeDetialPage extends StatelessWidget {
   final String? updateTimeStr;
   final int? canBuy;
   final int? canGive;
+
   const UBikeDetialPage(
       this.stopName, this.updateTimeStr, this.canBuy, this.canGive,
       {Key? key})
