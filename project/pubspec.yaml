@@ -22,13 +22,13 @@ dependencies:
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^0.1.2
+  cupertino_icons: ^1.0.4
   
   # HTTP Client
-  http: ^0.13.3
+  http: ^0.13.4
   
   # Observable Sequences
-  rxdart: ^0.27.1
+  rxdart: ^0.27.2
 
   # Service Locator 
   get_it: ^7.2.0
@@ -38,7 +38,7 @@ dependencies:
 
   reflectable: ^3.0.4
 
-  build_runner: ^2.0.1
+  build_runner: ^2.1.5
 
 dev_dependencies:
   flutter_test:
@@ -57,8 +57,8 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #  - images/a_dot_burr.jpeg
+  assets:
+    - assets/images/logo.png
   #  - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
@@ -72,7 +72,18 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
+  fonts:
+    - family: NotoSansTC
+      fonts:
+        - asset: assets/fonts/NotoSansTC-Black.otf
+        - asset: assets/fonts/NotoSansTC-Bold.otf
+        - asset: assets/fonts/NotoSansTC-Light.otf
+        - asset: assets/fonts/NotoSansTC-Medium.otf
+        - asset: assets/fonts/NotoSansTC-Regular.otf
+        - asset: assets/fonts/NotoSansTC-Thin.otf
+    - family: SNsanafonkaku
+      fonts:
+        - asset: assets/fonts/SNsanafonkaku.ttf
   #   - family: Schyler
   #     fonts:
   #       - asset: fonts/Schyler-Regular.ttf

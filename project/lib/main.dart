@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:project/main.locator.dart';
 import 'package:project/main.reflectable.dart';
 import 'package:project/main.route.dart';
+import 'package:project/main.theme.dart';
 
 void main() {
   initializeReflectable();
@@ -17,13 +18,7 @@ class MyApp extends StatelessWidget {
       title: 'Edward Flutter Portfolio',
       initialRoute: '/',
       onGenerateRoute: RouteGenerator.generateRoute,
-      theme: ThemeData(
-        primaryColor: Colors.grey[900],
-        floatingActionButtonTheme: FloatingActionButtonThemeData(
-          backgroundColor: Colors.blueGrey,
-          foregroundColor: Colors.grey[200],
-        ),
-      ),
+      theme: MainTheme.darkTheme,
     );
   }
 }
