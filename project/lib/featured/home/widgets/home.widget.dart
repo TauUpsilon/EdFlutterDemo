@@ -9,7 +9,6 @@ class HomeWidget extends StatefulWidget {
 
 class _HomeWidgetState extends BaseWidgetState<HomeWidget> {
   static const tabList = [
-    {'name': 'User', 'url': '/user'},
     {'name': 'Demo', 'url': '/demo'},
   ];
 

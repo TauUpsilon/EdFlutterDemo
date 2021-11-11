@@ -4,9 +4,8 @@
 
 import 'dart:core';
 import 'package:project/shared/decorators/imitable.decorator.dart' as prefix0;
-import 'package:project/shared/models/api_data.model.dart' as prefix3;
+import 'package:project/shared/models/api_data.model.dart' as prefix1;
 import 'package:project/shared/models/ubike_stop.model.dart' as prefix2;
-import 'package:project/shared/models/user.model.dart' as prefix1;
 
 // ignore_for_file: prefer_adjacent_string_concatenation
 // ignore_for_file: prefer_collection_literals
@@ -23,9 +22,9 @@ import 'package:reflectable/reflectable.dart' as r show Reflectable;
 final _data = <r.Reflectable, r.ReflectorData>{
   const prefix0.Imitable(): r.ReflectorData(
       <m.TypeMirror>[
-        r.NonGenericClassMirrorImpl(
-            r'User',
-            r'.User',
+        r.GenericClassMirrorImpl(
+            r'ApiData',
+            r'.ApiData',
             7,
             0,
             const prefix0.Imitable(),
@@ -33,16 +32,11 @@ final _data = <r.Reflectable, r.ReflectorData>{
             null,
             null,
             -1,
-            {r'fromJson': () => prefix1.User.fromJson},
+            {},
             {},
             {
-              r'': (bool b) => ({ID, NAME, EMAIL, GENDER, STATUS}) => b
-                  ? prefix1.User(
-                      EMAIL: EMAIL,
-                      GENDER: GENDER,
-                      ID: ID,
-                      NAME: NAME,
-                      STATUS: STATUS)
+              r'': (bool b) => ({STATUS, COLLECTION}) => b
+                  ? prefix1.ApiData(COLLECTION: COLLECTION, STATUS: STATUS)
                   : null
             },
             -1,
@@ -50,24 +44,18 @@ final _data = <r.Reflectable, r.ReflectorData>{
             const <int>[-1],
             null,
             {
-              r'==': 0,
-              r'toString': 1,
-              r'noSuchMethod': 0,
-              r'hashCode': 1,
-              r'runtimeType': 1,
-              r'toJson': 1,
-              r'ID': 1,
-              r'ID=': 0,
-              r'NAME': 1,
-              r'NAME=': 0,
-              r'EMAIL': 1,
-              r'EMAIL=': 0,
-              r'GENDER': 1,
-              r'GENDER=': 0,
-              r'STATUS': 1,
-              r'STATUS=': 0,
-              r'fromJson': 0
-            }),
+              r'==': 1,
+              r'toString': 0,
+              r'noSuchMethod': 1,
+              r'hashCode': 0,
+              r'runtimeType': 0,
+              r'STATUS': 0,
+              r'STATUS=': 1,
+              r'COLLECTION': 0,
+              r'COLLECTION=': 1
+            }, (o) {
+          return o is prefix1.ApiData;
+        }, null, 0),
         r.NonGenericClassMirrorImpl(
             r'UBikeStop',
             r'.UBikeStop',
@@ -119,95 +107,58 @@ final _data = <r.Reflectable, r.ReflectorData>{
             const <int>[-1],
             null,
             {
-              r'==': 0,
-              r'toString': 1,
-              r'noSuchMethod': 0,
-              r'hashCode': 1,
-              r'runtimeType': 1,
-              r'toJson': 1,
-              r'SNO': 1,
-              r'SNO=': 0,
-              r'SNA': 1,
-              r'SNA=': 0,
-              r'TOT': 1,
-              r'TOT=': 0,
-              r'SBI': 1,
-              r'SBI=': 0,
-              r'SAREA': 1,
-              r'SAREA=': 0,
-              r'MDAY': 1,
-              r'MDAY=': 0,
-              r'LAT': 1,
-              r'LAT=': 0,
-              r'LNG': 1,
-              r'LNG=': 0,
-              r'AR': 1,
-              r'AR=': 0,
-              r'SAREAEN': 1,
-              r'SAREAEN=': 0,
-              r'SNAEN': 1,
-              r'SNAEN=': 0,
-              r'AREN': 1,
-              r'AREN=': 0,
-              r'BEMP': 1,
-              r'BEMP=': 0,
-              r'ACT': 1,
-              r'ACT=': 0,
-              r'fromJson': 0
+              r'==': 1,
+              r'toString': 0,
+              r'noSuchMethod': 1,
+              r'hashCode': 0,
+              r'runtimeType': 0,
+              r'toJson': 0,
+              r'SNO': 0,
+              r'SNO=': 1,
+              r'SNA': 0,
+              r'SNA=': 1,
+              r'TOT': 0,
+              r'TOT=': 1,
+              r'SBI': 0,
+              r'SBI=': 1,
+              r'SAREA': 0,
+              r'SAREA=': 1,
+              r'MDAY': 0,
+              r'MDAY=': 1,
+              r'LAT': 0,
+              r'LAT=': 1,
+              r'LNG': 0,
+              r'LNG=': 1,
+              r'AR': 0,
+              r'AR=': 1,
+              r'SAREAEN': 0,
+              r'SAREAEN=': 1,
+              r'SNAEN': 0,
+              r'SNAEN=': 1,
+              r'AREN': 0,
+              r'AREN=': 1,
+              r'BEMP': 0,
+              r'BEMP=': 1,
+              r'ACT': 0,
+              r'ACT=': 1,
+              r'fromJson': 1
             }),
-        r.GenericClassMirrorImpl(
-            r'ApiData',
-            r'.ApiData',
-            7,
-            2,
-            const prefix0.Imitable(),
-            const <int>[-1],
-            null,
-            null,
-            -1,
-            {},
-            {},
-            {
-              r'': (bool b) => ({STATUS, COLLECTION}) => b
-                  ? prefix3.ApiData(COLLECTION: COLLECTION, STATUS: STATUS)
-                  : null
-            },
-            -1,
-            -1,
-            const <int>[-1],
-            null,
-            {
-              r'==': 0,
-              r'toString': 1,
-              r'noSuchMethod': 0,
-              r'hashCode': 1,
-              r'runtimeType': 1,
-              r'STATUS': 1,
-              r'STATUS=': 0,
-              r'COLLECTION': 1,
-              r'COLLECTION=': 0
-            }, (o) {
-          return o is prefix3.ApiData;
-        }, null, 2),
         r.TypeVariableMirrorImpl(
-            r'T', r'.ApiData.T', const prefix0.Imitable(), -1, 2, null)
+            r'T', r'.ApiData.T', const prefix0.Imitable(), -1, 0, null)
       ],
       null,
       null,
-      <Type>[prefix1.User, prefix2.UBikeStop, prefix3.ApiData],
-      3,
+      <Type>[prefix1.ApiData, prefix2.UBikeStop],
+      2,
       {
         r'==': (dynamic instance) => (x) => instance == x,
         r'toString': (dynamic instance) => instance.toString,
         r'noSuchMethod': (dynamic instance) => instance.noSuchMethod,
         r'hashCode': (dynamic instance) => instance.hashCode,
         r'runtimeType': (dynamic instance) => instance.runtimeType,
-        r'toJson': (dynamic instance) => instance.toJson,
-        r'ID': (dynamic instance) => instance.ID,
-        r'NAME': (dynamic instance) => instance.NAME,
-        r'EMAIL': (dynamic instance) => instance.EMAIL,
-        r'GENDER': (dynamic instance) => instance.GENDER,
         r'STATUS': (dynamic instance) => instance.STATUS,
+        r'COLLECTION': (dynamic instance) => instance.COLLECTION,
+        r'toJson': (dynamic instance) => instance.toJson,
         r'SNO': (dynamic instance) => instance.SNO,
         r'SNA': (dynamic instance) => instance.SNA,
         r'TOT': (dynamic instance) => instance.TOT,
@@ -221,15 +172,12 @@ final _data = <r.Reflectable, r.ReflectorData>{
         r'SNAEN': (dynamic instance) => instance.SNAEN,
         r'AREN': (dynamic instance) => instance.AREN,
         r'BEMP': (dynamic instance) => instance.BEMP,
-        r'ACT': (dynamic instance) => instance.ACT,
-        r'COLLECTION': (dynamic instance) => instance.COLLECTION
+        r'ACT': (dynamic instance) => instance.ACT
       },
       {
-        r'ID=': (dynamic instance, value) => instance.ID = value,
-        r'NAME=': (dynamic instance, value) => instance.NAME = value,
-        r'EMAIL=': (dynamic instance, value) => instance.EMAIL = value,
-        r'GENDER=': (dynamic instance, value) => instance.GENDER = value,
         r'STATUS=': (dynamic instance, value) => instance.STATUS = value,
+        r'COLLECTION=': (dynamic instance, value) =>
+            instance.COLLECTION = value,
         r'SNO=': (dynamic instance, value) => instance.SNO = value,
         r'SNA=': (dynamic instance, value) => instance.SNA = value,
         r'TOT=': (dynamic instance, value) => instance.TOT = value,
@@ -243,17 +191,16 @@ final _data = <r.Reflectable, r.ReflectorData>{
         r'SNAEN=': (dynamic instance, value) => instance.SNAEN = value,
         r'AREN=': (dynamic instance, value) => instance.AREN = value,
         r'BEMP=': (dynamic instance, value) => instance.BEMP = value,
-        r'ACT=': (dynamic instance, value) => instance.ACT = value,
-        r'COLLECTION=': (dynamic instance, value) => instance.COLLECTION = value
+        r'ACT=': (dynamic instance, value) => instance.ACT = value
       },
       null,
       [
-        const [1, 0, null],
         const [0, 0, null],
+        const [1, 0, null],
         const [
           0,
           0,
-          const [#ID, #NAME, #EMAIL, #GENDER, #STATUS]
+          const [#STATUS, #COLLECTION]
         ],
         const [
           0,
@@ -274,11 +221,6 @@ final _data = <r.Reflectable, r.ReflectorData>{
             #BEMP,
             #ACT
           ]
-        ],
-        const [
-          0,
-          0,
-          const [#STATUS, #COLLECTION]
         ]
       ])
 };

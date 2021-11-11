@@ -8,9 +8,6 @@ import 'package:project/featured/demo/pages/rx/list_items/rx_scan.page.dart';
 import 'package:project/featured/demo/pages/rx/list_items/rx_skip_while.page.dart';
 import 'package:project/featured/demo/pages/rx/rx_list.page.dart';
 import 'package:project/featured/home/home.page.dart';
-import 'package:project/featured/user/pages/user_detail.page.dart';
-import 'package:project/featured/user/pages/user_list.page.dart';
-import 'package:project/shared/models/user.model.dart';
 import 'package:project/shared/pages/error.page.dart';
 
 class RouteGenerator {
@@ -23,34 +20,16 @@ class RouteGenerator {
       case '/':
         return MaterialPageRoute(builder: (_) => HomePage());
 
-      case '/user':
-        return MaterialPageRoute(builder: (_) => UserListPage());
-      // return PageRouteBuilder(
-      //     pageBuilder: (context, animation, secondatAnimation) =>
-      //         UserListPage(),
-      //     transitionsBuilder: (context, animation, secondatAnimation, child) {
-      //       const begin = Offset(0.0, 1.0);
-      //       const end = Offset.zero;
-      //       const curve = Curves.ease;
+      // case '/user/user_detail':
+      //   if (args is User) {
+      //     return MaterialPageRoute(
+      //       builder: (_) => UserDetailPage(
+      //         user: args,
+      //       ),
+      //     );
+      //   }
 
-      //       var tween =
-      //           Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-
-      //       return SlideTransition(
-      //         position: animation.drive(tween),
-      //         child: child,
-      //       );
-      //     });
-      case '/user/user_detail':
-        if (args is User) {
-          return MaterialPageRoute(
-            builder: (_) => UserDetailPage(
-              user: args,
-            ),
-          );
-        }
-
-        return MaterialPageRoute(builder: (_) => ErrorPage());
+      //   return MaterialPageRoute(builder: (_) => ErrorPage());
 
       case '/demo':
         return MaterialPageRoute(builder: (_) => DemoListPage());
