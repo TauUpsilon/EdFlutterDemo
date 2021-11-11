@@ -136,10 +136,13 @@ class _UBikeListPageState extends BaseWidgetState<UBikeListPage> {
                                       children: dataSet
                                           .map(
                                             (data) => BikeStopWidget(
-                                              data.SNA,
-                                              data.MDAY,
-                                              int.parse(data.SBI!),
-                                              int.parse(data.BEMP!),
+                                              stopName: data.SNA,
+                                              updateTimeStr: data.MDAY,
+                                              availableBikes:
+                                                  int.parse(data.SBI!),
+                                              availableReturnPlace:
+                                                  int.parse(data.BEMP!),
+                                              location: data.SAREA,
                                             ),
                                           )
                                           .toList(),

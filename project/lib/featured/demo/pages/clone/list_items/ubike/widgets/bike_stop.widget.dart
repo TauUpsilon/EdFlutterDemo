@@ -5,15 +5,17 @@ import 'package:project/featured/demo/pages/clone/list_items/ubike/widgets/borro
 class BikeStopWidget extends StatelessWidget {
   final String? stopName;
   final String? updateTimeStr;
-  final int? canBuy;
-  final int? canGive;
+  final String? location;
+  final int? availableBikes;
+  final int? availableReturnPlace;
 
-  const BikeStopWidget(
+  const BikeStopWidget({
+    Key? key,
     this.stopName,
     this.updateTimeStr,
-    this.canBuy,
-    this.canGive, {
-    Key? key,
+    this.location,
+    this.availableBikes,
+    this.availableReturnPlace,
   }) : super(key: key);
 
   @override
@@ -23,8 +25,13 @@ class BikeStopWidget extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) =>
-                UBikeDetialPage(stopName, updateTimeStr, canBuy, canGive),
+            builder: (context) => UBikeDetialPage(
+              stopName: stopName,
+              updateTimeStr: updateTimeStr,
+              availableBikes: availableBikes,
+              availableReturnPlace: availableReturnPlace,
+              location: location,
+            ),
           ),
         ),
       },
@@ -58,8 +65,8 @@ class BikeStopWidget extends StatelessWidget {
                     ],
                   ),
                 ),
-                BorrowReturnWidget('可借', canBuy),
-                BorrowReturnWidget('可還', canGive),
+                BorrowReturnWidget('可借', availableBikes),
+                BorrowReturnWidget('可還', availableReturnPlace),
               ],
             ),
           ),

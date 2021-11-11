@@ -34,8 +34,6 @@ class ApiService {
 
     http.get(uri).then(
       (res) {
-        print(res.body);
-
         var mirror = imitable.reflectType(T) as ClassMirror;
 
         final action = DataRoomAction(

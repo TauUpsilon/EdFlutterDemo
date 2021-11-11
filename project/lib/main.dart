@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
       title: 'Edward Flutter Portfolio',
       initialRoute: '/',
       onGenerateRoute: RouteGenerator.generateRoute,
-      theme: MainTheme.darkTheme,
+      theme: MainTheme.lightTheme,
     );
   }
 }

@@ -4,13 +4,18 @@ import 'package:project/main.theme.dart';
 class UBikeDetialPage extends StatelessWidget {
   final String? stopName;
   final String? updateTimeStr;
-  final int? canBuy;
-  final int? canGive;
+  final String? location;
+  final int? availableBikes;
+  final int? availableReturnPlace;
 
-  const UBikeDetialPage(
-      this.stopName, this.updateTimeStr, this.canBuy, this.canGive,
-      {Key? key})
-      : super(key: key);
+  const UBikeDetialPage({
+    Key? key,
+    this.stopName,
+    this.updateTimeStr,
+    this.location,
+    this.availableBikes,
+    this.availableReturnPlace,
+  }) : super(key: key);
 
   Color? getcorrespondColor(int? number) {
     Color color = (number ?? 0) >= 5
@@ -65,15 +70,24 @@ class UBikeDetialPage extends StatelessWidget {
                     const EdgeInsets.symmetric(vertical: 26.0, horizontal: 20),
                 child: Column(
                   children: [
-                    InfoItem('剩餘車輛', canBuy.toString(),
-                        infoColor: getcorrespondColor(canBuy)),
-                    InfoItem('可還空位數', canGive.toString(),
-                        infoColor: getcorrespondColor(canGive)),
-                    InfoItem('總車位', (canBuy! + canGive!).toString(),
-                        infoColor: Theme.of(context).primaryColorLight),
+                    InfoItem(
+                      '剩餘車輛',
+                      availableBikes.toString(),
+                      infoColor: getcorrespondColor(availableBikes),
+                    ),
+                    InfoItem(
+                      '可還空位數',
+                      availableReturnPlace.toString(),
+                      infoColor: getcorrespondColor(availableReturnPlace),
+                    ),
+                    InfoItem(
+                      '總車位',
+                      (availableBikes! + availableReturnPlace!).toString(),
+                      infoColor: Theme.of(context).primaryColorLight,
+                    ),
                     InfoItem(
                       '區域',
-                      '新店區',
+                      location!.toString(),
                       infoColor: Theme.of(context).hintColor,
                     ),
                     InfoItem(
@@ -81,9 +95,12 @@ class UBikeDetialPage extends StatelessWidget {
                       '新北市新店區中正路700巷3號',
                       infoColor: Theme.of(context).hintColor,
                     ),
-                    InfoItem('更新時間', '2021/09/25 15:59:16',
-                        infoColor: Theme.of(context).hintColor,
-                        showDivider: false),
+                    InfoItem(
+                      '更新時間',
+                      '2021/09/25 15:59:16',
+                      infoColor: Theme.of(context).hintColor,
+                      showDivider: false,
+                    ),
                   ],
                 ),
               ),
