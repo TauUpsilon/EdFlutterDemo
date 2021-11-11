@@ -3,8 +3,8 @@ import 'package:project/shared/models/meta.model.dart';
 enum ResponseStatus { SUCCESS, FAILURE, LOADING }
 
 class DataRoom {
-  ResponseStatus STATUS;
-  Map<String, Collection<dynamic>> COLLECTIONS;
+  ResponseStatus? STATUS;
+  Map<String, Collection<dynamic>>? COLLECTIONS;
 
   DataRoom({
     this.STATUS,
@@ -20,8 +20,8 @@ class DataRoom {
 }
 
 class Collection<T> {
-  Meta META;
-  List<T> DATA;
+  Meta? META;
+  List<T>? DATA;
 
   Collection({
     this.META,

@@ -4,7 +4,7 @@ import 'package:project/shared/models/app.model.dart';
 AppModel appReducer(AppModel state, action) {
   return AppModel(
     DATA_ROOM: dataRoomReducer(
-      state.DATA_ROOM,
+      state.DATA_ROOM!,
       action,
     ),
   );

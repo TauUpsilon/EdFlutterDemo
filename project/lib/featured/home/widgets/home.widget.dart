@@ -30,7 +30,7 @@ class _HomeWidgetState extends BaseWidgetState<HomeWidget> {
           itemBuilder: (context, index) {
             return InkWell(
               onTap: () {
-                Navigator.of(context).pushNamed(tabList[index]['url']);
+                Navigator.of(context).pushNamed(tabList[index]['url']!);
               },
               child: Card(
                 child: Padding(

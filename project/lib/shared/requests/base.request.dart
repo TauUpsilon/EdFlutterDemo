@@ -6,7 +6,7 @@ enum RequestMethod {
 }
 
 class BaseRequest {
-  RequestMethod METHOD;
-  String NAME;
-  String URI;
+  RequestMethod? METHOD;
+  String? NAME;
+  String? URI;
 }

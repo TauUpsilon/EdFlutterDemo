@@ -9,8 +9,8 @@ class CloneListPage extends StatefulWidget {
 class _CloneListPageState extends BaseWidgetState<CloneListPage> {
   static const tabList = [
     {
-      'name': 'Bahaviour Subject',
-      'url': '/demo/rx/behaviour_subject',
+      'name': 'UBike',
+      'url': '/demo/clone/ubike',
     },
   ];
 
@@ -33,7 +33,7 @@ class _CloneListPageState extends BaseWidgetState<CloneListPage> {
             return InkWell(
               onTap: () {
                 Navigator.of(context).pushNamed(
-                  tabList[index]['url'],
+                  tabList[index]['url']!,
                 );
               },
               child: Card(

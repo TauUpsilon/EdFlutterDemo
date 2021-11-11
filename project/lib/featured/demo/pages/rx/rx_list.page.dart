@@ -45,7 +45,7 @@ class _RXListPageState extends BaseWidgetState<RXListPage> {
             return InkWell(
               onTap: () {
                 Navigator.of(context).pushNamed(
-                  tabList[index]['url'],
+                  tabList[index]['url']!,
                 );
               },
               child: Card(

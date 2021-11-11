@@ -2,11 +2,11 @@ import 'package:project/shared/decorators/imitable.decorator.dart';
 
 @imitable
 class User {
-  int ID;
-  String NAME;
-  String EMAIL;
-  String GENDER;
-  String STATUS;
+  int? ID;
+  String? NAME;
+  String? EMAIL;
+  String? GENDER;
+  String? STATUS;
 
   User({
     this.ID,

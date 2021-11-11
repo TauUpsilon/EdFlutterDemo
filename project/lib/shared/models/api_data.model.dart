@@ -3,8 +3,8 @@ import 'package:project/shared/models/data_room.model.dart';
 
 @imitable
 class ApiData<T> {
-  ResponseStatus STATUS;
-  Collection<T> COLLECTION;
+  ResponseStatus? STATUS;
+  Collection<T>? COLLECTION;
 
   ApiData({
     this.STATUS,

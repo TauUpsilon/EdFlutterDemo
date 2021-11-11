@@ -7,7 +7,7 @@ import 'package:project/shared/models/data_room.model.dart';
 import 'package:project/shared/models/user.model.dart';
 
 class UserListPageModel {
-  final Stream<ApiData<User>> getUsers;
+  final Stream<ApiData<User>>? getUsers;
 
   UserListPageModel({
     this.getUsers,
@@ -43,7 +43,7 @@ class _UserListPageState extends BaseWidgetState<UserListPage> {
         ) {
           if (snapshot.hasData) {
             return StreamBuilder<ApiData<User>>(
-              stream: snapshot.data.getUsers,
+              stream: snapshot.data!.getUsers!,
               builder: (
                 BuildContext context,
                 AsyncSnapshot<ApiData<User>> snapshot,
@@ -51,7 +51,7 @@ class _UserListPageState extends BaseWidgetState<UserListPage> {
                 if (snapshot.hasData) {
                   var res = snapshot.data;
 
-                  switch (res.STATUS) {
+                  switch (res!.STATUS) {
                     case ResponseStatus.LOADING:
                       return Container(
                         child: Center(
@@ -60,7 +60,7 @@ class _UserListPageState extends BaseWidgetState<UserListPage> {
                       );
 
                     case ResponseStatus.SUCCESS:
-                      var dataSet = res.COLLECTION.DATA;
+                      var dataSet = res.COLLECTION!.DATA!;
 
                       return Container(
                         padding: EdgeInsets.all(4),

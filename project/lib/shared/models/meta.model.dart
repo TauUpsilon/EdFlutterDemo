@@ -1,5 +1,5 @@
 class Meta {
-  final Pagination PAGINATION;
+  final Pagination? PAGINATION;
 
   Meta({
     this.PAGINATION,
@@ -15,17 +15,17 @@ class Meta {
 
   Map<String, dynamic> toJson() {
     return {
-      'pagination': PAGINATION.toJson(),
+      'pagination': PAGINATION!.toJson(),
     };
   }
 }
 
 class Pagination {
-  final int TOTAL;
-  final int PAGES;
-  final int PAGE;
-  final int LIMIT;
-  final Links LINKS;
+  final int? TOTAL;
+  final int? PAGES;
+  final int? PAGE;
+  final int? LIMIT;
+  final Links? LINKS;
 
   Pagination({
     this.TOTAL,
@@ -51,15 +51,15 @@ class Pagination {
       'pages': PAGES,
       'page': PAGE,
       'limit': LIMIT,
-      'links': LINKS.toJson(),
+      'links': LINKS!.toJson(),
     };
   }
 }
 
 class Links {
-  final String PREVIOUS;
-  final String CURRENT;
-  final String NEXT;
+  final String? PREVIOUS;
+  final String? CURRENT;
+  final String? NEXT;
 
   Links({
     this.PREVIOUS,

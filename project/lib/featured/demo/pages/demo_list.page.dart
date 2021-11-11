@@ -37,7 +37,7 @@ class _DemoListPageState extends BaseWidgetState<DemoListPage> {
             return InkWell(
               onTap: () {
                 Navigator.of(context).pushNamed(
-                  tabList[index]['url'],
+                  tabList[index]['url']!,
                 );
               },
               child: Card(

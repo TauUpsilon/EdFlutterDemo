@@ -38,17 +38,17 @@ class ApiService {
 
         store.dispatch(action);
 
-        var data = store.state.DATA_ROOM.COLLECTIONS[request.NAME].DATA
+        var data = store.state.DATA_ROOM!.COLLECTIONS![request.NAME]!.DATA!
             .map<T>(
-              (item) => mirror.invoke('fromJson', [item.toJson()]),
+              (item) => mirror.invoke('fromJson', [item.toJson()]) as T,
             )
             .toList();
 
-        var meta = store.state.DATA_ROOM.COLLECTIONS[request.NAME].META;
+        var meta = store.state.DATA_ROOM!.COLLECTIONS![request.NAME]!.META!;
 
         subject.add(
           ApiData<T>(
-            STATUS: store.state.DATA_ROOM.STATUS,
+            STATUS: store.state.DATA_ROOM!.STATUS!,
             COLLECTION: Collection<T>(META: meta, DATA: data),
           ),
         );

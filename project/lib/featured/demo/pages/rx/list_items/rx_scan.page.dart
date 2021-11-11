@@ -9,7 +9,7 @@ class RXScanOperatorPage extends StatefulWidget {
 }
 
 class _RXScanOperatorPageState extends BaseWidgetState<RXScanOperatorPage> {
-  static const source = [
+  static List<Map<String, dynamic>> source = [
     {
       'name': 'Taiwan',
       'year': '2020',
@@ -37,8 +37,11 @@ class _RXScanOperatorPageState extends BaseWidgetState<RXScanOperatorPage> {
 
     sourceSubject
         .switchMap(
-          (value) => sourceStream.scan(
-            (accumulated, value, index) => accumulated + value['population'],
+          (_) => sourceStream.scan(
+            (accumulated, value, index) {
+              var accumulatedVal = accumulated as int;
+              return accumulatedVal + value['population'];
+            },
             0,
           ),
         )

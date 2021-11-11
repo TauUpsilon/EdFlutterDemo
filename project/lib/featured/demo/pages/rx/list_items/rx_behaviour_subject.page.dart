@@ -17,11 +17,11 @@ class _RXBehaviourSubjectPageState
   };
 
   var sourceSubject = new BehaviorSubject<Map<String, String>>.seeded(
-    sources['king'],
+    sources['king']!,
   );
 
   var source = new Map<String, String>.from(
-    sources['king'],
+    sources['king']!,
   );
 
   @override
@@ -77,11 +77,11 @@ class _RXBehaviourSubjectPageState
                       ),
                       onPressed: () {
                         sourceSubject.add(
-                          sources[sources.keys.elementAt(index)],
+                          sources[sources.keys.elementAt(index)]!,
                         );
                       },
                       child: Text(
-                        '${sources[sources.keys.elementAt(index)]['name'].toUpperCase()}',
+                        '${sources[sources.keys.elementAt(index)]!['name']!.toUpperCase()}',
                         style: TextStyle(color: Colors.white),
                       ),
                     ),
@@ -97,7 +97,7 @@ class _RXBehaviourSubjectPageState
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        '${this.source['name'].toUpperCase()}',
+                        '${this.source['name']!.toUpperCase()}',
                         style: TextStyle(
                           fontSize: 70,
                           color: Colors.white,

@@ -3,10 +3,10 @@ import 'package:project/shared/bases/base_widget.state.dart';
 import 'package:project/shared/models/user.model.dart';
 
 class UserDetailPage extends StatefulWidget {
-  final User user;
+  final User? user;
 
   const UserDetailPage({
-    Key key,
+    Key? key,
     this.user,
   }) : super(key: key);
 
@@ -30,7 +30,7 @@ class _UserDetailPageState extends BaseWidgetState<UserDetailPage> {
         padding: EdgeInsets.all(2),
         child: Container(
           child: Center(
-            child: Text(widget.user.NAME),
+            child: Text(widget.user!.NAME!),
           ),
         ),
       ),

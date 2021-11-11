@@ -27,8 +27,8 @@ class _RXSkipWhileOperatorPageState
 
   var sourceSubject = new BehaviorSubject();
 
-  formatUserData(Map<String, Object> res) {
-    String outputString;
+  formatUserData(Map<String, Object?> res) {
+    String? outputString;
 
     if (res['status'] == 'done') {
       var value = res['value'] as Map<String, Object>;

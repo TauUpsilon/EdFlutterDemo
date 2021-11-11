@@ -19,7 +19,7 @@ class _RXCombineLatestStreamPageState
   final carryStream = new Stream.value(carrySource).asBroadcastStream();
   final mergeSubject = new BehaviorSubject();
 
-  String mergedStr;
+  String mergedStr = '';
 
   @override
   void initState() {
@@ -31,7 +31,7 @@ class _RXCombineLatestStreamPageState
           (_) => CombineLatestStream.combine2(
             this.figureStream,
             this.carryStream,
-            (figure, carry) {
+            (Map<String, String> figure, Map<String, String> carry) {
               return '${figure['name']} - ${carry['name']}';
             },
           ),
