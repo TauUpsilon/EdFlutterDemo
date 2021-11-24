@@ -6,6 +6,7 @@ import 'package:project/shared/decorators/imitable.decorator.dart';
 import 'package:project/shared/models/api_data.model.dart';
 import 'package:project/shared/models/app.model.dart';
 import 'package:project/shared/models/data_room.model.dart';
+import 'package:project/shared/models/meta.model.dart';
 import 'package:project/shared/requests/base.request.dart';
 import 'package:project/shared/services/store.service.dart';
 import 'package:project/store/data_room/data_room.action.dart';
@@ -26,30 +27,33 @@ class ApiService {
     BaseRequest request,
     Collection<T> collection,
   ) {
-    var subject = BehaviorSubject<ApiData<T>>();
     var store = this._storeService.store;
-    var uri = this.getUri(request)!;
+    var mirror = imitable.reflectType(T) as ClassMirror;
 
     store.dispatch(DataRoomAction(type: ActionType.LOADING));
 
-    http.get(uri).then(
-      (res) {
-        var mirror = imitable.reflectType(T) as ClassMirror;
+    var subject = BehaviorSubject<ApiData<T>>(onListen: () {
+      return null;
+    });
 
-        final action = DataRoomAction(
-          type: ActionType.SUCCESS,
-          payload: this.getPayload(request, res),
-          request: request,
-          mirror: mirror,
-        );
+    var uri = this.getUri(request)!;
 
-        store.dispatch(action);
+    // http.get(uri).then(
+    //   (res) {
+    //     final action = DataRoomAction(
+    //       type: ActionType.SUCCESS,
+    //       payload: this.getPayload(request, res),
+    //       request: request,
+    //       mirror: mirror,
+    //     );
 
-        subject.add(
-          this.getApiData<T>(store, request, mirror)!,
-        );
-      },
-    );
+    //     store.dispatch(action);
+
+    //     subject.add(
+    //       this.getApiData<T>(store, request, mirror)!,
+    //     );
+    //   },
+    // );
 
     return subject;
   }
@@ -72,14 +76,14 @@ class ApiService {
     BaseRequest request,
     ClassMirror mirror,
   ) {
+    var data = store.state.DATA_ROOM!.COLLECTIONS![request.NAME]!.DATA!
+        .map<T>(
+          (item) => mirror.invoke('fromJson', [item.toJson()]) as T,
+        )
+        .toList();
+
     switch (request.SCOPE) {
       case RequestScope.GOREST:
-        var data = store.state.DATA_ROOM!.COLLECTIONS![request.NAME]!.DATA!
-            .map<T>(
-              (item) => mirror.invoke('fromJson', [item.toJson()]) as T,
-            )
-            .toList();
-
         var meta = store.state.DATA_ROOM!.COLLECTIONS![request.NAME]!.META!;
 
         return ApiData<T>(
@@ -88,15 +92,9 @@ class ApiService {
         );
 
       case RequestScope.UBIKE:
-        var data = store.state.DATA_ROOM!.COLLECTIONS![request.NAME]!.DATA!
-            .map<T>(
-              (item) => mirror.invoke('fromJson', [item.toJson()]) as T,
-            )
-            .toList();
-
         return ApiData<T>(
           STATUS: store.state.DATA_ROOM!.STATUS!,
-          COLLECTION: Collection<T>(META: null, DATA: data),
+          COLLECTION: Collection<T>(META: new Meta(), DATA: data),
         );
 
       default:

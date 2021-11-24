@@ -3,62 +3,62 @@ import 'package:project/shared/decorators/imitable.decorator.dart';
 @imitable
 class UBikeStop {
   /// 站點代號
-  String? SNO;
+  String SNO;
 
   /// 中文場站名稱
-  String? SNA;
+  String SNA;
 
   /// 場站總停車格
-  String? TOT;
+  String TOT;
 
   /// 可借車位數
-  String? SBI;
+  String SBI;
 
   /// 中文場站區域 (新店區)
-  String? SAREA;
+  String SAREA;
 
   /// 資料更新時間(20211103233929)
-  String? MDAY;
+  String MDAY;
 
   /// 緯度
-  String? LAT;
+  String LAT;
 
   /// 經度
-  String? LNG;
+  String LNG;
 
   /// 中文地址
-  String? AR;
+  String AR;
 
   /// 英文場站區域
-  String? SAREAEN;
+  String SAREAEN;
 
   /// 英文場站名稱
-  String? SNAEN;
+  String SNAEN;
 
   /// 英文地址
-  String? AREN;
+  String AREN;
 
   /// 可還空位數
-  String? BEMP;
+  String BEMP;
 
   /// 場站是否暫停營運
-  String? ACT;
+  String ACT;
 
   UBikeStop({
-    this.SNO,
-    this.SNA,
-    this.TOT,
-    this.SBI,
-    this.SAREA,
-    this.MDAY,
-    this.LAT,
-    this.LNG,
-    this.AR,
-    this.SAREAEN,
-    this.SNAEN,
-    this.AREN,
-    this.BEMP,
-    this.ACT,
+    required this.SNO,
+    required this.SNA,
+    required this.TOT,
+    required this.SBI,
+    required this.SAREA,
+    required this.MDAY,
+    required this.LAT,
+    required this.LNG,
+    required this.AR,
+    required this.SAREAEN,
+    required this.SNAEN,
+    required this.AREN,
+    required this.BEMP,
+    required this.ACT,
   });
 
   static fromJson(Map<String, dynamic> json) {
