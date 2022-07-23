@@ -46,7 +46,7 @@ class RestfulListPageView extends BaseView<RestfulListPageState> {
                                     child: Card(
                                       key: UniqueKey(),
                                       elevation: 8.0,
-                                      color: Colors.red.shade400,
+                                      color: Colors.black,
                                       margin: const EdgeInsets.symmetric(
                                         horizontal: 0.0,
                                         vertical: 6.0,
@@ -118,7 +118,7 @@ class RestfulListPageView extends BaseView<RestfulListPageState> {
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       elevation: 2,
-                      primary: Colors.red.shade400,
+                      primary: Colors.black,
                     ),
                     child: const Padding(
                       padding: EdgeInsets.all(15.0),

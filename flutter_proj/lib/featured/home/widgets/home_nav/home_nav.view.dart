@@ -13,11 +13,11 @@ class HomeNavWidgetView extends BaseView<HomeNavWidget> {
   Widget build(BuildContext context) {
     return BottomNavigationBar(
       iconSize: 36,
-      backgroundColor: Colors.red[400],
+      backgroundColor: Colors.black,
       showUnselectedLabels: false,
       selectedFontSize: 16,
       selectedItemColor: Colors.white,
-      unselectedItemColor: Colors.black26,
+      unselectedItemColor: Colors.blueGrey,
       items: const [
         BottomNavigationBarItem(
           icon: Icon(Icons.widgets),

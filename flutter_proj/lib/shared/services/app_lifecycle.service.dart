@@ -5,7 +5,7 @@ class AppLifecycleService with WidgetsBindingObserver {
   final BehaviorSubject<AppLifecycleState> stateStream = BehaviorSubject();
 
   AppLifecycleService() {
-    WidgetsBinding.instance?.addObserver(this);
+    WidgetsBinding.instance.addObserver(this);
   }
 
   @override
@@ -14,6 +14,6 @@ class AppLifecycleService with WidgetsBindingObserver {
   }
 
   void onDispose() {
-    WidgetsBinding.instance?.removeObserver(this);
+    WidgetsBinding.instance.removeObserver(this);
   }
 }

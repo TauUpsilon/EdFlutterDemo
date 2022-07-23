@@ -17,7 +17,7 @@ class HomePageView extends BaseView<HomePageState> {
         preferredSize: const Size.fromHeight(80.0),
         child: AppBar(
           title: Text(state.title),
-          backgroundColor: Colors.red[400],
+          backgroundColor: Colors.black,
           elevation: 20,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.vertical(

@@ -16,7 +16,7 @@ class RestfulDetailPageView extends BaseView<RestfulDetailPageState> {
         preferredSize: const Size.fromHeight(80.0),
         child: AppBar(
           title: const Text('匯率明細'),
-          backgroundColor: Colors.red[400],
+          backgroundColor: Colors.black,
           elevation: 20,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.vertical(

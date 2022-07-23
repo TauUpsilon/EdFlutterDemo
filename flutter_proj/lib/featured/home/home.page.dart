@@ -14,7 +14,7 @@ class HomePage extends StatefulWidget {
 }
 
 class HomePageState extends State<HomePage> {
-  final String title = '台新 Flutter';
+  final String title = 'My Flutter';
 
   late List<Widget> pageBodies = <Widget>[
     CalculatorWidget(key: UniqueKey()),

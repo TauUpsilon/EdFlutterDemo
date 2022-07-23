@@ -28,7 +28,7 @@ class DialButtonWidgetView extends BaseView<DialButtonWidget> {
             Colors.white,
           ),
           backgroundColor: MaterialStateProperty.all<Color>(
-            Colors.red[400]!,
+            Colors.black!,
           ),
           shape: MaterialStateProperty.all<RoundedRectangleBorder>(
             RoundedRectangleBorder(
