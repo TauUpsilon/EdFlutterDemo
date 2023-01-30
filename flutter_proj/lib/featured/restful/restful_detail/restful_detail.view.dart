@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_proj/featured/restful/restful_detail/restful_detail.page.dart';
-import 'package:flutter_proj/shared/core/base_view.core.dart';
+import 'package:flutter_proj/core/base_view.core.dart';
 
 class RestfulDetailPageView extends BaseView<RestfulDetailPageState> {
   const RestfulDetailPageView({

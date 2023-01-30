@@ -1,15 +1,14 @@
-
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-class AppSettings{
+class AppSettings {
   static Future<void> setEnvironment() async {
     const envStr = String.fromEnvironment('ENV');
 
     var envPath = 'environments/';
 
     switch (envStr) {
-      case 'DEV':
-        envPath = '${envPath}dev.env';
+      case 'STAGE':
+        envPath = '${envPath}stage.env';
         break;
 
       case 'PROD':
@@ -17,7 +16,7 @@ class AppSettings{
         break;
 
       default:
-        envPath = '${envPath}default.env';
+        envPath = '${envPath}dev.env';
         break;
     }
 

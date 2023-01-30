@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_proj/featured/home/home.page.dart';
 import 'package:flutter_proj/featured/home/widgets/home_nav/home_nav.widget.dart';
-import 'package:flutter_proj/shared/core/base_view.core.dart';
+import 'package:flutter_proj/core/base_view.core.dart';
 
 class HomePageView extends BaseView<HomePageState> {
   const HomePageView({

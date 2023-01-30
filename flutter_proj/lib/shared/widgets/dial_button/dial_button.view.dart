@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:flutter_proj/shared/core/base_view.core.dart';
+import 'package:flutter_proj/core/base_view.core.dart';
 import 'package:flutter_proj/shared/widgets/dial_button/dial_button.widget.dart';
 
 class DialButtonWidgetView extends BaseView<DialButtonWidget> {

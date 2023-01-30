@@ -1,8 +1,8 @@
 import 'dart:convert';
 
+import 'package:flutter_proj/core/base_api.request.dart';
 import 'package:http/http.dart' as http;
 
-import 'package:flutter_proj/api/core/base_api.request.dart';
 import 'package:flutter_proj/app/app.config.dart';
 
 class BaseApiService {

@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 
-import 'package:flutter_proj/api/core/base_api.model.dart';
+import 'package:flutter_proj/core/base_api.model.dart';
 
 part 'mbm081018.model.g.dart';
 

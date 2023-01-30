@@ -1,4 +1,4 @@
-import 'package:flutter_proj/api/core/base_api.request.dart';
+import 'package:flutter_proj/core/base_api.request.dart';
 import 'package:flutter_proj/api/models/mbm081018/mbm081018.model.dart';
 
 class MBM081018RequestBody {

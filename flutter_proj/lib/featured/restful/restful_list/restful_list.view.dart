@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_proj/api/models/mbm081018/mbm081018.model.dart';
 
 import 'package:flutter_proj/featured/restful/restful_list/restful_list.page.dart';
-import 'package:flutter_proj/shared/core/base_view.core.dart';
+import 'package:flutter_proj/core/base_view.core.dart';
 
 class RestfulListPageView extends BaseView<RestfulListPageState> {
   const RestfulListPageView({
