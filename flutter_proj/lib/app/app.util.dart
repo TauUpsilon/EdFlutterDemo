@@ -1,6 +1,6 @@
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-class AppSettings {
+class AppUtil {
   static Future<void> setEnvironment() async {
     const envStr = String.fromEnvironment('ENV');
 

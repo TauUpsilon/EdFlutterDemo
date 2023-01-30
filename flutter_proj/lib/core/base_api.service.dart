@@ -1,12 +1,15 @@
 import 'dart:convert';
 
 import 'package:flutter_proj/core/base_api.request.dart';
+import 'package:flutter_proj/shared/services/app_logger.service.dart';
+import 'package:get_it/get_it.dart';
 import 'package:http/http.dart' as http;
 
-import 'package:flutter_proj/app/app.config.dart';
+import 'package:flutter_proj/config/app.config.dart';
 
 class BaseApiService {
-  final String baseUrl = AppConfig.baseUrl;
+  final appLogService = GetIt.instance.get<AppLogService>();
+  final baseUrl = AppConfig.baseUrl;
 
   Map<String, String> headers = {
     'Content-Type': 'application/json; charset=UTF-8',
@@ -45,6 +48,9 @@ class BaseApiService {
   Future<Map<String, dynamic>> _handleRespose(http.Response response) {
     if (response.statusCode == 200) {
       var res = jsonDecode(response.body) as Map<String, dynamic>;
+      var encoder = const JsonEncoder.withIndent("  ");
+
+      appLogService.d(encoder.convert(res));
 
       return Future.value(res);
     } else {
