@@ -32,7 +32,7 @@ class ApiRequestBodyHeader {
       };
 }
 
-abstract class ApiRequest {
+class ApiRequest {
   String method = 'GET';
   ApiRequestBodyHeader header = ApiRequestBodyHeader();
   Map<String, dynamic> body = {};

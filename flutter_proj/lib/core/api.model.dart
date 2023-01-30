@@ -1,1 +1,1 @@
-abstract class ApiModel<T> {}
+class ApiModel<T> {}

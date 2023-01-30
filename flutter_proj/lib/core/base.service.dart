@@ -4,5 +4,4 @@ import 'package:get_it/get_it.dart';
 
 class BaseService {
   final loggingService = GetIt.instance.get<LoggingService>();
-  final apiService = GetIt.instance.get<ApiService>();
 }
