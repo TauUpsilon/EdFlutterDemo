@@ -19,29 +19,21 @@ class RestfulDetailPageState extends State<RestfulDetailPage> {
   @override
   void initState() {
     super.initState();
-
-    print('init');
   }
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-
-    print('didChangeDependencies');
   }
 
   @override
   void deactivate() {
     super.deactivate();
-
-    print('deactivate');
   }
 
   @override
   void dispose() {
     super.dispose();
-
-    print('dispose');
   }
 
   @override

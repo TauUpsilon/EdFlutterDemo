@@ -17,23 +17,23 @@ class DialButtonWidgetView extends BaseView<DialButtonWidget> {
       margin: const EdgeInsets.all(3),
       child: ElevatedButton(
         onPressed: () => state.onPress(state.text),
-        child: Text(
-          state.text,
-          style: const TextStyle(
-            fontSize: 30,
-          ),
-        ),
         style: ButtonStyle(
           foregroundColor: MaterialStateProperty.all<Color>(
             Colors.white,
           ),
           backgroundColor: MaterialStateProperty.all<Color>(
-            Colors.black!,
+            Colors.black,
           ),
           shape: MaterialStateProperty.all<RoundedRectangleBorder>(
             RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(4.0),
             ),
+          ),
+        ),
+        child: Text(
+          state.text,
+          style: const TextStyle(
+            fontSize: 30,
           ),
         ),
       ),

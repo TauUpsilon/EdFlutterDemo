@@ -34,10 +34,6 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.5
 
-dev_dependencies:
-  flutter_test:
-    sdk: flutter
-
   # Common
   logger: ^1.1.0
   rxdart: ^0.27.5
@@ -45,7 +41,7 @@ dev_dependencies:
   flutter_dotenv: ^5.0.2
 
   # Network
-  http: ^0.13.4
+  http: ^0.13.5
 
   # Injection
   get_it: ^7.2.0
@@ -59,6 +55,10 @@ dev_dependencies:
   # Custom plugin
   custom_math:
     path: plugins/custom_math
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -82,7 +82,7 @@ flutter:
     - environments/default.env
     - environments/dev.env
     - environments/prod.env
-    - assets/images/
+    # - assets/images/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
