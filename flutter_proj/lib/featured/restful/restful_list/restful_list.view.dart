@@ -118,7 +118,7 @@ class RestfulListPageView extends BaseView<RestfulListPageState> {
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       elevation: 2,
-                      primary: Colors.black,
+                      // primary: Colors.black,
                     ),
                     child: const Padding(
                       padding: EdgeInsets.all(15.0),

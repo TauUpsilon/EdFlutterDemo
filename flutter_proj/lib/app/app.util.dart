@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class AppUtil {
@@ -23,5 +25,10 @@ class AppUtil {
     await dotenv.load(
       fileName: envPath,
     );
+  }
+
+  static String getJsonString(Map<String, dynamic> json) {
+    var encoder = const JsonEncoder.withIndent("  ");
+    return encoder.convert(json);
   }
 }

@@ -32,7 +32,7 @@ class ApiRequestBodyHeader {
       };
 }
 
-abstract class BaseApiRequest {
+abstract class ApiRequest {
   String method = 'GET';
   ApiRequestBodyHeader header = ApiRequestBodyHeader();
   Map<String, dynamic> body = {};
@@ -41,6 +41,4 @@ abstract class BaseApiRequest {
         "HEADER": header,
         "BODY": body,
       };
-
-  dynamic responseToModel<T>(Map<String, dynamic> res);
 }

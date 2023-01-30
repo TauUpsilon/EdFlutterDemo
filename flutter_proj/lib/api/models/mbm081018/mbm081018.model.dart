@@ -1,11 +1,11 @@
 import 'package:json_annotation/json_annotation.dart';
 
-import 'package:flutter_proj/core/base_api.model.dart';
+import 'package:flutter_proj/core/api.model.dart';
 
 part 'mbm081018.model.g.dart';
 
 @JsonSerializable(explicitToJson: true)
-class MBM081018Model extends BaseApiModel<MBM081018Model> {
+class MBM081018Model extends ApiModel<MBM081018Model> {
   @JsonKey(name: 'UPDATE_TIME')
   String updateTime;
   @JsonKey(name: 'FX_RATE')

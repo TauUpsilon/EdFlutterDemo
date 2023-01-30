@@ -1,7 +1,7 @@
 import 'package:logger/logger.dart';
 
-class AppLogService extends Logger {
-  AppLogService()
+class LoggingService extends Logger {
+  LoggingService()
       : super(
           level: Level.verbose,
           filter: null,

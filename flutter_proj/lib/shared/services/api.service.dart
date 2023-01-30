@@ -1,29 +1,33 @@
 import 'dart:convert';
 
-import 'package:flutter_proj/core/base_api.request.dart';
-import 'package:flutter_proj/shared/services/app_logger.service.dart';
+import 'package:flutter_proj/app/app.util.dart';
+import 'package:flutter_proj/core/api.request.dart';
+import 'package:flutter_proj/shared/services/logging.service.dart';
+import 'package:flutter_proj/shared/services/model.service.dart';
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:flutter_proj/config/app.config.dart';
 
-class BaseApiService {
-  final appLogService = GetIt.instance.get<AppLogService>();
+class ApiService {
+  final loggingService = GetIt.instance.get<LoggingService>();
+  final modelService = GetIt.instance.get<ModelService>();
   final baseUrl = AppConfig.baseUrl;
 
   Map<String, String> headers = {
     'Content-Type': 'application/json; charset=UTF-8',
   };
 
-  Future<T> request<T>(BaseApiRequest request) async {
+  Future<ModelService> request(ApiRequest request) async {
     var url = Uri.parse('$baseUrl/${request.header.txId}');
     var response = await _doRequest(url, request);
 
-    return request.responseToModel<T>(response);
+    modelService.model = response;
+
+    return modelService;
   }
 
-  Future<Map<String, dynamic>> _doRequest(
-      Uri url, BaseApiRequest request) async {
+  Future<Map<String, dynamic>> _doRequest(Uri url, ApiRequest request) async {
     http.Response res;
 
     switch (request.method) {
@@ -45,14 +49,13 @@ class BaseApiService {
     return _handleRespose(res);
   }
 
-  Future<Map<String, dynamic>> _handleRespose(http.Response response) {
+  Map<String, dynamic> _handleRespose(http.Response response) {
     if (response.statusCode == 200) {
       var res = jsonDecode(response.body) as Map<String, dynamic>;
-      var encoder = const JsonEncoder.withIndent("  ");
 
-      appLogService.d(encoder.convert(res));
+      loggingService.d(AppUtil.getJsonString(res));
 
-      return Future.value(res);
+      return res;
     } else {
       throw 'Error: ${response.statusCode}';
     }
