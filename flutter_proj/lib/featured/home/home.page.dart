@@ -20,7 +20,7 @@ class HomePageState extends State<HomePage> {
 
   int selectedNavBarIdx = 0;
 
-  PreferredSizeWidget get appBar => PreferredSize(
+  PreferredSizeWidget appBar() => PreferredSize(
         preferredSize: const Size.fromHeight(80.0),
         child: AppBar(
           title: Text(title),
@@ -36,13 +36,13 @@ class HomePageState extends State<HomePage> {
         ),
       );
 
-  Widget get body => SafeArea(
+  Widget body() => SafeArea(
         child: Center(
-          child: pageBodies.elementAt(selectedNavBarIdx),
+          child: pageBodies().elementAt(selectedNavBarIdx),
         ),
       );
 
-  List<Widget> get pageBodies => <Widget>[
+  List<Widget> pageBodies() => <Widget>[
         MultiProvider(
           providers: [
             Provider(create: (_) => MBM081018Service()),
@@ -52,7 +52,7 @@ class HomePageState extends State<HomePage> {
         CalculatorWidget(key: UniqueKey()),
       ];
 
-  Widget get bottomNavBar => HomeNavWidget(
+  Widget bottomNavBar() => HomeNavWidget(
         key: UniqueKey(),
         index: selectedNavBarIdx,
         onNavBarTapped: (index) => setState(() {
@@ -62,8 +62,8 @@ class HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        appBar: appBar,
-        body: body,
-        bottomNavigationBar: bottomNavBar,
+        appBar: appBar(),
+        body: body(),
+        bottomNavigationBar: bottomNavBar(),
       );
 }

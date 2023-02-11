@@ -11,7 +11,7 @@ class HomeNavWidget extends AppStatelessWidget {
     required this.onNavBarTapped,
   });
 
-  List<BottomNavigationBarItem> get makeNavBarItems => const [
+  List<BottomNavigationBarItem> makeNavBarItems() => const [
         BottomNavigationBarItem(
           icon: Icon(Icons.network_check),
           label: 'Network',
@@ -30,7 +30,7 @@ class HomeNavWidget extends AppStatelessWidget {
         selectedFontSize: 16,
         selectedItemColor: Colors.white,
         unselectedItemColor: Colors.blueGrey,
-        items: makeNavBarItems,
+        items: makeNavBarItems(),
         currentIndex: index,
         onTap: (index) => onNavBarTapped(index),
       );
