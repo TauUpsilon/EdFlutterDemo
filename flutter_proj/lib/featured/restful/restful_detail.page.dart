@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_proj/api/models/mbm081018/mbm081018.model.dart';
 
-class RestfulDetailPage extends StatefulWidget {
+import 'package:flutter_proj/api/models/mbm081018/mbm081018.model.dart';
+import 'package:flutter_proj/core/app_stateful.widget.dart';
+
+class RestfulDetailPage extends AppStatefulWidget {
   final MBM081018FxRate fxRate;
 
-  const RestfulDetailPage({
-    required Key key,
+  RestfulDetailPage({
+    super.key,
     required this.fxRate,
-  }) : super(key: key);
+  });
 
   @override
   RestfulDetailPageState createState() => RestfulDetailPageState();

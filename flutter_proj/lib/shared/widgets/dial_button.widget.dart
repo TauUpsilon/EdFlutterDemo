@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_proj/core/app_stateless.widget.dart';
 
-class DialButtonWidget extends StatelessWidget {
+class DialButtonWidget extends AppStatelessWidget {
   final String text;
   final Function(String) onPress;
 
-  const DialButtonWidget({
-    required Key key,
+  DialButtonWidget({
+    super.key,
     required this.text,
     required this.onPress,
-  }) : super(key: key);
+  });
 
   ElevatedButton button() => ElevatedButton(
         onPressed: () => onPress(text),

@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_proj/core/app_stateless.widget.dart';
 
-class HomeNavWidget extends StatelessWidget {
+class HomeNavWidget extends AppStatelessWidget {
   final int index;
   final Function(int index) onNavBarTapped;
 
-  const HomeNavWidget({
-    required Key key,
+  HomeNavWidget({
+    super.key,
     required this.index,
     required this.onNavBarTapped,
-  }) : super(key: key);
+  });
 
   List<BottomNavigationBarItem> get makeNavBarItems => const [
         BottomNavigationBarItem(

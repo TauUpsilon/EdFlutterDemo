@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_proj/api/api.model.dart';
+import 'package:flutter_proj/core/app_stateful.widget.dart';
 
 import 'package:flutter_redux/flutter_redux.dart';
 
@@ -11,8 +12,8 @@ import 'package:flutter_proj/featured/restful/store/restful.reducer.dart';
 import 'package:flutter_proj/featured/restful/store/restful.state.dart';
 import 'package:flutter_proj/api/models/mbm081018/mbm081018.model.dart';
 
-class RestfulListPage extends StatefulWidget {
-  const RestfulListPage({required Key key}) : super(key: key);
+class RestfulListPage extends AppStatefulWidget {
+  RestfulListPage({super.key});
 
   @override
   RestfulListPageState createState() => RestfulListPageState();

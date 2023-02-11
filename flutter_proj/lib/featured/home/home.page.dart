@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_proj/core/app_stateful.widget.dart';
 
 import 'package:provider/provider.dart';
 
@@ -7,8 +8,8 @@ import 'package:flutter_proj/featured/restful/restful_list.page.dart';
 import 'package:flutter_proj/shared/widgets/calculator.widget.dart';
 import 'package:flutter_proj/featured/home/widgets/home_nav.widget.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({required Key key}) : super(key: key);
+class HomePage extends AppStatefulWidget {
+  HomePage({super.key});
 
   @override
   HomePageState createState() => HomePageState();

@@ -1,11 +1,12 @@
 import 'package:custom_math/custom_math.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_proj/core/app_stateful.widget.dart';
 
 import 'package:flutter_proj/shared/widgets/dial_button.widget.dart';
 
-class CalculatorWidget extends StatefulWidget {
-  const CalculatorWidget({required Key key}) : super(key: key);
+class CalculatorWidget extends AppStatefulWidget {
+  CalculatorWidget({super.key});
 
   @override
   CalculatorWidgetState createState() => CalculatorWidgetState();
@@ -113,14 +114,11 @@ class CalculatorWidgetState extends State<CalculatorWidget> {
   }
 
   void _doSum() {
-    if (firstNum.isNotEmpty &&
-        secondNum.isEmpty &&
-        !displayText.endsWith('.')) {
+    if (firstNum.isNotEmpty && secondNum.isEmpty && !displayText.endsWith('.')) {
       setState(() {
         secondNum = displayText;
 
-        final pattern =
-            RegExp(r'^([0-9]\d*(\.\d+)?)([\/+x-])([0-9]\d*(\.\d+)?)$');
+        final pattern = RegExp(r'^([0-9]\d*(\.\d+)?)([\/+x-])([0-9]\d*(\.\d+)?)$');
         final match = pattern.firstMatch('$firstNum$operator$secondNum')!;
 
         _calculate(
@@ -147,9 +145,7 @@ class CalculatorWidgetState extends State<CalculatorWidget> {
 
   void _handleDecimalPlace() {
     setState(() {
-      displayText = RegExp(r'[\.]').hasMatch(displayText)
-          ? displayText
-          : displayText += '.';
+      displayText = RegExp(r'[\.]').hasMatch(displayText) ? displayText : displayText += '.';
     });
   }
 
