@@ -1,6 +1,6 @@
 import 'package:flutter_proj/api/models/mbm081018/mbm081018.model.dart';
 import 'package:flutter_proj/api/services/mbm081018.service.dart';
-import 'package:flutter_proj/core/api.model.dart';
+import 'package:flutter_proj/api/api.model.dart';
 import 'package:flutter_proj/featured/restful/store/restful.action.dart';
 import 'package:get_it/get_it.dart';
 import 'package:redux/redux.dart';

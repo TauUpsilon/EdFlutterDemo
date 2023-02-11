@@ -1,4 +1,4 @@
-import 'package:flutter_proj/core/api.request.dart';
+import 'package:flutter_proj/api/api.request.dart';
 
 class MBM081018RequestBody {
   String ccyName;

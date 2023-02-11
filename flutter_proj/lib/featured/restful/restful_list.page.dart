@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_proj/core/api.model.dart';
+import 'package:flutter_proj/api/api.model.dart';
 
 import 'package:flutter_redux/flutter_redux.dart';
 
@@ -152,7 +152,9 @@ class RestfulListPageState extends State<RestfulListPage> {
           ),
           child: Column(
             children: [
-              fxRateListView(vm.data!.fxRate),
+              if (vm.data != null) fxRateListView(vm.data!.fxRate),
+
+              if (vm.error != null) Text(vm.error!.message),
 
               const SizedBox(height: 20), // Gap
 

@@ -1,6 +1,6 @@
-import 'package:flutter_proj/shared/services/api.service.dart';
+import 'package:flutter_proj/api/api.service.dart';
 import 'package:flutter_proj/shared/services/logging.service.dart';
-import 'package:flutter_proj/shared/services/model.service.dart';
+import 'package:flutter_proj/api/api_model.service.dart';
 import 'package:get_it/get_it.dart';
 import 'package:flutter_proj/api/services/mbm081018.service.dart';
 
@@ -12,7 +12,7 @@ class AppLocator {
 
     getIt.registerLazySingleton<LoggingService>(() => LoggingService());
     getIt.registerLazySingleton<ApiService>(() => ApiService());
-    getIt.registerLazySingleton<ModelService>(() => ModelService());
+    getIt.registerLazySingleton<ApiModelService>(() => ApiModelService());
     getIt.registerLazySingleton<MBM081018Service>(() => MBM081018Service());
   }
 }
