@@ -14,6 +14,5 @@ class ModelService extends AppService {
       returnCode: _model["returnCode"],
       data: callback(_model["data"]),
     );
-    ;
   }
 }

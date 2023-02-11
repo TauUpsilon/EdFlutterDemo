@@ -1,14 +1,14 @@
 import 'dart:convert';
 
+import 'package:http/http.dart' as http;
+
+import 'package:get_it/get_it.dart';
+
 import 'package:flutter_proj/app/app.util.dart';
-import 'package:flutter_proj/core/api.model.dart';
 import 'package:flutter_proj/core/api.request.dart';
 import 'package:flutter_proj/core/api_status.enum.dart';
 import 'package:flutter_proj/core/app.service.dart';
 import 'package:flutter_proj/shared/services/model.service.dart';
-import 'package:get_it/get_it.dart';
-import 'package:http/http.dart' as http;
-
 import 'package:flutter_proj/config/app.config.dart';
 
 class ApiService extends AppService {
