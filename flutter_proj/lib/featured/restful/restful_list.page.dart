@@ -46,6 +46,98 @@ class RestfulListPageState extends State<RestfulListPage> {
     super.dispose();
   }
 
+  Expanded fxRateListView(List<MBM081018FxRate> fxRate) => Expanded(
+        child: ListView.builder(
+          itemCount: fxRate.length,
+          itemBuilder: (context, index) => InkWell(
+            onTap: () => Navigator.of(context).pushNamed(
+              '/restful/detail',
+              arguments: fxRate[index],
+            ),
+            child: fxRateListViewItem(fxRate[index]),
+          ),
+        ),
+      );
+
+  Widget fxRateListViewItem(MBM081018FxRate fxRate) => Card(
+        key: UniqueKey(),
+        elevation: 8.0,
+        color: Colors.black,
+        margin: const EdgeInsets.symmetric(
+          horizontal: 0.0,
+          vertical: 6.0,
+        ),
+        child: ListTile(
+          contentPadding: const EdgeInsets.symmetric(
+            horizontal: 20.0,
+            vertical: 10.0,
+          ),
+
+          // Tile leading
+          leading: fxRateListViewTileLead(),
+
+          // Tile middle
+          title: fxRateListViewTileMiddle(fxRate.ccyName),
+
+          // Tile tail
+          trailing: fxRateListViewTileTail(),
+        ),
+      );
+
+  Widget fxRateListViewTileLead() => Container(
+        padding: const EdgeInsets.fromLTRB(
+          0,
+          10.0,
+          14.0,
+          10.0,
+        ),
+        decoration: const BoxDecoration(
+          border: Border(
+            right: BorderSide(
+              width: 2.0,
+              color: Colors.white,
+            ),
+          ),
+        ),
+        child: const Icon(
+          Icons.currency_exchange,
+          color: Colors.white,
+          size: 30.0,
+        ),
+      );
+
+  Widget fxRateListViewTileMiddle(String text) => Text(
+        text,
+        style: const TextStyle(
+          color: Colors.white,
+          fontWeight: FontWeight.bold,
+          fontSize: 20.0,
+        ),
+      );
+
+  Widget fxRateListViewTileTail() => const Icon(
+        Icons.keyboard_arrow_right,
+        color: Colors.white,
+        size: 30.0,
+      );
+
+  ElevatedButton refreshBtn() => ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          elevation: 2,
+          // primary: Colors.black,
+        ),
+        child: const Padding(
+          padding: EdgeInsets.all(15.0),
+          child: Text(
+            'Refresh',
+            style: TextStyle(
+              fontSize: 20,
+            ),
+          ),
+        ),
+        onPressed: () => store.dispatch(GetPartOne()),
+      );
+
   @override
   Widget build(BuildContext context) {
     return StoreProvider(
@@ -59,95 +151,11 @@ class RestfulListPageState extends State<RestfulListPage> {
           ),
           child: Column(
             children: [
-              Expanded(
-                child: ListView.builder(
-                  itemCount: vm.fxRate.length,
-                  itemBuilder: (context, index) {
-                    return InkWell(
-                      onTap: () => Navigator.of(context).pushNamed(
-                        '/restful/detail',
-                        arguments: vm.fxRate[index],
-                      ),
-                      child: Card(
-                        key: UniqueKey(),
-                        elevation: 8.0,
-                        color: Colors.black,
-                        margin: const EdgeInsets.symmetric(
-                          horizontal: 0.0,
-                          vertical: 6.0,
-                        ),
-                        child: ListTile(
-                          contentPadding: const EdgeInsets.symmetric(
-                            horizontal: 20.0,
-                            vertical: 10.0,
-                          ),
+              fxRateListView(vm.fxRate),
 
-                          // Tile leading
-                          leading: Container(
-                            padding: const EdgeInsets.fromLTRB(
-                              0,
-                              10.0,
-                              14.0,
-                              10.0,
-                            ),
-                            decoration: const BoxDecoration(
-                              border: Border(
-                                right: BorderSide(
-                                  width: 2.0,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ),
-                            child: const Icon(
-                              Icons.currency_exchange,
-                              color: Colors.white,
-                              size: 30.0,
-                            ),
-                          ),
+              const SizedBox(height: 20), // Gap
 
-                          // Tile middle
-                          title: Text(
-                            vm.fxRate[index].ccyName,
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20.0,
-                            ),
-                          ),
-
-                          // Tile tail
-                          trailing: const Icon(
-                            Icons.keyboard_arrow_right,
-                            color: Colors.white,
-                            size: 30.0,
-                          ),
-                        ),
-                      ),
-                    );
-                  },
-                ),
-              ),
-
-              // Gap
-              const SizedBox(height: 20),
-
-              // Refresh button
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  elevation: 2,
-                  // primary: Colors.black,
-                ),
-                child: const Padding(
-                  padding: EdgeInsets.all(15.0),
-                  child: Text(
-                    'Refresh',
-                    style: TextStyle(
-                      fontSize: 20,
-                    ),
-                  ),
-                ),
-                onPressed: () => store.dispatch(GetPartOne()),
-              )
+              refreshBtn(),
             ],
           ),
         ),
