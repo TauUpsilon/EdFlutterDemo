@@ -1,5 +1,7 @@
 # My Flutter 3
 
+## SDK 3.7.0
+
 This project is to document and demonstrate my personal experience on the Flutter frame.
 
 The Flutter version is managed by FVM and the application of Redux and Rx is available to be found in this project.You may want to check out packaged used and their version through the section below
