@@ -9,19 +9,28 @@ The Flutter version is managed by FVM and the application of Redux and Rx is ava
 > #### Common
 >
 > - logger: ^1.1.0
-> - rxdart: ^0.27.5
 > - json_annotation: ^4.6.0
 > - flutter_dotenv: ^5.0.2
-
+>
 > #### Network
 >
-> - http: ^0.13.4
+> - http: ^0.13.5
 >
 > #### Injection
 >
 > - get_it: ^7.2.0
 > - provider: ^6.0.3
 >
+> #### State Management
+>
+> - flutter_redux: ^0.10.0
+> - rxdart: ^0.27.5
+> - redux: ^5.0.0
+>
 > #### Build
 >
 > - build_runner: ^2.2.0
+>
+> #### Widget
+>
+> - cupertino_icons: ^1.0.5
