@@ -1,11 +1,9 @@
 import 'package:json_annotation/json_annotation.dart';
 
-import 'package:flutter_proj/core/api.model.dart';
-
 part 'mbm081018.model.g.dart';
 
 @JsonSerializable(explicitToJson: true)
-class MBM081018Model extends ApiModel<MBM081018Model> {
+class MBM081018Model {
   @JsonKey(name: 'UPDATE_TIME')
   String updateTime;
   @JsonKey(name: 'FX_RATE')
@@ -16,8 +14,7 @@ class MBM081018Model extends ApiModel<MBM081018Model> {
     required this.fxRate,
   });
 
-  factory MBM081018Model.fromJson(Map<String, dynamic> json) =>
-      _$MBM081018ModelFromJson(json);
+  factory MBM081018Model.fromJson(Map<String, dynamic> json) => _$MBM081018ModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$MBM081018ModelToJson(this);
 }
@@ -70,8 +67,7 @@ class MBM081018FxRate {
     required this.isDay7SellLowest,
   });
 
-  factory MBM081018FxRate.fromJson(Map<String, dynamic> json) =>
-      _$MBM081018FxRateFromJson(json);
+  factory MBM081018FxRate.fromJson(Map<String, dynamic> json) => _$MBM081018FxRateFromJson(json);
 
   Map<String, dynamic> toJson() => _$MBM081018FxRateToJson(this);
 }

@@ -1,7 +1,8 @@
 import 'package:flutter_proj/api/models/mbm081018/mbm081018.model.dart';
+import 'package:flutter_proj/core/api.model.dart';
 
 class GetPartOne {
-  final MBM081018Model? mbm081018model;
+  final ApiModel<MBM081018Model>? mbm081018model;
 
   GetPartOne({this.mbm081018model});
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_proj/core/api.model.dart';
 
 import 'package:flutter_redux/flutter_redux.dart';
 
@@ -142,7 +143,7 @@ class RestfulListPageState extends State<RestfulListPage> {
   Widget build(BuildContext context) {
     return StoreProvider(
       store: store,
-      child: StoreConnector<RestfulState, MBM081018Model>(
+      child: StoreConnector<RestfulState, ApiModel<MBM081018Model>>(
         converter: (store) => store.state.mbm081018model!,
         builder: (_, vm) => Padding(
           padding: const EdgeInsets.symmetric(
@@ -151,7 +152,7 @@ class RestfulListPageState extends State<RestfulListPage> {
           ),
           child: Column(
             children: [
-              fxRateListView(vm.fxRate),
+              fxRateListView(vm.data!.fxRate),
 
               const SizedBox(height: 20), // Gap
 

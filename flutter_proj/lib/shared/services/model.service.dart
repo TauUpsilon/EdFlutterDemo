@@ -1,3 +1,4 @@
+import 'package:flutter_proj/core/api.model.dart';
 import 'package:flutter_proj/core/app.service.dart';
 
 class ModelService extends AppService {
@@ -7,7 +8,12 @@ class ModelService extends AppService {
     _model = res;
   }
 
-  T serialise<T>(T Function(Map<String, dynamic> value) callback) {
-    return callback(_model);
+  ApiModel<T> serialise<T>(T Function(Map<String, dynamic> value) callback) {
+    return ApiModel<T>(
+      state: _model["status"],
+      returnCode: _model["returnCode"],
+      data: callback(_model["data"]),
+    );
+    ;
   }
 }

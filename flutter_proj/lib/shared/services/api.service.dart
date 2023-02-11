@@ -1,7 +1,9 @@
 import 'dart:convert';
 
 import 'package:flutter_proj/app/app.util.dart';
+import 'package:flutter_proj/core/api.model.dart';
 import 'package:flutter_proj/core/api.request.dart';
+import 'package:flutter_proj/core/api_status.enum.dart';
 import 'package:flutter_proj/core/app.service.dart';
 import 'package:flutter_proj/shared/services/model.service.dart';
 import 'package:get_it/get_it.dart';
@@ -26,7 +28,10 @@ class ApiService extends AppService {
     return modelService;
   }
 
-  Future<Map<String, dynamic>> _doRequest(Uri url, ApiRequest request) async {
+  Future<Map<String, dynamic>> _doRequest(
+    Uri url,
+    ApiRequest request,
+  ) async {
     http.Response res;
 
     switch (request.method) {
@@ -54,7 +59,11 @@ class ApiService extends AppService {
 
       loggingService.d(AppUtil.getJsonString(res));
 
-      return res;
+      return {
+        "status": ApiStatusEnum.done,
+        "returnCode": response.statusCode.toString(),
+        "data": res,
+      };
     } else {
       throw 'Error: ${response.statusCode}';
     }
