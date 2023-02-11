@@ -1,6 +1,6 @@
-import 'package:flutter_proj/core/base.service.dart';
+import 'package:flutter_proj/core/app.service.dart';
 
-class ModelService extends BaseService {
+class ModelService extends AppService {
   late Map<String, dynamic> _model;
 
   set model(Map<String, dynamic> res) {

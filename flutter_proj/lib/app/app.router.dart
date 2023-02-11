@@ -3,7 +3,7 @@ import 'package:flutter_proj/shared/services/logging.service.dart';
 import 'package:get_it/get_it.dart';
 import 'package:flutter_proj/api/models/mbm081018/mbm081018.model.dart';
 import 'package:flutter_proj/featured/home/home.page.dart';
-import 'package:flutter_proj/featured/restful/restful_detail/restful_detail.page.dart';
+import 'package:flutter_proj/featured/restful/restful_detail.page.dart';
 
 class AppRouter {
   static Route<dynamic> generateRoute(RouteSettings settings) {

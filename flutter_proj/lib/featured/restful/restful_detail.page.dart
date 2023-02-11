@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_proj/api/models/mbm081018/mbm081018.model.dart';
 
-import 'package:flutter_proj/featured/restful/restful_detail/restful_detail.view.dart';
-
 class RestfulDetailPage extends StatefulWidget {
   final MBM081018FxRate fxRate;
 
@@ -35,12 +33,6 @@ class RestfulDetailPageState extends State<RestfulDetailPage> {
   void dispose() {
     super.dispose();
   }
-
-  @override
-  Widget build(BuildContext context) => RestfulDetailPageView(
-        key: UniqueKey(),
-        state: this,
-      );
 
   String getFxRateKeyName(String key) {
     switch (key) {
@@ -104,4 +96,61 @@ class RestfulDetailPageState extends State<RestfulDetailPage> {
 
     return val.toString();
   }
+
+  @override
+  Widget build(BuildContext context) => Scaffold(
+        appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(80.0),
+          child: AppBar(
+            title: const Text('匯率明細'),
+            backgroundColor: Colors.black,
+            elevation: 20,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.vertical(
+                  bottom: Radius.elliptical(
+                MediaQuery.of(context).size.height,
+                200.0,
+              )),
+            ),
+          ),
+        ),
+        body: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 20,
+              vertical: 10,
+            ),
+            child: ListView.builder(
+              itemCount: widget.fxRate.toJson().length,
+              itemBuilder: (context, index) {
+                final fxRateMap = widget.fxRate.toJson();
+                final key = fxRateMap.keys.toList()[index];
+
+                return Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 15),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        getFxRateKeyName(key),
+                        style: const TextStyle(
+                          fontWeight: FontWeight.w400,
+                          fontSize: 20,
+                        ),
+                      ),
+                      Text(
+                        getFxRateStrValue(fxRateMap[key]),
+                        style: const TextStyle(
+                          fontWeight: FontWeight.w400,
+                          fontSize: 20,
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              },
+            ),
+          ),
+        ),
+      );
 }

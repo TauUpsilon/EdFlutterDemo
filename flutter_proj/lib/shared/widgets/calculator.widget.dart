@@ -1,7 +1,8 @@
 import 'package:custom_math/custom_math.dart';
+
 import 'package:flutter/material.dart';
 
-import 'package:flutter_proj/shared/widgets/calculator/calculator.view.dart';
+import 'package:flutter_proj/shared/widgets/dial_button.widget.dart';
 
 class CalculatorWidget extends StatefulWidget {
   const CalculatorWidget({required Key key}) : super(key: key);
@@ -17,9 +18,58 @@ class CalculatorWidgetState extends State<CalculatorWidget> {
   late String displayText = '0';
 
   @override
-  Widget build(BuildContext context) => CalculatorWidgetView(
-        key: UniqueKey(),
-        state: this,
+  Widget build(BuildContext context) => Padding(
+        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            // Arithmetic
+            Container(
+              alignment: const Alignment(1.0, 1.0),
+              child: Padding(
+                padding: const EdgeInsets.only(right: 12.0),
+                child: Text(
+                  '$firstNum $operator $secondNum',
+                  style: const TextStyle(
+                    fontSize: 24,
+                  ),
+                ),
+              ),
+            ),
+
+            // Number Display
+            Container(
+              alignment: const Alignment(1.0, 1.0),
+              child: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Text(
+                  displayText,
+                  style: const TextStyle(
+                    fontSize: 48,
+                  ),
+                ),
+              ),
+            ),
+
+            // Keyboards
+            ...createDialArray()
+                .map(
+                  (row) => Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: row
+                        .map(
+                          (col) => DialButtonWidget(
+                            key: UniqueKey(),
+                            text: col,
+                            onPress: (text) => onDialPress(text),
+                          ),
+                        )
+                        .toList(),
+                  ),
+                )
+                .toList()
+          ],
+        ),
       );
 
   List<List<String>> createDialArray() {

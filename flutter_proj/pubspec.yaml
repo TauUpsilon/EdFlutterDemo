@@ -32,7 +32,6 @@ dependencies:
 
   # Common
   logger: ^1.1.0
-  rxdart: ^0.27.5
   json_annotation: ^4.6.0
   flutter_dotenv: ^5.0.2
 
@@ -43,7 +42,10 @@ dependencies:
   get_it: ^7.2.0
   provider: ^6.0.3
 
-  # Coding Support
+  # State Management
+  flutter_redux: ^0.10.0
+  rxdart: ^0.27.5
+  redux: ^5.0.0
 
   # Build
   build_runner: ^2.2.0

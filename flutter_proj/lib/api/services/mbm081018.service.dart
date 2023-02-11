@@ -1,10 +1,10 @@
-import 'package:flutter_proj/core/base.service.dart';
+import 'package:flutter_proj/core/app.service.dart';
 import 'package:flutter_proj/api/models/mbm081018/mbm081018.model.dart';
 import 'package:flutter_proj/api/requests/mbm081018.request.dart';
 import 'package:flutter_proj/shared/services/api.service.dart';
 import 'package:get_it/get_it.dart';
 
-class MBM081018Service extends BaseService {
+class MBM081018Service extends AppService {
   final apiService = GetIt.instance.get<ApiService>();
 
   Future<MBM081018Model> getFxRate(String ccyName) async {

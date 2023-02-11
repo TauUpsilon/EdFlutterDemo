@@ -2,14 +2,14 @@ import 'dart:convert';
 
 import 'package:flutter_proj/app/app.util.dart';
 import 'package:flutter_proj/core/api.request.dart';
-import 'package:flutter_proj/core/base.service.dart';
+import 'package:flutter_proj/core/app.service.dart';
 import 'package:flutter_proj/shared/services/model.service.dart';
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:flutter_proj/config/app.config.dart';
 
-class ApiService extends BaseService {
+class ApiService extends AppService {
   final modelService = GetIt.instance.get<ModelService>();
   final baseUrl = AppConfig.baseUrl;
 
