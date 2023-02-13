@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:flutter_proj/shared/objects/common_error.dart';
+import 'package:flutter_proj/shared/objects/common_fail.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:get_it/get_it.dart';
@@ -65,8 +65,10 @@ class ApiService extends AppService {
 
       return {
         "status": CommonStatus.done,
-        "returnCode": response.statusCode.toString(),
-        "data": res,
+        "value": {
+          "code": returnCode,
+          "data": res,
+        },
         "error": null,
       };
 
@@ -74,12 +76,11 @@ class ApiService extends AppService {
     } else if (returnCode.startsWith("5")) {
       return {
         "status": CommonStatus.fail,
-        "returnCode": response.statusCode.toString(),
-        "data": null,
-        "error": CommonError(
-          errorCode: returnCode,
-          message: "Server Issue",
-        ),
+        "value": null,
+        "error": {
+          "code": returnCode,
+          "message": "Server Issue",
+        }
       };
     } else {
       throw 'Error: ${response.statusCode}';

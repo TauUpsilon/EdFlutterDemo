@@ -1,16 +1,15 @@
 import 'package:flutter_proj/shared/enums/common.status.dart';
-import 'package:flutter_proj/shared/objects/common_error.dart';
+import 'package:flutter_proj/shared/objects/common_done.dart';
+import 'package:flutter_proj/shared/objects/common_fail.dart';
 
 class ApiModel<T> {
-  CommonStatus? status;
-  String? returnCode;
-  T? data;
-  CommonError? error;
+  CommonStatus status;
+  CommonDone? value;
+  CommonFail? error;
 
   ApiModel({
     required this.status,
-    required this.returnCode,
-    this.data,
+    this.value,
     this.error,
   }) : super();
 }

@@ -21,14 +21,10 @@ class MBM081018Service extends AppService {
     return response.serialise<MBM081018Model>((res) => _serialiseFxRate(res));
   }
 
-  MBM081018Model? _serialiseFxRate(Map<String, dynamic>? res) {
-    if (res != null) {
-      var body = res['BODY'];
-      var model = MBM081018Model.fromJson(body);
+  MBM081018Model _serialiseFxRate(Map<String, dynamic> res) {
+    var body = res['BODY'];
+    var model = MBM081018Model.fromJson(body);
 
-      return model;
-    } else {
-      return null;
-    }
+    return model;
   }
 }

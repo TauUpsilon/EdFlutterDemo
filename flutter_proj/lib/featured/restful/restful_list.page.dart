@@ -153,7 +153,7 @@ class RestfulListPageState extends State<RestfulListPage> {
           ),
           child: Column(
             children: [
-              if (vm.data != null) fxRateListView(vm.data!.fxRate),
+              if (vm.value != null) fxRateListView(vm.value!.data.fxRate),
 
               if (vm.error != null) Text(vm.error!.message),
 
