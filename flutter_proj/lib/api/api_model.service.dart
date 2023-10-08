@@ -1,16 +1,13 @@
-import 'package:flutter_proj/api/api.model.dart';
-import 'package:flutter_proj/core/app.service.dart';
-import 'package:flutter_proj/shared/objects/common_done.dart';
-import 'package:flutter_proj/shared/objects/common_fail.dart';
+part of 'api.service.dart';
 
-class ApiModelService extends AppService {
+class ApiModelService extends AlphaCore {
   late Map<String, dynamic> _model;
 
   set model(Map<String, dynamic> res) {
     _model = res;
   }
 
-  ApiModel<T> serialise<T>(T Function(Map<String, dynamic> value) callback) {
+  ApiModel<T> serialise<T>(T Function(dynamic value) callback) {
     return ApiModel<T>(
       status: _model["status"],
       value: _model['value'] != null

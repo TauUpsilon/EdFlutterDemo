@@ -1,10 +1,8 @@
-import 'package:flutter_proj/shared/enums/common.status.dart';
-import 'package:flutter_proj/shared/objects/common_done.dart';
-import 'package:flutter_proj/shared/objects/common_fail.dart';
+part of 'api.service.dart';
 
 class ApiModel<T> {
-  CommonStatus status;
-  CommonDone? value;
+  LoadingStatus status;
+  CommonDone<T>? value;
   CommonFail? error;
 
   ApiModel({

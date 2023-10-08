@@ -1,6 +1,4 @@
-import 'dart:convert';
-
-import 'package:flutter_dotenv/flutter_dotenv.dart';
+part of 'app.widget.dart';
 
 class AppUtil {
   static Future<void> setEnvironment() async {
@@ -18,7 +16,7 @@ class AppUtil {
         break;
 
       default:
-        envPath = '${envPath}dev.env';
+        envPath = '${envPath}local.env';
         break;
     }
 
@@ -27,7 +25,7 @@ class AppUtil {
     );
   }
 
-  static String getJsonString(Map<String, dynamic> json) {
+  static String getJsonString(dynamic json) {
     var encoder = const JsonEncoder.withIndent("  ");
     return encoder.convert(json);
   }

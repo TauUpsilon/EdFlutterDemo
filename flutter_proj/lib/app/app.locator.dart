@@ -1,18 +1,19 @@
-import 'package:flutter_proj/api/api.service.dart';
-import 'package:flutter_proj/shared/services/logging.service.dart';
-import 'package:flutter_proj/api/api_model.service.dart';
-import 'package:get_it/get_it.dart';
-import 'package:flutter_proj/api/services/mbm081018.service.dart';
+part of 'app.widget.dart';
 
 class AppLocator {
   static final locator = GetIt.instance;
 
   static initLocator() {
-    GetIt getIt = locator;
+    // Utils
+    locator.registerLazySingleton(() => Connectivity());
 
-    getIt.registerLazySingleton<LoggingService>(() => LoggingService());
-    getIt.registerLazySingleton<ApiService>(() => ApiService());
-    getIt.registerLazySingleton<ApiModelService>(() => ApiModelService());
-    getIt.registerLazySingleton<MBM081018Service>(() => MBM081018Service());
+    // Services
+    locator.registerLazySingleton(() => LoggingService());
+    locator.registerLazySingleton(() => ApiService());
+    locator.registerLazySingleton(() => ApiModelService());
+    locator.registerLazySingleton(() => TodosApiService());
+
+    // Stores
+    locator.registerLazySingleton(() => Store<GlobalState>(globalReducer, initialState: GlobalState.initialState()));
   }
 }

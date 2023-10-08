@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-
-import 'package:flutter_proj/app/app.locator.dart';
-import 'package:flutter_proj/app/app.page.dart';
-import 'package:flutter_proj/app/app.util.dart';
+import 'package:flutter_proj/app/app.widget.dart';
 
 void main() async {
   await AppUtil.setEnvironment();
@@ -10,7 +7,7 @@ void main() async {
   AppLocator.initLocator();
 
   runApp(
-    MyApp(
+    App(
       key: UniqueKey(),
     ),
   );
