@@ -120,7 +120,7 @@ class ApiService extends AlphaCore {
     String status,
     dynamic body,
   ) {
-    logger.d(AppUtil.getJsonString(body));
+    // logger.d(AppUtil.getJsonString(body));
 
     if (request is JsonPlaceholderRequest) {
       return {
