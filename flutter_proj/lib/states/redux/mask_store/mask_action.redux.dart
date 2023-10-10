@@ -1,11 +1,11 @@
 part of 'mask_reducer.redux.dart';
 
-sealed class MaskReduxAction {
+sealed class MaskAction {
   static AddMaskClientAction addMaskClient(String clientName) => AddMaskClientAction(clientName: clientName);
   static PopMaskClientAction popMaskClient(String clientName) => PopMaskClientAction(clientName: clientName);
 }
 
-class AddMaskClientAction extends MaskReduxAction {
+class AddMaskClientAction extends MaskAction {
   String clientName;
 
   AddMaskClientAction({
@@ -13,7 +13,7 @@ class AddMaskClientAction extends MaskReduxAction {
   });
 }
 
-class PopMaskClientAction extends MaskReduxAction {
+class PopMaskClientAction extends MaskAction {
   String clientName;
 
   PopMaskClientAction({

@@ -35,7 +35,7 @@ class AppRouteObserver extends RouteObserver with AlphaCore {
   @override
   void didPush(Route route, Route? previousRoute) {
     globalStore.dispatch(
-      RouterReduxAction.updateRouterStateAction(route, previousRoute),
+      RouterAction.updateRouterStateAction(route, previousRoute),
     );
   }
 

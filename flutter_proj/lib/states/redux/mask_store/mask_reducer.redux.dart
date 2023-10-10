@@ -1,7 +1,9 @@
+import 'package:flutter/widgets.dart';
+
 part 'mask_action.redux.dart';
 part 'mask_state.redux.dart';
 
-MaskReduxState maskReducer(MaskReduxState state, MaskReduxAction action) {
+MaskState maskReducer(MaskState state, MaskAction action) {
   if (action is AddMaskClientAction) {
     if (!state.clients.contains(action.clientName)) {
       state.clients.add(action.clientName);

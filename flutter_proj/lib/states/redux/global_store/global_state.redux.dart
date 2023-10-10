@@ -1,15 +1,16 @@
 part of 'global_reducer.redux.dart';
 
+@immutable
 class GlobalState {
-  final MaskReduxState mask;
-  final RouterReduxState router;
+  final MaskState mask;
+  final RouterState router;
 
-  GlobalState({
+  const GlobalState({
     required this.mask,
     required this.router,
   });
 
   GlobalState.initialState()
-      : mask = MaskReduxState.initialState(),
-        router = RouterReduxState.initialState();
+      : mask = MaskState.initialState(),
+        router = RouterState.initialState();
 }

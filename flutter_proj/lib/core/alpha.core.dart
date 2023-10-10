@@ -12,13 +12,13 @@ mixin class AlphaCore {
 
   void addMask(String clientName) {
     globalStore.dispatch(
-      MaskReduxAction.addMaskClient(clientName),
+      MaskAction.addMaskClient(clientName),
     );
   }
 
   void removeMask(String clientName) {
     globalStore.dispatch(
-      MaskReduxAction.popMaskClient(clientName),
+      MaskAction.popMaskClient(clientName),
     );
   }
 }
