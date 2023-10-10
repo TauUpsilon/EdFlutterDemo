@@ -15,6 +15,13 @@ class HeaderBarWidget extends StatelessWidget with AlphaCore {
       title: Text(title),
       backgroundColor: Colors.black,
       elevation: 20,
+      automaticallyImplyLeading: false,
+      leading: Navigator.of(context).canPop()
+          ? IconButton(
+              icon: const Icon(Icons.arrow_back),
+              onPressed: () => Navigator.of(context).pop(),
+            )
+          : null,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(
           bottom: Radius.elliptical(

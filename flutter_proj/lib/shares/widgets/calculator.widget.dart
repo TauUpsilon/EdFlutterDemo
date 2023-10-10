@@ -29,30 +29,30 @@ class CalculatorWidgetState extends State<CalculatorWidget> {
       growable: false,
     );
 
-    array[4][0] = "00";
-    array[4][1] = "0";
-    array[4][2] = ".";
-    array[4][3] = "=";
+    array[4][0] = '00';
+    array[4][1] = '0';
+    array[4][2] = '.';
+    array[4][3] = '=';
 
-    array[3][0] = "1";
-    array[3][1] = "2";
-    array[3][2] = "3";
-    array[3][3] = "+";
+    array[3][0] = '1';
+    array[3][1] = '2';
+    array[3][2] = '3';
+    array[3][3] = '+';
 
-    array[2][0] = "4";
-    array[2][1] = "5";
-    array[2][2] = "6";
-    array[2][3] = "-";
+    array[2][0] = '4';
+    array[2][1] = '5';
+    array[2][2] = '6';
+    array[2][3] = '-';
 
-    array[1][0] = "7";
-    array[1][1] = "8";
-    array[1][2] = "9";
-    array[1][3] = "x";
+    array[1][0] = '7';
+    array[1][1] = '8';
+    array[1][2] = '9';
+    array[1][3] = 'x';
 
-    array[0][0] = "ac";
-    array[0][1] = "c";
-    array[0][2] = "<";
-    array[0][3] = "/";
+    array[0][0] = 'ac';
+    array[0][1] = 'c';
+    array[0][2] = '<';
+    array[0][3] = '/';
 
     return array;
   }

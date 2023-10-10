@@ -27,38 +27,38 @@ class ApiCommonInstance {
 
 class ApiErrorInstance {
   static final offline = {
-    "status": LoadingStatus.loaded,
-    "value": null,
-    "error": {
-      "code": ApiStatusCode.api0001,
-      "message": "Check your connectivity",
+    'status': LoadingStatus.loaded,
+    'value': null,
+    'error': {
+      'code': ApiStatusCode.api0001,
+      'message': 'Check your connectivity',
     }
   };
 
   static final clientIssue = {
-    "status": LoadingStatus.loaded,
-    "value": null,
-    "error": {
-      "code": ApiStatusCode.api0004,
-      "message": "System not responsed",
+    'status': LoadingStatus.loaded,
+    'value': null,
+    'error': {
+      'code': ApiStatusCode.api0004,
+      'message': 'System not responsed',
     }
   };
 
   static final serverIssue = {
-    "status": LoadingStatus.loaded,
-    "value": null,
-    "error": {
-      "code": ApiStatusCode.api0005,
-      "message": "System not responsed",
+    'status': LoadingStatus.loaded,
+    'value': null,
+    'error': {
+      'code': ApiStatusCode.api0005,
+      'message': 'System not responsed',
     }
   };
 
   static final timeout = {
-    "status": LoadingStatus.loaded,
-    "value": null,
-    "error": {
-      "code": ApiStatusCode.api0006,
-      "message": "Timeout",
+    'status': LoadingStatus.loaded,
+    'value': null,
+    'error': {
+      'code': ApiStatusCode.api0006,
+      'message': 'Timeout',
     }
   };
 }

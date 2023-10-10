@@ -8,6 +8,8 @@ mixin class AlphaCore {
   final logger = GetIt.instance.get<LoggingService>();
   final globalStore = GetIt.instance.get<Store<GlobalState>>();
 
+  get routerState => globalStore.state.router;
+
   void addMask(String clientName) {
     globalStore.dispatch(
       MaskReduxAction.addMaskClient(clientName),
@@ -16,7 +18,7 @@ mixin class AlphaCore {
 
   void removeMask(String clientName) {
     globalStore.dispatch(
-      MaskReduxAction.removeMaskClient(clientName),
+      MaskReduxAction.popMaskClient(clientName),
     );
   }
 }

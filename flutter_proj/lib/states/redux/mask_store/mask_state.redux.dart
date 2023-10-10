@@ -1,7 +1,7 @@
 part of 'mask_reducer.redux.dart';
 
 class MaskReduxState {
-  final clients = [];
+  List<String> clients;
 
-  MaskReduxState.initialState();
+  MaskReduxState.initialState() : clients = [];
 }

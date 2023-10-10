@@ -5,12 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_proj/api/api.service.dart';
 import 'package:flutter_proj/api/todos/todos.service.dart';
+import 'package:flutter_proj/core/alpha.core.dart';
 import 'package:flutter_proj/features/component/component.page.dart';
 import 'package:flutter_proj/features/home/home.page.dart';
 import 'package:flutter_proj/features/network/network.page.dart';
 import 'package:flutter_proj/shares/services/logging.service.dart';
-import 'package:flutter_proj/shares/widgets/footer.widget.dart';
 import 'package:flutter_proj/states/redux/global_store/global_reducer.redux.dart';
+import 'package:flutter_proj/states/redux/router_store/router_reducer.redux.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:get_it/get_it.dart';
 import 'package:redux/redux.dart';
@@ -30,10 +31,11 @@ class App extends StatelessWidget {
       child: Stack(
         alignment: Alignment.center,
         children: [
-          const MaterialApp(
+          MaterialApp(
             debugShowCheckedModeBanner: false,
             initialRoute: '/',
             onGenerateRoute: AppRouter.generateRoute,
+            navigatorObservers: [AppRouteObserver()],
           ),
           StoreConnector<GlobalState, GlobalState>(
             converter: (store) => store.state,

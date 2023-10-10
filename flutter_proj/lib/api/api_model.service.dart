@@ -9,17 +9,17 @@ class ApiModelService extends AlphaCore {
 
   ApiModel<T> serialise<T>(T Function(dynamic value) callback) {
     return ApiModel<T>(
-      status: _model["status"],
+      status: _model['status'],
       value: _model['value'] != null
           ? CommonDone<T>(
               code: _model['value']['code'],
               data: callback(_model['value']['data']),
             )
           : null,
-      error: _model["error"] != null
+      error: _model['error'] != null
           ? CommonFail(
-              code: _model["error"]["code"],
-              message: _model["error"]["message"],
+              code: _model['error']['code'],
+              message: _model['error']['message'],
             )
           : null,
     );

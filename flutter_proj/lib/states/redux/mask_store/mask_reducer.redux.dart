@@ -8,7 +8,7 @@ MaskReduxState maskReducer(MaskReduxState state, MaskReduxAction action) {
     }
 
     return state;
-  } else if (action is RemoveMaskClientAction) {
+  } else if (action is PopMaskClientAction) {
     if (state.clients.contains(action.clientName)) {
       state.clients.remove(action.clientName);
     }

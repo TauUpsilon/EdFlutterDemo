@@ -1,18 +1,22 @@
 part of 'mask_reducer.redux.dart';
 
 sealed class MaskReduxAction {
-  static AddMaskClientAction addMaskClient(String clientName) => AddMaskClientAction(clientName);
-  static RemoveMaskClientAction removeMaskClient(String clientName) => RemoveMaskClientAction(clientName);
+  static AddMaskClientAction addMaskClient(String clientName) => AddMaskClientAction(clientName: clientName);
+  static PopMaskClientAction popMaskClient(String clientName) => PopMaskClientAction(clientName: clientName);
 }
 
 class AddMaskClientAction extends MaskReduxAction {
   String clientName;
 
-  AddMaskClientAction(this.clientName);
+  AddMaskClientAction({
+    required this.clientName,
+  });
 }
 
-class RemoveMaskClientAction extends MaskReduxAction {
+class PopMaskClientAction extends MaskReduxAction {
   String clientName;
 
-  RemoveMaskClientAction(this.clientName);
+  PopMaskClientAction({
+    required this.clientName,
+  });
 }

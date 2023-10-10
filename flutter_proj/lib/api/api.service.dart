@@ -158,7 +158,7 @@ class ApiService extends AlphaCore {
   void _handleMask(ApiRequest request, {MaskStatus maskStatus = MaskStatus.show}) {
     switch (maskStatus) {
       case MaskStatus.show:
-        if (_modelService._model["status"] == LoadingStatus.loading) {
+        if (_modelService._model['status'] == LoadingStatus.loading) {
           addMask(_handleURI(request).toString());
         } else {
           removeMask(_handleURI(request).toString());

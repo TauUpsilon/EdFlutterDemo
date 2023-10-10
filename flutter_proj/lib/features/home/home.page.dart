@@ -26,15 +26,15 @@ class HomePageState extends State<HomePage> {
           children: [
             TextButton(
               onPressed: () {
-                Navigator.of(context).pushNamed('/network');
+                Navigator.of(context).pushNamed('/network', arguments: 'Test');
               },
-              child: const Text("Network"),
+              child: const Text('Network'),
             ),
             TextButton(
               onPressed: () {
                 Navigator.of(context).pushNamed('/component');
               },
-              child: const Text("Component"),
+              child: const Text('Component'),
             ),
           ],
         ),

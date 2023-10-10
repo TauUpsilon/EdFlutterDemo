@@ -12,11 +12,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_proj/api/todos/todos.service.dart';
 import 'package:flutter_proj/app/app.widget.dart';
+import 'package:flutter_proj/core/alpha.core.dart';
 import 'package:flutter_proj/shares/widgets/header.widget.dart';
 import 'package:get_it/get_it.dart';
 
-class NetworkPage extends StatefulWidget {
-  const NetworkPage({super.key});
+class NetworkPage extends StatefulWidget with AlphaCore {
+  NetworkPage({super.key});
 
   @override
   State<NetworkPage> createState() => _NetworkPageState();
@@ -43,7 +44,6 @@ class _NetworkPageState extends State<NetworkPage> {
   @override
   Widget build(BuildContext context) {
     _todosService.requestTodos().listen((res) => print(res));
-
     return Scaffold(
       appBar: header(),
       body: body(),

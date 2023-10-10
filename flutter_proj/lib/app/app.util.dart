@@ -26,7 +26,7 @@ class AppUtil {
   }
 
   static String getJsonString(dynamic json) {
-    var encoder = const JsonEncoder.withIndent("  ");
+    var encoder = const JsonEncoder.withIndent('  ');
     return encoder.convert(json);
   }
 }
