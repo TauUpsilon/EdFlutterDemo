@@ -1,4 +1,4 @@
-part of 'mask_reducer.redux.dart';
+part of 'mask.reducer.dart';
 
 @immutable
 class MaskState {

@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 
-part 'mask_action.redux.dart';
-part 'mask_state.redux.dart';
+part 'mask.action.dart';
+part 'mask.state.dart';
 
 MaskState maskReducer(MaskState state, MaskAction action) {
   if (action is AddMaskClientAction) {

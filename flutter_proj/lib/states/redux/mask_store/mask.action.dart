@@ -1,4 +1,4 @@
-part of 'mask_reducer.redux.dart';
+part of 'mask.reducer.dart';
 
 sealed class MaskAction {
   static AddMaskClientAction addMaskClient(String clientName) => AddMaskClientAction(clientName: clientName);

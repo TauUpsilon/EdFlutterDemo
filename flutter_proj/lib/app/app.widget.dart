@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_proj/api/api.service.dart';
 import 'package:flutter_proj/api/todos/todos.service.dart';
@@ -10,8 +11,8 @@ import 'package:flutter_proj/features/component/component.page.dart';
 import 'package:flutter_proj/features/home/home.page.dart';
 import 'package:flutter_proj/features/network/network.page.dart';
 import 'package:flutter_proj/shares/services/logging.service.dart';
-import 'package:flutter_proj/states/redux/global_store/global_reducer.redux.dart';
-import 'package:flutter_proj/states/redux/router_store/router_reducer.redux.dart';
+import 'package:flutter_proj/states/redux/global_store/global.reducer.dart';
+import 'package:flutter_proj/states/redux/router_store/router.reducer.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:get_it/get_it.dart';
 import 'package:redux/redux.dart';

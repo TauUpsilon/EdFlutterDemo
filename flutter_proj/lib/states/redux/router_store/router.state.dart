@@ -1,4 +1,4 @@
-part of 'router_reducer.redux.dart';
+part of 'router.reducer.dart';
 
 @immutable
 class RouterState {

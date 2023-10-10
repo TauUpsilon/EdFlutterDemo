@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 
-part 'router_action.redux.dart';
-part 'router_state.redux.dart';
+part 'router.action.dart';
+part 'router.state.dart';
 
 RouterState routerReducer(RouterState state, RouterAction action) {
   if (action is UpdateRouterStateAction) {

@@ -1,8 +1,6 @@
-import 'package:flutter_proj/shares/enums/common.enum.dart';
-
 class CommonDone<T> {
   String code;
-  T? data;
+  T data;
 
   CommonDone({
     required this.code,
@@ -17,17 +15,5 @@ class CommonFail {
   CommonFail({
     required this.code,
     required this.message,
-  });
-}
-
-class CommonResult<T> {
-  LoadingStatus? status;
-  String? returnCode;
-  T? data;
-
-  CommonResult({
-    required this.status,
-    required this.returnCode,
-    required this.data,
   });
 }

@@ -1,4 +1,4 @@
-part of 'router_reducer.redux.dart';
+part of 'router.reducer.dart';
 
 sealed class RouterAction {
   static UpdateRouterStateAction updateRouterStateAction(Route currentRoute, Route? previousRoute) =>

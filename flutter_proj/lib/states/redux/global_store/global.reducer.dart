@@ -1,8 +1,8 @@
 import 'package:flutter/widgets.dart';
-import 'package:flutter_proj/states/redux/mask_store/mask_reducer.redux.dart';
-import 'package:flutter_proj/states/redux/router_store/router_reducer.redux.dart';
+import 'package:flutter_proj/states/redux/mask_store/mask.reducer.dart';
+import 'package:flutter_proj/states/redux/router_store/router.reducer.dart';
 
-part 'global_state.redux.dart';
+part 'global.state.dart';
 
 GlobalState globalReducer(GlobalState state, dynamic action) {
   if (action is MaskAction) {

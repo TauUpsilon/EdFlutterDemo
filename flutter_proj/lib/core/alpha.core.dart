@@ -1,6 +1,6 @@
 import 'package:flutter_proj/shares/services/logging.service.dart';
-import 'package:flutter_proj/states/redux/global_store/global_reducer.redux.dart';
-import 'package:flutter_proj/states/redux/mask_store/mask_reducer.redux.dart';
+import 'package:flutter_proj/states/redux/global_store/global.reducer.dart';
+import 'package:flutter_proj/states/redux/mask_store/mask.reducer.dart';
 import 'package:get_it/get_it.dart';
 import 'package:redux/redux.dart';
 

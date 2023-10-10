@@ -9,13 +9,19 @@ class AppRouter {
     switch (settings.name) {
       case '/':
         return MaterialPageRoute(
-          builder: (_) => HomePage(key: UniqueKey()),
+          builder: (_) => BlocProvider(
+            create: (context) => HomeCubit(),
+            child: HomePage(key: UniqueKey()),
+          ),
           settings: settings,
         );
 
       case '/network':
         return MaterialPageRoute(
-          builder: (_) => NetworkPage(key: UniqueKey()),
+          builder: (_) => BlocProvider(
+            create: (context) => NetworkCubit(),
+            child: NetworkPage(key: UniqueKey()),
+          ),
           settings: settings,
         );
 

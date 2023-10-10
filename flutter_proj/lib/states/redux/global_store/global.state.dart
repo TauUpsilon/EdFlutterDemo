@@ -1,4 +1,4 @@
-part of 'global_reducer.redux.dart';
+part of 'global.reducer.dart';
 
 @immutable
 class GlobalState {
