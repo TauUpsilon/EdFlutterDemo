@@ -37,7 +37,7 @@ class AppRouter {
   }
 }
 
-class AppRouteObserver extends RouteObserver with AlphaCore {
+class AppRouteObserver extends RouteObserver with AlphaBase {
   @override
   void didPush(Route route, Route? previousRoute) {
     globalStore.dispatch(

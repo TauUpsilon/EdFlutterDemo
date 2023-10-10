@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_proj/api/api.service.dart';
 import 'package:flutter_proj/api/todos/todos.service.dart';
 import 'package:flutter_proj/app/app.widget.dart';
-import 'package:flutter_proj/core/alpha.core.dart';
+import 'package:flutter_proj/core/alpha_base.mixin.dart';
 import 'package:flutter_proj/shares/enums/common.enum.dart';
 import 'package:flutter_proj/shares/widgets/header.widget.dart';
 import 'package:get_it/get_it.dart';
@@ -42,10 +42,17 @@ class _NetworkPageState extends State<NetworkPage> {
                 if (todosValue != null) {
                   return ListView.builder(
                     key: UniqueKey(),
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 30,
+                      horizontal: 20,
+                    ),
                     itemCount: todosValue.data.length,
                     itemBuilder: (context, index) {
-                      return ListTile(
-                        title: Text(todosValue.data[index].title),
+                      return Card(
+                        child: ListTile(
+                          key: UniqueKey(),
+                          title: Text(todosValue.data[index].title),
+                        ),
                       );
                     },
                   );

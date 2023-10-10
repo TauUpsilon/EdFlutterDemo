@@ -1,6 +1,6 @@
 part of 'api.service.dart';
 
-class ApiModelService extends AlphaCore {
+class ApiModelService extends AlphaBase {
   late Map<String, dynamic> _model;
 
   set model(Map<String, dynamic> res) {

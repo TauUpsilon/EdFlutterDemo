@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_proj/core/alpha.core.dart';
+import 'package:flutter_proj/core/alpha_base.mixin.dart';
 
-class HeaderBarWidget extends StatelessWidget with AlphaCore {
+class HeaderBarWidget extends StatelessWidget with AlphaBase {
   final String title;
 
   HeaderBarWidget({

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_proj/core/alpha.core.dart';
+import 'package:flutter_proj/core/alpha_base.mixin.dart';
 
-class DialButtonWidget extends StatelessWidget with AlphaCore {
+class DialButtonWidget extends StatelessWidget with AlphaBase {
   final String text;
   final Function(String) onPress;
 

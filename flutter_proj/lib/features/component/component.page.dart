@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_proj/app/app.widget.dart';
-import 'package:flutter_proj/core/alpha.core.dart';
+import 'package:flutter_proj/core/alpha_base.mixin.dart';
 import 'package:flutter_proj/shares/widgets/calculator.widget.dart';
 import 'package:flutter_proj/shares/widgets/header.widget.dart';
 
-class ComponentPage extends StatefulWidget with AlphaCore {
+class ComponentPage extends StatefulWidget with AlphaBase {
   ComponentPage({super.key});
 
   @override

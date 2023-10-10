@@ -4,7 +4,7 @@ part of 'home.page.dart';
 class HomeState {
   const HomeState();
 
-  HomeState.initialState();
+  const HomeState.initialState();
 
-  factory HomeState.create() => HomeState();
+  factory HomeState.create() => const HomeState();
 }

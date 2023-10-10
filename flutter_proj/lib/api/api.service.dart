@@ -4,7 +4,7 @@ import 'dart:io';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter_proj/app/app.widget.dart';
-import 'package:flutter_proj/core/alpha.core.dart';
+import 'package:flutter_proj/core/alpha_base.mixin.dart';
 import 'package:flutter_proj/shares/enums/common.enum.dart';
 import 'package:flutter_proj/shares/instances/common.instance.dart';
 import 'package:get_it/get_it.dart';
@@ -18,7 +18,7 @@ part 'api.request.dart';
 part 'api_common.request.dart';
 part 'api_model.service.dart';
 
-class ApiService extends AlphaCore {
+class ApiService with AlphaBase {
   final _baseUrl = AppConfig.jsonPlaceholderBaseUrl;
 
   final _connectivity = GetIt.instance.get<Connectivity>();

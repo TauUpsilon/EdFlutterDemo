@@ -6,7 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_proj/api/api.service.dart';
 import 'package:flutter_proj/api/todos/todos.service.dart';
-import 'package:flutter_proj/core/alpha.core.dart';
+import 'package:flutter_proj/core/alpha_base.mixin.dart';
 import 'package:flutter_proj/features/component/component.page.dart';
 import 'package:flutter_proj/features/home/home.page.dart';
 import 'package:flutter_proj/features/network/network.page.dart';
