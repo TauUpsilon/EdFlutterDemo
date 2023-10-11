@@ -3,7 +3,7 @@
 
 # Auto Generated
 *.reflectable.dart
-*.model.g.dart
+*.g.dart
 
 # VS Code
 .vscode

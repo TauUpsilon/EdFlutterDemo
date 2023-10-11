@@ -1,19 +1,20 @@
 part of 'app.widget.dart';
 
 class AppLocator {
-  static final locator = GetIt.instance;
+  static final getIt = GetIt.instance;
 
   static initLocator() {
-    // Utils
-    locator.registerLazySingleton(() => Connectivity());
+    getIt
+      // Utils
+      ..registerLazySingleton(() => Connectivity())
 
-    // Services
-    locator.registerLazySingleton(() => LoggingService());
-    locator.registerLazySingleton(() => ApiService());
-    locator.registerLazySingleton(() => ApiModelService());
-    locator.registerLazySingleton(() => TodosApiService());
+      // Services
+      ..registerLazySingleton(() => LoggingService())
+      ..registerLazySingleton(() => ApiService())
+      ..registerLazySingleton(() => ApiModelService())
+      ..registerLazySingleton(() => TodosApiService())
 
-    // Stores
-    locator.registerLazySingleton(() => Store<GlobalState>(globalReducer, initialState: GlobalState.initialState()));
+      // Stores
+      ..registerLazySingleton(() => Store<GlobalState>(globalReducer, initialState: GlobalState.initialState()));
   }
 }
