@@ -34,6 +34,7 @@ dependencies:
   logger: 
   json_annotation: 
   flutter_dotenv:
+  go_router:
 
   # Network
   http:
@@ -41,7 +42,6 @@ dependencies:
 
   # Injection
   get_it:
-  provider:
 
   # State Management
   rxdart:

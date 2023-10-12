@@ -6,7 +6,13 @@ class NetworkState {
 
   const NetworkState({required this.todos});
 
-  NetworkState.initialState() : todos = ApiModel(status: LoadingStatus.loaded);
+  NetworkState.initialState()
+      : todos = ApiModel(
+          status: LoadingStatus.loaded,
+        );
 
-  factory NetworkState.create(ApiModel<List<TodosGetModel>> todos) => NetworkState(todos: todos);
+  factory NetworkState.create(
+    ApiModel<List<TodosGetModel>> todos,
+  ) =>
+      NetworkState(todos: todos);
 }

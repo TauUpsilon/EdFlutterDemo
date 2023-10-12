@@ -6,14 +6,14 @@ class HomeCubit extends Cubit<HomeState> with AlphaBase {
   HomeCubit() : super(const HomeState.initialState());
 
   void dispose() {
-    subscription.dispose();
+    subscription.cancel();
   }
 
   navigateToNetwork(BuildContext context) {
-    Navigator.of(context).pushNamed('/network', arguments: 'Test');
+    context.pushNamed('network', extra: 'Test');
   }
 
   navigateToComponent(BuildContext context) {
-    Navigator.of(context).pushNamed('/component');
+    context.pushNamed('component');
   }
 }

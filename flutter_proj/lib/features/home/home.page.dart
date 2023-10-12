@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_proj/app/app.widget.dart';
 import 'package:flutter_proj/core/alpha_base.mixin.dart';
 import 'package:flutter_proj/shares/widgets/header.widget.dart';
+import 'package:go_router/go_router.dart';
 import 'package:rxdart/utils.dart';
 
 part 'home.cubit.dart';
@@ -16,7 +17,7 @@ class HomePage extends StatefulWidget {
 }
 
 class HomePageState extends State<HomePage> {
-  late HomeCubit homeCubit;
+  final HomeCubit homeCubit = AppLocator.getIt.get<HomeCubit>();
 
   PreferredSize header() {
     return PreferredSize(
@@ -51,8 +52,6 @@ class HomePageState extends State<HomePage> {
 
   @override
   void didChangeDependencies() {
-    homeCubit = BlocProvider.of<HomeCubit>(context);
-
     super.didChangeDependencies();
   }
 

@@ -6,7 +6,6 @@ import 'package:flutter_proj/app/app.widget.dart';
 import 'package:flutter_proj/core/alpha_base.mixin.dart';
 import 'package:flutter_proj/shares/enums/common.enum.dart';
 import 'package:flutter_proj/shares/widgets/header.widget.dart';
-import 'package:get_it/get_it.dart';
 import 'package:rxdart/utils.dart';
 
 part 'network.cubit.dart';
@@ -20,7 +19,7 @@ class NetworkPage extends StatefulWidget {
 }
 
 class _NetworkPageState extends State<NetworkPage> {
-  late NetworkCubit networkCubit;
+  final NetworkCubit networkCubit = AppLocator.getIt.get<NetworkCubit>();
 
   PreferredSize header() {
     return PreferredSize(
@@ -58,14 +57,15 @@ class _NetworkPageState extends State<NetworkPage> {
                   );
                 }
 
-                // if (state.todos.error != null) {
+                if (state.todos.error != null) {}
 
-                // }
+                break;
 
-                return const SizedBox.shrink();
               default:
-                return const SizedBox.shrink();
+                break;
             }
+
+            return const SizedBox.shrink();
           },
         ),
       ),
@@ -74,7 +74,7 @@ class _NetworkPageState extends State<NetworkPage> {
 
   @override
   void didChangeDependencies() {
-    networkCubit = BlocProvider.of<NetworkCubit>(context);
+    networkCubit.didChangeDependencies();
     networkCubit.requestTodos();
 
     super.didChangeDependencies();

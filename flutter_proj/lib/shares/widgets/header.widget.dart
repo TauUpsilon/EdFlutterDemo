@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_proj/core/alpha_base.mixin.dart';
+import 'package:go_router/go_router.dart';
 
 class HeaderBarWidget extends StatelessWidget with AlphaBase {
   final String title;
@@ -15,11 +16,10 @@ class HeaderBarWidget extends StatelessWidget with AlphaBase {
       title: Text(title),
       backgroundColor: Colors.black,
       elevation: 20,
-      automaticallyImplyLeading: false,
-      leading: Navigator.of(context).canPop()
+      leading: context.canPop()
           ? IconButton(
               icon: const Icon(Icons.arrow_back),
-              onPressed: () => Navigator.of(context).pop(),
+              onPressed: () => context.pop(),
             )
           : null,
       shape: RoundedRectangleBorder(

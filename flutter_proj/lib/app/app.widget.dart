@@ -12,15 +12,16 @@ import 'package:flutter_proj/features/home/home.page.dart';
 import 'package:flutter_proj/features/network/network.page.dart';
 import 'package:flutter_proj/shares/services/logging.service.dart';
 import 'package:flutter_proj/states/redux/global_store/global.reducer.dart';
-import 'package:flutter_proj/states/redux/router_store/router.reducer.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:get_it/get_it.dart';
+import 'package:go_router/go_router.dart';
 import 'package:redux/redux.dart';
 
 part 'app.config.dart';
 part 'app.locator.dart';
 part 'app.router.dart';
 part 'app.util.dart';
+part 'app_route.config.dart';
 
 class App extends StatelessWidget {
   const App({required Key key}) : super(key: key);
@@ -32,12 +33,18 @@ class App extends StatelessWidget {
       child: Stack(
         alignment: Alignment.center,
         children: [
-          MaterialApp(
+          MaterialApp.router(
             debugShowCheckedModeBanner: false,
-            initialRoute: '/',
-            onGenerateRoute: AppRouter.generateRoute,
-            navigatorObservers: [AppRouteObserver()],
+            routeInformationProvider: AppRouter.goRouter.routeInformationProvider,
+            routerDelegate: AppRouter.goRouter.routerDelegate,
+            routeInformationParser: AppRouter.goRouter.routeInformationParser,
           ),
+          // MaterialApp(
+          //   debugShowCheckedModeBanner: false,
+          //   initialRoute: '/',
+          //   onGenerateRoute: AppRouter.generateRoute,
+          //   navigatorObservers: [AppRouteObserver()],
+          // ),
           StoreConnector<GlobalState, GlobalState>(
             converter: (store) => store.state,
             builder: (context, vm) {

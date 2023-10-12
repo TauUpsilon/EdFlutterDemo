@@ -1,21 +1,25 @@
 part of 'network.page.dart';
 
 class NetworkCubit extends Cubit<NetworkState> with AlphaBase {
-  final todosService = GetIt.instance.get<TodosApiService>();
+  final todosService = AppLocator.getIt.get<TodosApiService>();
 
-  final CompositeSubscription subscription = CompositeSubscription();
+  late CompositeSubscription _subscription = CompositeSubscription();
 
   NetworkCubit() : super(NetworkState.initialState());
 
   void requestTodos() {
-    subscription.add(
+    _subscription.add(
       todosService.requestTodos().listen((res) {
         emit(NetworkState.create(res));
       }),
     );
   }
 
+  void didChangeDependencies() {
+    _subscription = CompositeSubscription();
+  }
+
   void dispose() {
-    subscription.dispose();
+    _subscription.dispose();
   }
 }

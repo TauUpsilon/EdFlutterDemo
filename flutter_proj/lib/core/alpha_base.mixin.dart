@@ -11,6 +11,7 @@ mixin class AlphaBase {
 
   get routerState => globalStore.state.router;
 
+  @protected
   void addMask(String clientName) {
     globalStore.dispatch(
       MaskAction.addMaskClient(clientName),

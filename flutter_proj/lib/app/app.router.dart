@@ -1,50 +1,59 @@
 part of 'app.widget.dart';
 
 class AppRouter {
+  static GoRouter goRouter = GoRouter(
+    initialLocation: '/home',
+    routes: AppRouteConfig.getGoRoutes(AppRouteConfig.routes),
+    observers: [AppRouteObserver()],
+    errorBuilder: (context, state) => const Text('404'),
+  );
+
   static Route<dynamic> generateRoute(RouteSettings settings) {
     var loggingService = GetIt.instance.get<LoggingService>();
 
     loggingService.i('Will navigate to -> ${settings.name}');
 
-    switch (settings.name) {
-      case '/':
-        return MaterialPageRoute(
-          builder: (_) => BlocProvider(
-            create: (context) => HomeCubit(),
-            child: HomePage(key: UniqueKey()),
-          ),
-          settings: settings,
-        );
+    try {
+      var route = AppRouteConfig.routes.firstWhere((route) => route.name == settings.name);
 
-      case '/network':
-        return MaterialPageRoute(
-          builder: (_) => BlocProvider(
-            create: (context) => NetworkCubit(),
-            child: NetworkPage(key: UniqueKey()),
-          ),
-          settings: settings,
-        );
-
-      case '/component':
-        return MaterialPageRoute(
-          builder: (_) => ComponentPage(key: UniqueKey()),
-          settings: settings,
-        );
-
-      default:
-        return MaterialPageRoute(builder: (_) => const Text('404'));
+      return MaterialPageRoute(
+        builder: (_) => MultiBlocProvider(
+          providers: [route.bloc],
+          child: route.page,
+        ),
+        settings: settings,
+      );
+    } on Error catch (_) {
+      return MaterialPageRoute(
+        builder: (_) => const Text('404'),
+        settings: settings,
+      );
     }
   }
 }
 
 class AppRouteObserver extends RouteObserver with AlphaBase {
-  @override
-  void didPush(Route route, Route? previousRoute) {
-    globalStore.dispatch(
-      RouterAction.updateRouterStateAction(route, previousRoute),
-    );
-  }
+  // @override
+  // void didPush(Route route, Route? previousRoute) {
+  //   globalStore.dispatch(
+  //     RouterAction.updateRouterStateAction(route, previousRoute),
+  //   );
+
+  //   super.didPush(route, previousRoute);
+  // }
 
   // @override
-  // void didPop(Route route, Route? previousRoute) { }
+  // void didPop(Route route, Route? previousRoute) {
+  //   if (previousRoute != null) {
+  //     globalStore.dispatch(
+  //       RouterAction.updateRouterStateAction(previousRoute, route),
+  //     );
+  //   } else {
+  //     globalStore.dispatch(
+  //       RouterAction.updateRouterStateAction(route, previousRoute),
+  //     );
+  //   }
+
+  //   super.didPop(route, previousRoute);
+  // }
 }
