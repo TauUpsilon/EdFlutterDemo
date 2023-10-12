@@ -73,6 +73,9 @@ dev_dependencies:
 
   # Build
   build_runner:
+    
+  # Git
+  husky: ^0.1.6
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
