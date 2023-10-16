@@ -9,19 +9,19 @@ class AppRouteConfig {
     AppRouteEntity(
       name: home,
       page: HomePage(key: UniqueKey()),
-      bloc: BlocProvider.value(value: AppLocator.getIt.get<HomeCubit>()),
+      blocs: [BlocProvider.value(value: HomeCubit())],
       subRoutes: [],
     ),
     AppRouteEntity(
       name: network,
       page: NetworkPage(key: UniqueKey()),
-      bloc: BlocProvider.value(value: AppLocator.getIt.get<NetworkCubit>()),
+      blocs: [BlocProvider.value(value: NetworkCubit())],
       subRoutes: [],
     ),
     AppRouteEntity(
       name: component,
       page: ComponentPage(key: UniqueKey()),
-      bloc: BlocProvider.value(value: AppLocator.getIt.get<NetworkCubit>()),
+      blocs: [BlocProvider.value(value: NetworkCubit())],
       subRoutes: [],
     ),
   ];
@@ -33,7 +33,7 @@ class AppRouteConfig {
             name: route.name,
             path: '/${route.name}',
             builder: (context, state) => MultiBlocProvider(
-              providers: [route.bloc],
+              providers: [...route.blocs],
               child: route.page,
             ),
             routes: route.subRoutes.isNotEmpty ? getGoRoutes(route.subRoutes) : [],
@@ -46,13 +46,13 @@ class AppRouteConfig {
 class AppRouteEntity {
   String name;
   Widget page;
-  dynamic bloc;
+  List<dynamic> blocs;
   List<AppRouteEntity> subRoutes;
 
   AppRouteEntity({
     required this.name,
     required this.page,
-    required this.bloc,
+    required this.blocs,
     required this.subRoutes,
   });
 }

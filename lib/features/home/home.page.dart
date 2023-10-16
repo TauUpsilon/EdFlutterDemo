@@ -17,7 +17,21 @@ class HomePage extends StatefulWidget {
 }
 
 class HomePageState extends State<HomePage> {
-  final HomeCubit homeCubit = AppLocator.getIt.get<HomeCubit>();
+  late HomeCubit _homeCubit;
+
+  @override
+  void didChangeDependencies() {
+    _homeCubit = BlocProvider.of<HomeCubit>(context);
+
+    super.didChangeDependencies();
+  }
+
+  @override
+  void dispose() {
+    _homeCubit.close();
+
+    super.dispose();
+  }
 
   PreferredSize header() {
     return PreferredSize(
@@ -35,11 +49,11 @@ class HomePageState extends State<HomePage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 TextButton(
-                  onPressed: () => homeCubit.navigateToNetwork(context),
+                  onPressed: () => _homeCubit.navigateToNetwork(context),
                   child: const Text('Network'),
                 ),
                 TextButton(
-                  onPressed: () => homeCubit.navigateToComponent(context),
+                  onPressed: () => _homeCubit.navigateToComponent(context),
                   child: const Text('Component'),
                 ),
               ],
@@ -48,18 +62,6 @@ class HomePageState extends State<HomePage> {
         ),
       ),
     );
-  }
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-  }
-
-  @override
-  void dispose() {
-    homeCubit.dispose();
-
-    super.dispose();
   }
 
   @override

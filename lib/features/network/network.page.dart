@@ -19,7 +19,22 @@ class NetworkPage extends StatefulWidget {
 }
 
 class _NetworkPageState extends State<NetworkPage> {
-  final NetworkCubit networkCubit = AppLocator.getIt.get<NetworkCubit>();
+  late NetworkCubit _networkCubit;
+
+  @override
+  void didChangeDependencies() {
+    _networkCubit = BlocProvider.of<NetworkCubit>(context);
+    _networkCubit.requestTodos();
+
+    super.didChangeDependencies();
+  }
+
+  @override
+  void dispose() {
+    _networkCubit.close();
+
+    super.dispose();
+  }
 
   PreferredSize header() {
     return PreferredSize(
@@ -70,21 +85,6 @@ class _NetworkPageState extends State<NetworkPage> {
         ),
       ),
     );
-  }
-
-  @override
-  void didChangeDependencies() {
-    networkCubit.didChangeDependencies();
-    networkCubit.requestTodos();
-
-    super.didChangeDependencies();
-  }
-
-  @override
-  void dispose() {
-    networkCubit.dispose();
-
-    super.dispose();
   }
 
   @override

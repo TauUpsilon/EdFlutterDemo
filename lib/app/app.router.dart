@@ -18,7 +18,7 @@ class AppRouter {
 
       return MaterialPageRoute(
         builder: (_) => MultiBlocProvider(
-          providers: [route.bloc],
+          providers: [...route.blocs],
           child: route.page,
         ),
         settings: settings,

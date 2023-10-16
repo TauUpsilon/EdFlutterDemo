@@ -1,4 +1,6 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-pwd
+# fvm dart format . --set-exit-if-changed
+fvm flutter analyze
+# fvm flutter test

@@ -1,12 +1,15 @@
 part of 'home.page.dart';
 
 class HomeCubit extends Cubit<HomeState> with AlphaBase {
-  final CompositeSubscription subscription = CompositeSubscription();
+  final CompositeSubscription _subscription = CompositeSubscription();
 
   HomeCubit() : super(const HomeState.initialState());
 
-  void dispose() {
-    subscription.cancel();
+  @override
+  Future<void> close() async {
+    _subscription.dispose();
+
+    await super.close();
   }
 
   navigateToNetwork(BuildContext context) {
