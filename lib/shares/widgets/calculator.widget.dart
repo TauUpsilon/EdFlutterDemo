@@ -215,22 +215,20 @@ class CalculatorWidgetState extends State<CalculatorWidget> {
             ),
 
             // Keyboards
-            ...createDialArray()
-                .map(
-                  (row) => Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: row
-                        .map(
-                          (col) => DialButtonWidget(
-                            key: UniqueKey(),
-                            text: col,
-                            onPress: (text) => onDialPress(text),
-                          ),
-                        )
-                        .toList(),
-                  ),
-                )
-                .toList()
+            ...createDialArray().map(
+              (row) => Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: row
+                    .map(
+                      (col) => DialButtonWidget(
+                        key: UniqueKey(),
+                        text: col,
+                        onPress: (text) => onDialPress(text),
+                      ),
+                    )
+                    .toList(),
+              ),
+            )
           ],
         ),
       );

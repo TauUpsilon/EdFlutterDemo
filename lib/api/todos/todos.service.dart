@@ -20,13 +20,15 @@ class TodosApiService with AlphaBase {
           req,
         )
         .map(
-          (res) => res.serialise((value) => _serialiseTodos(value)),
+          (res) => res.serialise<List<TodosGetModel>>((value) => _serialiseTodos(value)),
         );
   }
 
   List<TodosGetModel> _serialiseTodos(dynamic res) {
-    var data = res as List<dynamic>;
-
-    return data.map((e) => TodosGetModel.fromJson(e)).toList();
+    if (res is List<dynamic>) {
+      return res.map((e) => TodosGetModel.fromJson(e)).toList();
+    } else {
+      return [];
+    }
   }
 }

@@ -1,0 +1,13 @@
+targets:
+  $default:
+    builders:
+      source_gen|combining_builder:
+        options:
+          # build_extensions:
+          #   '^lib/features/{{}}.page.dart': 'lib/app/{{}}.g.dart'
+          ignore_for_file:
+            - lint_alpha
+            - lint_beta
+
+      go_routes_generator|go_routes_builder:
+        enabled: true

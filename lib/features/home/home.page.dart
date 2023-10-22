@@ -4,11 +4,15 @@ import 'package:flutter_proj/app/app.widget.dart';
 import 'package:flutter_proj/core/alpha_base.mixin.dart';
 import 'package:flutter_proj/shares/widgets/header.widget.dart';
 import 'package:go_router/go_router.dart';
+import 'package:routes_generator/annotation.dart';
 import 'package:rxdart/utils.dart';
 
 part 'home.cubit.dart';
 part 'home.state.dart';
 
+@RouterGeneratableConfig(
+  routeName: 'home',
+)
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 

@@ -1,5 +1,5 @@
 {
-  "dart.flutterSdkPath": "./flutter_proj/.fvm/flutter_sdk",
+  "dart.flutterSdkPath": "./.fvm/flutter_sdk",
   "dart.lineLength": 120,
   "[dart]": {
     "editor.formatOnSave": true,

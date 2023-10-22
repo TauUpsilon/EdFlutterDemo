@@ -6,7 +6,6 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter_proj/app/app.widget.dart';
 import 'package:flutter_proj/core/alpha_base.mixin.dart';
 import 'package:flutter_proj/shares/enums/common.enum.dart';
-import 'package:flutter_proj/shares/instances/common.instance.dart';
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart';
 
@@ -37,7 +36,7 @@ class ApiService with AlphaBase {
     _handleMask(request, maskStatus: maskStatus);
   }
 
-  Future<Map<String, dynamic>> _doRequest(
+  Future<ApiModel<dynamic>> _doRequest(
     ApiRequest request,
   ) async {
     return _connectivity
@@ -98,7 +97,7 @@ class ApiService with AlphaBase {
     }
   }
 
-  Map<String, dynamic> _handleRespose(
+  ApiModel<dynamic> _handleRespose(
     ApiRequest request,
     Response response,
   ) {
@@ -115,35 +114,20 @@ class ApiService with AlphaBase {
     }
   }
 
-  Map<String, dynamic> _handleSuccess(
+  ApiModel<dynamic> _handleSuccess(
     ApiRequest request,
     String status,
     dynamic body,
   ) {
     // logger.d(AppUtil.getJsonString(body));
 
-    if (request is JsonPlaceholderRequest) {
-      return {
-        'status': LoadingStatus.loaded,
-        'value': {
-          'code': status,
-          'data': body,
-        },
-        'error': null,
-      };
-    } else {
-      return {
-        'status': LoadingStatus.loaded,
-        'value': {
-          'code': status,
-          'data': body,
-        },
-        'error': null,
-      };
-    }
+    return ApiDone(
+      code: status,
+      value: body,
+    );
   }
 
-  Map<String, dynamic> _handleError(dynamic error) {
+  ApiFail _handleError(dynamic error) {
     if (error is SocketException) {
       return ApiErrorInstance.offline;
     } else if (error is ServerError) {
@@ -151,14 +135,14 @@ class ApiService with AlphaBase {
     } else if (error is TimeoutException) {
       return ApiErrorInstance.timeout;
     } else {
-      return {};
+      return ApiErrorInstance.uknownError;
     }
   }
 
   void _handleMask(ApiRequest request, {MaskStatus maskStatus = MaskStatus.show}) {
     switch (maskStatus) {
       case MaskStatus.show:
-        if (_modelService._model['status'] == LoadingStatus.loading) {
+        if (_modelService._model is ApiLoading) {
           addMask(_handleURI(request).toString());
         } else {
           removeMask(_handleURI(request).toString());

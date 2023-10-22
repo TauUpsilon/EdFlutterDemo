@@ -4,7 +4,6 @@ import 'package:flutter_proj/api/api.service.dart';
 import 'package:flutter_proj/api/todos/todos.service.dart';
 import 'package:flutter_proj/app/app.widget.dart';
 import 'package:flutter_proj/core/alpha_base.mixin.dart';
-import 'package:flutter_proj/shares/enums/common.enum.dart';
 import 'package:flutter_proj/shares/widgets/header.widget.dart';
 import 'package:rxdart/utils.dart';
 
@@ -48,39 +47,31 @@ class _NetworkPageState extends State<NetworkPage> {
       child: Center(
         child: BlocBuilder<NetworkCubit, NetworkState>(
           builder: (context, state) {
-            var todosStatus = state.todos.status;
-            var todosValue = state.todos.value;
+            // var todosStatus = state.todos.status;
+            var todosModel = state.todos;
 
-            switch (todosStatus) {
-              case LoadingStatus.loaded:
-                if (todosValue != null) {
-                  return ListView.builder(
-                    key: UniqueKey(),
-                    padding: const EdgeInsets.symmetric(
-                      vertical: 30,
-                      horizontal: 20,
+            if (todosModel is ApiLoading) {
+              return const SizedBox.shrink();
+            } else if (todosModel is ApiFail) {
+              return const Text('Error');
+            } else {
+              return ListView.builder(
+                key: UniqueKey(),
+                padding: const EdgeInsets.symmetric(
+                  vertical: 30,
+                  horizontal: 20,
+                ),
+                itemCount: todosModel.value.length,
+                itemBuilder: (context, index) {
+                  return Card(
+                    child: ListTile(
+                      key: UniqueKey(),
+                      title: Text(todosModel.value[index].title),
                     ),
-                    itemCount: todosValue.data.length,
-                    itemBuilder: (context, index) {
-                      return Card(
-                        child: ListTile(
-                          key: UniqueKey(),
-                          title: Text(todosValue.data[index].title),
-                        ),
-                      );
-                    },
                   );
-                }
-
-                if (state.todos.error != null) {}
-
-                break;
-
-              default:
-                break;
+                },
+              );
             }
-
-            return const SizedBox.shrink();
           },
         ),
       ),

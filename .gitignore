@@ -6,7 +6,7 @@
 *.g.dart
 
 # VS Code
-.vscode
+# .vscode
 
 # Miscellaneous
 *.class

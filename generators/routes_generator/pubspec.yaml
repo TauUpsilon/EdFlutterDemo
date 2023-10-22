@@ -1,0 +1,15 @@
+name: routes_generator
+description: generate go routes
+version: 1.0.0
+publish_to: none
+
+environment:
+  sdk: ^3.0.0
+
+dependencies:
+  build:
+  analyzer:
+  source_gen: ^1.1.0
+
+dev_dependencies:
+  dart_flutter_team_lints:

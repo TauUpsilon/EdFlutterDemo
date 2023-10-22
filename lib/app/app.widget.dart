@@ -16,12 +16,13 @@ import 'package:flutter_redux/flutter_redux.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:redux/redux.dart';
+import 'package:routes_generator/annotation.dart';
 
 part 'app.config.dart';
 part 'app.locator.dart';
+part 'app.route.dart';
 part 'app.router.dart';
 part 'app.util.dart';
-part 'app_route.config.dart';
 
 class App extends StatelessWidget {
   const App({required Key key}) : super(key: key);

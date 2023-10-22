@@ -7,8 +7,9 @@ class NetworkState {
   const NetworkState({required this.todos});
 
   NetworkState.initialState()
-      : todos = ApiModel(
-          status: LoadingStatus.loaded,
+      : todos = ApiDone<List<TodosGetModel>>(
+          code: '',
+          value: [],
         );
 
   factory NetworkState.create(
