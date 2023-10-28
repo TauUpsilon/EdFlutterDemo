@@ -19,6 +19,7 @@ class CalculatorWidgetState extends State<CalculatorWidget> {
   List<List<String>> createDialArray() {
     const cols = 4;
     const rows = 5;
+
     final array = List.generate(
       rows,
       (row) => List.generate(
@@ -85,16 +86,12 @@ class CalculatorWidgetState extends State<CalculatorWidget> {
           });
         }
 
-        break;
-
       case 'c':
         if (secondNum.isEmpty) {
           setState(() {
             displayText = '0';
           });
         }
-
-        break;
 
       case 'ac':
         setState(() {
@@ -103,8 +100,6 @@ class CalculatorWidgetState extends State<CalculatorWidget> {
           secondNum = '';
           displayText = '0';
         });
-
-        break;
 
       default:
         break;
@@ -118,9 +113,13 @@ class CalculatorWidgetState extends State<CalculatorWidget> {
       setState(() {
         secondNum = displayText;
 
-        final pattern =
-            RegExp(r'^([0-9]\d*(\.\d+)?)([\/+x-])([0-9]\d*(\.\d+)?)$');
-        final match = pattern.firstMatch('$firstNum$operator$secondNum')!;
+        final pattern = RegExp(
+          r'^([0-9]\d*(\.\d+)?)([\/+x-])([0-9]\d*(\.\d+)?)$',
+        );
+
+        final match = pattern.firstMatch(
+          '$firstNum$operator$secondNum',
+        )!;
 
         _calculate(
           double.tryParse(match[1].toString())!,
@@ -193,9 +192,9 @@ class CalculatorWidgetState extends State<CalculatorWidget> {
           children: [
             // Arithmetic
             Container(
-              alignment: const Alignment(1.0, 1.0),
+              alignment: Alignment.bottomRight,
               child: Padding(
-                padding: const EdgeInsets.only(right: 12.0),
+                padding: const EdgeInsets.only(right: 12),
                 child: Text(
                   '$firstNum $operator $secondNum',
                   style: const TextStyle(
@@ -207,9 +206,9 @@ class CalculatorWidgetState extends State<CalculatorWidget> {
 
             // Number Display
             Container(
-              alignment: const Alignment(1.0, 1.0),
+              alignment: Alignment.bottomRight,
               child: Padding(
-                padding: const EdgeInsets.all(12.0),
+                padding: const EdgeInsets.all(12),
                 child: Text(
                   displayText,
                   style: const TextStyle(
@@ -228,12 +227,12 @@ class CalculatorWidgetState extends State<CalculatorWidget> {
                       (col) => DialButtonWidget(
                         key: UniqueKey(),
                         text: col,
-                        onPress: (text) => onDialPress(text),
+                        onPress: onDialPress,
                       ),
                     )
                     .toList(),
               ),
-            )
+            ),
           ],
         ),
       );

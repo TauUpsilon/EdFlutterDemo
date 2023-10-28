@@ -1,18 +1,18 @@
 part of 'app.widget.dart';
 
-class AppLocator {
+mixin AppLocator {
   static final getIt = GetIt.instance;
 
-  static initLocator() {
+  static void initLocator() {
     getIt
       // Utils
-      ..registerLazySingleton(() => Connectivity())
+      ..registerLazySingleton(Connectivity.new)
 
       // Services
-      ..registerLazySingleton(() => LoggingService())
-      ..registerLazySingleton(() => ApiService())
-      ..registerLazySingleton(() => ApiModelService())
-      ..registerLazySingleton(() => TodosApiService())
+      ..registerLazySingleton(LoggingService.new)
+      ..registerLazySingleton(ApiService.new)
+      ..registerLazySingleton(ApiModelService.new)
+      ..registerLazySingleton(TodosApiService.new)
 
       // Stores
       ..registerLazySingleton(

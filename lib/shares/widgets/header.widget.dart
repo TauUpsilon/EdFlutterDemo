@@ -26,7 +26,7 @@ class HeaderBarWidget extends StatelessWidget with AlphaBase {
         borderRadius: BorderRadius.vertical(
           bottom: Radius.elliptical(
             MediaQuery.of(context).size.height,
-            200.0,
+            200,
           ),
         ),
       ),

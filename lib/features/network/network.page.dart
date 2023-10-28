@@ -37,7 +37,7 @@ class _NetworkPageState extends State<NetworkPage> {
 
   PreferredSize header() {
     return PreferredSize(
-      preferredSize: const Size.fromHeight(80.0),
+      preferredSize: const Size.fromHeight(80),
       child: HeaderBarWidget(title: AppConfig.appTitle),
     );
   }
@@ -47,8 +47,7 @@ class _NetworkPageState extends State<NetworkPage> {
       child: Center(
         child: BlocBuilder<NetworkCubit, NetworkState>(
           builder: (context, state) {
-            // var todosStatus = state.todos.status;
-            var todosModel = state.todos;
+            final todosModel = state.todos;
 
             if (todosModel is ApiLoading) {
               return const SizedBox.shrink();

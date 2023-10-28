@@ -31,7 +31,7 @@ class DialButtonWidget extends StatelessWidget with AlphaBase {
         ),
         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
           RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(4.0),
+            borderRadius: BorderRadius.circular(4),
           ),
         ),
       );

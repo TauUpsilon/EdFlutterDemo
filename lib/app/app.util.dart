@@ -1,19 +1,17 @@
 part of 'app.widget.dart';
 
-class AppUtil {
+mixin AppUtil {
   static Future<void> setEnvironment() async {
     const envStr = String.fromEnvironment('ENV');
 
-    String envPath = 'environments/';
+    var envPath = 'environments/';
 
     switch (envStr) {
       case 'STAGE':
         envPath = '${envPath}stage.env';
-        break;
 
       case 'PROD':
         envPath = '${envPath}prod.env';
-        break;
 
       default:
         envPath = '${envPath}local.env';
@@ -30,13 +28,13 @@ class AppUtil {
     return encoder.convert(json);
   }
 
-  static String splitStringIntoLines(String input, int maxLineLength) {
+  static String splitStringIntoLines(String input, int maxLen) {
     final result = StringBuffer();
-    int index = 0;
+    var index = 0;
 
     while (index < input.length) {
-      final remainingChars = input.length - index;
-      final lineLength = (remainingChars < maxLineLength) ? remainingChars : maxLineLength;
+      final remainChars = input.length - index;
+      final lineLength = remainChars < maxLen ? remainChars : maxLen;
       final line = input.substring(index, index + lineLength);
 
       result.write(line);

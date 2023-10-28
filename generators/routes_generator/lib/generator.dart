@@ -1,8 +1,7 @@
 import 'package:analyzer/dart/element/element.dart';
 import 'package:build/build.dart';
+import 'package:routes_generator/annotation.dart';
 import 'package:source_gen/source_gen.dart';
-
-import 'annotation.dart';
 
 class RoutesGenerator extends GeneratorForAnnotation<RouterGeneratable> {
   @override
@@ -14,10 +13,9 @@ class RoutesGenerator extends GeneratorForAnnotation<RouterGeneratable> {
     // final visitor = Visitor();
     // element.visitChildren(visitor);
 
-    final buffer = StringBuffer();
-
-    buffer.writeln('class Test {\n');
-    buffer.writeln('}');
+    // final buffer = StringBuffer()
+    //   ..writeln('class Test {\n')
+    //   ..writeln('}');
 
     return null;
   }

@@ -13,22 +13,22 @@ class TodosApiService with AlphaBase {
   final _apiService = GetIt.instance.get<ApiService>();
 
   Stream<ApiModel<List<TodosGetModel>>> requestTodos() {
-    var req = TodosGetRequest();
+    final req = TodosGetRequest();
 
     return _apiService
         .request(
           req,
         )
         .map(
-          (res) => res.serialise<List<TodosGetModel>>(
-            (value) => _serialiseTodos(value),
-          ),
+          (res) => res.serialise<List<TodosGetModel>>(_serialiseTodos),
         );
   }
 
   List<TodosGetModel> _serialiseTodos(dynamic res) {
-    if (res is List<dynamic>) {
-      return res.map((e) => TodosGetModel.fromJson(e)).toList();
+    if (res is List) {
+      return res
+          .map((e) => TodosGetModel.fromJson(e as Map<String, dynamic>))
+          .toList();
     } else {
       return [];
     }

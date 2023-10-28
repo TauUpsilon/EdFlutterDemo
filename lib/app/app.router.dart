@@ -1,7 +1,7 @@
 part of 'app.widget.dart';
 
 @RouterGeneratable()
-class AppRouter {
+mixin AppRouter {
   static final routeConfig = AppRoute();
 
   static final goRouter = GoRouter(
@@ -36,7 +36,7 @@ class AppRouter {
           ],
           child: const ComponentPage(),
         ),
-      )
+      ),
     ],
     observers: [AppRouteObserver()],
     errorBuilder: (context, state) => const Text('404'),
@@ -48,6 +48,7 @@ class AppRouter {
   //   loggingService.i('Will navigate to -> ${settings.name}');
 
   //   try {
+  // ignore: lines_longer_than_80_chars
   //     var route = AppRouteConfig.routes.firstWhere((route) => route.name == settings.name);
 
   //     return MaterialPageRoute(

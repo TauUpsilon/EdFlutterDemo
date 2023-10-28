@@ -31,27 +31,26 @@ dependencies:
     sdk: flutter
 
   # Common
-  logger: 
-  json_annotation: 
-  flutter_dotenv:
-  go_router:
+  logger: ^2.0.2+1
+  json_annotation: ^4.8.1
+  flutter_dotenv: ^5.1.0
+  go_router: ^12.0.1
 
   # Network
-  http:
-  connectivity_plus:
+  http: ^1.1.0
+  connectivity_plus: ^5.0.1
 
   # Injection
-  get_it:
+  get_it: ^7.6.4
 
   # State Management
-  rxdart:
-  bloc:
-  flutter_bloc:
-  redux: 
-  flutter_redux: 
+  rxdart: ^0.27.7
+  redux: ^5.0.0
+  flutter_redux: ^0.10.0
+  flutter_bloc: ^8.1.3
 
   # Widget
-  cupertino_icons:
+  cupertino_icons: ^1.0.6
 
   # Custom plugin
   custom_math:
@@ -64,22 +63,22 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  # The "flutter_lints" package below contains a set of recommended lints to
+  # The 'flutter_lints' package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints:
+  flutter_lints: ^3.0.0
 
-  # Common
-  json_serializable:
+  #Common
+  json_serializable: ^6.7.1
 
   # Build
-  build_runner:
-  build_verify:
-    
+  build_runner: ^2.4.6
+  build_verify: ^3.1.0
+
   # Git
-  husky:
+  husky: ^0.1.6
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -98,15 +97,15 @@ flutter:
     - environments/prod.env
     # - assets/images/
 
-  # An image asset can refer to one or more resolution-specific "variants", see
+  # An image asset can refer to one or more resolution-specific 'variants', see
   # https://flutter.dev/assets-and-images/#resolution-aware
 
   # For details regarding adding assets from package dependencies, see
   # https://flutter.dev/assets-and-images/#from-packages
 
   # To add custom fonts to your application, add a fonts section here,
-  # in this "flutter" section. Each entry in this list should have a
-  # "family" key with the font family name, and a "fonts" key with a
+  # in this 'flutter' section. Each entry in this list should have a
+  # 'family' key with the font family name, and a 'fonts' key with a
   # list giving the asset and other descriptors for the font. For
   # example:
   # fonts:

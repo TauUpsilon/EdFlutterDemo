@@ -1,6 +1,6 @@
 part of 'mask.reducer.dart';
 
-sealed class MaskAction {
+mixin MaskAction {
   static AddMaskClientAction addMaskClient(String clientName) =>
       AddMaskClientAction(clientName: clientName);
 
@@ -8,7 +8,7 @@ sealed class MaskAction {
       PopMaskClientAction(clientName: clientName);
 }
 
-class AddMaskClientAction extends MaskAction {
+class AddMaskClientAction with MaskAction {
   String clientName;
 
   AddMaskClientAction({
@@ -16,7 +16,7 @@ class AddMaskClientAction extends MaskAction {
   });
 }
 
-class PopMaskClientAction extends MaskAction {
+class PopMaskClientAction with MaskAction {
   String clientName;
 
   PopMaskClientAction({

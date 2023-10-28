@@ -20,11 +20,11 @@ class ApiStatusCode {
   static const String api9999 = 'API9999';
 }
 
-class ApiCommonInstance {
+mixin ApiCommonInstance {
   static final loading = ApiLoading();
 }
 
-class ApiErrorInstance {
+mixin ApiErrorInstance {
   static final offline = ApiFail<Map<String, dynamic>>(
     code: ApiStatusCode.api0001,
     value: {},

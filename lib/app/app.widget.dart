@@ -36,7 +36,8 @@ class App extends StatelessWidget {
         children: [
           MaterialApp.router(
             debugShowCheckedModeBanner: false,
-            routeInformationProvider: AppRouter.goRouter.routeInformationProvider,
+            routeInformationProvider:
+                AppRouter.goRouter.routeInformationProvider,
             routerDelegate: AppRouter.goRouter.routerDelegate,
             routeInformationParser: AppRouter.goRouter.routeInformationParser,
           ),
@@ -62,7 +63,7 @@ class App extends StatelessWidget {
                 return const SizedBox.shrink();
               }
             },
-          )
+          ),
         ],
       ),
     );

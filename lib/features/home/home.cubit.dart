@@ -7,16 +7,15 @@ class HomeCubit extends Cubit<HomeState> with AlphaBase {
 
   @override
   Future<void> close() async {
-    _subscription.dispose();
-
+    await _subscription.dispose();
     await super.close();
   }
 
-  navigateToNetwork(BuildContext context) {
+  void navigateToNetwork(BuildContext context) {
     context.pushNamed(AppRoute.network, extra: 'Test');
   }
 
-  navigateToComponent(BuildContext context) {
+  void navigateToComponent(BuildContext context) {
     context.pushNamed(AppRoute.component);
   }
 }

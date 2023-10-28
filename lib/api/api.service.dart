@@ -44,28 +44,29 @@ class ApiService with AlphaBase {
         .then((value) => _handleRequest(request))
         .timeout(Duration(seconds: AppConfig.timeoutSec))
         .then((response) => _handleRespose(request, response))
-        .catchError((error) => _handleError(error));
+        .catchError(_handleError);
   }
 
   Future<Response> _handleRequest(
     ApiRequest request,
   ) async {
-    var uri = _handleURI(request);
-    var headers = _handleHeaders(request);
-    var body = _handleBody(request);
+    final uri = _handleURI(request);
+    final headers = _handleHeaders(request);
+    final body = _handleBody(request);
 
-    logger.d(
-      '$runtimeType - Request Info\n\n$request',
-    );
-    logger.d(
-      '$runtimeType - Request Headers\n\n${AppUtil.getJsonString(headers)}',
-    );
-    logger.d(
-      '$runtimeType - Request Body or QueryParams\n\n${AppUtil.getJsonString(request.reqBody)}',
-    );
-    logger.d(
-      '$runtimeType - Start to request for ${AppConfig.timeoutSec} seconds\n\nURI: $uri',
-    );
+    logger
+      ..d(
+        '$runtimeType - Request Info\n\n$request',
+      )
+      ..d(
+        '$runtimeType - Request Headers\n\n${AppUtil.getJsonString(headers)}',
+      )
+      ..d(
+        '''$runtimeType - Request Body or QueryParams\n\n${AppUtil.getJsonString(request.reqBody)}''',
+      )
+      ..d(
+        '''$runtimeType - Start to request for ${AppConfig.timeoutSec} seconds\n\nURI: $uri''',
+      );
 
     switch (request.reqMethod) {
       case ApiMethod.post:
@@ -74,8 +75,7 @@ class ApiService with AlphaBase {
           headers: headers,
           body: body,
         );
-
-      default:
+      case ApiMethod.get:
         return get(uri);
     }
   }
@@ -115,9 +115,9 @@ class ApiService with AlphaBase {
     ApiRequest request,
     Response response,
   ) {
-    var status = response.statusCode.toString().trim();
+    final status = response.statusCode.toString().trim();
 
-    if (status.startsWith('1')) {
+    if (status.startsWith('2')) {
       // 200
       return _handleSuccess(request, status, response);
     } else if (status.startsWith('5')) {
@@ -135,8 +135,9 @@ class ApiService with AlphaBase {
   ) {
     final body = jsonDecode(response.body);
 
-    logger.d('$runtimeType - Response Body\n\n${AppUtil.getJsonString(body)}');
-    logger.d('$runtimeType - Response Status\n\nHttp Res Code: $status');
+    logger
+      ..d('$runtimeType - Response Body\n\n${AppUtil.getJsonString(body)}')
+      ..d('$runtimeType - Response Status\n\nHttp Res Code: $status');
 
     if (request is JsonPlaceholderRequest) {
       return ApiDone(
@@ -170,17 +171,19 @@ class ApiService with AlphaBase {
     }
   }
 
-  void _handleMask(ApiRequest request, {MaskStatus maskStatus = MaskStatus.show}) {
+  void _handleMask(
+    ApiRequest request, {
+    MaskStatus maskStatus = MaskStatus.show,
+  }) {
     switch (maskStatus) {
       case MaskStatus.show:
-        if (_modelService._model is ApiLoading) {
+        if (_modelService.model is ApiLoading) {
           addMask(_handleURI(request).toString());
         } else {
           removeMask(_handleURI(request).toString());
         }
 
-        break;
-      default:
+      case MaskStatus.hide:
         break;
     }
   }

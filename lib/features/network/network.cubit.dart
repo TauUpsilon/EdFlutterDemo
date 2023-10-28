@@ -17,8 +17,7 @@ class NetworkCubit extends Cubit<NetworkState> with AlphaBase {
 
   @override
   Future<void> close() async {
-    _subscription.dispose();
-
+    await _subscription.dispose();
     await super.close();
   }
 }

@@ -7,7 +7,6 @@ class Visitor extends SimpleElementVisitor<void> {
 
   @override
   void visitConstructorElement(ConstructorElement element) {
-    final elementReturnType = element.type.returnType.toString();
-    className = elementReturnType.replaceFirst('*', '');
+    className = element.type.returnType.toString().replaceFirst('*', '');
   }
 }

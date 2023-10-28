@@ -1,32 +1,28 @@
 part of 'api.service.dart';
 
 class ApiModelService extends AlphaBase {
-  late ApiModel _model;
-
-  set model(ApiModel res) {
-    _model = res;
-  }
+  late ApiModel model;
 
   ApiModel<T> serialise<T>(T Function(dynamic value) callback) {
-    ApiModel<dynamic> model = _model;
+    var modelCopied = model;
 
-    if (model is ApiFail) {
-      model = ApiFail<T>(
-        code: model.code,
-        value: callback(model.value),
-        message: model.message,
+    if (modelCopied is ApiFail) {
+      modelCopied = ApiFail<T>(
+        code: modelCopied.code,
+        value: callback(modelCopied.value),
+        message: modelCopied.message,
       );
 
-      logger.e('$runtimeType - ApiModel \n\n$model');
+      logger.e('$runtimeType - ApiModel \n\n$modelCopied');
     } else {
-      model = ApiDone<T>(
-        code: model.code,
-        value: callback(_model.value),
+      modelCopied = ApiDone<T>(
+        code: modelCopied.code,
+        value: callback(modelCopied.value),
       );
 
-      logger.d('$runtimeType - ApiModel \n\n$model');
+      logger.d('$runtimeType - ApiModel \n\n$modelCopied');
     }
 
-    return model as ApiModel<T>;
+    return modelCopied as ApiModel<T>;
   }
 }

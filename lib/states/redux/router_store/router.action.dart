@@ -1,6 +1,6 @@
 part of 'router.reducer.dart';
 
-sealed class RouterAction {
+mixin RouterAction {
   static UpdateRouterStateAction updateRouterStateAction(
     Route currentRoute,
     Route? previousRoute,
@@ -11,7 +11,7 @@ sealed class RouterAction {
       );
 }
 
-class UpdateRouterStateAction extends RouterAction {
+class UpdateRouterStateAction with RouterAction {
   Route currentRoute;
   Route? previousRoute;
 

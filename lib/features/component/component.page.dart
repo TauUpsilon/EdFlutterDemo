@@ -8,7 +8,7 @@ class ComponentPage extends StatelessWidget {
 
   PreferredSize header() {
     return PreferredSize(
-      preferredSize: const Size.fromHeight(80.0),
+      preferredSize: const Size.fromHeight(80),
       child: HeaderBarWidget(title: AppConfig.appTitle),
     );
   }

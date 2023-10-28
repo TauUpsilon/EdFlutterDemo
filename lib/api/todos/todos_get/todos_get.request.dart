@@ -6,8 +6,8 @@ class TodosGetRequest extends JsonPlaceholderRequest {
           reqMethod: ApiMethod.get,
           reqApi: 'todos',
           reqBody: {
-            "test_num": "1",
-            "test_str": 'test',
+            'test_num': '1',
+            'test_str': 'test',
           },
         );
 }
