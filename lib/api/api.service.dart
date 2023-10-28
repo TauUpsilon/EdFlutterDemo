@@ -50,37 +50,43 @@ class ApiService with AlphaBase {
   Future<Response> _handleRequest(
     ApiRequest request,
   ) async {
-    var url = _handleURI(request);
+    var uri = _handleURI(request);
     var headers = _handleHeaders(request);
     var body = _handleBody(request);
 
-    switch (request.method) {
+    logger.d('$runtimeType - Request Info\n\n$request');
+    logger.d('$runtimeType - Request Headers\n\n${AppUtil.getJsonString(headers)}');
+    logger.d('$runtimeType - Request Body or QueryParams\n\n${AppUtil.getJsonString(request.reqBody)}');
+    logger.d('$runtimeType - Start to request for ${AppConfig.timeoutSec} seconds\n\nURI: $uri');
+
+    switch (request.reqMethod) {
       case ApiMethod.post:
         return post(
-          url,
+          uri,
           headers: headers,
           body: body,
         );
 
       default:
-        return get(url);
+        return get(uri);
     }
   }
 
   Uri _handleURI(ApiRequest request) {
     if (request is JsonPlaceholderRequest) {
-      return Uri.parse('$_baseUrl/${request.apiId}');
+      return Uri.parse('$_baseUrl/${request.reqApi}').replace(
+        queryParameters: request.reqBody,
+      );
     } else {
       return Uri.parse(_baseUrl);
     }
   }
 
   Map<String, String> _handleHeaders(ApiRequest request) {
-    if (request is JsonPlaceholderRequest) {
-      return {
-        'Content-Type': 'application/json; charset=UTF-8',
-        'Accept': 'application/json',
-      };
+    final headers = request.reqHeaders;
+
+    if (headers != null && headers.isNotEmpty) {
+      return headers;
     } else {
       return {
         'Content-Type': 'application/json; charset=UTF-8',
@@ -91,7 +97,7 @@ class ApiService with AlphaBase {
 
   String _handleBody(ApiRequest request) {
     if (request is JsonPlaceholderRequest) {
-      return jsonEncode(request.body);
+      return jsonEncode(request.reqBody);
     } else {
       return '';
     }
@@ -103,34 +109,49 @@ class ApiService with AlphaBase {
   ) {
     var status = response.statusCode.toString().trim();
 
-    if (status.startsWith('2')) {
+    if (status.startsWith('1')) {
       // 200
-      return _handleSuccess(request, status, jsonDecode(response.body));
+      return _handleSuccess(request, status, response);
     } else if (status.startsWith('5')) {
       // 500
-      throw ServerError();
+      throw ServerException();
     } else {
-      throw 'Error: ${response.statusCode}';
+      throw UnknownResException('Unknown status code: $status');
     }
   }
 
   ApiModel<dynamic> _handleSuccess(
     ApiRequest request,
     String status,
-    dynamic body,
+    Response response,
   ) {
-    // logger.d(AppUtil.getJsonString(body));
+    final body = jsonDecode(response.body);
 
-    return ApiDone(
-      code: status,
-      value: body,
-    );
+    logger.d('$runtimeType - Response Body\n\n${AppUtil.getJsonString(body)}');
+    logger.d('$runtimeType - Response Status\n\nHttp Res Code: $status');
+
+    if (request is JsonPlaceholderRequest) {
+      return ApiDone(
+        code: status, // Could be custom return code
+        value: body,
+      );
+    } else {
+      return ApiDone(
+        code: status,
+        value: body,
+      );
+    }
   }
 
-  ApiFail _handleError(dynamic error) {
+  ApiFail _handleError(Object error) {
+    logger.e(
+      '',
+      error: '$runtimeType - Error Response\n\n${AppUtil.splitStringIntoLines(error.toString(), 100)}',
+    );
+
     if (error is SocketException) {
       return ApiErrorInstance.offline;
-    } else if (error is ServerError) {
+    } else if (error is ServerException) {
       return ApiErrorInstance.serverIssue;
     } else if (error is TimeoutException) {
       return ApiErrorInstance.timeout;

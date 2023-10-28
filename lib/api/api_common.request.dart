@@ -1,13 +1,14 @@
 part of 'api.service.dart';
 
 class JsonPlaceholderRequest extends ApiRequest {
-  String apiId;
-  Map<String, dynamic>? body;
-
   JsonPlaceholderRequest({
-    required this.apiId,
-    body,
-  }) {
-    method = ApiMethod.get;
-  }
+    required super.reqMethod,
+    required super.reqApi,
+    super.reqBody,
+  }) : super(
+          reqHeaders: {
+            'Content-Type': 'application/json; charset=UTF-8',
+            'Accept': 'application/json',
+          },
+        );
 }

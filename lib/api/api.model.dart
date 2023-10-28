@@ -19,6 +19,13 @@ class ApiDone<T> extends ApiModel<T> {
     required super.code,
     required super.value,
   });
+
+  @override
+  String toString() => AppUtil.getJsonString({
+        'Status': 'Success',
+        'Return Code': code,
+        'Model': runtimeType.toString(),
+      });
 }
 
 class ApiFail<T> extends ApiModel<T> {
@@ -29,4 +36,12 @@ class ApiFail<T> extends ApiModel<T> {
     required super.value,
     this.message = '',
   });
+
+  @override
+  String toString() => AppUtil.getJsonString({
+        'Status': 'Failure',
+        'Return Code': code,
+        'Return Message': AppUtil.splitStringIntoLines(message, 100),
+        'Model': runtimeType.toString(),
+      });
 }

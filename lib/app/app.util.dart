@@ -4,7 +4,7 @@ class AppUtil {
   static Future<void> setEnvironment() async {
     const envStr = String.fromEnvironment('ENV');
 
-    var envPath = 'environments/';
+    String envPath = 'environments/';
 
     switch (envStr) {
       case 'STAGE':
@@ -26,7 +26,28 @@ class AppUtil {
   }
 
   static String getJsonString(dynamic json) {
-    var encoder = const JsonEncoder.withIndent('  ');
+    const encoder = JsonEncoder.withIndent('  ');
     return encoder.convert(json);
+  }
+
+  static String splitStringIntoLines(String input, int maxLineLength) {
+    final result = StringBuffer();
+    int index = 0;
+
+    while (index < input.length) {
+      final remainingChars = input.length - index;
+      final lineLength = remainingChars < maxLineLength ? remainingChars : maxLineLength;
+      final line = input.substring(index, index + lineLength);
+
+      result.write(line);
+
+      index += lineLength;
+
+      if (index < input.length) {
+        result.write('\n');
+      }
+    }
+
+    return result.toString();
   }
 }

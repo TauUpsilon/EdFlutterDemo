@@ -1,13 +1,22 @@
 part of 'api.service.dart';
 
-class UnknownResponseError extends FormatException {
-  UnknownResponseError([super.message]);
+class ApiException implements Exception {
+  final String message;
+
+  ApiException([this.message = '']);
+
+  @override
+  String toString() => 'ApiException with $runtimeType: $message';
 }
 
-class ServerError extends FormatException {
-  ServerError([super.message]);
+class UnknownResException extends ApiException {
+  UnknownResException([super.message]);
 }
 
-class ClientError extends FormatException {
-  ClientError([super.message]);
+class ServerException extends ApiException {
+  ServerException([super.message]);
+}
+
+class ClientException extends ApiException {
+  ClientException([super.message]);
 }
