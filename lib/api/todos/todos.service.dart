@@ -20,7 +20,9 @@ class TodosApiService with AlphaBase {
           req,
         )
         .map(
-          (res) => res.serialise<List<TodosGetModel>>((value) => _serialiseTodos(value)),
+          (res) => res.serialise<List<TodosGetModel>>(
+            (value) => _serialiseTodos(value),
+          ),
         );
   }
 

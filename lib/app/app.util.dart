@@ -36,7 +36,7 @@ class AppUtil {
 
     while (index < input.length) {
       final remainingChars = input.length - index;
-      final lineLength = remainingChars < maxLineLength ? remainingChars : maxLineLength;
+      final lineLength = (remainingChars < maxLineLength) ? remainingChars : maxLineLength;
       final line = input.substring(index, index + lineLength);
 
       result.write(line);

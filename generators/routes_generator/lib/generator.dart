@@ -6,7 +6,11 @@ import 'annotation.dart';
 
 class RoutesGenerator extends GeneratorForAnnotation<RouterGeneratable> {
   @override
-  String? generateForAnnotatedElement(Element element, ConstantReader annotation, BuildStep buildStep) {
+  String? generateForAnnotatedElement(
+    Element element,
+    ConstantReader annotation,
+    BuildStep buildStep,
+  ) {
     // final visitor = Visitor();
     // element.visitChildren(visitor);
 

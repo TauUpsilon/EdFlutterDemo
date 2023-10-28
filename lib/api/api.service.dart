@@ -54,10 +54,18 @@ class ApiService with AlphaBase {
     var headers = _handleHeaders(request);
     var body = _handleBody(request);
 
-    logger.d('$runtimeType - Request Info\n\n$request');
-    logger.d('$runtimeType - Request Headers\n\n${AppUtil.getJsonString(headers)}');
-    logger.d('$runtimeType - Request Body or QueryParams\n\n${AppUtil.getJsonString(request.reqBody)}');
-    logger.d('$runtimeType - Start to request for ${AppConfig.timeoutSec} seconds\n\nURI: $uri');
+    logger.d(
+      '$runtimeType - Request Info\n\n$request',
+    );
+    logger.d(
+      '$runtimeType - Request Headers\n\n${AppUtil.getJsonString(headers)}',
+    );
+    logger.d(
+      '$runtimeType - Request Body or QueryParams\n\n${AppUtil.getJsonString(request.reqBody)}',
+    );
+    logger.d(
+      '$runtimeType - Start to request for ${AppConfig.timeoutSec} seconds\n\nURI: $uri',
+    );
 
     switch (request.reqMethod) {
       case ApiMethod.post:
@@ -144,9 +152,11 @@ class ApiService with AlphaBase {
   }
 
   ApiFail _handleError(Object error) {
+    final errStr = AppUtil.splitStringIntoLines(error.toString(), 100);
+
     logger.e(
       '',
-      error: '$runtimeType - Error Response\n\n${AppUtil.splitStringIntoLines(error.toString(), 100)}',
+      error: '$runtimeType - Error Response\n\n$errStr',
     );
 
     if (error is SocketException) {

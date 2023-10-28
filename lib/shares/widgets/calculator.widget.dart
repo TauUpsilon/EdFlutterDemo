@@ -112,11 +112,14 @@ class CalculatorWidgetState extends State<CalculatorWidget> {
   }
 
   void _doSum() {
-    if (firstNum.isNotEmpty && secondNum.isEmpty && !displayText.endsWith('.')) {
+    if (firstNum.isNotEmpty &&
+        secondNum.isEmpty &&
+        !displayText.endsWith('.')) {
       setState(() {
         secondNum = displayText;
 
-        final pattern = RegExp(r'^([0-9]\d*(\.\d+)?)([\/+x-])([0-9]\d*(\.\d+)?)$');
+        final pattern =
+            RegExp(r'^([0-9]\d*(\.\d+)?)([\/+x-])([0-9]\d*(\.\d+)?)$');
         final match = pattern.firstMatch('$firstNum$operator$secondNum')!;
 
         _calculate(
@@ -143,7 +146,9 @@ class CalculatorWidgetState extends State<CalculatorWidget> {
 
   void _handleDecimalPlace() {
     setState(() {
-      displayText = RegExp(r'[\.]').hasMatch(displayText) ? displayText : displayText += '.';
+      displayText = RegExp(r'[\.]').hasMatch(displayText)
+          ? displayText
+          : displayText += '.';
     });
   }
 

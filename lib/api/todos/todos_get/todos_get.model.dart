@@ -21,7 +21,8 @@ class TodosGetModel {
     required this.completed,
   });
 
-  factory TodosGetModel.fromJson(Map<String, dynamic> json) => _$TodosGetModelFromJson(json);
+  factory TodosGetModel.fromJson(Map<String, dynamic> json) =>
+      _$TodosGetModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$TodosGetModelToJson(this);
 }

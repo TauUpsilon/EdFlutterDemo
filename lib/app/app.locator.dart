@@ -15,10 +15,11 @@ class AppLocator {
       ..registerLazySingleton(() => TodosApiService())
 
       // Stores
-      ..registerLazySingleton(() => Store<GlobalState>(globalReducer, initialState: GlobalState.initialState()))
-
-      // Cubits
-      ..registerLazySingleton(() => HomeCubit())
-      ..registerLazySingleton(() => NetworkCubit());
+      ..registerLazySingleton(
+        () => Store<GlobalState>(
+          globalReducer,
+          initialState: GlobalState.initialState(),
+        ),
+      );
   }
 }
