@@ -1,6 +1,6 @@
 part of 'api.service.dart';
 
-class ApiModelService extends AlphaBase {
+class ApiModelService with AlphaBase {
   late ApiModel model;
 
   ApiModel<T> serialise<T>(T Function(dynamic value) callback) {

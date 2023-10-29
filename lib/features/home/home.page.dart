@@ -1,26 +1,31 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_proj/app/app.widget.dart';
 import 'package:flutter_proj/core/alpha_base.mixin.dart';
 import 'package:flutter_proj/shares/widgets/header.widget.dart';
-import 'package:go_router/go_router.dart';
-import 'package:routes_generator/annotation.dart';
 import 'package:rxdart/utils.dart';
 
 part 'home.cubit.dart';
 part 'home.state.dart';
 
-@RouterGeneratableConfig(
-  routeName: 'home',
-)
-class HomePage extends StatefulWidget {
+@RoutePage<HomePage>()
+class HomePage extends StatefulWidget implements AutoRouteWrapper {
   const HomePage({super.key});
 
   @override
   HomePageState createState() => HomePageState();
+
+  @override
+  Widget wrappedRoute(BuildContext context) => MultiBlocProvider(
+        providers: [
+          BlocProvider.value(value: HomeCubit()),
+        ],
+        child: this,
+      );
 }
 
-class HomePageState extends State<HomePage> {
+class HomePageState extends State<HomePage> with AppConfig {
   late HomeCubit _homeCubit;
 
   @override
@@ -40,7 +45,7 @@ class HomePageState extends State<HomePage> {
   PreferredSize header() {
     return PreferredSize(
       preferredSize: const Size.fromHeight(80),
-      child: HeaderBarWidget(title: AppConfig.appTitle),
+      child: HeaderBarWidget(title: appTitle),
     );
   }
 

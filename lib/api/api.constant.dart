@@ -20,36 +20,41 @@ class ApiStatusCode {
   static const String api9999 = 'API9999';
 }
 
-mixin ApiCommonInstance {
-  static final loading = ApiLoading();
+mixin ApiCommonConst {
+  final apiInstances = _ApiCommonInstances();
+  final apiErrorInstances = _ApiErrorInstances();
 }
 
-mixin ApiErrorInstance {
-  static final offline = ApiFail<Map<String, dynamic>>(
+class _ApiCommonInstances {
+  final loading = ApiLoading();
+}
+
+class _ApiErrorInstances {
+  final offline = ApiFail<Map<String, dynamic>>(
     code: ApiStatusCode.api0001,
     value: {},
     message: 'Check your connectivity',
   );
 
-  static final clientIssue = ApiFail<Map<String, dynamic>>(
+  final clientIssue = ApiFail<Map<String, dynamic>>(
     code: ApiStatusCode.api0004,
     value: {},
     message: 'System not responsed',
   );
 
-  static final serverIssue = ApiFail<Map<String, dynamic>>(
+  final serverIssue = ApiFail<Map<String, dynamic>>(
     code: ApiStatusCode.api0005,
     value: {},
     message: 'System not responsed',
   );
 
-  static final timeout = ApiFail<Map<String, dynamic>>(
+  final timeout = ApiFail<Map<String, dynamic>>(
     code: ApiStatusCode.api0006,
     value: {},
     message: 'Timeout',
   );
 
-  static final uknownError = ApiFail<Map<String, dynamic>>(
+  final uknownError = ApiFail<Map<String, dynamic>>(
     code: ApiStatusCode.api9999,
     value: {},
     message: 'Something went wrong...',

@@ -6,6 +6,7 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter_proj/app/app.widget.dart';
 import 'package:flutter_proj/core/alpha_base.mixin.dart';
 import 'package:flutter_proj/shares/enums/common.enum.dart';
+import 'package:flutter_proj/states/redux/mask_store/mask.reducer.dart';
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart';
 
@@ -17,9 +18,8 @@ part 'api.request.dart';
 part 'api_common.request.dart';
 part 'api_model.service.dart';
 
-class ApiService with AlphaBase {
-  final _baseUrl = AppConfig.jsonPlaceholderBaseUrl;
-
+class ApiService
+    with AlphaBase, MaskActions, ApiCommonConst, AppUtil, AppConfig {
   final _connectivity = GetIt.instance.get<Connectivity>();
   final _modelService = GetIt.instance.get<ApiModelService>();
 
@@ -27,7 +27,7 @@ class ApiService with AlphaBase {
     ApiRequest request, {
     MaskStatus maskStatus = MaskStatus.show,
   }) async* {
-    _modelService.model = ApiCommonInstance.loading;
+    _modelService.model = apiInstances.loading;
     yield _modelService;
     _handleMask(request, maskStatus: maskStatus);
 
@@ -42,7 +42,7 @@ class ApiService with AlphaBase {
     return _connectivity
         .checkConnectivity()
         .then((value) => _handleRequest(request))
-        .timeout(Duration(seconds: AppConfig.timeoutSec))
+        .timeout(Duration(seconds: timeoutSec))
         .then((response) => _handleRespose(request, response))
         .catchError(_handleError);
   }
@@ -59,13 +59,13 @@ class ApiService with AlphaBase {
         '$runtimeType - Request Info\n\n$request',
       )
       ..d(
-        '$runtimeType - Request Headers\n\n${AppUtil.getJsonString(headers)}',
+        '$runtimeType - Request Headers\n\n${getJsonString(headers)}',
       )
       ..d(
-        '''$runtimeType - Request Body or QueryParams\n\n${AppUtil.getJsonString(request.reqBody)}''',
+        '''$runtimeType - Request Body or QueryParams\n\n${getJsonString(request.reqBody)}''',
       )
       ..d(
-        '''$runtimeType - Start to request for ${AppConfig.timeoutSec} seconds\n\nURI: $uri''',
+        '''$runtimeType - Start to request for $timeoutSec seconds\n\nURI: $uri''',
       );
 
     switch (request.reqMethod) {
@@ -82,11 +82,11 @@ class ApiService with AlphaBase {
 
   Uri _handleURI(ApiRequest request) {
     if (request is JsonPlaceholderRequest) {
-      return Uri.parse('$_baseUrl/${request.reqApi}').replace(
+      return Uri.parse('$jsonPlaceholderBaseUrl/${request.reqApi}').replace(
         queryParameters: request.reqBody,
       );
     } else {
-      return Uri.parse(_baseUrl);
+      return Uri.parse(jsonPlaceholderBaseUrl);
     }
   }
 
@@ -136,7 +136,7 @@ class ApiService with AlphaBase {
     final body = jsonDecode(response.body);
 
     logger
-      ..d('$runtimeType - Response Body\n\n${AppUtil.getJsonString(body)}')
+      ..d('$runtimeType - Response Body\n\n${getJsonString(body)}')
       ..d('$runtimeType - Response Status\n\nHttp Res Code: $status');
 
     if (request is JsonPlaceholderRequest) {
@@ -153,7 +153,7 @@ class ApiService with AlphaBase {
   }
 
   ApiFail _handleError(Object error) {
-    final errStr = AppUtil.splitStringIntoLines(error.toString(), 100);
+    final errStr = splitStringIntoLines(error.toString(), 100);
 
     logger.e(
       '',
@@ -161,13 +161,13 @@ class ApiService with AlphaBase {
     );
 
     if (error is SocketException) {
-      return ApiErrorInstance.offline;
+      return apiErrorInstances.offline;
     } else if (error is ServerException) {
-      return ApiErrorInstance.serverIssue;
+      return apiErrorInstances.serverIssue;
     } else if (error is TimeoutException) {
-      return ApiErrorInstance.timeout;
+      return apiErrorInstances.timeout;
     } else {
-      return ApiErrorInstance.uknownError;
+      return apiErrorInstances.uknownError;
     }
   }
 

@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_proj/api/api.service.dart';
@@ -10,14 +11,23 @@ import 'package:rxdart/utils.dart';
 part 'network.cubit.dart';
 part 'network.state.dart';
 
-class NetworkPage extends StatefulWidget {
-  const NetworkPage({super.key});
+@RoutePage<NetworkPage>()
+class NetworkPage extends StatefulWidget implements AutoRouteWrapper {
+  NetworkPage({super.key});
 
   @override
   State<NetworkPage> createState() => _NetworkPageState();
+
+  @override
+  Widget wrappedRoute(BuildContext context) => MultiBlocProvider(
+        providers: [
+          BlocProvider.value(value: NetworkCubit()),
+        ],
+        child: this,
+      );
 }
 
-class _NetworkPageState extends State<NetworkPage> {
+class _NetworkPageState extends State<NetworkPage> with AppConfig {
   late NetworkCubit _networkCubit;
 
   @override
@@ -38,7 +48,7 @@ class _NetworkPageState extends State<NetworkPage> {
   PreferredSize header() {
     return PreferredSize(
       preferredSize: const Size.fromHeight(80),
-      child: HeaderBarWidget(title: AppConfig.appTitle),
+      child: HeaderBarWidget(title: appTitle),
     );
   }
 

@@ -4,6 +4,7 @@
 # Auto Generated
 *.reflectable.dart
 *.g.dart
+*.gr.dart
 
 # VS Code
 # .vscode

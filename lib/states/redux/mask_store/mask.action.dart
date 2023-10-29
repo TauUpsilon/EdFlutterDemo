@@ -1,14 +1,8 @@
 part of 'mask.reducer.dart';
 
-mixin MaskAction {
-  static AddMaskClientAction addMaskClient(String clientName) =>
-      AddMaskClientAction(clientName: clientName);
+sealed class MaskAction {}
 
-  static PopMaskClientAction popMaskClient(String clientName) =>
-      PopMaskClientAction(clientName: clientName);
-}
-
-class AddMaskClientAction with MaskAction {
+class AddMaskClientAction extends MaskAction {
   String clientName;
 
   AddMaskClientAction({
@@ -16,10 +10,26 @@ class AddMaskClientAction with MaskAction {
   });
 }
 
-class PopMaskClientAction with MaskAction {
+class PopMaskClientAction extends MaskAction {
   String clientName;
 
   PopMaskClientAction({
     required this.clientName,
   });
+}
+
+mixin MaskActions {
+  final _globalStore = GetIt.instance.get<Store<GlobalState>>();
+
+  void addMask(String clientName) {
+    _globalStore.dispatch(
+      AddMaskClientAction(clientName: clientName),
+    );
+  }
+
+  void removeMask(String clientName) {
+    _globalStore.dispatch(
+      PopMaskClientAction(clientName: clientName),
+    );
+  }
 }

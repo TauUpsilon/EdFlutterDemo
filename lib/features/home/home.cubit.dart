@@ -12,10 +12,10 @@ class HomeCubit extends Cubit<HomeState> with AlphaBase {
   }
 
   void navigateToNetwork(BuildContext context) {
-    context.pushNamed(AppRoute.network, extra: 'Test');
+    context.router.navigateNamed('/network');
   }
 
   void navigateToComponent(BuildContext context) {
-    context.pushNamed(AppRoute.component);
+    context.router.navigateNamed('/component');
   }
 }
