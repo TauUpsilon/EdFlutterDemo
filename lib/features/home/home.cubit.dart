@@ -1,7 +1,7 @@
 part of 'home.page.dart';
 
-class HomeCubit extends Cubit<HomeState> with AlphaBase {
-  final CompositeSubscription _subscription = CompositeSubscription();
+class HomeCubit extends Cubit<HomeState> with Alpha {
+  final _subscription = CompositeSubscription();
 
   HomeCubit() : super(const HomeState.initialState());
 
@@ -11,11 +11,11 @@ class HomeCubit extends Cubit<HomeState> with AlphaBase {
     await super.close();
   }
 
-  void navigateToNetwork(BuildContext context) {
-    context.router.navigateNamed('/network');
+  void navigateToNetwork() {
+    router.pushNamed('/network');
   }
 
   void navigateToComponent(BuildContext context) {
-    context.router.navigateNamed('/component');
+    router.navigateNamed('/component');
   }
 }

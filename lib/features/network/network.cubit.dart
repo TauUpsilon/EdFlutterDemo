@@ -1,11 +1,14 @@
 part of 'network.page.dart';
 
-class NetworkCubit extends Cubit<NetworkState> with AlphaBase {
-  final _todosService = AppLocator.getIt.get<TodosApiService>();
+class NetworkCubit extends Cubit<NetworkState> with Alpha {
+  TodosApiService get _todosService => injector.get<TodosApiService>();
 
   final _subscription = CompositeSubscription();
 
-  NetworkCubit() : super(NetworkState.initialState());
+  NetworkCubit()
+      : super(
+          NetworkState.initialState(),
+        );
 
   void requestTodos() {
     _subscription.add(

@@ -1,7 +1,9 @@
 part of 'app.widget.dart';
 
 @AutoRouterConfig()
-class AppRouter extends $AppRouter {
+class AppRouter extends $AppRouter with Alpha {
+  AppRouter({super.navigatorKey});
+
   @override
   RouteType get defaultRouteType => RouteType.material();
 

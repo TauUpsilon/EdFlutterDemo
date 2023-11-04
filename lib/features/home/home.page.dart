@@ -2,7 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_proj/app/app.widget.dart';
-import 'package:flutter_proj/core/alpha_base.mixin.dart';
+import 'package:flutter_proj/core/alpha.mixin.dart';
 import 'package:flutter_proj/shares/widgets/header.widget.dart';
 import 'package:rxdart/utils.dart';
 
@@ -25,7 +25,7 @@ class HomePage extends StatefulWidget implements AutoRouteWrapper {
       );
 }
 
-class HomePageState extends State<HomePage> with AppConfig {
+class HomePageState extends State<HomePage> {
   late HomeCubit _homeCubit;
 
   @override
@@ -45,7 +45,7 @@ class HomePageState extends State<HomePage> with AppConfig {
   PreferredSize header() {
     return PreferredSize(
       preferredSize: const Size.fromHeight(80),
-      child: HeaderBarWidget(title: appTitle),
+      child: HeaderBarWidget(title: AppConfig.appTitle),
     );
   }
 
@@ -58,7 +58,7 @@ class HomePageState extends State<HomePage> with AppConfig {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 TextButton(
-                  onPressed: () => _homeCubit.navigateToNetwork(context),
+                  onPressed: () => _homeCubit.navigateToNetwork(),
                   child: const Text('Network'),
                 ),
                 TextButton(

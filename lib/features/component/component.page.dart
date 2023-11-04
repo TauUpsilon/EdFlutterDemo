@@ -12,11 +12,11 @@ class ComponentPage extends StatefulWidget {
   State<ComponentPage> createState() => _ComponentPageState();
 }
 
-class _ComponentPageState extends State<ComponentPage> with AppConfig {
+class _ComponentPageState extends State<ComponentPage> {
   PreferredSize header() {
     return PreferredSize(
       preferredSize: const Size.fromHeight(80),
-      child: HeaderBarWidget(title: appTitle),
+      child: HeaderBarWidget(title: AppConfig.appTitle),
     );
   }
 

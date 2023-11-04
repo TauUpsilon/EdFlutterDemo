@@ -1,6 +1,6 @@
 part of 'api.service.dart';
 
-abstract class ApiRequest with AppUtil {
+abstract class ApiRequest {
   final ApiMethod reqMethod;
   final String reqApi;
   final Map<String, String>? reqHeaders;
@@ -14,7 +14,7 @@ abstract class ApiRequest with AppUtil {
   });
 
   @override
-  String toString() => getJsonString({
+  String toString() => AppUtil.getJsonString({
         'Request Method': reqMethod.name,
         'Request API': reqApi,
       });

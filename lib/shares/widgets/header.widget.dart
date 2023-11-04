@@ -1,8 +1,7 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_proj/core/alpha_base.mixin.dart';
+import 'package:flutter_proj/core/alpha.mixin.dart';
 
-class HeaderBarWidget extends StatelessWidget with AlphaBase {
+class HeaderBarWidget extends StatelessWidget with Alpha {
   final String title;
 
   HeaderBarWidget({
@@ -15,10 +14,10 @@ class HeaderBarWidget extends StatelessWidget with AlphaBase {
         title: Text(title),
         backgroundColor: Colors.black,
         elevation: 20,
-        leading: context.router.canPop()
+        leading: router.canPop()
             ? IconButton(
                 icon: const Icon(Icons.arrow_back),
-                onPressed: () => context.router.pop(),
+                onPressed: () => router.pop(),
               )
             : null,
         shape: RoundedRectangleBorder(

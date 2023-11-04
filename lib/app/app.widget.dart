@@ -7,6 +7,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_proj/api/api.service.dart';
 import 'package:flutter_proj/api/todos/todos.service.dart';
 import 'package:flutter_proj/app/app.widget.gr.dart';
+import 'package:flutter_proj/core/alpha.mixin.dart';
 import 'package:flutter_proj/shares/services/logging.service.dart';
 import 'package:flutter_proj/states/redux/global_store/global.reducer.dart';
 import 'package:flutter_proj/states/redux/router_store/router.reducer.dart';
@@ -15,14 +16,12 @@ import 'package:get_it/get_it.dart';
 import 'package:redux/redux.dart';
 
 part 'app.config.dart';
-part 'app.locator.dart';
+part 'app.initor.dart';
 part 'app.route.dart';
 part 'app.router.dart';
 part 'app.util.dart';
 
-class App extends StatelessWidget {
-  final _appRouter = AppRouter();
-
+class App extends StatelessWidget with Alpha {
   App({required Key key}) : super(key: key);
 
   @override
@@ -33,7 +32,7 @@ class App extends StatelessWidget {
           children: [
             MaterialApp.router(
               debugShowCheckedModeBanner: false,
-              routerConfig: _appRouter.config(
+              routerConfig: router.config(
                 navigatorObservers: () => [
                   AppRouteObserver(),
                 ],

@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_proj/api/api.service.dart';
 import 'package:flutter_proj/api/todos/todos.service.dart';
 import 'package:flutter_proj/app/app.widget.dart';
-import 'package:flutter_proj/core/alpha_base.mixin.dart';
+import 'package:flutter_proj/core/alpha.mixin.dart';
 import 'package:flutter_proj/shares/widgets/header.widget.dart';
 import 'package:rxdart/utils.dart';
 
@@ -27,7 +27,7 @@ class NetworkPage extends StatefulWidget implements AutoRouteWrapper {
       );
 }
 
-class _NetworkPageState extends State<NetworkPage> with AppConfig {
+class _NetworkPageState extends State<NetworkPage> {
   late NetworkCubit _networkCubit;
 
   @override
@@ -48,7 +48,7 @@ class _NetworkPageState extends State<NetworkPage> with AppConfig {
   PreferredSize header() {
     return PreferredSize(
       preferredSize: const Size.fromHeight(80),
-      child: HeaderBarWidget(title: appTitle),
+      child: HeaderBarWidget(title: AppConfig.appTitle),
     );
   }
 

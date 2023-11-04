@@ -1,12 +1,12 @@
 part of 'app.widget.dart';
 
 mixin AppUtil {
-  String getJsonString(dynamic json) {
+  static String getJsonString(dynamic json) {
     const encoder = JsonEncoder.withIndent('  ');
     return encoder.convert(json);
   }
 
-  String splitStringIntoLines(String input, int maxLen) {
+  static String splitStringIntoLines(String input, int maxLen) {
     final result = StringBuffer();
     var index = 0;
 

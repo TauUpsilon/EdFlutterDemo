@@ -1,9 +1,9 @@
 import 'package:custom_math/custom_math.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_proj/core/alpha_base.mixin.dart';
+import 'package:flutter_proj/core/alpha.mixin.dart';
 import 'package:flutter_proj/shares/widgets/dial_button.widget.dart';
 
-class CalculatorWidget extends StatefulWidget with AlphaBase {
+class CalculatorWidget extends StatefulWidget with Alpha {
   CalculatorWidget({super.key});
 
   @override

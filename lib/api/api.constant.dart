@@ -21,8 +21,8 @@ class ApiStatusCode {
 }
 
 mixin ApiCommonConst {
-  final apiInstances = _ApiCommonInstances();
-  final apiErrorInstances = _ApiErrorInstances();
+  static final apiInstances = _ApiCommonInstances();
+  static final apiErrorInstances = _ApiErrorInstances();
 }
 
 class _ApiCommonInstances {

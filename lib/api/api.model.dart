@@ -1,6 +1,6 @@
 part of 'api.service.dart';
 
-class ApiModel<T> with AppUtil {
+class ApiModel<T> {
   String code;
   T value;
 
@@ -21,7 +21,7 @@ class ApiDone<T> extends ApiModel<T> {
   });
 
   @override
-  String toString() => getJsonString({
+  String toString() => AppUtil.getJsonString({
         'Status': 'Success',
         'Return Code': code,
         'Model': runtimeType.toString(),
@@ -38,10 +38,10 @@ class ApiFail<T> extends ApiModel<T> {
   });
 
   @override
-  String toString() => getJsonString({
+  String toString() => AppUtil.getJsonString({
         'Status': 'Failure',
         'Return Code': code,
-        'Return Message': splitStringIntoLines(message, 100),
+        'Return Message': AppUtil.splitStringIntoLines(message, 100),
         'Model': runtimeType.toString(),
       });
 }
