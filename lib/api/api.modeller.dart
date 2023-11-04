@@ -1,7 +1,11 @@
 part of 'api.service.dart';
 
-class ApiModelService with Alpha {
+class ApiModeller with Alpha {
   late ApiModel model;
+
+  ApiModeller({
+    required this.model,
+  });
 
   ApiModel<T> serialise<T>(T Function(dynamic value) callback) {
     var modelCopied = model;

@@ -8,7 +8,6 @@ mixin AppInitor {
     // Services
     ..registerLazySingleton(LoggingService.new)
     ..registerLazySingleton(ApiService.new)
-    ..registerLazySingleton(ApiModelService.new)
     ..registerLazySingleton(TodosApiService.new)
 
     // Stores

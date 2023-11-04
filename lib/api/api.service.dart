@@ -7,32 +7,33 @@ import 'package:flutter_proj/app/app.widget.dart';
 import 'package:flutter_proj/core/alpha.mixin.dart';
 import 'package:flutter_proj/shares/enums/common.enum.dart';
 import 'package:flutter_proj/states/redux/mask_store/mask.reducer.dart';
-import 'package:get_it/get_it.dart';
 import 'package:http/http.dart';
 
 part 'api.constant.dart';
 part 'api.enum.dart';
 part 'api.error.dart';
 part 'api.model.dart';
+part 'api.modeller.dart';
 part 'api.request.dart';
 part 'api_common.request.dart';
-part 'api_model.service.dart';
 
 class ApiService with Alpha, MaskActions {
-  final _connectivity = GetIt.instance.get<Connectivity>();
-  final _modelService = GetIt.instance.get<ApiModelService>();
+  Connectivity get _connectivity => injector.get<Connectivity>();
 
-  Stream<ApiModelService> request(
+  Stream<ApiModeller> request(
     ApiRequest request, {
     MaskStatus maskStatus = MaskStatus.show,
   }) async* {
-    _modelService.model = ApiCommonConst.apiInstances.loading;
-    yield _modelService;
-    _handleMask(request, maskStatus: maskStatus);
+    final apiModeller = ApiModeller(
+      model: ApiCommonConst.apiInstances.loading,
+    );
 
-    _modelService.model = await _doRequest(request);
-    yield _modelService;
-    _handleMask(request, maskStatus: maskStatus);
+    yield apiModeller;
+    _handleMask(request, apiModeller.model, maskStatus: maskStatus);
+
+    apiModeller.model = await _doRequest(request);
+    yield apiModeller;
+    _handleMask(request, apiModeller.model, maskStatus: maskStatus);
   }
 
   Future<ApiModel<dynamic>> _doRequest(
@@ -172,12 +173,13 @@ class ApiService with Alpha, MaskActions {
   }
 
   void _handleMask(
-    ApiRequest request, {
+    ApiRequest request,
+    ApiModel model, {
     MaskStatus maskStatus = MaskStatus.show,
   }) {
     switch (maskStatus) {
       case MaskStatus.show:
-        if (_modelService.model is ApiLoading) {
+        if (model is ApiLoading) {
           addMask(_handleURI(request).toString());
         } else {
           removeMask(_handleURI(request).toString());

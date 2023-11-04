@@ -26,7 +26,7 @@ class App extends StatelessWidget with Alpha {
 
   @override
   Widget build(BuildContext context) => StoreProvider(
-        store: GetIt.instance.get<Store<GlobalState>>(),
+        store: injector.get<Store<GlobalState>>(),
         child: Stack(
           alignment: Alignment.center,
           children: [

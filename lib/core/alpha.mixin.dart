@@ -11,6 +11,6 @@ mixin Alpha {
   AppRouter get router => injector.get<AppRouter>();
 
   // State
-  Store<GlobalState> get globalState => injector.get<Store<GlobalState>>();
-  RouterState get routerState => globalState.state.router;
+  Store<GlobalState> get globalStore => injector.get<Store<GlobalState>>();
+  RouterState get routerState => globalStore.state.router;
 }
