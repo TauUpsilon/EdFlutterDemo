@@ -8,8 +8,6 @@ import 'package:flutter_proj/api/api.service.dart';
 import 'package:flutter_proj/api/todos/todos.service.dart';
 import 'package:flutter_proj/app/app.widget.gr.dart';
 import 'package:flutter_proj/core/alpha.mixin.dart';
-import 'package:flutter_proj/features/home/home.page.dart';
-import 'package:flutter_proj/features/network/network.page.dart';
 import 'package:flutter_proj/shares/services/logging.service.dart';
 import 'package:flutter_proj/states/redux/global_store/global.reducer.dart';
 import 'package:flutter_proj/states/redux/router_store/router.reducer.dart';
