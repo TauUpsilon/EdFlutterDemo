@@ -6,6 +6,7 @@ import 'package:flutter_proj/api/todos/todos.service.dart';
 import 'package:flutter_proj/app/app.widget.dart';
 import 'package:flutter_proj/core/alpha.mixin.dart';
 import 'package:flutter_proj/shares/widgets/header.widget.dart';
+import 'package:get_it/get_it.dart';
 import 'package:rxdart/utils.dart';
 
 part 'network.cubit.dart';
@@ -28,21 +29,20 @@ class NetworkPage extends StatefulWidget implements AutoRouteWrapper {
 }
 
 class _NetworkPageState extends State<NetworkPage> {
-  late NetworkCubit _networkCubit;
+  late NetworkCubit networkCubit = context.read<NetworkCubit>();
 
   @override
   void didChangeDependencies() {
-    _networkCubit = BlocProvider.of<NetworkCubit>(context);
-    _networkCubit.requestTodos();
+    networkCubit.requestTodos();
 
     super.didChangeDependencies();
   }
 
   @override
-  void dispose() {
-    _networkCubit.close();
-
+  Future<void> dispose() async {
     super.dispose();
+
+    await networkCubit.close();
   }
 
   PreferredSize header() {

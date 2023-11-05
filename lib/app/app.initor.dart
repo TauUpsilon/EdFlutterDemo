@@ -1,27 +1,31 @@
 part of 'app.widget.dart';
 
 mixin AppInitor {
-  static void initLocator() => GetIt.instance
-    // Utils
-    ..registerLazySingleton(Connectivity.new)
+  static void initLocator() => {
+        GetIt.I
+          // Router
+          ..registerLazySingleton(
+            () => AppRouter(
+              navigatorKey: GlobalKey<NavigatorState>(),
+            ),
+          )
 
-    // Services
-    ..registerLazySingleton(LoggingService.new)
-    ..registerLazySingleton(ApiService.new)
-    ..registerLazySingleton(TodosApiService.new)
+          // Utils
+          ..registerLazySingleton(Connectivity.new)
 
-    // Stores
-    ..registerLazySingleton(
-      () => Store<GlobalState>(
-        globalReducer,
-        initialState: GlobalState.initialState(),
-      ),
-    )
-    ..registerLazySingleton(
-      () => AppRouter(
-        navigatorKey: GlobalKey<NavigatorState>(),
-      ),
-    );
+          // Services
+          ..registerLazySingleton(LoggingService.new)
+          ..registerLazySingleton(ApiService.new)
+          ..registerLazySingleton(TodosApiService.new)
+
+          // Stores
+          ..registerLazySingleton(
+            () => Store<GlobalState>(
+              globalReducer,
+              initialState: GlobalState.initialState(),
+            ),
+          ),
+      };
 
   static Future<void> setEnvironment() async {
     const envStr = String.fromEnvironment('ENV');

@@ -6,11 +6,10 @@ import 'package:get_it/get_it.dart';
 import 'package:redux/redux.dart';
 
 mixin Alpha {
-  GetIt get injector => GetIt.instance;
-  LoggingService get logger => injector.get<LoggingService>();
-  AppRouter get router => injector.get<AppRouter>();
+  LoggingService get logger => GetIt.I<LoggingService>();
+  AppRouter get router => GetIt.I<AppRouter>();
 
-  // State
-  Store<GlobalState> get globalStore => injector.get<Store<GlobalState>>();
+  // Store
+  Store<GlobalState> get globalStore => GetIt.I<Store<GlobalState>>();
   RouterState get routerState => globalStore.state.router;
 }

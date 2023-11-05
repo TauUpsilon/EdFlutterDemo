@@ -1,5 +1,6 @@
 import 'package:flutter_proj/api/api.service.dart';
 import 'package:flutter_proj/core/alpha.mixin.dart';
+import 'package:get_it/get_it.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'todos.service.g.dart';
@@ -9,7 +10,7 @@ part 'todos_post/todos_post.model.dart';
 part 'todos_post/todos_post.request.dart';
 
 class TodosApiService with Alpha {
-  ApiService get _apiService => injector.get<ApiService>();
+  ApiService get _apiService => GetIt.I<ApiService>();
 
   Stream<ApiModel<List<TodosGetModel>>> requestTodos() {
     final req = TodosGetRequest();

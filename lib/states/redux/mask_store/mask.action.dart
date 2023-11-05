@@ -19,7 +19,7 @@ class PopMaskClientAction extends MaskAction {
 }
 
 mixin MaskActions {
-  final _globalStore = GetIt.instance.get<Store<GlobalState>>();
+  final _globalStore = GetIt.I<Store<GlobalState>>();
 
   void addMask(String clientName) {
     _globalStore.dispatch(

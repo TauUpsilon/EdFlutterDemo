@@ -26,20 +26,13 @@ class HomePage extends StatefulWidget implements AutoRouteWrapper {
 }
 
 class HomePageState extends State<HomePage> {
-  late HomeCubit _homeCubit;
+  late HomeCubit homeCubit = context.read<HomeCubit>();
 
   @override
-  void didChangeDependencies() {
-    _homeCubit = BlocProvider.of<HomeCubit>(context);
-
-    super.didChangeDependencies();
-  }
-
-  @override
-  void dispose() {
-    _homeCubit.close();
-
+  Future<void> dispose() async {
     super.dispose();
+
+    await homeCubit.close();
   }
 
   PreferredSize header() {
@@ -58,11 +51,11 @@ class HomePageState extends State<HomePage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 TextButton(
-                  onPressed: () => _homeCubit.navigateToNetwork(),
+                  onPressed: () => homeCubit.navigateToNetwork(),
                   child: const Text('Network'),
                 ),
                 TextButton(
-                  onPressed: () => _homeCubit.navigateToComponent(context),
+                  onPressed: () => homeCubit.navigateToComponent(context),
                   child: const Text('Component'),
                 ),
               ],

@@ -14,7 +14,7 @@ abstract class ApiRequest {
   });
 
   @override
-  String toString() => AppUtil.getJsonString({
+  String toString() => StringUtil.formateStrAsJson({
         'Request Method': reqMethod.name,
         'Request API': reqApi,
       });

@@ -7,6 +7,7 @@ import 'package:flutter_proj/app/app.widget.dart';
 import 'package:flutter_proj/core/alpha.mixin.dart';
 import 'package:flutter_proj/shares/enums/common.enum.dart';
 import 'package:flutter_proj/states/redux/mask_store/mask.reducer.dart';
+import 'package:get_it/get_it.dart';
 import 'package:http/http.dart';
 
 part 'api.constant.dart';
@@ -18,7 +19,7 @@ part 'api.request.dart';
 part 'api_common.request.dart';
 
 class ApiService with Alpha, MaskActions {
-  Connectivity get _connectivity => injector.get<Connectivity>();
+  Connectivity get _connectivity => GetIt.I<Connectivity>();
 
   Stream<ApiModeller> request(
     ApiRequest request, {
@@ -59,10 +60,10 @@ class ApiService with Alpha, MaskActions {
         '$runtimeType - Request Info\n\n$request',
       )
       ..d(
-        '$runtimeType - Request Headers\n\n${AppUtil.getJsonString(headers)}',
+        '''$runtimeType - Request Headers\n\n${StringUtil.formateStrAsJson(headers)}''',
       )
       ..d(
-        '''$runtimeType - Request Body or QueryParams\n\n${AppUtil.getJsonString(request.reqBody)}''',
+        '''$runtimeType - Request Body or QueryParams\n\n${StringUtil.formateStrAsJson(request.reqBody)}''',
       )
       ..d(
         '''$runtimeType - Start to request for ${AppConfig.timeoutSec} seconds\n\nURI: $uri''',
@@ -137,8 +138,8 @@ class ApiService with Alpha, MaskActions {
     final body = jsonDecode(response.body);
 
     logger
-      ..d('$runtimeType - Response Body\n\n${AppUtil.getJsonString(body)}')
-      ..d('$runtimeType - Response Status\n\nHttp Res Code: $status');
+      ..d('''$runtimeType - Response Body\n\n${StringUtil.formateStrAsJson(body)}''')
+      ..d('''$runtimeType - Response Status\n\nHttp Res Code: $status''');
 
     if (request is JsonPlaceholderRequest) {
       return ApiDone(
@@ -154,7 +155,7 @@ class ApiService with Alpha, MaskActions {
   }
 
   ApiFail _handleError(Object error) {
-    final errStr = AppUtil.splitStringIntoLines(error.toString(), 100);
+    final errStr = StringUtil.splitStrIntoLines(error.toString(), 100);
 
     logger.e(
       '',

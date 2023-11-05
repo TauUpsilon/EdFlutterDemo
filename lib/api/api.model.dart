@@ -21,7 +21,7 @@ class ApiDone<T> extends ApiModel<T> {
   });
 
   @override
-  String toString() => AppUtil.getJsonString({
+  String toString() => StringUtil.formateStrAsJson({
         'Status': 'Success',
         'Return Code': code,
         'Model': runtimeType.toString(),
@@ -38,10 +38,10 @@ class ApiFail<T> extends ApiModel<T> {
   });
 
   @override
-  String toString() => AppUtil.getJsonString({
+  String toString() => StringUtil.formateStrAsJson({
         'Status': 'Failure',
         'Return Code': code,
-        'Return Message': AppUtil.splitStringIntoLines(message, 100),
+        'Return Message': StringUtil.splitStrIntoLines(message, 100),
         'Model': runtimeType.toString(),
       });
 }

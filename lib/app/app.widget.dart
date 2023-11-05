@@ -8,6 +8,8 @@ import 'package:flutter_proj/api/api.service.dart';
 import 'package:flutter_proj/api/todos/todos.service.dart';
 import 'package:flutter_proj/app/app.widget.gr.dart';
 import 'package:flutter_proj/core/alpha.mixin.dart';
+import 'package:flutter_proj/features/home/home.page.dart';
+import 'package:flutter_proj/features/network/network.page.dart';
 import 'package:flutter_proj/shares/services/logging.service.dart';
 import 'package:flutter_proj/states/redux/global_store/global.reducer.dart';
 import 'package:flutter_proj/states/redux/router_store/router.reducer.dart';
@@ -15,18 +17,18 @@ import 'package:flutter_redux/flutter_redux.dart';
 import 'package:get_it/get_it.dart';
 import 'package:redux/redux.dart';
 
+part '../shares/utils/string.util.dart';
 part 'app.config.dart';
 part 'app.initor.dart';
 part 'app.route.dart';
 part 'app.router.dart';
-part 'app.util.dart';
 
 class App extends StatelessWidget with Alpha {
   App({required Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) => StoreProvider(
-        store: injector.get<Store<GlobalState>>(),
+        store: GetIt.I<Store<GlobalState>>(),
         child: Stack(
           alignment: Alignment.center,
           children: [

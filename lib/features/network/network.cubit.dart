@@ -1,7 +1,7 @@
 part of 'network.page.dart';
 
 class NetworkCubit extends Cubit<NetworkState> with Alpha {
-  TodosApiService get _todosService => injector.get<TodosApiService>();
+  TodosApiService get _todosService => GetIt.I<TodosApiService>();
 
   final _subscription = CompositeSubscription();
 
