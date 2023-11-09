@@ -55,7 +55,7 @@ class HomePageState extends State<HomePage> {
                   child: const Text('Network'),
                 ),
                 TextButton(
-                  onPressed: () => homeCubit.navigateToComponent(context),
+                  onPressed: () => homeCubit.navigateToComponent(),
                   child: const Text('Component'),
                 ),
               ],

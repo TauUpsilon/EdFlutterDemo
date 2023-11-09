@@ -15,7 +15,7 @@ class HomeCubit extends Cubit<HomeState> with Alpha {
     router.pushNamed('/network');
   }
 
-  void navigateToComponent(BuildContext context) {
+  void navigateToComponent() {
     router.navigateNamed('/component');
   }
 }

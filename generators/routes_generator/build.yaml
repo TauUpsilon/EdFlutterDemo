@@ -1,9 +1,0 @@
-builders:
-  routes_builder:
-    import: "package:routes_generator/builder.dart"
-    builder_factories: ["routesBuilder"]
-    build_extensions: {".dart": [".g.part"]}
-    auto_apply: dependents
-    build_to: cache
-    applies_builders: ["source_gen|combining_builder"]
-

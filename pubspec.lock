@@ -228,7 +228,7 @@ packages:
   custom_math:
     dependency: "direct main"
     description:
-      path: "plugins/custom_math"
+      path: "custom_plugins/custom_math"
       relative: true
     source: path
     version: "0.0.1"
@@ -511,6 +511,20 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.0"
+  page_route_annotation:
+    dependency: "direct main"
+    description:
+      path: "custom_packages/page_route_annotation"
+      relative: true
+    source: path
+    version: "0.0.1"
+  page_route_generator:
+    dependency: "direct dev"
+    description:
+      path: "custom_packages/page_route_generator"
+      relative: true
+    source: path
+    version: "0.0.1"
   path:
     dependency: transitive
     description:
@@ -575,13 +589,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.0.0"
-  routes_generator:
-    dependency: "direct main"
-    description:
-      path: "generators/routes_generator"
-      relative: true
-    source: path
-    version: "1.0.0"
   rxdart:
     dependency: "direct main"
     description:
@@ -812,5 +819,5 @@ packages:
     source: hosted
     version: "3.1.2"
 sdks:
-  dart: ">=3.1.0-185.0.dev <3.1.5"
+  dart: ">=3.1.2 <3.1.5"
   flutter: ">=3.13.0"

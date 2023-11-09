@@ -4,6 +4,9 @@ import 'package:flutter_proj/app/app.widget.dart';
 import 'package:flutter_proj/shares/widgets/calculator.widget.dart';
 import 'package:flutter_proj/shares/widgets/header.widget.dart';
 
+// part 'component.page.g.dart';
+
+// @RouteParamGenerable()
 @RoutePage<ComponentPage>()
 class ComponentPage extends StatefulWidget {
   ComponentPage({super.key});
