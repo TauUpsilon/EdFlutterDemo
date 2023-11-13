@@ -26,8 +26,12 @@ mixin AppInitor {
             ),
           )
 
-          // Cubit
-          ..registerLazySingleton(MaskCubit.new),
+          // Global Cubits
+          ..registerLazySingleton(MaskCubit.new)
+
+          // Page Cubits
+          ..registerLazySingleton(HomeCubit.new)
+          ..registerLazySingleton(NetworkCubit.new),
       };
 
   static Future<void> setEnvironment() async {

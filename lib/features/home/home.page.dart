@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_proj/app/app.widget.dart';
 import 'package:flutter_proj/shares/mixins/common_functionable.mixin.dart';
 import 'package:flutter_proj/shares/widgets/header.widget.dart';
+import 'package:get_it/get_it.dart';
 import 'package:rxdart/utils.dart';
 
 part 'home.cubit.dart';
@@ -19,7 +20,7 @@ class HomePage extends StatefulWidget implements AutoRouteWrapper {
   @override
   Widget wrappedRoute(BuildContext context) => MultiBlocProvider(
         providers: [
-          BlocProvider.value(value: HomeCubit()),
+          BlocProvider.value(value: GetIt.I.get<HomeCubit>()),
         ],
         child: this,
       );

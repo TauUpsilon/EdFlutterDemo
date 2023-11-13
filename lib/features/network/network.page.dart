@@ -22,7 +22,7 @@ class NetworkPage extends StatefulWidget implements AutoRouteWrapper {
   @override
   Widget wrappedRoute(BuildContext context) => MultiBlocProvider(
         providers: [
-          BlocProvider.value(value: NetworkCubit()),
+          BlocProvider.value(value: GetIt.I.get<NetworkCubit>()),
         ],
         child: this,
       );

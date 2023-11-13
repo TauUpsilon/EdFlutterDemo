@@ -10,17 +10,18 @@ class NetworkCubit extends Cubit<NetworkState> with CommonFunctionable {
           NetworkState.initialState(),
         );
 
+  @override
+  Future<void> close() async {
+    await _subscription.dispose();
+    await GetIt.I.resetLazySingleton<NetworkCubit>();
+    await super.close();
+  }
+
   void requestTodos() {
     _subscription.add(
       _todosService.requestTodos().listen((res) {
         emit(NetworkState.create(res));
       }),
     );
-  }
-
-  @override
-  Future<void> close() async {
-    await _subscription.dispose();
-    await super.close();
   }
 }

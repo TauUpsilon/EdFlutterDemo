@@ -8,6 +8,7 @@ class HomeCubit extends Cubit<HomeState> with CommonFunctionable {
   @override
   Future<void> close() async {
     await _subscription.dispose();
+    await GetIt.I.resetLazySingleton<HomeCubit>();
     await super.close();
   }
 
