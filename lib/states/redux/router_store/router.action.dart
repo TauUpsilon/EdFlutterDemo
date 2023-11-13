@@ -11,16 +11,3 @@ class UpdateRouterStateAction extends RouterAction {
     this.previousRoute,
   });
 }
-
-mixin RouterActions {
-  final _globalStore = GetIt.I<Store<GlobalState>>();
-
-  void updateRouterState(Route currentRoute, Route? previousRoute) {
-    _globalStore.dispatch(
-      UpdateRouterStateAction(
-        currentRoute: currentRoute,
-        previousRoute: previousRoute,
-      ),
-    );
-  }
-}

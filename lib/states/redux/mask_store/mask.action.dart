@@ -17,19 +17,3 @@ class PopMaskClientAction extends MaskAction {
     required this.clientName,
   });
 }
-
-mixin MaskActions {
-  final _globalStore = GetIt.I<Store<GlobalState>>();
-
-  void addMask(String clientName) {
-    _globalStore.dispatch(
-      AddMaskClientAction(clientName: clientName),
-    );
-  }
-
-  void removeMask(String clientName) {
-    _globalStore.dispatch(
-      PopMaskClientAction(clientName: clientName),
-    );
-  }
-}

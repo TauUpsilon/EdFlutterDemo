@@ -18,14 +18,6 @@ mixin AppInitor {
           ..registerLazySingleton(ApiService.new)
           ..registerLazySingleton(TodosApiService.new)
 
-          // Stores
-          ..registerLazySingleton(
-            () => Store<GlobalState>(
-              globalReducer,
-              initialState: GlobalState.initialState(),
-            ),
-          )
-
           // Global Cubits
           ..registerLazySingleton(MaskCubit.new)
 

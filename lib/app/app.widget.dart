@@ -13,10 +13,7 @@ import 'package:flutter_proj/features/network/network.page.dart';
 import 'package:flutter_proj/shares/mixins/common_functionable.mixin.dart';
 import 'package:flutter_proj/shares/services/logging.service.dart';
 import 'package:flutter_proj/states/cubit/mask/mask_cubit.dart';
-import 'package:flutter_proj/states/redux/global_store/global.reducer.dart';
-import 'package:flutter_proj/states/redux/router_store/router.reducer.dart';
 import 'package:get_it/get_it.dart';
-import 'package:redux/redux.dart';
 
 part 'app.config.dart';
 part 'app.initor.dart';
@@ -26,41 +23,6 @@ part 'package:flutter_proj/shares/utils/string.util.dart';
 
 class App extends StatelessWidget with CommonFunctionable {
   App({required Key key}) : super(key: key);
-
-  // @override
-  // Widget build(BuildContext context) => StoreProvider(
-  //       store: GetIt.I<Store<GlobalState>>(),
-  //       child: Stack(
-  //         alignment: Alignment.center,
-  //         children: [
-  //           MaterialApp.router(
-  //             debugShowCheckedModeBanner: false,
-  //             routerConfig: router.config(
-  //               navigatorObservers: () => [
-  //                 AppRouteObserver(),
-  //               ],
-  //             ),
-  //           ),
-  //           StoreConnector<GlobalState, GlobalState>(
-  //             converter: (store) => store.state,
-  //             builder: (context, vm) {
-  //               if (vm.mask.clients.isNotEmpty) {
-  //                 return Container(
-  //                   color: Colors.transparent,
-  //                   width: 1000,
-  //                   height: 1000,
-  //                   child: const Center(
-  //                     child: CircularProgressIndicator(),
-  //                   ),
-  //                 );
-  //               } else {
-  //                 return const SizedBox.shrink();
-  //               }
-  //             },
-  //           ),
-  //         ],
-  //       ),
-  //     );
 
   @override
   Widget build(BuildContext context) => MultiBlocProvider(
@@ -80,18 +42,17 @@ class App extends StatelessWidget with CommonFunctionable {
             ),
             BlocBuilder<MaskCubit, MaskState>(
               builder: (context, state) {
-                if (state.clients.isNotEmpty) {
-                  return Container(
-                    color: Colors.transparent,
-                    width: 1000,
-                    height: 1000,
+                return Visibility(
+                  visible: state.clients.isNotEmpty,
+                  child: Container(
+                    color: Color.fromARGB(166, 0, 0, 0),
+                    width: MediaQuery.of(context).size.width,
+                    height: MediaQuery.of(context).size.height,
                     child: const Center(
                       child: CircularProgressIndicator(),
                     ),
-                  );
-                } else {
-                  return const SizedBox.shrink();
-                }
+                  ),
+                );
               },
             ),
           ],

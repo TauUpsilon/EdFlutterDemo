@@ -25,22 +25,4 @@ class AppRouter extends $AppRouter with CommonFunctionable {
       ];
 }
 
-class AppRouteObserver extends AutoRouterObserver with RouterActions {
-  @override
-  void didPush(Route route, Route? previousRoute) {
-    updateRouterState(route, previousRoute);
-
-    super.didPush(route, previousRoute);
-  }
-
-  @override
-  void didPop(Route route, Route? previousRoute) {
-    if (previousRoute != null) {
-      updateRouterState(previousRoute, route);
-    } else {
-      updateRouterState(route, previousRoute);
-    }
-
-    super.didPop(route, previousRoute);
-  }
-}
+class AppRouteObserver extends AutoRouterObserver {}
