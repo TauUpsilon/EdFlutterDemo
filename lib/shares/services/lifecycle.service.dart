@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_proj/core/alpha.mixin.dart';
+import 'package:flutter_proj/shares/mixins/common_functionable.mixin.dart';
 import 'package:rxdart/rxdart.dart';
 
-class LifecycleService with Alpha, WidgetsBindingObserver {
+class LifecycleService with CommonFunctionable, WidgetsBindingObserver {
   final BehaviorSubject<AppLifecycleState> stateStream = BehaviorSubject();
 
   LifecycleService() {

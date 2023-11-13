@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_proj/core/alpha.mixin.dart';
+import 'package:flutter_proj/shares/mixins/common_functionable.mixin.dart';
 
-class HeaderBarWidget extends StatelessWidget with Alpha {
+class HeaderBarWidget extends StatelessWidget with CommonFunctionable {
   final String title;
 
   HeaderBarWidget({

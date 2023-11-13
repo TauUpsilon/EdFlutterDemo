@@ -2,7 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_proj/app/app.widget.dart';
-import 'package:flutter_proj/core/alpha.mixin.dart';
+import 'package:flutter_proj/shares/mixins/common_functionable.mixin.dart';
 import 'package:flutter_proj/shares/widgets/header.widget.dart';
 import 'package:rxdart/utils.dart';
 

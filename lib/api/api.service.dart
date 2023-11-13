@@ -4,8 +4,8 @@ import 'dart:io';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter_proj/app/app.widget.dart';
-import 'package:flutter_proj/core/alpha.mixin.dart';
 import 'package:flutter_proj/shares/enums/common.enum.dart';
+import 'package:flutter_proj/shares/mixins/common_functionable.mixin.dart';
 import 'package:flutter_proj/states/redux/mask_store/mask.reducer.dart';
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart';
@@ -18,7 +18,7 @@ part 'api.modeller.dart';
 part 'api.request.dart';
 part 'api_common.request.dart';
 
-class ApiService with Alpha, MaskActions {
+class ApiService with CommonFunctionable, MaskActions {
   Connectivity get _connectivity => GetIt.I<Connectivity>();
 
   Stream<ApiModeller> request(
@@ -33,6 +33,7 @@ class ApiService with Alpha, MaskActions {
     _handleMask(request, apiModeller.model, maskStatus: maskStatus);
 
     apiModeller.model = await _doRequest(request);
+
     yield apiModeller;
     _handleMask(request, apiModeller.model, maskStatus: maskStatus);
   }
@@ -181,9 +182,11 @@ class ApiService with Alpha, MaskActions {
     switch (maskStatus) {
       case MaskStatus.show:
         if (model is ApiLoading) {
-          addMask(_handleURI(request).toString());
+          maskCubit.addMaskClient(_handleURI(request).toString());
+          // addMask(_handleURI(request).toString());
         } else {
-          removeMask(_handleURI(request).toString());
+          maskCubit.popMaskClient(_handleURI(request).toString());
+          // removeMask(_handleURI(request).toString());
         }
 
       case MaskStatus.hide:

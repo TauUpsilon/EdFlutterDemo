@@ -1,6 +1,6 @@
 part of 'home.page.dart';
 
-class HomeCubit extends Cubit<HomeState> with Alpha {
+class HomeCubit extends Cubit<HomeState> with CommonFunctionable {
   final _subscription = CompositeSubscription();
 
   HomeCubit() : super(const HomeState.initialState());

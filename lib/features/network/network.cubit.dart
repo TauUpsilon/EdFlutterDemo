@@ -1,6 +1,6 @@
 part of 'network.page.dart';
 
-class NetworkCubit extends Cubit<NetworkState> with Alpha {
+class NetworkCubit extends Cubit<NetworkState> with CommonFunctionable {
   TodosApiService get _todosService => GetIt.I<TodosApiService>();
 
   final _subscription = CompositeSubscription();

@@ -1,6 +1,6 @@
 part of 'api.service.dart';
 
-class ApiModeller with Alpha {
+class ApiModeller with CommonFunctionable {
   late ApiModel model;
 
   ApiModeller({

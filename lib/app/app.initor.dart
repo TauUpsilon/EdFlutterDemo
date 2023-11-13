@@ -24,7 +24,10 @@ mixin AppInitor {
               globalReducer,
               initialState: GlobalState.initialState(),
             ),
-          ),
+          )
+
+          // Cubit
+          ..registerLazySingleton(MaskCubit.new),
       };
 
   static Future<void> setEnvironment() async {

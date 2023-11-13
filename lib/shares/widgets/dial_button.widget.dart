@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_proj/core/alpha.mixin.dart';
+import 'package:flutter_proj/shares/mixins/common_functionable.mixin.dart';
 
-class DialButtonWidget extends StatelessWidget with Alpha {
+class DialButtonWidget extends StatelessWidget with CommonFunctionable {
   final String text;
   final Function(String) onPress;
 

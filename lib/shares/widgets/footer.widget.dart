@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_proj/core/alpha.mixin.dart';
+import 'package:flutter_proj/shares/mixins/common_functionable.mixin.dart';
 
-class FooterBarWidget extends StatelessWidget with Alpha {
+class FooterBarWidget extends StatelessWidget with CommonFunctionable {
   // Dependency Variable
   final int selectedItem;
   final Function(int index) onNavBarTapped;

@@ -6,8 +6,8 @@ import 'package:flutter_proj/shares/widgets/header.widget.dart';
 
 // part 'component.page.g.dart';
 
-// @RouteParamGenerable()
 @RoutePage<ComponentPage>()
+// @RouteParamGenerable()
 class ComponentPage extends StatefulWidget {
   ComponentPage({super.key});
 

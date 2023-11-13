@@ -1,7 +1,7 @@
 part of 'app.widget.dart';
 
 @AutoRouterConfig()
-class AppRouter extends $AppRouter with Alpha {
+class AppRouter extends $AppRouter with CommonFunctionable {
   AppRouter({super.navigatorKey});
 
   @override
