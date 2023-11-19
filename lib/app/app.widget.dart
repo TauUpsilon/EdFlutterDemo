@@ -2,24 +2,22 @@ import 'dart:convert';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:eyr/api/api.service.dart';
+import 'package:eyr/api/todos/todos.service.dart';
+import 'package:eyr/app/app.widget.gr.dart';
+import 'package:eyr/shares/mixins/common_functionable.mixin.dart';
+import 'package:eyr/shares/services/logging.service.dart';
+import 'package:eyr/states/cubit/mask/mask_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:flutter_proj/api/api.service.dart';
-import 'package:flutter_proj/api/todos/todos.service.dart';
-import 'package:flutter_proj/app/app.widget.gr.dart';
-import 'package:flutter_proj/features/home/home.page.dart';
-import 'package:flutter_proj/features/network/network.page.dart';
-import 'package:flutter_proj/shares/mixins/common_functionable.mixin.dart';
-import 'package:flutter_proj/shares/services/logging.service.dart';
-import 'package:flutter_proj/states/cubit/mask/mask_cubit.dart';
 import 'package:get_it/get_it.dart';
 
 part 'app.config.dart';
 part 'app.initor.dart';
 part 'app.route.dart';
 part 'app.router.dart';
-part 'package:flutter_proj/shares/utils/string.util.dart';
+part 'package:eyr/shares/utils/string.util.dart';
 
 class App extends StatelessWidget with CommonFunctionable {
   App({required Key key}) : super(key: key);
@@ -34,11 +32,14 @@ class App extends StatelessWidget with CommonFunctionable {
           children: [
             MaterialApp.router(
               debugShowCheckedModeBanner: false,
-              routerConfig: router.config(
-                navigatorObservers: () => [
-                  AppRouteObserver(),
-                ],
-              ),
+              // routerConfig: router.config(
+              //   navigatorObservers: () => [
+              //     AppRouteObserver(),
+              //   ],
+              // ),
+              routerDelegate: router.delegate(),
+              routeInformationProvider: router.routeInfoProvider(),
+              routeInformationParser: router.defaultRouteParser(),
             ),
             BlocBuilder<MaskCubit, MaskState>(
               builder: (context, state) {

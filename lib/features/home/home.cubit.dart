@@ -3,17 +3,16 @@ part of 'home.page.dart';
 class HomeCubit extends Cubit<HomeState> with CommonFunctionable {
   final _subscription = CompositeSubscription();
 
-  HomeCubit() : super(const HomeState.initialState());
+  HomeCubit() : super(HomeInitial.init());
 
   @override
   Future<void> close() async {
     await _subscription.dispose();
-    await GetIt.I.resetLazySingleton<HomeCubit>();
     await super.close();
   }
 
   void navigateToNetwork() {
-    router.pushNamed('/network');
+    router.push(NetworkRoute(test: 'edward'));
   }
 
   void navigateToComponent() {

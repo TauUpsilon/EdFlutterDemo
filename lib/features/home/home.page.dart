@@ -1,77 +1,53 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:eyr/app/app.widget.dart';
+import 'package:eyr/app/app.widget.gr.dart';
+import 'package:eyr/shares/mixins/common_functionable.mixin.dart';
+import 'package:eyr/shares/widgets/header.widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_proj/app/app.widget.dart';
-import 'package:flutter_proj/shares/mixins/common_functionable.mixin.dart';
-import 'package:flutter_proj/shares/widgets/header.widget.dart';
-import 'package:get_it/get_it.dart';
 import 'package:rxdart/utils.dart';
 
 part 'home.cubit.dart';
 part 'home.state.dart';
 
 @RoutePage<HomePage>()
-class HomePage extends StatefulWidget implements AutoRouteWrapper {
-  const HomePage({super.key});
-
-  @override
-  HomePageState createState() => HomePageState();
-
+class HomePage extends StatelessWidget implements AutoRouteWrapper {
   @override
   Widget wrappedRoute(BuildContext context) => MultiBlocProvider(
         providers: [
-          BlocProvider.value(value: GetIt.I.get<HomeCubit>()),
+          BlocProvider(create: (context) => HomeCubit()),
         ],
         child: this,
       );
-}
-
-class HomePageState extends State<HomePage> {
-  late HomeCubit homeCubit = context.read<HomeCubit>();
-
-  @override
-  Future<void> dispose() async {
-    super.dispose();
-
-    await homeCubit.close();
-  }
-
-  PreferredSize header() {
-    return PreferredSize(
-      preferredSize: const Size.fromHeight(80),
-      child: HeaderBarWidget(title: AppConfig.appTitle),
-    );
-  }
-
-  Widget body() {
-    return SafeArea(
-      child: Center(
-        child: BlocBuilder<HomeCubit, HomeState>(
-          builder: (context, state) {
-            return Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                TextButton(
-                  onPressed: () => homeCubit.navigateToNetwork(),
-                  child: const Text('Network'),
-                ),
-                TextButton(
-                  onPressed: () => homeCubit.navigateToComponent(),
-                  child: const Text('Component'),
-                ),
-              ],
-            );
-          },
-        ),
-      ),
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
+    final homeCubit = context.read<HomeCubit>();
+
     return Scaffold(
-      appBar: header(),
-      body: body(),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(80),
+        child: HeaderBarWidget(title: AppConfig.appTitle),
+      ),
+      body: SafeArea(
+        child: Center(
+          child: BlocBuilder<HomeCubit, HomeState>(
+            builder: (context, state) => Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                TextButton(
+                  onPressed: homeCubit.navigateToNetwork,
+                  child: const Text('Network'),
+                ),
+                TextButton(
+                  onPressed: homeCubit.navigateToComponent,
+                  child: const Text('Component'),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

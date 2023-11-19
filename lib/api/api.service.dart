@@ -3,9 +3,9 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:flutter_proj/app/app.widget.dart';
-import 'package:flutter_proj/shares/enums/common.enum.dart';
-import 'package:flutter_proj/shares/mixins/common_functionable.mixin.dart';
+import 'package:eyr/app/app.widget.dart';
+import 'package:eyr/shares/enums/common.enum.dart';
+import 'package:eyr/shares/mixins/common_functionable.mixin.dart';
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart';
 
@@ -20,24 +20,24 @@ part 'api_common.request.dart';
 class ApiService with CommonFunctionable {
   Connectivity get _connectivity => GetIt.I<Connectivity>();
 
-  Stream<ApiModeller> request(
+  Stream<ApiModeller> request<T>(
     ApiRequest request, {
     MaskStatus maskStatus = MaskStatus.show,
   }) async* {
     final apiModeller = ApiModeller(
-      model: ApiCommonConst.apiInstances.loading,
+      model: ApiLoading<T>(),
     );
 
     yield apiModeller;
-    _handleMask(request, apiModeller.model, maskStatus: maskStatus);
+    _handleMask<T>(request, apiModeller.model, maskStatus: maskStatus);
 
     apiModeller.model = await _doRequest(request);
 
     yield apiModeller;
-    _handleMask(request, apiModeller.model, maskStatus: maskStatus);
+    _handleMask<T>(request, apiModeller.model, maskStatus: maskStatus);
   }
 
-  Future<ApiModel<dynamic>> _doRequest(
+  Future<ApiModel> _doRequest(
     ApiRequest request,
   ) async {
     return _connectivity
@@ -51,69 +51,33 @@ class ApiService with CommonFunctionable {
   Future<Response> _handleRequest(
     ApiRequest request,
   ) async {
-    final uri = _handleURI(request);
-    final headers = _handleHeaders(request);
-    final body = _handleBody(request);
-
     logger
       ..d(
         '$runtimeType - Request Info\n\n$request',
       )
       ..d(
-        '''$runtimeType - Request Headers\n\n${StringUtil.formateStrAsJson(headers)}''',
+        '''$runtimeType - Request Headers\n\n${StringUtil.formateStrAsJson(request.reqHeader)}''',
       )
       ..d(
-        '''$runtimeType - Request Body or QueryParams\n\n${StringUtil.formateStrAsJson(request.reqBody)}''',
+        '''$runtimeType - Request Body or QueryParams\n\n${StringUtil.formateStrAsJson(request.body)}''',
       )
       ..d(
-        '''$runtimeType - Start to request for ${AppConfig.timeoutSec} seconds\n\nURI: $uri''',
+        '''$runtimeType - Start to request for ${AppConfig.timeoutSec} seconds\n\nURI: ${request.reqURI}''',
       );
 
-    switch (request.reqMethod) {
+    switch (request.method) {
       case ApiMethod.post:
         return post(
-          uri,
-          headers: headers,
-          body: body,
+          request.reqURI,
+          headers: request.reqHeader,
+          body: request.reqBody,
         );
       case ApiMethod.get:
-        return get(uri);
+        return get(request.reqURI);
     }
   }
 
-  Uri _handleURI(ApiRequest request) {
-    if (request is JsonPlaceholderRequest) {
-      return Uri.parse('${AppConfig.jsonPlaceholderBaseUrl}/${request.reqApi}')
-          .replace(
-        queryParameters: request.reqBody,
-      );
-    } else {
-      return Uri.parse(AppConfig.jsonPlaceholderBaseUrl);
-    }
-  }
-
-  Map<String, String> _handleHeaders(ApiRequest request) {
-    final headers = request.reqHeaders;
-
-    if (headers != null && headers.isNotEmpty) {
-      return headers;
-    } else {
-      return {
-        'Content-Type': 'application/json; charset=UTF-8',
-        'Accept': 'application/json',
-      };
-    }
-  }
-
-  String _handleBody(ApiRequest request) {
-    if (request is JsonPlaceholderRequest) {
-      return jsonEncode(request.reqBody);
-    } else {
-      return '';
-    }
-  }
-
-  ApiModel<dynamic> _handleRespose(
+  ApiModel _handleRespose(
     ApiRequest request,
     Response response,
   ) {
@@ -130,7 +94,7 @@ class ApiService with CommonFunctionable {
     }
   }
 
-  ApiModel<dynamic> _handleSuccess(
+  ApiModel _handleSuccess(
     ApiRequest request,
     String status,
     Response response,
@@ -173,17 +137,17 @@ class ApiService with CommonFunctionable {
     }
   }
 
-  void _handleMask(
+  void _handleMask<T>(
     ApiRequest request,
     ApiModel model, {
     MaskStatus maskStatus = MaskStatus.show,
   }) {
     switch (maskStatus) {
       case MaskStatus.show:
-        if (model is ApiLoading) {
-          maskCubit.addMaskClient(_handleURI(request).toString());
+        if (model is ApiLoading<T>) {
+          maskCubit.addMaskClient(request.reqURI.toString());
         } else {
-          maskCubit.popMaskClient(_handleURI(request).toString());
+          maskCubit.popMaskClient(request.reqURI.toString());
         }
 
       case MaskStatus.hide:

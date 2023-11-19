@@ -1,8 +1,8 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:eyr/app/app.widget.dart';
+import 'package:eyr/shares/widgets/calculator.widget.dart';
+import 'package:eyr/shares/widgets/header.widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_proj/app/app.widget.dart';
-import 'package:flutter_proj/shares/widgets/calculator.widget.dart';
-import 'package:flutter_proj/shares/widgets/header.widget.dart';
 
 // part 'component.page.g.dart';
 

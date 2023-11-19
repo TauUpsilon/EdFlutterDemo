@@ -1,6 +1,6 @@
-import 'package:flutter_proj/app/app.widget.dart';
-import 'package:flutter_proj/shares/services/logging.service.dart';
-import 'package:flutter_proj/states/cubit/mask/mask_cubit.dart';
+import 'package:eyr/app/app.widget.dart';
+import 'package:eyr/shares/services/logging.service.dart';
+import 'package:eyr/states/cubit/mask/mask_cubit.dart';
 import 'package:get_it/get_it.dart';
 
 mixin CommonFunctionable {

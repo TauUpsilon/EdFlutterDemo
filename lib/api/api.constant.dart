@@ -25,38 +25,31 @@ mixin ApiCommonConst {
   static final apiErrorInstances = _ApiErrorInstances();
 }
 
-class _ApiCommonInstances {
-  final loading = ApiLoading();
-}
+class _ApiCommonInstances {}
 
 class _ApiErrorInstances {
-  final offline = ApiFail<Map<String, dynamic>>(
+  final offline = ApiFail(
     code: ApiStatusCode.api0001,
-    value: {},
     message: 'Check your connectivity',
   );
 
-  final clientIssue = ApiFail<Map<String, dynamic>>(
+  final clientIssue = ApiFail(
     code: ApiStatusCode.api0004,
-    value: {},
     message: 'System not responsed',
   );
 
-  final serverIssue = ApiFail<Map<String, dynamic>>(
+  final serverIssue = ApiFail(
     code: ApiStatusCode.api0005,
-    value: {},
     message: 'System not responsed',
   );
 
-  final timeout = ApiFail<Map<String, dynamic>>(
+  final timeout = ApiFail(
     code: ApiStatusCode.api0006,
-    value: {},
     message: 'Timeout',
   );
 
-  final uknownError = ApiFail<Map<String, dynamic>>(
+  final uknownError = ApiFail(
     code: ApiStatusCode.api9999,
-    value: {},
     message: 'Something went wrong...',
   );
 }

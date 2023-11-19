@@ -1,5 +1,5 @@
+import 'package:eyr/shares/mixins/common_functionable.mixin.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_proj/shares/mixins/common_functionable.mixin.dart';
 
 class FooterBarWidget extends StatelessWidget with CommonFunctionable {
   // Dependency Variable

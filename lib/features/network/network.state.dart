@@ -1,19 +1,23 @@
 part of 'network.page.dart';
 
 @immutable
-class NetworkState {
+sealed class NetworkState {
   final ApiModel<List<TodosGetModel>> todos;
 
   const NetworkState({required this.todos});
+}
 
-  NetworkState.initialState()
-      : todos = ApiDone<List<TodosGetModel>>(
-          code: '',
-          value: [],
+final class NetworkInitial extends NetworkState {
+  NetworkInitial.init()
+      : super(
+          todos: ApiDone<List<TodosGetModel>>(
+            code: '',
+            value: [],
+          ),
         );
 
-  factory NetworkState.create(
-    ApiModel<List<TodosGetModel>> todos,
-  ) =>
-      NetworkState(todos: todos);
+  NetworkInitial.update(ApiModel<List<TodosGetModel>> todos)
+      : super(
+          todos: todos,
+        );
 }

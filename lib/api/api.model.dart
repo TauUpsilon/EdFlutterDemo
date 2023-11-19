@@ -1,23 +1,23 @@
 part of 'api.service.dart';
 
-class ApiModel<T> {
+abstract class ApiModel<T> {
   String code;
-  T value;
 
   ApiModel({
     required this.code,
-    required this.value,
   });
 }
 
-class ApiLoading extends ApiModel {
-  ApiLoading() : super(code: '', value: {});
+class ApiLoading<T> extends ApiModel<T> {
+  ApiLoading() : super(code: '');
 }
 
 class ApiDone<T> extends ApiModel<T> {
+  T value;
+
   ApiDone({
     required super.code,
-    required super.value,
+    required this.value,
   });
 
   @override
@@ -33,7 +33,6 @@ class ApiFail<T> extends ApiModel<T> {
 
   ApiFail({
     required super.code,
-    required super.value,
     this.message = '',
   });
 

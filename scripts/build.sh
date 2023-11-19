@@ -1,2 +1,2 @@
-# fvm flutter pub run build_runner build --delete-conflicting-outputs
-fvm flutter run --dart-define ENV=LOCAL -d 611D9820-8F15-4A33-8F40-144056AC0232
+fvm flutter pub run build_runner build -d
+fvm flutter run --dart-define ENV=LOCAL -d FC1D28EA-5C49-4DFF-9B2E-F15DAA530D99

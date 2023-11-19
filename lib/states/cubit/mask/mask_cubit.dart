@@ -6,17 +6,14 @@ import 'package:meta/meta.dart';
 part 'mask_state.dart';
 
 class MaskCubit extends Cubit<MaskState> {
-  MaskCubit()
-      : super(
-          MaskInitial(),
-        );
+  MaskCubit() : super(MaskInitial.init());
 
   void addMaskClient(String clientName) {
     if (!state.clients.contains(clientName)) {
       state.clients.add(clientName);
     }
 
-    emit(MaskUpdate(clients: state.clients));
+    emit(MaskInitial.copy(clients: state.clients));
   }
 
   void popMaskClient(String clientName) {
@@ -24,6 +21,6 @@ class MaskCubit extends Cubit<MaskState> {
       state.clients.remove(clientName);
     }
 
-    emit(MaskUpdate(clients: state.clients));
+    emit(MaskInitial.copy(clients: state.clients));
   }
 }

@@ -8,9 +8,6 @@ sealed class MaskState {
 }
 
 final class MaskInitial extends MaskState {
-  MaskInitial() : super(clients: []);
-}
-
-final class MaskUpdate extends MaskState {
-  MaskUpdate({required super.clients});
+  MaskInitial.init() : super(clients: []);
+  MaskInitial.copy({required super.clients});
 }

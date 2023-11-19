@@ -19,11 +19,7 @@ mixin AppInitor {
           ..registerLazySingleton(TodosApiService.new)
 
           // Global Cubits
-          ..registerLazySingleton(MaskCubit.new)
-
-          // Page Cubits
-          ..registerLazySingleton(HomeCubit.new)
-          ..registerLazySingleton(NetworkCubit.new),
+          ..registerLazySingleton(MaskCubit.new),
       };
 
   static Future<void> setEnvironment() async {

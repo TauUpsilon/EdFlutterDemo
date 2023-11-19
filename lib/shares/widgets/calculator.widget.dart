@@ -1,7 +1,7 @@
 import 'package:custom_math/custom_math.dart';
+import 'package:eyr/shares/mixins/common_functionable.mixin.dart';
+import 'package:eyr/shares/widgets/dial_button.widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_proj/shares/mixins/common_functionable.mixin.dart';
-import 'package:flutter_proj/shares/widgets/dial_button.widget.dart';
 
 class CalculatorWidget extends StatefulWidget with CommonFunctionable {
   CalculatorWidget({super.key});

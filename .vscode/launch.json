@@ -9,19 +9,7 @@
       "request": "launch",
       "type": "dart",
       "noDebug": true,
-      "args": ["--dart-define", "ENV=LOCAL"]
-    },
-    {
-      "name": "routes_generator",
-      "cwd": "generators/routes_generator",
-      "request": "launch",
-      "type": "dart"
-    },
-    {
-      "name": "custom_math",
-      "cwd": "plugins/custom_math",
-      "request": "launch",
-      "type": "dart"
+      "args": ["--no-enable-impeller", "--dart-define", "ENV=LOCAL"]
     }
   ]
 }
