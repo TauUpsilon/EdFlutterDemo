@@ -1,0 +1,11 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Build App",
+      "type": "dart",
+      "command": "dart",
+      "args": ["pub", "run", "build_runner", "watch", "-d"]
+    }
+  ]
+}
