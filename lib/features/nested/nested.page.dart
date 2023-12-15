@@ -8,12 +8,8 @@ import 'package:rxdart/utils.dart';
 part 'nested.cubit.dart';
 part 'nested.state.dart';
 
-@RoutePage()
-class NestedPage extends StatelessWidget
-    with CommonFunctionable
-    implements AutoRouteWrapper {
-  NestedPage();
-
+@RoutePage(name: 'NestedRouter')
+class NestedRouterPage extends AutoRouter implements AutoRouteWrapper {
   @override
   Widget wrappedRoute(BuildContext context) => MultiBlocProvider(
         providers: [
@@ -23,9 +19,4 @@ class NestedPage extends StatelessWidget
         ],
         child: this,
       );
-
-  @override
-  Widget build(BuildContext context) {
-    return AutoRouter();
-  }
 }

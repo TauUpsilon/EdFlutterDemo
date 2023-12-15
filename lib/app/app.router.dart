@@ -33,9 +33,8 @@ class AppRouter extends $AppRouter {
         ),
         AutoRoute(
           path: '/nested',
-          page: NestedRoute.page,
+          page: NestedRouter.page,
           allowSnapshotting: false,
-          keepHistory: false,
           children: [
             AutoRoute(
               initial: true,
@@ -52,9 +51,8 @@ class AppRouter extends $AppRouter {
             ),
             AutoRoute(
               path: 'sub-nested',
-              page: SubNestedRoute.page,
+              page: SubNestedRouter.page,
               allowSnapshotting: false,
-              keepHistory: false,
               children: [
                 AutoRoute(
                   initial: true,
