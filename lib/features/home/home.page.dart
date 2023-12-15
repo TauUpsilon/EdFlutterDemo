@@ -43,6 +43,14 @@ class HomePage extends StatelessWidget implements AutoRouteWrapper {
                   onPressed: homeCubit.navigateToComponent,
                   child: const Text('Component'),
                 ),
+                TextButton(
+                  onPressed: homeCubit.navigateToNested,
+                  child: const Text('Nested'),
+                ),
+                TextButton(
+                  onPressed: homeCubit.navigateToSubNested,
+                  child: const Text('Sub Nested'),
+                ),
               ],
             ),
           ),

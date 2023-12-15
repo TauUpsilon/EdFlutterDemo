@@ -10,7 +10,6 @@
       "type": "dart",
       "noDebug": true,
       "args": ["--no-enable-impeller", "--dart-define", "ENV=LOCAL"],
-      "preLaunchTask": "Build App"
     }
   ]
 }
