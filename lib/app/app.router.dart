@@ -7,7 +7,28 @@ class AppRouter extends $AppRouter {
   AppRouter({super.navigatorKey});
 
   @override
-  RouteType get defaultRouteType => RouteType.material();
+  RouteType get defaultRouteType => RouteType.custom(
+        durationInMilliseconds: 100,
+        reverseDurationInMilliseconds: 100,
+        transitionsBuilder: (
+          BuildContext context,
+          Animation<double> animation,
+          Animation<double> secondaryAnimation,
+          Widget child,
+        ) {
+          return ScaleTransition(
+            scale: animation.drive(
+              Tween<double>(begin: 0.9, end: 1),
+            ),
+            child: FadeTransition(
+              opacity: animation.drive(
+                Tween<double>(begin: 0, end: 1),
+              ),
+              child: child,
+            ),
+          );
+        },
+      );
 
   @override
   List<AutoRoute> get routes => [
@@ -34,7 +55,7 @@ class AppRouter extends $AppRouter {
         AutoRoute(
           path: '/nested',
           page: NestedRouter.page,
-          allowSnapshotting: false,
+          // allowSnapshotting: false,
           children: [
             AutoRoute(
               initial: true,
@@ -52,7 +73,7 @@ class AppRouter extends $AppRouter {
             AutoRoute(
               path: 'sub-nested',
               page: SubNestedRouter.page,
-              allowSnapshotting: false,
+              // allowSnapshotting: false,
               children: [
                 AutoRoute(
                   initial: true,

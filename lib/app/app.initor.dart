@@ -16,6 +16,7 @@ mixin AppInitor {
           // Services
           ..registerLazySingleton(LoggingService.new)
           ..registerLazySingleton(ApiService.new)
+          ..registerLazySingleton(RsaService.new)
           ..registerLazySingleton(TodosApiService.new)
 
           // Global Cubits

@@ -29,3 +29,31 @@ class JsonPlaceholderRequest extends ApiRequest {
     };
   }
 }
+
+class LocalRequest extends ApiRequest {
+  LocalRequest({
+    required super.method,
+    required super.uri,
+    super.body,
+  });
+
+  @override
+  Uri get reqURI {
+    return Uri.parse(
+      'http://localhost:8080/$uri',
+    );
+  }
+
+  @override
+  String? get reqBody {
+    return jsonEncode(body);
+  }
+
+  @override
+  Map<String, String> get reqHeader {
+    return {
+      'Content-Type': 'application/json; charset=UTF-8',
+      'Accept': 'application/json',
+    };
+  }
+}

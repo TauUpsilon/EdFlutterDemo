@@ -7,7 +7,9 @@ import 'package:eyr/api/todos/todos.service.dart';
 import 'package:eyr/app/app.widget.gr.dart';
 // import 'package:eyr/shares/guards/home-route.guard.dart';
 import 'package:eyr/shares/mixins/common_functionable.mixin.dart';
+import 'package:eyr/shares/observers/app_router.observer.dart';
 import 'package:eyr/shares/services/logging.service.dart';
+import 'package:eyr/shares/services/rsa.service.dart';
 import 'package:eyr/states/cubit/mask/mask_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -33,12 +35,12 @@ class App extends StatelessWidget with CommonFunctionable {
         children: [
           MaterialApp.router(
             debugShowCheckedModeBanner: false,
-            // routerConfig: router.config(
-            //   navigatorObservers: () => [
-            //     AppRouteObserver(),
-            //   ],
-            // ),
-            routerDelegate: router.delegate(),
+            routerDelegate: router.delegate(
+              placeholder: (_) => SizedBox.expand(),
+              navigatorObservers: () => [
+                AppRouterObserver(),
+              ],
+            ),
             routeInformationProvider: router.routeInfoProvider(),
             routeInformationParser: router.defaultRouteParser(),
           ),

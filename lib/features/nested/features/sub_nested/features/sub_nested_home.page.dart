@@ -1,5 +1,4 @@
 import 'package:auto_route/auto_route.dart';
-
 import 'package:eyr/shares/mixins/common_functionable.mixin.dart';
 import 'package:eyr/shares/widgets/header.widget.dart';
 import 'package:flutter/material.dart';
@@ -24,22 +23,7 @@ class SubNestedHomePage extends StatelessWidget with CommonFunctionable {
               TextButton(
                 onPressed: () {
                   router.pop();
-                  // router.popUntilRouteWithName(NestedRoute.name);
-                  // router.popUntil(
-                  //   (route) {
-                  //     if (route.settings is AutoRoutePage) {
-                  //       print(
-                  //         (route.settings as AutoRoutePage).routeData.match,
-                  //       );
-                  //       return (route.settings as AutoRoutePage)
-                  //               .routeData
-                  //               .match ==
-                  //           '/home';
-                  //     }
-
-                  //     return route.settings.name == '/home';
-                  //   },
-                  // );
+                  // router.popUntilRouteWithPath('/nested');
                 },
                 child: Text(
                   'Go Back to',
