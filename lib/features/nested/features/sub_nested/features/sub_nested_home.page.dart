@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:eyr/app/app.widget.gr.dart';
 import 'package:eyr/shares/mixins/common_functionable.mixin.dart';
 import 'package:eyr/shares/widgets/header.widget.dart';
 import 'package:flutter/material.dart';
@@ -22,8 +23,9 @@ class SubNestedHomePage extends StatelessWidget with CommonFunctionable {
               Text('Hello from sub home'),
               TextButton(
                 onPressed: () {
-                  router.pop();
-                  // router.popUntilRouteWithPath('/nested');
+                  router.popUntilRouteWithName(
+                    NestedRouter.name,
+                  );
                 },
                 child: Text(
                   'Go Back to',
