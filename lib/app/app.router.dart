@@ -55,7 +55,6 @@ class AppRouter extends $AppRouter {
         AutoRoute(
           path: '/nested',
           page: NestedRouter.page,
-          // allowSnapshotting: false,
           children: [
             AutoRoute(
               initial: true,
@@ -73,7 +72,6 @@ class AppRouter extends $AppRouter {
             AutoRoute(
               path: 'sub-nested',
               page: SubNestedRouter.page,
-              // allowSnapshotting: false,
               children: [
                 AutoRoute(
                   initial: true,

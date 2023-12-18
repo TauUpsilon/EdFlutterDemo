@@ -12,14 +12,14 @@ class NestedCubit extends Cubit<NestedState> with CommonFunctionable {
   }
 
   void navigateToOne() {
-    router.push(NestedOneRoute(test: 'test'));
+    router.navigate(NestedOneRoute(test: 'test'));
   }
 
   void navigateToTwo() {
-    router.push(NestedTwoRoute());
+    router.navigate(NestedTwoRoute());
   }
 
   void navigateToSubNested() {
-    router.push(SubNestedHomeRoute());
+    router.navigate(SubNestedHomeRoute());
   }
 }

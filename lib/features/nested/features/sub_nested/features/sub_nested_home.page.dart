@@ -24,7 +24,8 @@ class SubNestedHomePage extends StatelessWidget with CommonFunctionable {
               TextButton(
                 onPressed: () {
                   router.popUntilRouteWithName(
-                    NestedRouter.name,
+                    NestedHomeRoute.name,
+                    scoped: false,
                   );
                 },
                 child: Text(

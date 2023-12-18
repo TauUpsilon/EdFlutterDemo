@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:eyr/app/app.widget.gr.dart';
 
 import 'package:eyr/shares/mixins/common_functionable.mixin.dart';
 import 'package:eyr/shares/widgets/header.widget.dart';
@@ -16,8 +17,24 @@ class NestedTwoPage extends StatelessWidget with CommonFunctionable {
         child: HeaderBarWidget(title: 'Nested Two'),
       ),
       body: SafeArea(
-        child: Center(
-          child: Text('Hello To Two'),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Center(
+              child: Text('Hello To Two'),
+            ),
+            TextButton(
+              onPressed: () {
+                router.popUntilRouteWithName(
+                  NestedHomeRoute.name,
+                  scoped: false,
+                );
+              },
+              child: Text(
+                'Go Back to',
+              ),
+            ),
+          ],
         ),
       ),
     );
