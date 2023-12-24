@@ -12,19 +12,19 @@ class HomeCubit extends Cubit<HomeState> with CommonFunctionable {
   }
 
   void navigateToNetwork() {
-    router.navigate(NetworkRoute(test: 'edward'));
+    router.push('/network');
   }
 
   void navigateToComponent() {
-    router.navigate(ComponentRoute());
+    router.push('/component');
   }
 
   void navigateToNested() {
-    router.navigate(NestedHomeRoute());
+    router.push('/nested');
   }
 
   void navigateToSubNested() {
-    router.navigate(SubNestedHomeRoute());
+    router.push('/nested/sub-nested');
   }
 
   void rsaRequest() {

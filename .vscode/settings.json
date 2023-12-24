@@ -47,7 +47,8 @@
     // "editor.wordBasedSuggestions": false,
 
     "editor.codeActionsOnSave": {
-      "source.fixAll": "explicit"
+      "source.fixAll": "explicit",
+      "source.organizeImports": "explicit"
     }
   }
 }

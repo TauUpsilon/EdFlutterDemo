@@ -1,13 +1,12 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:eyr/app/app.widget.dart';
 import 'package:eyr/shares/widgets/calculator.widget.dart';
 import 'package:eyr/shares/widgets/header.widget.dart';
 import 'package:flutter/material.dart';
+import 'package:page_route_annotation/page_route.annotation.dart';
 
-// part 'component.page.g.dart';
+part 'component.page.g.dart';
 
-@RoutePage<ComponentPage>()
-// @RouteParamGenerable()
+@RouteParamGenerable()
 class ComponentPage extends StatefulWidget {
   ComponentPage({super.key});
 

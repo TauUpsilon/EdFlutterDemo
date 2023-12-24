@@ -16,9 +16,7 @@ class DialButtonWidget extends StatelessWidget with CommonFunctionable {
         style: buttonStyle(),
         child: Text(
           text,
-          style: const TextStyle(
-            fontSize: 30,
-          ),
+          style: TextStyle(fontSize: 24),
         ),
       );
 
@@ -31,16 +29,16 @@ class DialButtonWidget extends StatelessWidget with CommonFunctionable {
         ),
         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
           RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(4),
+            borderRadius: BorderRadius.circular(16),
           ),
         ),
       );
 
   @override
   Widget build(BuildContext context) => Container(
-        width: MediaQuery.of(context).size.width / 4 - (1.5 * 4) - 20,
-        height: MediaQuery.of(context).size.width / 4 - (1.5 * 4) - 20,
-        margin: const EdgeInsets.all(3),
+        width: MediaQuery.of(context).size.width / 4 - (1.5 * 4) - 8,
+        height: MediaQuery.of(context).size.width / 4 - (1.5 * 4) - 8,
+        margin: const EdgeInsets.all(4),
         child: button(),
       );
 }

@@ -50,8 +50,8 @@ class CalculatorWidgetState extends State<CalculatorWidget> {
     array[1][2] = '9';
     array[1][3] = 'x';
 
-    array[0][0] = 'ac';
-    array[0][1] = 'c';
+    array[0][0] = 'AC';
+    array[0][1] = 'C';
     array[0][2] = '<';
     array[0][3] = '/';
 
@@ -186,7 +186,7 @@ class CalculatorWidgetState extends State<CalculatorWidget> {
 
   @override
   Widget build(BuildContext context) => Padding(
-        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 4),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [

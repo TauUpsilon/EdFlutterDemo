@@ -1,30 +1,22 @@
 import 'dart:convert';
 import 'dart:typed_data';
 
-import 'package:auto_route/auto_route.dart';
 import 'package:eyr/api/api.service.dart';
 import 'package:eyr/app/app.widget.dart';
-import 'package:eyr/app/app.widget.gr.dart';
 import 'package:eyr/shares/mixins/common_functionable.mixin.dart';
 import 'package:eyr/shares/widgets/header.widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:page_route_annotation/page_route.annotation.dart';
 import 'package:rxdart/utils.dart';
 
 part 'home.cubit.dart';
+part 'home.page.g.dart';
 part 'home.state.dart';
 
-@RoutePage<HomePage>()
-class HomePage extends StatelessWidget implements AutoRouteWrapper {
-  @override
-  Widget wrappedRoute(BuildContext context) => MultiBlocProvider(
-        providers: [
-          BlocProvider(create: (context) => HomeCubit()),
-        ],
-        child: this,
-      );
-
+@RouteParamGenerable()
+class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final homeCubit = context.read<HomeCubit>();

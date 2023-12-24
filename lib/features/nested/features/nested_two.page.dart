@@ -1,11 +1,7 @@
-import 'package:auto_route/auto_route.dart';
-import 'package:eyr/app/app.widget.gr.dart';
-
 import 'package:eyr/shares/mixins/common_functionable.mixin.dart';
 import 'package:eyr/shares/widgets/header.widget.dart';
 import 'package:flutter/material.dart';
 
-@RoutePage()
 class NestedTwoPage extends StatelessWidget with CommonFunctionable {
   NestedTwoPage();
 
@@ -25,10 +21,10 @@ class NestedTwoPage extends StatelessWidget with CommonFunctionable {
             ),
             TextButton(
               onPressed: () {
-                router.popUntilRouteWithName(
-                  NestedHomeRoute.name,
-                  scoped: false,
-                );
+                // router.popUntilRouteWithName(
+                //   NestedHomeRoute.name,
+                //   scoped: false,
+                // );
               },
               child: Text(
                 'Go Back to',

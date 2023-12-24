@@ -19,7 +19,7 @@ class HeaderBarWidget extends StatelessWidget with CommonFunctionable {
         leading: router.canPop()
             ? IconButton(
                 icon: Icon(Icons.arrow_back),
-                onPressed: () => router.popTop(),
+                onPressed: () => router.pop(),
               )
             : null,
         shape: RoundedRectangleBorder(

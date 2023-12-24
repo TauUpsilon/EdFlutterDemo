@@ -1,3 +1,4 @@
+import 'package:eyr/app/app.initor.dart';
 import 'package:eyr/app/app.widget.dart';
 import 'package:flutter/material.dart';
 
