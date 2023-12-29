@@ -5,16 +5,19 @@ import 'package:eyr/app/app.router.dart';
 import 'package:eyr/shares/services/logging.service.dart';
 import 'package:eyr/shares/services/rsa.service.dart';
 import 'package:eyr/states/cubit/mask/mask_cubit.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 
+final navigatorKey = GlobalKey<NavigatorState>();
 mixin AppInitor {
   static void initLocator() => {
         GetIt.I
           // Router
           ..registerLazySingleton(
             () => GoRouter.routingConfig(
+              navigatorKey: navigatorKey,
               initialLocation: '/home',
               debugLogDiagnostics: true,
               routingConfig: appRoutingConfig,

@@ -5,7 +5,7 @@ import 'package:eyr/features/nested/features/nested_two.page.dart';
 import 'package:eyr/features/nested/features/sub_nested/sub_nested.page.dart';
 import 'package:eyr/features/nested/nested.page.dart';
 import 'package:eyr/features/network/network.page.dart';
-import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
@@ -41,6 +41,7 @@ final appRoutingConfig = ValueNotifier<RoutingConfig>(
         builder: (context, state) => ComponentPage(),
       ),
       ShellRoute(
+        navigatorKey: GlobalKey<NavigatorState>(),
         builder: (context, state, child) {
           return MultiBlocProvider(
             providers: [
@@ -86,26 +87,50 @@ final appRoutingConfig = ValueNotifier<RoutingConfig>(
   ),
 );
 
-// @override
-// RouteType get defaultRouteType => RouteType.custom(
-//       durationInMilliseconds: 100,
-//       reverseDurationInMilliseconds: 100,
-//       transitionsBuilder: (
-//         BuildContext context,
-//         Animation<double> animation,
-//         Animation<double> secondaryAnimation,
-//         Widget child,
-//       ) {
-//         return ScaleTransition(
-//           scale: animation.drive(
-//             Tween<double>(begin: 0.9, end: 1),
-//           ),
-//           child: FadeTransition(
-//             opacity: animation.drive(
-//               Tween<double>(begin: 0, end: 1),
-//             ),
-//             child: child,
-//           ),
-//         );
-//       },
-//     );
+extension GoRouterExt on GoRouter {
+  bool maybePop() {
+    if (canPop()) pop();
+    return canPop();
+  }
+
+  void pushAndPopUntil(
+    String location,
+    String until, {
+    Object? extra,
+  }) {
+    popUntil(until);
+    push(location, extra: extra);
+  }
+
+  void pushNamedAndPopUntil(
+    String name,
+    String until, {
+    Object? extra,
+  }) {
+    popUntil(name);
+    pushNamed(name, extra: extra);
+  }
+
+  void popUntilRoot() {
+    while (canPop()) {
+      pop();
+    }
+  }
+
+  /// If there is not routePath given, it will pop until the first index
+  void popUntil(String target) {
+    final list = routerDelegate.currentConfiguration.routes.toList();
+
+    for (final route in list.reversed) {
+      if (route is GoRoute) {
+        if (route.path == target || route.name == target) break;
+        if (!canPop()) break;
+        pop();
+      }
+
+      if (list.elementAt(list.indexOf(route) - 1) is ShellRoute) {
+        routerDelegate.currentConfiguration.matches.removeLast();
+      }
+    }
+  }
+}
