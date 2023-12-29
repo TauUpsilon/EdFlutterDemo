@@ -21,17 +21,31 @@ class RouteParamGenerator extends GeneratorForAnnotation<RouteParamGenerable> {
 
     buffer.writeln('class $className {');
 
-    for (int i = 0; i < visitor.fields.length; i++) {
-      buffer.writeln(
-        'final ${visitor.fields.values.elementAt(i)} ${visitor.fields.keys.elementAt(i)};',
-      );
-    }
+    final countOfPrivateFields = visitor.fields.keys
+        .where((element) => element.startsWith('_'))
+        .toList()
+        .length;
 
-    // Constructor
-    if (visitor.fields.isNotEmpty) {
-      buffer.writeln('const $className({');
+    final hasPublicFields =
+        countOfPrivateFields == visitor.fields.keys.toList().length;
 
+    if (visitor.fields.isNotEmpty && !hasPublicFields) {
+      // Fields
       for (int i = 0; i < visitor.fields.length; i++) {
+        if (visitor.fields.keys.elementAt(i).startsWith('_')) continue;
+
+        buffer.writeln(
+          'final ${visitor.fields.values.elementAt(i)} ${visitor.fields.keys.elementAt(i)};',
+        );
+      }
+
+      buffer.writeln('\n');
+
+      // Constructor
+      buffer.writeln('const $className({');
+      for (int i = 0; i < visitor.fields.length; i++) {
+        if (visitor.fields.keys.elementAt(i).startsWith('_')) continue;
+
         final type = visitor.fields.values.elementAt(i);
 
         if (type.toString().contains('?')) {
@@ -44,7 +58,6 @@ class RouteParamGenerator extends GeneratorForAnnotation<RouteParamGenerable> {
           );
         }
       }
-
       buffer.writeln('});');
     } else {
       buffer.writeln('const $className();');
