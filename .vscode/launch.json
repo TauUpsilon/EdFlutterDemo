@@ -5,11 +5,25 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "local",
+      "name": "Local",
       "request": "launch",
       "type": "dart",
       "noDebug": true,
-      "args": ["--no-enable-impeller", "--dart-define", "ENV=LOCAL"],
+      "args": ["--no-enable-impeller", "--dart-define-from-file=env/local.env"]
+    },
+    {
+      "name": "Stage",
+      "request": "launch",
+      "type": "dart",
+      "noDebug": true,
+      "args": ["--no-enable-impeller", "--dart-define-from-file=env/stage.env"]
+    },
+    {
+      "name": "Prod",
+      "request": "launch",
+      "type": "dart",
+      "noDebug": true,
+      "args": ["--no-enable-impeller", "--dart-define-from-file=env/prod.env"]
     }
   ]
 }

@@ -1,4 +1,4 @@
-part of '../../app/app.widget.dart';
+import 'dart:convert';
 
 mixin StringUtil {
   static String formateStrAsJson(dynamic json) =>

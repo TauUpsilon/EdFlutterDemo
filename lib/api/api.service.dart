@@ -3,9 +3,10 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:eyr/app/app.widget.dart';
+import 'package:eyr/app/app_widget.dart';
 import 'package:eyr/shares/enums/common.enum.dart';
 import 'package:eyr/shares/mixins/common_functionable.mixin.dart';
+import 'package:eyr/shares/utils/string.util.dart';
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart';
 

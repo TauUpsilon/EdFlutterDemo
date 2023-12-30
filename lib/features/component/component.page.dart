@@ -1,4 +1,4 @@
-import 'package:eyr/app/app.widget.dart';
+import 'package:eyr/app/app_widget.dart';
 import 'package:eyr/shares/widgets/calculator.widget.dart';
 import 'package:eyr/shares/widgets/header.widget.dart';
 import 'package:flutter/material.dart';

@@ -10,7 +10,7 @@ class LoggingService extends Logger {
             PrettyPrinter(
               methodCount: 0, // number of method calls to be displayed
               errorMethodCount: 10, //count calls if stacktrace is provided
-              lineLength: 100, // width of the output
+              lineLength: 60, // width of the output
               colors: false, // Colorful log messages
               printEmojis: false, // Print an emoji for each log message
               printTime: true, // Should each log print contain a timestamp
@@ -33,9 +33,9 @@ class PrefixPrinter extends LogPrinter {
         .log(
           event,
         )
-        .map(
-          (msg) => '${PrettyPrinter.defaultLevelEmojis[event.level]}$msg',
-        )
+        // .map(
+        //   (msg) => '${PrettyPrinter.defaultLevelEmojis[event.level]}$msg',
+        // )
         .toList();
   }
 }

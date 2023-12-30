@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:eyr/api/api.service.dart';
-import 'package:eyr/app/app.widget.dart';
+import 'package:eyr/app/app_widget.dart';
 import 'package:eyr/shares/mixins/common_functionable.mixin.dart';
 import 'package:eyr/shares/widgets/header.widget.dart';
 import 'package:flutter/material.dart';

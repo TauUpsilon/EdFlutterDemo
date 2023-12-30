@@ -1,13 +1,9 @@
-import 'dart:convert';
-
 import 'package:eyr/shares/mixins/common_functionable.mixin.dart';
 import 'package:eyr/states/cubit/mask/mask_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-part 'app.config.dart';
-part 'package:eyr/shares/utils/string.util.dart';
+part 'app_config.dart';
 
 class App extends StatelessWidget with CommonFunctionable {
   App({required Key key}) : super(key: key);
