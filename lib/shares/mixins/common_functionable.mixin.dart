@@ -1,4 +1,4 @@
-import 'package:eyr/shares/services/logging.service.dart';
+import 'package:eyr/shares/services/logging_service.dart';
 import 'package:eyr/shares/services/rsa.service.dart';
 import 'package:eyr/states/cubit/mask/mask_cubit.dart';
 import 'package:get_it/get_it.dart';

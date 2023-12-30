@@ -2,7 +2,7 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:eyr/api/api.service.dart';
 import 'package:eyr/api/todos/todos.service.dart';
 import 'package:eyr/app/app_router.dart';
-import 'package:eyr/shares/services/logging.service.dart';
+import 'package:eyr/shares/services/logging_service.dart';
 import 'package:eyr/shares/services/rsa.service.dart';
 import 'package:eyr/states/cubit/mask/mask_cubit.dart';
 import 'package:flutter/material.dart';
