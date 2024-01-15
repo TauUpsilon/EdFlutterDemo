@@ -7,13 +7,11 @@ import 'package:rxdart/utils.dart';
 part 'nested.cubit.dart';
 part 'nested.state.dart';
 
-class NestedPage extends StatelessWidget {
+class NestedPage extends StatelessWidget with CommonFunctionable {
   NestedPage();
 
   @override
   Widget build(BuildContext context) {
-    final nestedCubit = context.read<NestedCubit>();
-
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(80),
@@ -21,24 +19,22 @@ class NestedPage extends StatelessWidget {
       ),
       body: SafeArea(
         child: Center(
-          child: BlocBuilder<NestedCubit, NestedState>(
-            builder: (context, state) => Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                TextButton(
-                  onPressed: nestedCubit.navigateToOne,
-                  child: const Text('Nested One'),
-                ),
-                TextButton(
-                  onPressed: nestedCubit.navigateToTwo,
-                  child: const Text('Nested Two'),
-                ),
-                TextButton(
-                  onPressed: nestedCubit.navigateToSubNested,
-                  child: const Text('Sub Nested'),
-                ),
-              ],
-            ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              TextButton(
+                onPressed: () => router.push('/nested/nested-one'),
+                child: const Text('Nested One'),
+              ),
+              TextButton(
+                onPressed: () => router.push('/nested/nested-two'),
+                child: const Text('Nested Two'),
+              ),
+              TextButton(
+                onPressed: () => router.push('/nested/sub-nested'),
+                child: const Text('Sub Nested'),
+              ),
+            ],
           ),
         ),
       ),

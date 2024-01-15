@@ -67,11 +67,19 @@ final appRoutingConfig = ValueNotifier<RoutingConfig>(
                   );
                 },
               ),
-              GoRoute(
-                path: 'nested-two',
-                builder: (context, state) {
-                  return NestedTwoPage();
-                },
+              ShellRoute(
+                navigatorKey: GlobalKey<NavigatorState>(),
+                builder: (context, state, child) => Container(
+                  child: child,
+                ),
+                routes: [
+                  GoRoute(
+                    path: 'nested-two',
+                    builder: (context, state) {
+                      return NestedTwoPage();
+                    },
+                  ),
+                ],
               ),
               GoRoute(
                 path: 'sub-nested',

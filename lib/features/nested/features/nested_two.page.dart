@@ -1,3 +1,4 @@
+import 'package:eyr/app/app_router.dart';
 import 'package:eyr/shares/mixins/common_functionable.mixin.dart';
 import 'package:eyr/shares/widgets/header.widget.dart';
 import 'package:flutter/material.dart';
@@ -21,14 +22,9 @@ class NestedTwoPage extends StatelessWidget with CommonFunctionable {
             ),
             TextButton(
               onPressed: () {
-                // router.popUntilRouteWithName(
-                //   NestedHomeRoute.name,
-                //   scoped: false,
-                // );
+                router.popUntil('/nested');
               },
-              child: Text(
-                'Go Back to',
-              ),
+              child: Text('Go Back to'),
             ),
           ],
         ),

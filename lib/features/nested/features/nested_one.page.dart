@@ -24,10 +24,10 @@ class NestedOnePage extends StatelessWidget with CommonFunctionable {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                'With ${context.read<NestedCubit>().state.text}',
+                'With',
               ),
               TextButton(
-                onPressed: nestedCubit.navigateToTwo,
+                onPressed: () => router.push('/nested/nested-two'),
                 child: const Text('Nested Two'),
               ),
             ],
