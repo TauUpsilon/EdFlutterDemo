@@ -1,11 +1,12 @@
 import 'package:eyr/shares/mixins/common_functionable.mixin.dart';
+import 'package:eyr/shares/observers/app_router.observer.dart';
 import 'package:eyr/states/cubit/mask/mask_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'app_config.dart';
 
-class App extends StatelessWidget with CommonFunctionable {
+class App extends StatelessWidget with CommonFunctionable, AppRoutingObserver {
   App({required Key key}) : super(key: key);
 
   @override
