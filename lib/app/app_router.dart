@@ -125,20 +125,25 @@ extension GoRouterExt on GoRouter {
     }
   }
 
-  /// If there is not routePath given, it will pop until the first index
-  void popUntil(String target) {
-    final list = routerDelegate.currentConfiguration.routes.toList();
+  void popUntil(String? target) {
+    var routes = routerDelegate.currentConfiguration.routes;
+    var route = routerDelegate.currentConfiguration.routes.last;
 
-    for (final route in list.reversed) {
+    while (canPop()) {
+      final cIndex = routes.indexOf(route);
+
+      if (routes.elementAt(cIndex - 1) is ShellRoute) {
+        routerDelegate.currentConfiguration.matches.removeLast();
+      }
+
       if (route is GoRoute) {
         if (route.path == target || route.name == target) break;
         if (!canPop()) break;
         pop();
       }
 
-      if (list.elementAt(list.indexOf(route) - 1) is ShellRoute) {
-        routerDelegate.currentConfiguration.matches.removeLast();
-      }
+      routes = routerDelegate.currentConfiguration.routes;
+      route = routes.last;
     }
   }
 }
