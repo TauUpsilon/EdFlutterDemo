@@ -73,13 +73,12 @@ class DigitKeyboard extends StatelessWidget {
                   ],
                 ),
                 child: ElevatedButton(
-                  onPressed: () {
-                    context.read<DigitKeyboardCubit>().onDialTapped(
-                          widget,
-                          onValueChanged,
-                          onSubmitted,
-                        );
-                  },
+                  onPressed: () =>
+                      context.read<DigitKeyboardCubit>().onDialTapped(
+                            widget,
+                            onValueChanged,
+                            onSubmitted,
+                          ),
                   style: ButtonStyle(
                     backgroundColor: backgroundColor,
                     foregroundColor: foregroundColor,
