@@ -1,5 +1,6 @@
 import 'package:eyr/app/app_widget.dart';
 import 'package:eyr/shares/widgets/calculator.widget.dart';
+import 'package:eyr/shares/widgets/digit_keyboard/digit_keyboard_cubit.dart';
 import 'package:eyr/shares/widgets/header.widget.dart';
 import 'package:flutter/material.dart';
 import 'package:page_route_annotation/page_route.annotation.dart';
@@ -34,7 +35,17 @@ class _ComponentPageState extends State<ComponentPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: header(),
-      body: body(),
+      body: Padding(
+        padding: const EdgeInsets.all(40),
+        child: DigitKeyboard(
+          onValueChanged: (value) {
+            print('Change $value');
+          },
+          onSubmitted: (value) {
+            print('Submit: $value');
+          },
+        ),
+      ),
     );
   }
 }

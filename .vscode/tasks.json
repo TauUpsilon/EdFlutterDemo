@@ -5,7 +5,7 @@
       "label": "Build App",
       "type": "dart",
       "command": "dart",
-      "args": ["pub", "run", "build_runner", "watch", "-d"]
+      "args": ["pub", "run", "build_runner", "build", "-d"]
     }
   ]
 }

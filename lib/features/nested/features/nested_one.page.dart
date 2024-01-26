@@ -1,8 +1,6 @@
-import 'package:eyr/features/nested/nested.page.dart';
 import 'package:eyr/shares/mixins/common_functionable.mixin.dart';
 import 'package:eyr/shares/widgets/header.widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class NestedOnePage extends StatelessWidget with CommonFunctionable {
   final String test;
@@ -11,7 +9,7 @@ class NestedOnePage extends StatelessWidget with CommonFunctionable {
 
   @override
   Widget build(BuildContext context) {
-    final nestedCubit = context.read<NestedCubit>();
+    // final nestedCubit = context.read<NestedCubit>();
 
     return Scaffold(
       appBar: PreferredSize(

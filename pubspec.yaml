@@ -58,6 +58,7 @@ dependencies:
 
   page_route_annotation:
     path: custom_packages/page_route_annotation
+  equatable: ^2.0.5
 
 dev_dependencies:
   flutter_test:
