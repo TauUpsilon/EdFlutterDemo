@@ -39,8 +39,8 @@ class DigitKeyboard extends StatelessWidget {
       ];
 
   Widget get _keysGrid {
-    final dialSpacing = 15.0;
-    final dialShadowOffset = 4.0;
+    final dialSpacing = 10.0;
+    final dialShadowOffset = 2.0;
     final dialBlurRadius = 10.0;
     final dialBorderRadius = 10.0;
 

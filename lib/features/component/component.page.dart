@@ -39,7 +39,7 @@ class _ComponentPageState extends State<ComponentPage> {
         padding: const EdgeInsets.all(40),
         child: DigitKeyboard(
           onValueChanged: (value) {
-            print('Change $value');
+            print('Change: $value');
           },
           onSubmitted: (value) {
             print('Submit: $value');
