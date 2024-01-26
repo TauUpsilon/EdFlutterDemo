@@ -36,7 +36,7 @@ class _ComponentPageState extends State<ComponentPage> {
     return Scaffold(
       appBar: header(),
       body: Padding(
-        padding: const EdgeInsets.all(40),
+        padding: const EdgeInsets.all(0),
         child: DigitKeyboard(
           onValueChanged: (value) {
             print('Change: $value');

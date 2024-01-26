@@ -32,10 +32,25 @@ class DigitKeyboard extends StatelessWidget {
   }
 
   List<Widget> get _keys => [
-        Icon(Icons.clear_rounded),
-        Text('0'),
-        Icon(Icons.arrow_forward_rounded),
-        ...List.generate(9, (index) => Text('${index + 1}')),
+        Icon(
+          Icons.clear_rounded,
+          size: foregroundSize - 5,
+        ),
+        Text(
+          '0',
+          style: TextStyle(fontSize: foregroundSize),
+        ),
+        Icon(
+          Icons.arrow_forward_rounded,
+          size: foregroundSize - 5,
+        ),
+        ...List.generate(
+          9,
+          (index) => Text(
+            '${index + 1}',
+            style: TextStyle(fontSize: foregroundSize),
+          ),
+        ),
       ];
 
   Widget get _keysGrid {
@@ -54,45 +69,54 @@ class DigitKeyboard extends StatelessWidget {
         crossAxisCount: 3,
         children: _keys
             .map(
-              (widget) => DecoratedBox(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(dialBorderRadius),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.shade500,
-                      offset: Offset(dialShadowOffset, dialShadowOffset),
-                      blurRadius: dialBlurRadius,
-                      spreadRadius: 1,
+              (widget) => GestureDetector(
+                onTap: () => context.read<DigitKeyboardCubit>().onDialTapped(
+                      widget,
+                      onValueChanged,
+                      onSubmitted,
                     ),
-                    BoxShadow(
-                      color: Colors.white,
-                      offset: Offset(-dialShadowOffset, -dialShadowOffset),
-                      blurRadius: dialBlurRadius,
-                      spreadRadius: 1,
-                    ),
-                  ],
-                ),
-                child: ElevatedButton(
-                  onPressed: () =>
-                      context.read<DigitKeyboardCubit>().onDialTapped(
-                            widget,
-                            onValueChanged,
-                            onSubmitted,
-                          ),
-                  style: ButtonStyle(
-                    backgroundColor: backgroundColor,
-                    foregroundColor: foregroundColor,
-                    shape: MaterialStatePropertyAll(
-                      RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(dialBorderRadius),
+                child: DecoratedBox(
+                  decoration: BoxDecoration(
+                    color: Colors.grey.shade100,
+                    borderRadius: BorderRadius.circular(dialBorderRadius),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.shade500,
+                        offset: Offset(dialShadowOffset, dialShadowOffset),
+                        blurRadius: dialBlurRadius,
+                        spreadRadius: 1,
                       ),
-                    ),
-                    textStyle: MaterialStatePropertyAll(
-                      TextStyle(fontSize: foregroundSize),
-                    ),
-                    iconSize: MaterialStatePropertyAll(foregroundSize - 5),
+                      BoxShadow(
+                        color: Colors.white,
+                        offset: Offset(-dialShadowOffset, -dialShadowOffset),
+                        blurRadius: dialBlurRadius,
+                        spreadRadius: 1,
+                      ),
+                    ],
                   ),
-                  child: widget,
+                  child: Center(child: widget),
+                  // ElevatedButton(
+                  //   onPressed: () =>
+                  //       context.read<DigitKeyboardCubit>().onDialTapped(
+                  //             widget,
+                  //             onValueChanged,
+                  //             onSubmitted,
+                  //           ),
+                  //   style: ButtonStyle(
+                  //     backgroundColor: backgroundColor,
+                  //     foregroundColor: foregroundColor,
+                  //     shape: MaterialStatePropertyAll(
+                  //       RoundedRectangleBorder(
+                  //         borderRadius: BorderRadius.circular(dialBorderRadius),
+                  //       ),
+                  //     ),
+                  //     textStyle: MaterialStatePropertyAll(
+                  //       TextStyle(fontSize: foregroundSize),
+                  //     ),
+                  //     iconSize: MaterialStatePropertyAll(foregroundSize - 5),
+                  //   ),
+                  //   child: widget,
+                  // ),
                 ),
               ),
             )
