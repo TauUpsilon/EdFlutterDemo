@@ -11,6 +11,17 @@ class HomeCubit extends Cubit<HomeState> with CommonFunctionable {
     await super.close();
   }
 
+  void onInit() {
+    FirebaseMessaging.onMessage.listen((event) {
+      emit(
+        HomeInitial.copyWith(
+          title: event.notification?.title ?? state.title,
+          body: event.notification?.body ?? state.body,
+        ),
+      );
+    });
+  }
+
   void navigateToNetwork() {
     router.push('/network');
   }

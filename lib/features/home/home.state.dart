@@ -2,9 +2,25 @@ part of 'home.page.dart';
 
 @immutable
 sealed class HomeState {
-  const HomeState();
+  final String title;
+  final String body;
+
+  const HomeState({
+    required this.title,
+    required this.body,
+  });
 }
 
 final class HomeInitial extends HomeState {
-  HomeInitial.init() : super();
+  HomeInitial({required super.title, required super.body});
+
+  factory HomeInitial.init() => HomeInitial(title: '', body: '');
+  factory HomeInitial.copyWith({
+    required String title,
+    required String body,
+  }) =>
+      HomeInitial(
+        title: title,
+        body: body,
+      );
 }

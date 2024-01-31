@@ -5,6 +5,7 @@ import 'package:eyr/api/api.service.dart';
 import 'package:eyr/app/app_widget.dart';
 import 'package:eyr/shares/mixins/common_functionable.mixin.dart';
 import 'package:eyr/shares/widgets/header.widget.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
@@ -19,7 +20,7 @@ part 'home.state.dart';
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final homeCubit = context.read<HomeCubit>();
+    final homeCubit = context.read<HomeCubit>()..onInit();
 
     return Scaffold(
       appBar: PreferredSize(
@@ -32,6 +33,8 @@ class HomePage extends StatelessWidget {
             builder: (context, state) => Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                Text(state.title),
+                Text(state.body),
                 TextButton(
                   onPressed: homeCubit.navigateToNetwork,
                   child: const Text('Network'),
