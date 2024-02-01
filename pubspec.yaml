@@ -63,6 +63,7 @@ dependencies:
   firebase_messaging: ^14.7.10
   firebase_core: ^2.24.2
   firebase_analytics: ^10.8.0
+  flutter_notification_channel: ^2.0.0
 
 dev_dependencies:
   flutter_test:

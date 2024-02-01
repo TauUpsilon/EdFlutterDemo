@@ -11,7 +11,7 @@ class HomeCubit extends Cubit<HomeState> with CommonFunctionable {
     await super.close();
   }
 
-  void onInit() {
+  Future<void> onInit() async {
     FirebaseMessaging.onMessage.listen((event) {
       emit(
         HomeInitial.copyWith(

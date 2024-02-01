@@ -5,6 +5,8 @@ import 'package:eyr/app/app_widget.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_notification_channel/flutter_notification_channel.dart';
+import 'package:flutter_notification_channel/notification_importance.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -29,9 +31,22 @@ void main() async {
     log(token);
   }
 
+  FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
+
+  await FlutterNotificationChannel.registerNotificationChannel(
+    id: 'com.example.flutter_proj',
+    name: 'com.example.flutter_proj',
+    description: 'Your channel description',
+    importance: NotificationImportance.IMPORTANCE_HIGH,
+  );
+
   runApp(
     App(
       key: UniqueKey(),
     ),
   );
+}
+
+Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  print(message.notification?.android?.channelId);
 }
