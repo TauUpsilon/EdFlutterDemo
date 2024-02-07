@@ -1,7 +1,7 @@
 import 'package:eyr/app/app_widget.dart';
 import 'package:eyr/apr/app_routes.dart';
 import 'package:eyr/shared/mixins/common_funcable.dart';
-import 'package:eyr/shared/widgets/header.widget.dart';
+import 'package:eyr/shared/widgets/header_widget.dart';
 import 'package:eyr/states/auth/auth_cubit.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';

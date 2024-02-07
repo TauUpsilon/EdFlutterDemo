@@ -1,6 +1,6 @@
 import 'package:custom_math/custom_math.dart';
 import 'package:eyr/shared/mixins/common_funcable.dart';
-import 'package:eyr/shared/widgets/dial_button.widget.dart';
+import 'package:eyr/shared/widgets/dial_button_widget.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 

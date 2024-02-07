@@ -1,6 +1,6 @@
 import 'package:eyr/app/app_widget.dart';
 import 'package:eyr/shared/mixins/common_funcable.dart';
-import 'package:eyr/shared/widgets/header.widget.dart';
+import 'package:eyr/shared/widgets/header_widget.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
