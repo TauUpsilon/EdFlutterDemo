@@ -29,8 +29,6 @@ class HomeView extends StatelessWidget {
               builder: (context, state) => Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(state.title),
-                  Text(state.body),
                   TextButton(
                     onPressed: context.read<HomeCubit>().navigateToNetwork,
                     child: const Text('Network'),
@@ -39,6 +37,8 @@ class HomeView extends StatelessWidget {
                   //   onPressed: homeCubit.rsaRequest,
                   //   child: const Text('RsaRequest'),
                   // ),
+                  Text(state.title),
+                  Text(state.body),
                 ],
               ),
             ),

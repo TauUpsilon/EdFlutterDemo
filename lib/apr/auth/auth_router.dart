@@ -13,7 +13,17 @@ final authRouter = ShellRoute(
         GoRoute(
           path: AppRoutes.auth.login.path,
           name: AppRoutes.auth.login.name,
-          builder: (context, state) => const LoginView(),
+          builder: (context, state) {
+            final extra = state.extra;
+
+            if (extra is! LoginRouteParam) {
+              throw Exception('LoginRouteParam');
+            }
+
+            return LoginView(
+              redirectUrl: extra.redirectUrl,
+            );
+          },
         ),
       ],
     ),

@@ -10,4 +10,8 @@ class AuthCubit extends Cubit<AuthState> {
   void login() {
     emit(AuthState.copyWith(isAuthenticated: true));
   }
+
+  void logout() {
+    emit(AuthState.copyWith(isAuthenticated: false));
+  }
 }

@@ -1,6 +1,10 @@
+import 'package:eyr/apr/app_routes.dart';
 import 'package:eyr/shared/mixins/common_funcable.dart';
+import 'package:eyr/states/auth/auth_cubit.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 
 class HeaderBarWidget extends StatelessWidget with CommonFuncable {
   final String title;
@@ -31,6 +35,20 @@ class HeaderBarWidget extends StatelessWidget with CommonFuncable {
             ),
           ),
         ),
+        actions: [
+          BlocBuilder<AuthCubit, AuthState>(
+            builder: (context, state) => state.isAuthenticated
+                ? IconButton(
+                    onPressed: () {
+                      GetIt.I<AuthCubit>().logout();
+
+                      router.goNamed(AppRoutes.home.fullpath);
+                    },
+                    icon: const Icon(Icons.logout),
+                  )
+                : const SizedBox.shrink(),
+          ),
+        ],
       );
 
   @override
