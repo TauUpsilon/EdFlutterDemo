@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:equatable/equatable.dart';
 import 'package:eyr/shared/mixins/common_funcable.dart';
+import 'package:eyr/shared/mixins/subscribable.dart';
+import 'package:eyr/shared/observers/app_router_observer.dart';
 import 'package:eyr/shared/widgets/app_mask/app_mask_enum.dart';
 import 'package:eyr/shared/widgets/app_mask/app_mask_view.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +13,11 @@ import 'package:get_it/get_it.dart';
 part 'init_state.dart';
 
 class InitCubit extends Cubit<void>
-    with WidgetsBindingObserver, CommonFuncable {
+    with
+        WidgetsBindingObserver,
+        AppRouterObserver,
+        CommonFuncable,
+        Subscribable {
   final _maskCubit = GetIt.I<AppMaskCubit>();
   final _appLifecycle = StreamController<AppLifecycleState>();
 
@@ -20,6 +26,7 @@ class InitCubit extends Cubit<void>
 
   InitCubit() : super(null) {
     WidgetsBinding.instance.addObserver(this);
+    WidgetsBinding.instance.addRouterObserver(this);
   }
 
   Future<void> prepare() async {
@@ -47,7 +54,7 @@ class InitCubit extends Cubit<void>
       onError: (err) {
         logger.e('WatchAppLifeCycle $err');
       },
-    );
+    ).subscribe(this);
 
     isAppLifeCycleWatched = true;
   }
@@ -82,6 +89,9 @@ class InitCubit extends Cubit<void>
   @override
   Future<void> close() {
     WidgetsBinding.instance.removeObserver(this);
+    WidgetsBinding.instance.removeRouterObserver(this);
+
+    unsubscribe();
 
     return super.close();
   }

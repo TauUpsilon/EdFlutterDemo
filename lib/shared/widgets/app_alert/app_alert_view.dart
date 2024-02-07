@@ -100,11 +100,11 @@ class AppAlert extends StatelessWidget {
         children: [
           ElevatedButton(
             child: Text(AppLocalizations.of(context)?.confirm ?? ''),
-            onPressed: () => context.read<AppAlertCubit>()._onConfirm(),
+            onPressed: () => context.read<AppAlertCubit>().onConfirm(),
           ),
           ElevatedButton(
             child: Text(AppLocalizations.of(context)?.cancel ?? ''),
-            onPressed: () => context.read<AppAlertCubit>()._onCancel(),
+            onPressed: () => context.read<AppAlertCubit>().onCancel(),
           ),
         ],
       ),

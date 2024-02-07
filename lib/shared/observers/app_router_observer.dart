@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 
-mixin class AppRoutingObserver {
+mixin class AppRouterObserver {
   GoRouter get router => GetIt.I<GoRouter>();
 
   void didRouteChanged() {
@@ -34,14 +34,14 @@ mixin class AppRoutingObserver {
   }
 }
 
-extension RouteWidgetsBinding on WidgetsBinding {
+extension AppRouterBinding on WidgetsBinding {
   GoRouter get router => GetIt.I<GoRouter>();
 
-  void addRouteObserver(AppRoutingObserver observer) {
+  void addRouterObserver(AppRouterObserver observer) {
     router.routerDelegate.addListener(() => observer.didRouteChanged());
   }
 
-  void removeRouteObserver(AppRoutingObserver observer) {
+  void removeRouterObserver(AppRouterObserver observer) {
     router.routerDelegate.removeListener(() => observer.didRouteChanged());
   }
 }

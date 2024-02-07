@@ -12,7 +12,7 @@ import 'package:get_it/get_it.dart';
 
 part 'app_config.dart';
 
-class App extends StatelessWidget with CommonFuncable, AppRoutingObserver {
+class App extends StatelessWidget with CommonFuncable, AppRouterObserver {
   final Locale _locale = const Locale('en');
 
   App({super.key});

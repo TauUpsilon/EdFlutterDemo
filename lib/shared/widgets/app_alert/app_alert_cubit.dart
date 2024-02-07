@@ -24,12 +24,12 @@ class AppAlertCubit extends Cubit<AppAlertState> {
     );
   }
 
-  void _onConfirm() {
+  void onConfirm() {
     hide();
     completer.complete(true);
   }
 
-  void _onCancel() {
+  void onCancel() {
     hide();
     completer.complete(false);
   }
