@@ -67,12 +67,12 @@ class InitCubit extends Cubit<void>
     isDeeplinkListened = true;
   }
 
-  Future<void> _handleDeeplink(Uri? uri) async {
-    if (uri != null && uri.host.contains('ezwt.com')) {
-      // await Future.delayed(const Duration(milliseconds: 100));
-      // router.goNamed(EzwtRoutes.queuer.explore.name);
-    }
-  }
+  // Future<void> _handleDeeplink(Uri? uri) async {
+  //   if (uri != null && uri.host.contains('')) {
+  //     await Future.delayed(const Duration(milliseconds: 100));
+  //     router.goNamed(EzwtRoutes.queuer.explore.name);
+  //   }
+  // }
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {

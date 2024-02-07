@@ -1,6 +1,7 @@
 import 'package:custom_math/custom_math.dart';
 import 'package:eyr/shared/mixins/common_funcable.dart';
 import 'package:eyr/shared/widgets/dial_button.widget.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class CalculatorWidget extends StatefulWidget with CommonFuncable {
@@ -110,7 +111,7 @@ class CalculatorWidgetState extends State<CalculatorWidget> {
     if (firstNum.isNotEmpty &&
         secondNum.isEmpty &&
         !displayText.endsWith('.')) {
-      setState(() {
+      setState(() async {
         secondNum = displayText;
 
         final pattern = RegExp(
@@ -138,7 +139,7 @@ class CalculatorWidgetState extends State<CalculatorWidget> {
         displayText += val;
       } else {
         displayText += val;
-        displayText = displayText.replaceAll(RegExp(r'^0+(?=.)'), '');
+        displayText = displayText.replaceAll(RegExp('^0+(?=.)'), '');
       }
     });
   }
@@ -236,4 +237,13 @@ class CalculatorWidgetState extends State<CalculatorWidget> {
           ],
         ),
       );
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(StringProperty('firstNum', firstNum))
+      ..add(StringProperty('secondNum', secondNum))
+      ..add(StringProperty('operator', operator))
+      ..add(StringProperty('displayText', displayText));
+  }
 }

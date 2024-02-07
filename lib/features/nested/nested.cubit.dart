@@ -1,22 +1,22 @@
 part of 'nested.page.dart';
 
 class NestedCubit extends Cubit<NestedState> with CommonFuncable {
-  NestedCubit() : super(NetworkInitial.init());
+  NestedCubit() : super(const NetworkInitial.init());
 
   @override
   Future<void> close() async {
     await super.close();
   }
 
-  void navigateToOne() {
+  Future<void> navigateToOne() async {
     router.push('/nested/nested-one');
   }
 
-  void navigateToTwo() {
+  Future<void> navigateToTwo() async {
     router.push('/nested/nested-two');
   }
 
-  void navigateToSubNested() {
+  Future<void> navigateToSubNested() async {
     router.push('/nested/sub-nested');
   }
 }

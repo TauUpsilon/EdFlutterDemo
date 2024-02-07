@@ -1,4 +1,5 @@
 import 'package:eyr/shared/mixins/common_funcable.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class FooterBarWidget extends StatelessWidget with CommonFuncable {
@@ -26,9 +27,9 @@ class FooterBarWidget extends StatelessWidget with CommonFuncable {
   ];
 
   FooterBarWidget({
-    super.key,
     required this.selectedItem,
     required this.onNavBarTapped,
+    super.key,
   });
 
   @override
@@ -44,5 +45,18 @@ class FooterBarWidget extends StatelessWidget with CommonFuncable {
       currentIndex: selectedItem,
       onTap: (index) => onNavBarTapped,
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(IntProperty('selectedItem', selectedItem))
+      ..add(
+        ObjectFlagProperty<Function(int index)>.has(
+          'onNavBarTapped',
+          onNavBarTapped,
+        ),
+      );
   }
 }

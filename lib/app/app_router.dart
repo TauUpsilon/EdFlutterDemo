@@ -1,3 +1,4 @@
+import 'package:eyr/app/app_navigator.dart';
 import 'package:eyr/features/component/component.page.dart';
 import 'package:eyr/features/home/home.page.dart';
 import 'package:eyr/features/nested/features/nested_one.page.dart';
@@ -9,6 +10,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
+final router = GoRouter.routingConfig(
+  navigatorKey: AppNavigator.rootKey,
+  debugLogDiagnostics: true,
+  routingConfig: appRoutingConfig,
+);
+
 final appRoutingConfig = ValueNotifier<RoutingConfig>(
   RoutingConfig(
     routes: <RouteBase>[
@@ -19,7 +26,7 @@ final appRoutingConfig = ValueNotifier<RoutingConfig>(
             providers: [
               BlocProvider(create: (_) => HomeCubit()),
             ],
-            child: HomePage(),
+            child: const HomePage(),
           );
         },
       ),
@@ -38,7 +45,7 @@ final appRoutingConfig = ValueNotifier<RoutingConfig>(
       ),
       GoRoute(
         path: '/component',
-        builder: (context, state) => ComponentPage(),
+        builder: (context, state) => const ComponentPage(),
       ),
       ShellRoute(
         navigatorKey: GlobalKey<NavigatorState>(),
@@ -95,26 +102,21 @@ final appRoutingConfig = ValueNotifier<RoutingConfig>(
   ),
 );
 
-extension GoRouterExt on GoRouter {
-  bool maybePop() {
-    if (canPop()) pop();
-    return canPop();
-  }
-
-  void pushAndPopUntil(
+extension AppRouterExt on GoRouter {
+  Future<void> pushAndPopUntil(
     String location,
     String until, {
     Object? extra,
-  }) {
+  }) async {
     popUntil(until);
     push(location, extra: extra);
   }
 
-  void pushNamedAndPopUntil(
+  Future<void> pushNamedAndPopUntil(
     String name,
     String until, {
     Object? extra,
-  }) {
+  }) async {
     popUntil(name);
     pushNamed(name, extra: extra);
   }
@@ -125,25 +127,31 @@ extension GoRouterExt on GoRouter {
     }
   }
 
-  void popUntil(String? target) {
-    var routes = routerDelegate.currentConfiguration.routes;
-    var route = routerDelegate.currentConfiguration.routes.last;
+  void popUntil(String target) {
+    final list = routerDelegate.currentConfiguration.routes.toList();
 
-    while (canPop()) {
-      final cIndex = routes.indexOf(route);
-
-      if (routes.elementAt(cIndex - 1) is ShellRoute) {
-        routerDelegate.currentConfiguration.matches.removeLast();
-      }
-
+    for (final route in list.reversed) {
       if (route is GoRoute) {
         if (route.path == target || route.name == target) break;
         if (!canPop()) break;
         pop();
       }
 
-      routes = routerDelegate.currentConfiguration.routes;
-      route = routes.last;
+      if (list.elementAt(list.indexOf(route) - 1) is ShellRoute) {
+        routerDelegate.currentConfiguration.matches.removeLast();
+      }
     }
   }
+}
+
+abstract class AppRoute {
+  final AppRoute? _parent;
+
+  AppRoute({
+    AppRoute? parent,
+  }) : _parent = parent;
+
+  String get path;
+  String get name => fullpath;
+  String get fullpath => '${_parent?.fullpath ?? ''}/$path';
 }

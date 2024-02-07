@@ -8,7 +8,7 @@ class HomeCubit extends Cubit<HomeState> with CommonFuncable {
     await super.close();
   }
 
-  Future<void> onInit() async {
+  void onInit() {
     FirebaseMessaging.onMessage.listen((event) {
       emit(
         HomeInitial.copyWith(
@@ -19,19 +19,19 @@ class HomeCubit extends Cubit<HomeState> with CommonFuncable {
     });
   }
 
-  void navigateToNetwork() {
+  Future<void> navigateToNetwork() async {
     router.push('/network');
   }
 
-  void navigateToComponent() {
+  Future<void> navigateToComponent() async {
     router.push('/component');
   }
 
-  void navigateToNested() {
+  Future<void> navigateToNested() async {
     router.push('/nested');
   }
 
-  void navigateToSubNested() {
+  Future<void> navigateToSubNested() async {
     router.push('/nested/sub-nested');
   }
 

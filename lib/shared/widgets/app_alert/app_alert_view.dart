@@ -6,6 +6,7 @@ import 'package:eyr/shared/widgets/app_alert/app_alert_enum.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 part 'app_alert_cubit.dart';
 part 'app_alert_state.dart';
@@ -97,17 +98,14 @@ class AppAlert extends StatelessWidget {
       builder: (context, state) => Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          // EzwtButton(
-          //   textStyle: Theme.of(context).textTheme.headlineMedium,
-          //   child: Text(AppLocalizations.of(context)?.confirm ?? ''),
-          //   onPressed: () => context.read<AppAlertCubit>()._onConfirm(),
-          // ),
-          // EzwtButton(
-          //   isActive: false,
-          //   textStyle: Theme.of(context).textTheme.headlineMedium,
-          //   child: Text(AppLocalizations.of(context)?.cancel ?? ''),
-          //   onPressed: () => context.read<AppAlertCubit>()._onCancel(),
-          // ),
+          ElevatedButton(
+            child: Text(AppLocalizations.of(context)?.confirm ?? ''),
+            onPressed: () => context.read<AppAlertCubit>()._onConfirm(),
+          ),
+          ElevatedButton(
+            child: Text(AppLocalizations.of(context)?.cancel ?? ''),
+            onPressed: () => context.read<AppAlertCubit>()._onCancel(),
+          ),
         ],
       ),
     );

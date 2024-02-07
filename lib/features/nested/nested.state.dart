@@ -8,5 +8,5 @@ sealed class NestedState {
 }
 
 final class NetworkInitial extends NestedState {
-  NetworkInitial.init() : super(text: 'NestedState');
+  const NetworkInitial.init() : super(text: 'NestedState');
 }

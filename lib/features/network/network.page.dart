@@ -2,6 +2,7 @@ import 'package:eyr/api/json_place_holder/todos/todos_service.dart';
 import 'package:eyr/app/app_widget.dart';
 import 'package:eyr/shared/mixins/common_funcable.dart';
 import 'package:eyr/shared/widgets/header.widget.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
@@ -13,7 +14,7 @@ part 'network.page.g.dart';
 
 @RouteParamGenerable()
 class NetworkPage extends StatelessWidget with CommonFuncable {
-  NetworkPage({required this.test});
+  NetworkPage({required this.test, super.key});
 
   final String test;
 
@@ -23,7 +24,7 @@ class NetworkPage extends StatelessWidget with CommonFuncable {
 
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(80),
+        preferredSize: const Size.fromHeight(80),
         child: HeaderBarWidget(title: AppConfig.appTitle),
       ),
       body: SafeArea(
@@ -53,11 +54,17 @@ class NetworkPage extends StatelessWidget with CommonFuncable {
               //   return SizedBox.shrink();
               // }
 
-              return SizedBox.shrink();
+              return const SizedBox.shrink();
             },
           ),
         ),
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('test', test));
   }
 }

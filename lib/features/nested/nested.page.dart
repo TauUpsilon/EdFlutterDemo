@@ -7,13 +7,13 @@ part 'nested.cubit.dart';
 part 'nested.state.dart';
 
 class NestedPage extends StatelessWidget with CommonFuncable {
-  NestedPage();
+  NestedPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(80),
+        preferredSize: const Size.fromHeight(80),
         child: HeaderBarWidget(title: 'Nested Home'),
       ),
       body: SafeArea(
@@ -22,15 +22,15 @@ class NestedPage extends StatelessWidget with CommonFuncable {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               TextButton(
-                onPressed: () => router.push('/nested/nested-one'),
+                onPressed: () async => router.push('/nested/nested-one'),
                 child: const Text('Nested One'),
               ),
               TextButton(
-                onPressed: () => router.push('/nested/nested-two'),
+                onPressed: () async => router.push('/nested/nested-two'),
                 child: const Text('Nested Two'),
               ),
               TextButton(
-                onPressed: () => router.push('/nested/sub-nested'),
+                onPressed: () async => router.push('/nested/sub-nested'),
                 child: const Text('Sub Nested'),
               ),
             ],

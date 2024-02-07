@@ -9,13 +9,13 @@ class DigitKeyboard extends StatelessWidget {
   final ValueChanged<String> onValueChanged;
   final ValueChanged<String> onSubmitted;
 
-  DigitKeyboard({
+  const DigitKeyboard({
+    required this.onValueChanged,
+    required this.onSubmitted,
     super.key,
     this.backgroundColor,
     this.foregroundColor,
     this.foregroundSize = 40,
-    required this.onValueChanged,
-    required this.onSubmitted,
   });
 
   @override
@@ -54,14 +54,14 @@ class DigitKeyboard extends StatelessWidget {
       ];
 
   Widget get _keysGrid {
-    final dialSpacing = 10.0;
-    final dialShadowOffset = 2.0;
-    final dialBlurRadius = 10.0;
-    final dialBorderRadius = 10.0;
+    const dialSpacing = 10.0;
+    const dialShadowOffset = 2.0;
+    const dialBlurRadius = 10.0;
+    const dialBorderRadius = 10.0;
 
     return BlocBuilder<DigitKeyboardCubit, DigitKeyboardState>(
       builder: (context, state) => GridView.count(
-        padding: EdgeInsets.all(25),
+        padding: const EdgeInsets.all(25),
         mainAxisSpacing: dialSpacing,
         crossAxisSpacing: dialSpacing,
         reverse: true,
@@ -82,11 +82,12 @@ class DigitKeyboard extends StatelessWidget {
                     boxShadow: [
                       BoxShadow(
                         color: Colors.grey.shade500,
-                        offset: Offset(dialShadowOffset, dialShadowOffset),
+                        offset:
+                            const Offset(dialShadowOffset, dialShadowOffset),
                         blurRadius: dialBlurRadius,
                         spreadRadius: 1,
                       ),
-                      BoxShadow(
+                      const BoxShadow(
                         color: Colors.white,
                         offset: Offset(-dialShadowOffset, -dialShadowOffset),
                         blurRadius: dialBlurRadius,
@@ -123,5 +124,36 @@ class DigitKeyboard extends StatelessWidget {
             .toList(),
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(
+        DiagnosticsProperty<MaterialStateProperty<Color?>?>(
+          'backgroundColor',
+          backgroundColor,
+        ),
+      )
+      ..add(
+        DiagnosticsProperty<MaterialStateProperty<Color?>?>(
+          'foregroundColor',
+          foregroundColor,
+        ),
+      )
+      ..add(DoubleProperty('foregroundSize', foregroundSize))
+      ..add(
+        ObjectFlagProperty<ValueChanged<String>>.has(
+          'onValueChanged',
+          onValueChanged,
+        ),
+      )
+      ..add(
+        ObjectFlagProperty<ValueChanged<String>>.has(
+          'onSubmitted',
+          onSubmitted,
+        ),
+      );
   }
 }

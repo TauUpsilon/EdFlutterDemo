@@ -1,11 +1,12 @@
 import 'package:eyr/shared/mixins/common_funcable.dart';
 import 'package:eyr/shared/widgets/header.widget.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class NestedOnePage extends StatelessWidget with CommonFuncable {
   final String test;
 
-  NestedOnePage({required this.test});
+  NestedOnePage({required this.test, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +14,7 @@ class NestedOnePage extends StatelessWidget with CommonFuncable {
 
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(80),
+        preferredSize: const Size.fromHeight(80),
         child: HeaderBarWidget(title: 'Nested One'),
       ),
       body: SafeArea(
@@ -21,11 +22,11 @@ class NestedOnePage extends StatelessWidget with CommonFuncable {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
+              const Text(
                 'With',
               ),
               TextButton(
-                onPressed: () => router.push('/nested/nested-two'),
+                onPressed: () async => router.push('/nested/nested-two'),
                 child: const Text('Nested Two'),
               ),
             ],
@@ -33,5 +34,11 @@ class NestedOnePage extends StatelessWidget with CommonFuncable {
         ),
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(StringProperty('test', test));
   }
 }

@@ -3,32 +3,32 @@ import 'package:eyr/shared/widgets/header.widget.dart';
 import 'package:flutter/material.dart';
 
 class SubNestedPage extends StatelessWidget with CommonFuncable {
-  SubNestedPage();
+  SubNestedPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(80),
+        preferredSize: const Size.fromHeight(80),
         child: HeaderBarWidget(title: 'Sub Nested Home'),
       ),
       body: SafeArea(
         child: Stack(
           children: [
-            Container(
+            SizedBox(
               height: MediaQuery.of(context).size.height,
               width: MediaQuery.of(context).size.width,
               child: DragTarget<String>(
                 builder: (
-                  BuildContext context,
-                  List<dynamic> accepted,
-                  List<dynamic> rejected,
+                  context,
+                  accepted,
+                  rejected,
                 ) {
-                  return ClipRRect(
+                  return const ClipRRect(
                     borderRadius: BorderRadius.all(
                       Radius.circular(12),
                     ),
-                    child: Container(
+                    child: SizedBox(
                       height: 200,
                       width: 200,
                       child: Center(
@@ -53,7 +53,7 @@ class SubNestedPage extends StatelessWidget with CommonFuncable {
               child: Container(
                 height: MediaQuery.of(context).size.height * 0.1,
                 width: MediaQuery.of(context).size.width,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   border: Border.symmetric(
                     horizontal: BorderSide(
                       width: 5,
@@ -63,25 +63,15 @@ class SubNestedPage extends StatelessWidget with CommonFuncable {
                 ),
                 child: ListView(
                   scrollDirection: Axis.horizontal,
-                  children: List.generate(20, (int i) {})
+                  children: List.generate(20, (i) {})
                       .map(
-                        (e) => Padding(
-                          padding: const EdgeInsets.symmetric(
+                        (e) => const Padding(
+                          padding: EdgeInsets.symmetric(
                             horizontal: 16,
                           ),
                           child: Draggable<String>(
                             data: 'red',
-                            child: Container(
-                              height: 50,
-                              width: 50,
-                              child: Center(
-                                child: Icon(
-                                  Icons.table_restaurant_rounded,
-                                  size: 50,
-                                ),
-                              ),
-                            ),
-                            feedback: Container(
+                            feedback: SizedBox(
                               height: 60,
                               width: 60,
                               child: Center(
@@ -91,13 +81,23 @@ class SubNestedPage extends StatelessWidget with CommonFuncable {
                                 ),
                               ),
                             ),
-                            childWhenDragging: Container(
+                            childWhenDragging: SizedBox(
                               height: 50,
                               width: 50,
                               child: Center(
                                 child: Icon(
                                   Icons.table_restaurant_rounded,
                                   color: Colors.grey,
+                                  size: 50,
+                                ),
+                              ),
+                            ),
+                            child: SizedBox(
+                              height: 50,
+                              width: 50,
+                              child: Center(
+                                child: Icon(
+                                  Icons.table_restaurant_rounded,
                                   size: 50,
                                 ),
                               ),
