@@ -18,7 +18,13 @@ class HeaderBarWidget extends StatelessWidget with CommonFuncable {
   Widget build(BuildContext context) => AppBar(
         foregroundColor: Colors.white,
         shadowColor: Colors.black,
-        title: Text(title),
+        title: Text(
+          title,
+          style: TextStyle(
+            fontSize: Theme.of(context).textTheme.titleSmall?.fontSize,
+          ),
+          textAlign: TextAlign.center,
+        ),
         backgroundColor: Colors.black,
         elevation: 20,
         leading: router.canPop()
