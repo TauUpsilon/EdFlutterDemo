@@ -1,4 +1,4 @@
-part of 'home.page.dart';
+part of 'home_view.dart';
 
 @immutable
 sealed class HomeState {

@@ -1,4 +1,4 @@
-part of 'network.page.dart';
+part of 'network_view.dart';
 
 class NetworkCubit extends Cubit<void> with CommonFuncable {
   NetworkCubit() : super(null);

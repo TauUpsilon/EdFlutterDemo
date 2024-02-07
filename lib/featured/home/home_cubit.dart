@@ -1,4 +1,4 @@
-part of 'home.page.dart';
+part of 'home_view.dart';
 
 class HomeCubit extends Cubit<HomeState> with CommonFuncable {
   HomeCubit() : super(HomeInitial.init());

@@ -10,7 +10,7 @@ class PageClassVisitor extends SimpleElementVisitor<void> {
   @override
   void visitConstructorElement(ConstructorElement element) {
     final returnType = element.returnType.toString();
-    className = returnType.replaceFirst(RegExp(r'View*'), '');
+    className = returnType.replaceFirst(RegExp(r'(Page|View)'), '');
   }
 
   @override
