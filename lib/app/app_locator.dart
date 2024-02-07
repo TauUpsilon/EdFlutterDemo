@@ -6,6 +6,7 @@ import 'package:eyr/shared/services/logging_service.dart';
 import 'package:eyr/shared/services/rsa_service.dart';
 import 'package:eyr/shared/widgets/app_alert/app_alert_view.dart';
 import 'package:eyr/shared/widgets/app_mask/app_mask_view.dart';
+import 'package:eyr/states/auth/auth_cubit.dart';
 import 'package:eyr/states/env/env_cubit.dart';
 import 'package:eyr/states/init/init_cubit.dart';
 import 'package:get_it/get_it.dart';
@@ -28,6 +29,7 @@ mixin AppLocator {
           ..registerLazySingleton(TodosService.new)
 
           // Global Cubits
+          ..registerLazySingleton(AuthCubit.new)
           ..registerLazySingleton(InitCubit.new)
           ..registerLazySingleton(EnvCubit.new)
           ..registerLazySingleton(AppMaskCubit.new)

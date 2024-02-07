@@ -1,5 +1,6 @@
 part of 'init_cubit.dart';
 
+@immutable
 sealed class InitState with EquatableMixin {
   const InitState();
 

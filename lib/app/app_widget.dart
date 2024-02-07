@@ -3,6 +3,7 @@ import 'package:eyr/shared/mixins/common_funcable.dart';
 import 'package:eyr/shared/observers/app_router_observer.dart';
 import 'package:eyr/shared/widgets/app_alert/app_alert_view.dart';
 import 'package:eyr/shared/widgets/app_mask/app_mask_view.dart';
+import 'package:eyr/states/auth/auth_cubit.dart';
 import 'package:eyr/states/env/env_cubit.dart';
 import 'package:eyr/states/init/init_cubit.dart';
 import 'package:flutter/material.dart';
@@ -25,6 +26,7 @@ class App extends StatelessWidget with CommonFuncable, AppRouterObserver {
         BlocProvider(create: (context) => GetIt.I<AppAlertCubit>()),
         BlocProvider(create: (context) => GetIt.I<InitCubit>()),
         BlocProvider(create: (context) => GetIt.I<EnvCubit>()),
+        BlocProvider(create: (context) => GetIt.I<AuthCubit>()),
       ],
       child: Stack(
         alignment: Alignment.center,

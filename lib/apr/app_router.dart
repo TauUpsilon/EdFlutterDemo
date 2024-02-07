@@ -1,5 +1,6 @@
 import 'package:eyr/app/app_navigator.dart';
 import 'package:eyr/apr/app_routes.dart';
+import 'package:eyr/apr/auth/auth_router.dart';
 import 'package:eyr/apr/home/home_router.dart';
 import 'package:eyr/apr/network/network_router.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +19,7 @@ final appRoutingConfig = ValueNotifier<RoutingConfig>(
         path: '/',
         redirect: (context, state) => AppRoutes.home.name,
       ),
+      authRouter,
       homeRouter,
       networkRouter,
     ],
