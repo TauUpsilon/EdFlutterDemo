@@ -1,4 +1,6 @@
+import 'package:equatable/equatable.dart';
 import 'package:eyr/app/app_widget.dart';
+import 'package:eyr/apr/app_routes.dart';
 import 'package:eyr/shared/mixins/common_funcable.dart';
 import 'package:eyr/shared/widgets/header_widget.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -32,6 +34,10 @@ class HomeView extends StatelessWidget {
                   TextButton(
                     onPressed: context.read<HomeCubit>().navigateToNetwork,
                     child: const Text('Network'),
+                  ),
+                  TextButton(
+                    onPressed: context.read<HomeCubit>().navigateToTry,
+                    child: const Text('Try'),
                   ),
                   // TextButton(
                   //   onPressed: homeCubit.rsaRequest,

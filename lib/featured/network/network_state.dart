@@ -1,23 +1,30 @@
-// part of 'network.page.dart';
+part of 'network_view.dart';
 
-// @immutable
-// sealed class NetworkState {
+@immutable
+sealed class NetworkState with EquatableMixin {
+  final List<TodosGetRes> todos;
 
+  const NetworkState({
+    required this.todos,
+  });
 
-//   const NetworkState({required this.todos});
-// }
+  factory NetworkState.init() => const NetworkInstance(
+        todos: [],
+      );
 
-// final class NetworkInitial extends NetworkState {
-//   NetworkInitial.init()
-//       : super(
-//           todos: ApiDone<List<TodosGetModel>>(
-//             code: '',
-//             value: [],
-//           ),
-//         );
+  factory NetworkState.copyWith({
+    required List<TodosGetRes> todos,
+  }) =>
+      NetworkInstance(
+        todos: todos,
+      );
+}
 
-//   NetworkInitial.update(ApiModel<List<TodosGetModel>> todos)
-//       : super(
-//           todos: todos,
-//         );
-// }
+final class NetworkInstance extends NetworkState {
+  const NetworkInstance({required super.todos});
+
+  @override
+  List<Object?> get props => [
+        super.todos,
+      ];
+}

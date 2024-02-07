@@ -1,7 +1,7 @@
 part of 'home_view.dart';
 
 class HomeCubit extends Cubit<HomeState> with CommonFuncable {
-  HomeCubit() : super(HomeInitial.init());
+  HomeCubit() : super(HomeState.init());
 
   @override
   Future<void> close() async {
@@ -11,7 +11,7 @@ class HomeCubit extends Cubit<HomeState> with CommonFuncable {
   void onInit() {
     FirebaseMessaging.onMessage.listen((event) {
       emit(
-        HomeInitial.copyWith(
+        HomeState.copyWith(
           title: event.notification?.title ?? state.title,
           body: event.notification?.body ?? state.body,
         ),
@@ -20,19 +20,11 @@ class HomeCubit extends Cubit<HomeState> with CommonFuncable {
   }
 
   Future<void> navigateToNetwork() async {
-    router.push('/network');
+    router.pushNamed(AppRoutes.network.name);
   }
 
-  Future<void> navigateToComponent() async {
-    router.push('/component');
-  }
-
-  Future<void> navigateToNested() async {
-    router.push('/nested');
-  }
-
-  Future<void> navigateToSubNested() async {
-    router.push('/nested/sub-nested');
+  Future<void> navigateToTry() async {
+    router.pushNamed(AppRoutes.network.todoDetail.name);
   }
 
   // void rsaRequest() {

@@ -1,3 +1,5 @@
+import 'package:equatable/equatable.dart';
+import 'package:eyr/api/json_place_holder/todos/todos_get/todos_get_res.dart';
 import 'package:eyr/api/json_place_holder/todos/todos_service.dart';
 import 'package:eyr/app/app_widget.dart';
 import 'package:eyr/shared/mixins/common_funcable.dart';
@@ -9,8 +11,8 @@ import 'package:get_it/get_it.dart';
 import 'package:page_route_annotation/page_route.annotation.dart';
 
 part 'network_cubit.dart';
+part 'network_state.dart';
 part 'network_view.g.dart';
-// part 'network.state.dart';
 
 @RouteParamGenerable()
 class NetworkView extends StatelessWidget with CommonFuncable {
@@ -21,7 +23,7 @@ class NetworkView extends StatelessWidget with CommonFuncable {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => NetworkCubit()..requestTodos(),
+      create: (context) => NetworkCubit()..onInit(),
       child: Scaffold(
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(80),
@@ -29,33 +31,21 @@ class NetworkView extends StatelessWidget with CommonFuncable {
         ),
         body: SafeArea(
           child: Center(
-            child: BlocBuilder<NetworkCubit, void>(
-              builder: (context, state) {
-                // final todosModel = state.todos;
-
-                // if (todosModel is ApiDone<List<TodosGetModel>>) {
-                //   return ListView.builder(
-                //     key: UniqueKey(),
-                //     padding: EdgeInsets.symmetric(
-                //       vertical: 30,
-                //       horizontal: 20,
-                //     ),
-                //     itemCount: todosModel.value.length,
-                //     itemBuilder: (context, index) => Card(
-                //       child: ListTile(
-                //         key: UniqueKey(),
-                //         title: Text(todosModel.value[index].title),
-                //       ),
-                //     ),
-                //   );
-                // } else if (todosModel is ApiFail<List<TodosGetModel>>) {
-                //   return Text(todosModel.message);
-                // } else {
-                //   return SizedBox.shrink();
-                // }
-
-                return const SizedBox.shrink();
-              },
+            child: BlocBuilder<NetworkCubit, NetworkState>(
+              builder: (context, state) => ListView.builder(
+                key: UniqueKey(),
+                padding: const EdgeInsets.symmetric(
+                  vertical: 30,
+                  horizontal: 20,
+                ),
+                itemCount: state.todos.length,
+                itemBuilder: (context, index) => Card(
+                  child: ListTile(
+                    key: UniqueKey(),
+                    title: Text(state.todos[index].title),
+                  ),
+                ),
+              ),
             ),
           ),
         ),

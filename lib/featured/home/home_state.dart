@@ -1,7 +1,7 @@
 part of 'home_view.dart';
 
 @immutable
-sealed class HomeState {
+sealed class HomeState with EquatableMixin {
   final String title;
   final String body;
 
@@ -9,18 +9,31 @@ sealed class HomeState {
     required this.title,
     required this.body,
   });
-}
 
-final class HomeInitial extends HomeState {
-  const HomeInitial({required super.title, required super.body});
+  factory HomeState.init() => const HomeInstance(
+        title: '',
+        body: '',
+      );
 
-  factory HomeInitial.init() => const HomeInitial(title: '', body: '');
-  factory HomeInitial.copyWith({
+  factory HomeState.copyWith({
     required String title,
     required String body,
   }) =>
-      HomeInitial(
+      HomeInstance(
         title: title,
         body: body,
       );
+}
+
+final class HomeInstance extends HomeState {
+  const HomeInstance({
+    required super.title,
+    required super.body,
+  });
+
+  @override
+  List<Object?> get props => [
+        super.title,
+        super.body,
+      ];
 }

@@ -5,4 +5,13 @@ class NetworkRoute extends AppRoute {
 
   @override
   String get path => 'network';
+
+  AppRoute get todoDetail => _NetworkTodoDetailRoute(parent: this);
+}
+
+class _NetworkTodoDetailRoute extends AppRoute {
+  _NetworkTodoDetailRoute({super.parent});
+
+  @override
+  String get path => 'todo-detail';
 }
