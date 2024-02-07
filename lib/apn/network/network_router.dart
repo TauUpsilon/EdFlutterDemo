@@ -1,4 +1,4 @@
-import 'package:eyr/apr/app_routes.dart';
+import 'package:eyr/apn/app_routes.dart';
 import 'package:eyr/featured/auth/login/login_view.dart';
 import 'package:eyr/featured/network/network_todos_detail/network_todos_detail_view.dart';
 import 'package:eyr/featured/network/network_view.dart';

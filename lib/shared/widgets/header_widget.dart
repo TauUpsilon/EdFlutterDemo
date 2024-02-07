@@ -1,4 +1,4 @@
-import 'package:eyr/apr/app_routes.dart';
+import 'package:eyr/apn/app_routes.dart';
 import 'package:eyr/shared/mixins/common_funcable.dart';
 import 'package:eyr/states/auth/auth_cubit.dart';
 import 'package:flutter/foundation.dart';

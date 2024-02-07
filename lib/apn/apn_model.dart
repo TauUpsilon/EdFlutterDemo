@@ -1,8 +1,8 @@
-abstract class AppRoute {
-  final AppRoute? _parent;
+abstract class ApnRoute {
+  final ApnRoute? _parent;
 
-  AppRoute({
-    AppRoute? parent,
+  ApnRoute({
+    ApnRoute? parent,
   }) : _parent = parent;
 
   String get path;

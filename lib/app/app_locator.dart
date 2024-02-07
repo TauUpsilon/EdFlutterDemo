@@ -1,7 +1,7 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:eyr/api/api_service.dart';
 import 'package:eyr/api/json_place_holder/todos/todos_service.dart';
-import 'package:eyr/apr/app_router.dart';
+import 'package:eyr/apn/app_router.dart';
 import 'package:eyr/shared/services/logging_service.dart';
 import 'package:eyr/shared/services/rsa_service.dart';
 import 'package:eyr/shared/widgets/app_alert/app_alert_view.dart';

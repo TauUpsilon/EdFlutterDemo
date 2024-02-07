@@ -1,8 +1,8 @@
+import 'package:eyr/apn/app_routes.dart';
+import 'package:eyr/apn/auth/auth_router.dart';
+import 'package:eyr/apn/home/home_router.dart';
+import 'package:eyr/apn/network/network_router.dart';
 import 'package:eyr/app/app_navigator.dart';
-import 'package:eyr/apr/app_routes.dart';
-import 'package:eyr/apr/auth/auth_router.dart';
-import 'package:eyr/apr/home/home_router.dart';
-import 'package:eyr/apr/network/network_router.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
