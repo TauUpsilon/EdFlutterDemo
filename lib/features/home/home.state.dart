@@ -12,9 +12,9 @@ sealed class HomeState {
 }
 
 final class HomeInitial extends HomeState {
-  HomeInitial({required super.title, required super.body});
+  const HomeInitial({required super.title, required super.body});
 
-  factory HomeInitial.init() => HomeInitial(title: '', body: '');
+  factory HomeInitial.init() => const HomeInitial(title: '', body: '');
   factory HomeInitial.copyWith({
     required String title,
     required String body,

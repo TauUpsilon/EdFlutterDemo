@@ -1,13 +1,10 @@
 part of 'nested.page.dart';
 
-class NestedCubit extends Cubit<NestedState> with CommonFunctionable {
+class NestedCubit extends Cubit<NestedState> with CommonFuncable {
   NestedCubit() : super(NetworkInitial.init());
-
-  final _subscription = CompositeSubscription();
 
   @override
   Future<void> close() async {
-    await _subscription.dispose();
     await super.close();
   }
 

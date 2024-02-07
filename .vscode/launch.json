@@ -9,21 +9,30 @@
       "request": "launch",
       "type": "dart",
       "noDebug": true,
-      "args": ["--no-enable-impeller", "--dart-define-from-file=env/local.env"]
+      "args": [
+        "--no-enable-impeller",
+        "--dart-define-from-file=ext/env/local.env"
+      ]
     },
     {
       "name": "Stage",
       "request": "launch",
       "type": "dart",
       "noDebug": true,
-      "args": ["--no-enable-impeller", "--dart-define-from-file=env/stage.env"]
+      "args": [
+        "--no-enable-impeller",
+        "--dart-define-from-file=ext/env/stage.env"
+      ]
     },
     {
-      "name": "Prod",
+      "name": "Public",
       "request": "launch",
       "type": "dart",
       "noDebug": true,
-      "args": ["--no-enable-impeller", "--dart-define-from-file=env/prod.env"]
+      "args": [
+        "--no-enable-impeller",
+        "--dart-define-from-file=ext/env/public.env"
+      ]
     }
   ]
 }

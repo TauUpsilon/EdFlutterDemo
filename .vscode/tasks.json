@@ -2,10 +2,32 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "Build App",
+      "label": "Generate files",
       "type": "dart",
       "command": "dart",
-      "args": ["pub", "run", "build_runner", "build", "-d"]
+      "args": ["run", "build_runner", "build", "-d"]
+    },
+    {
+      "label": "Set launcher icon",
+      "type": "dart",
+      "command": "dart",
+      "args": [
+        "run",
+        "flutter_launcher_icons",
+        "-f",
+        "flutter_launcher_icon.yaml"
+      ]
+    },
+    {
+      "label": "Set splash screen",
+      "type": "dart",
+      "command": "dart",
+      "args": [
+        "run",
+        "flutter_native_splash:create",
+        "--path",
+        "flutter_splash_screen.yaml"
+      ]
     }
   ]
 }

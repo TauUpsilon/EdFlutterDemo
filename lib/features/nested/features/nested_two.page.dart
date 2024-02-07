@@ -1,9 +1,9 @@
 import 'package:eyr/app/app_router.dart';
-import 'package:eyr/shares/mixins/common_functionable.mixin.dart';
-import 'package:eyr/shares/widgets/header.widget.dart';
+import 'package:eyr/shared/mixins/common_funcable.dart';
+import 'package:eyr/shared/widgets/header.widget.dart';
 import 'package:flutter/material.dart';
 
-class NestedTwoPage extends StatelessWidget with CommonFunctionable {
+class NestedTwoPage extends StatelessWidget with CommonFuncable {
   NestedTwoPage();
 
   @override

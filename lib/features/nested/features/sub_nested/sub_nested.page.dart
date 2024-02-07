@@ -1,8 +1,8 @@
-import 'package:eyr/shares/mixins/common_functionable.mixin.dart';
-import 'package:eyr/shares/widgets/header.widget.dart';
+import 'package:eyr/shared/mixins/common_funcable.dart';
+import 'package:eyr/shared/widgets/header.widget.dart';
 import 'package:flutter/material.dart';
 
-class SubNestedPage extends StatelessWidget with CommonFunctionable {
+class SubNestedPage extends StatelessWidget with CommonFuncable {
   SubNestedPage();
 
   @override

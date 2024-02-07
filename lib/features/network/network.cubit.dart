@@ -1,23 +1,20 @@
 part of 'network.page.dart';
 
-class NetworkCubit extends Cubit<NetworkState> with CommonFunctionable {
-  NetworkCubit() : super(NetworkInitial.init());
+class NetworkCubit extends Cubit<void> with CommonFuncable {
+  NetworkCubit() : super(null);
 
-  TodosApiService get _todosService => GetIt.I<TodosApiService>();
-
-  final _subscription = CompositeSubscription();
+  TodosService get _todosService => GetIt.I<TodosService>();
 
   @override
   Future<void> close() async {
-    await _subscription.dispose();
     await super.close();
   }
 
   void requestTodos() {
-    _subscription.add(
-      _todosService.requestTodos().listen((res) {
-        emit(NetworkInitial.update(res));
-      }),
-    );
+    // _subscription.add(
+    //   _todosService.requestTodos().listen((res) {
+    //     emit(NetworkInitial.update(res));
+    //   }),
+    // );
   }
 }

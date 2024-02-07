@@ -1,8 +1,8 @@
-import 'package:eyr/shares/mixins/common_functionable.mixin.dart';
-import 'package:eyr/shares/widgets/header.widget.dart';
+import 'package:eyr/shared/mixins/common_funcable.dart';
+import 'package:eyr/shared/widgets/header.widget.dart';
 import 'package:flutter/material.dart';
 
-class NestedOnePage extends StatelessWidget with CommonFunctionable {
+class NestedOnePage extends StatelessWidget with CommonFuncable {
   final String test;
 
   NestedOnePage({required this.test});

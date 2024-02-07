@@ -1,13 +1,12 @@
-import 'package:eyr/shares/mixins/common_functionable.mixin.dart';
-import 'package:eyr/shares/widgets/header.widget.dart';
+import 'package:eyr/shared/mixins/common_funcable.dart';
+import 'package:eyr/shared/widgets/header.widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:rxdart/utils.dart';
 
 part 'nested.cubit.dart';
 part 'nested.state.dart';
 
-class NestedPage extends StatelessWidget with CommonFunctionable {
+class NestedPage extends StatelessWidget with CommonFuncable {
   NestedPage();
 
   @override
