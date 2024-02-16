@@ -5,7 +5,7 @@
       "label": "Generate files",
       "type": "dart",
       "command": "dart",
-      "args": ["run", "build_runner", "build", "-d"]
+      "args": ["run", "build_runner", "build"]
     },
     {
       "label": "Set launcher icon",

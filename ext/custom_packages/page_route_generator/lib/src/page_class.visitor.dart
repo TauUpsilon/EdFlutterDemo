@@ -5,16 +5,23 @@ import 'package:analyzer/dart/element/visitor.dart';
 
 class PageClassVisitor extends SimpleElementVisitor<void> {
   String className = '';
-  Map<String, dynamic> fields = {};
+  List<ParameterElement> params = [];
+  List<FieldElement> fields = [];
 
   @override
   void visitConstructorElement(ConstructorElement element) {
     final returnType = element.returnType.toString();
-    className = returnType.replaceFirst(RegExp(r'(Page|View)'), '');
+    className = returnType.replaceFirst(RegExp(r'(Page|View)'), 'RouteParam');
+    params = element.parameters
+        .where(
+          (element) => !element.isSuperFormal,
+        )
+        .toList();
   }
 
   @override
   void visitFieldElement(FieldElement element) {
-    fields[element.name] = element.type.toString().replaceFirst('*', '');
+    if (element.isPrivate) return;
+    fields.add(element);
   }
 }

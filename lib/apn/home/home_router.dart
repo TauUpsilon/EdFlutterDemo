@@ -8,7 +8,10 @@ final homeRouter = ShellRoute(
     GoRoute(
       path: '/${AppRoutes.home.path}',
       name: AppRoutes.home.name,
-      builder: (context, state) => const HomeView(),
+      builder: (context, state) => HomeView(
+        testone: '',
+        testtwo: Test(subtest: 'subtest'),
+      ),
     ),
   ],
 );
