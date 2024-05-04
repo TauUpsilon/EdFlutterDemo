@@ -43,7 +43,10 @@
 
 //     localExpired
 //         ? await authCubit.biometricLogout()
-//         : await authCubit.update(user: authCubit.state.user, accessModel: null);
+//         : await authCubit.update(
+//             user: authCubit.state.user, 
+//             accessModel: null
+//           );
 
 //     await router.pushNamed(
 //       RouterTable.errorCommon,

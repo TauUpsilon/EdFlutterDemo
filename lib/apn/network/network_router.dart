@@ -14,12 +14,10 @@ final networkRouter = ShellRoute(
       name: AppRoutes.network.name,
       redirect: (context, state) async {
         if (!GetIt.I<AuthCubit>().state.isAuthenticated) {
-          await GetIt.I<GoRouter>().pushNamed(
+          return GetIt.I<GoRouter>().pushNamed(
             AppRoutes.auth.login.name,
             extra: LoginRouteParam(redirectUrl: state.uri),
           );
-
-          return null;
         }
 
         return null;

@@ -108,7 +108,9 @@ class DigitKeyboard extends StatelessWidget {
                   //     foregroundColor: foregroundColor,
                   //     shape: MaterialStatePropertyAll(
                   //       RoundedRectangleBorder(
-                  //         borderRadius: BorderRadius.circular(dialBorderRadius),
+                  //         borderRadius: BorderRadius.circular(
+                  //           dialBorderRadius
+                  //         ),
                   //       ),
                   //     ),
                   //     textStyle: MaterialStatePropertyAll(
