@@ -1,6 +1,8 @@
-import 'package:eyr/apn/app_routes.dart';
+import 'package:equatable/equatable.dart';
 import 'package:eyr/app/app_widget.dart';
+import 'package:eyr/shared/fields/password/password_field.dart';
 import 'package:eyr/shared/mixins/common_funcable.dart';
+import 'package:eyr/shared/mixins/common_viewable.dart';
 import 'package:eyr/shared/widgets/header_widget.dart';
 import 'package:eyr/states/auth/auth_cubit.dart';
 import 'package:flutter/foundation.dart';
@@ -14,7 +16,7 @@ part 'login_state.dart';
 part 'login_view.g.dart';
 
 @RouteParamGenerable()
-class LoginView extends StatelessWidget {
+class LoginView extends StatelessWidget with CommonViewable {
   final Uri? redirectUrl;
 
   const LoginView({
@@ -34,17 +36,49 @@ class LoginView extends StatelessWidget {
         body: SafeArea(
           child: Center(
             child: BlocBuilder<LoginCubit, LoginState>(
-              builder: (context, state) => Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text('Redirect URL: $redirectUrl'),
-                  TextButton(
-                    onPressed: () async => context.read<LoginCubit>().login(
-                          redirectUrl,
+              builder: (context, state) => Form(
+                key: context.read<LoginCubit>().formKey,
+                autovalidateMode: AutovalidateMode.onUserInteraction,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Text('Redirect URL: $redirectUrl'),
+                    Focus(
+                      focusNode: context.read<LoginCubit>().passwordFocusNode,
+                      child: TextFormField(
+                        controller:
+                            context.read<LoginCubit>().passwordController,
+                        decoration: InputDecoration(
+                          icon: const Icon(Icons.lock),
+                          helperText: localiser.passwordHint,
+                          helperMaxLines: 2,
+                          labelText: localiser.passwordLabel,
+                          errorMaxLines: 2,
                         ),
-                    child: const Text('Login'),
-                  ),
-                ],
+                        validator: (value) =>
+                            state.passwordField.validator(value ?? '')?.text,
+                        obscureText: true,
+                        textInputAction: TextInputAction.done,
+                        onChanged: (value) =>
+                            context.read<LoginCubit>().onPasswordChange(value),
+                        onFieldSubmitted: (_) async =>
+                            context.read<LoginCubit>().login(
+                                  redirectUrl,
+                                ),
+                        onTapOutside: (_) => context
+                            .read<LoginCubit>()
+                            .passwordFocusNode
+                            .unfocus(),
+                      ),
+                    ),
+                    TextButton(
+                      onPressed: () async => context.read<LoginCubit>().login(
+                            redirectUrl,
+                          ),
+                      child: Text(localiser.login),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

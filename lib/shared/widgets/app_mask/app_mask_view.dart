@@ -10,15 +10,18 @@ part 'app_mask_state.dart';
 
 class AppMask extends StatelessWidget {
   final Locale? locale;
+  final GlobalKey<NavigatorState>? navigatorKey;
 
   const AppMask({
     super.key,
     this.locale,
+    this.navigatorKey,
   });
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      navigatorKey: navigatorKey,
       theme: AppTheme.light,
       darkTheme: AppTheme.dark,
       locale: locale,
@@ -80,6 +83,13 @@ class AppMask extends StatelessWidget {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Locale?>('locale', locale));
+    properties
+      ..add(DiagnosticsProperty<Locale?>('locale', locale))
+      ..add(
+        DiagnosticsProperty<GlobalKey<NavigatorState>?>(
+          'navigatorKey',
+          navigatorKey,
+        ),
+      );
   }
 }

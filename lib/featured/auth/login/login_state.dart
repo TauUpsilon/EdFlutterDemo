@@ -1,13 +1,32 @@
 part of 'login_view.dart';
 
 @immutable
-sealed class LoginState {
-  const LoginState();
+sealed class LoginState with EquatableMixin {
+  final PasswordField passwordField;
+
+  LoginState({
+    required this.passwordField,
+  });
+
+  factory LoginState.init() => LoginInstance(
+        passwordField: const PasswordField.pure(),
+      );
+
+  LoginState copyWith({
+    PasswordField? passwordField,
+  }) =>
+      LoginInstance(
+        passwordField: passwordField ?? this.passwordField,
+      );
 }
 
-final class LoginInitial extends LoginState {
-  const LoginInitial();
+final class LoginInstance extends LoginState {
+  LoginInstance({
+    required super.passwordField,
+  });
 
-  factory LoginInitial.init() => const LoginInitial();
-  factory LoginInitial.copyWith() => const LoginInitial();
+  @override
+  List<Object?> get props => [
+        passwordField,
+      ];
 }

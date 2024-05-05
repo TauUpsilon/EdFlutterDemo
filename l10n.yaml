@@ -1,3 +1,8 @@
 arb-dir: ext/l10n
 template-arb-file: app_en.arb
-output-localization-file: app_localizations.dart
+output-localization-file: localiser.g.dart
+output-dir: lib/localised/
+output-class: Localiser
+synthetic-package: false
+use-deferred-loading: true
+nullable-getter: false

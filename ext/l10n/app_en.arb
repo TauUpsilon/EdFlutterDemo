@@ -1,9 +1,17 @@
 {
   "@@locale": "en",
+  "@=====Field=====": {},
+  "passwordLabel": "Password",
+  "passwordHint": "At least 8 characters including one letter and number",
+  "passwordInvalid": "Password must be at least 8 characters and contain at least one letter and number",
+  "passwordEmpty": "Please enter a password",
+  "@=====Common=====": {},
   "confirm": "Confirm",
   "cancel": "Cancel",
   "close": "Close",
   "swap": "Switch",
   "back": "Back",
-  "thingWentWront": "Went wront"
+  "login": "Login",
+  "@=====Error=====": {},
+  "errorUnknown": "Unknown error"
 }

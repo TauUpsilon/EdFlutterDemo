@@ -2,11 +2,11 @@ import 'dart:async';
 
 import 'package:equatable/equatable.dart';
 import 'package:eyr/app/app_theme.dart';
+import 'package:eyr/localised/localiser.g.dart';
 import 'package:eyr/shared/widgets/app_alert/app_alert_enum.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 part 'app_alert_cubit.dart';
 part 'app_alert_state.dart';
@@ -15,12 +15,14 @@ class AppAlert extends StatelessWidget {
   final Locale? locale;
   final Iterable<LocalizationsDelegate<dynamic>>? localizationsDelegates;
   final Iterable<Locale> supportedLocales;
+  final GlobalKey<NavigatorState>? navigatorKey;
 
   const AppAlert({
     super.key,
     this.locale,
     this.localizationsDelegates,
     this.supportedLocales = const <Locale>[Locale('en', 'US')],
+    this.navigatorKey,
   });
 
   @override
@@ -29,6 +31,7 @@ class AppAlert extends StatelessWidget {
       builder: (context, state) => Visibility(
         visible: state.status == AppAlertStatus.on,
         child: MaterialApp(
+          navigatorKey: navigatorKey,
           theme: AppTheme.light,
           darkTheme: AppTheme.dark,
           locale: locale,
@@ -99,11 +102,11 @@ class AppAlert extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           ElevatedButton(
-            child: Text(AppLocalizations.of(context)?.confirm ?? ''),
+            child: Text(Localiser.of(context).confirm),
             onPressed: () => context.read<AppAlertCubit>().onConfirm(),
           ),
           ElevatedButton(
-            child: Text(AppLocalizations.of(context)?.cancel ?? ''),
+            child: Text(Localiser.of(context).cancel),
             onPressed: () => context.read<AppAlertCubit>().onCancel(),
           ),
         ],
@@ -122,6 +125,12 @@ class AppAlert extends StatelessWidget {
           localizationsDelegates,
         ),
       )
-      ..add(IterableProperty<Locale>('supportedLocales', supportedLocales));
+      ..add(IterableProperty<Locale>('supportedLocales', supportedLocales))
+      ..add(
+        DiagnosticsProperty<GlobalKey<NavigatorState>?>(
+          'navigatorKey',
+          navigatorKey,
+        ),
+      );
   }
 }

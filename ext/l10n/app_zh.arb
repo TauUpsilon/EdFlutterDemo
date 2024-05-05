@@ -1,9 +1,17 @@
 {
   "@@locale": "zh",
+  "@=====Field=====": {},
+  "passwordLabel": "密碼",
+  "passwordHint": "At least 8 characters including one letter and number",
+  "passwordInvalid": "Password must be at least 8 characters and contain at least one letter and number",
+  "passwordEmpty": "Please enter a password",
+  "@=====Common=====": {},
   "confirm": "確認",
   "cancel": "取消",
   "close": "關閉",
   "swap": "切換",
   "back": "返回",
-  "thingWentWront": "未知錯誤"
+  "login": "登入",
+  "@=====Error=====": {},
+  "errorUnknown": "未知錯誤"
 }
