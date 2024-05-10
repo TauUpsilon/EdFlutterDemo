@@ -3,15 +3,16 @@ part of 'login_view.dart';
 class LoginCubit extends Cubit<LoginState> with CommonFuncable {
   final formKey = GlobalKey<FormState>();
   final authCubit = GetIt.I<AuthCubit>();
-  final passwordController = TextEditingController();
-  final passwordFocusNode = FocusNode();
 
   LoginCubit() : super(LoginState.init());
 
   void onPasswordChange(String value) {
     emit(
       state.copyWith(
-        passwordField: PasswordField.dirty(value),
+        passwordField: PasswordField.dirty(
+          field: state.passwordField,
+          value: value,
+        ),
       ),
     );
   }

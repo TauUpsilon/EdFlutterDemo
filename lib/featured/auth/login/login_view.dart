@@ -33,52 +33,60 @@ class LoginView extends StatelessWidget with CommonViewable {
           preferredSize: const Size.fromHeight(80),
           child: HeaderBarWidget(title: AppConfig.appTitle),
         ),
-        body: SafeArea(
-          child: Center(
-            child: BlocBuilder<LoginCubit, LoginState>(
-              builder: (context, state) => Form(
-                key: context.read<LoginCubit>().formKey,
-                autovalidateMode: AutovalidateMode.onUserInteraction,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Text('Redirect URL: $redirectUrl'),
-                    Focus(
-                      focusNode: context.read<LoginCubit>().passwordFocusNode,
-                      child: TextFormField(
-                        controller:
-                            context.read<LoginCubit>().passwordController,
-                        decoration: InputDecoration(
-                          icon: const Icon(Icons.lock),
-                          helperText: localiser.passwordHint,
-                          helperMaxLines: 2,
-                          labelText: localiser.passwordLabel,
-                          errorMaxLines: 2,
+        body: BlocBuilder<LoginCubit, LoginState>(
+          builder: (context, state) => SizedBox(
+            height: double.infinity,
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.all(20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Text('Redirect URL: $redirectUrl'),
+                  Form(
+                    key: context.read<LoginCubit>().formKey,
+                    child: Column(
+                      children: [
+                        Focus(
+                          focusNode: state.passwordField.focusNode,
+                          child: TextFormField(
+                            key: state.passwordField.key,
+                            controller: state.passwordField.controller,
+                            decoration: InputDecoration(
+                              helperText: localiser.passwordHint,
+                              helperMaxLines: 2,
+                              labelText: localiser.passwordLabel,
+                              errorMaxLines: 2,
+                            ),
+                            validator: (value) => state.passwordField
+                                .validator(value ?? '')
+                                ?.text,
+                            obscureText: true,
+                            textInputAction: TextInputAction.done,
+                            onChanged: (value) => context
+                                .read<LoginCubit>()
+                                .onPasswordChange(value),
+                            onFieldSubmitted: (_) async =>
+                                context.read<LoginCubit>().login(redirectUrl),
+                            onTapOutside: (_) =>
+                                state.passwordField.focusNode.unfocus(),
+                          ),
+                          onFocusChange: (value) => !value
+                              ? state.passwordField.key.currentState?.validate()
+                              : null,
                         ),
-                        validator: (value) =>
-                            state.passwordField.validator(value ?? '')?.text,
-                        obscureText: true,
-                        textInputAction: TextInputAction.done,
-                        onChanged: (value) =>
-                            context.read<LoginCubit>().onPasswordChange(value),
-                        onFieldSubmitted: (_) async =>
-                            context.read<LoginCubit>().login(
-                                  redirectUrl,
-                                ),
-                        onTapOutside: (_) => context
-                            .read<LoginCubit>()
-                            .passwordFocusNode
-                            .unfocus(),
-                      ),
+                      ],
                     ),
-                    TextButton(
+                  ),
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: TextButton(
                       onPressed: () async => context.read<LoginCubit>().login(
                             redirectUrl,
                           ),
                       child: Text(localiser.login),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
           ),

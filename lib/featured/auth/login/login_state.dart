@@ -9,7 +9,7 @@ sealed class LoginState with EquatableMixin {
   });
 
   factory LoginState.init() => LoginInstance(
-        passwordField: const PasswordField.pure(),
+        passwordField: PasswordField.init(),
       );
 
   LoginState copyWith({
