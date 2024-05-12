@@ -6,10 +6,8 @@ enum PasswordError {
 }
 
 extension PasswordErrorExtension on PasswordError {
-  Localiser get _locoliser => GetIt.I<LocaleCubit>().state.localiser;
-
-  String get text => switch (this) {
-        PasswordError.invalid => _locoliser.passwordInvalid,
-        PasswordError.empty => _locoliser.passwordEmpty,
+  String toMessage(BuildContext context) => switch (this) {
+        PasswordError.invalid => Localiser.of(context).passwordInvalid,
+        PasswordError.empty => Localiser.of(context).passwordEmpty,
       };
 }

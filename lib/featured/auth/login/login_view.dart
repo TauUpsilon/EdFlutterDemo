@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:eyr/app/app_widget.dart';
+import 'package:eyr/localised/localiser.g.dart';
 import 'package:eyr/shared/fields/password/password_field.dart';
 import 'package:eyr/shared/mixins/common_funcable.dart';
 import 'package:eyr/shared/mixins/common_viewable.dart';
@@ -52,14 +53,14 @@ class LoginView extends StatelessWidget with CommonViewable {
                             key: state.passwordField.key,
                             controller: state.passwordField.controller,
                             decoration: InputDecoration(
-                              helperText: localiser.passwordHint,
+                              helperText: Localiser.of(context).passwordHint,
                               helperMaxLines: 2,
-                              labelText: localiser.passwordLabel,
+                              labelText: Localiser.of(context).passwordLabel,
                               errorMaxLines: 2,
                             ),
                             validator: (value) => state.passwordField
                                 .validator(value ?? '')
-                                ?.text,
+                                ?.toMessage(context),
                             obscureText: true,
                             textInputAction: TextInputAction.done,
                             onChanged: (value) => context
@@ -83,7 +84,9 @@ class LoginView extends StatelessWidget with CommonViewable {
                       onPressed: () async => context.read<LoginCubit>().login(
                             redirectUrl,
                           ),
-                      child: Text(localiser.login),
+                      child: Text(
+                        Localiser.of(context).login,
+                      ),
                     ),
                   ),
                 ],

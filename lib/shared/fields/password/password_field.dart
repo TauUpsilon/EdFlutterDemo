@@ -1,8 +1,6 @@
 import 'package:eyr/localised/localiser.g.dart';
-import 'package:eyr/states/locale/locale_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:formz/formz.dart';
-import 'package:get_it/get_it.dart';
 
 part 'password_error.dart';
 
@@ -11,17 +9,17 @@ class PasswordField extends FormzInput<String, PasswordError> {
   final TextEditingController controller;
   final FocusNode focusNode;
 
-  const PasswordField.pure({
-    required this.key,
-    required this.controller,
-    required this.focusNode,
-  }) : super.pure('');
-
   factory PasswordField.init() => PasswordField.pure(
         key: GlobalKey<FormFieldState>(),
         controller: TextEditingController(),
         focusNode: FocusNode(),
       );
+
+  const PasswordField.pure({
+    required this.key,
+    required this.controller,
+    required this.focusNode,
+  }) : super.pure('');
 
   PasswordField.dirty({
     required PasswordField field,
