@@ -18,7 +18,6 @@ class LoginCubit extends Cubit<LoginState> with CommonFuncable {
   }
 
   Future<void> login(Uri? redirect) async {
-    localeCubit.update('zh');
     if (!formKey.currentState!.validate()) return;
 
     // authCubit.login();
