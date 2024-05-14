@@ -7,7 +7,7 @@ enum PasswordError {
 
 extension PasswordErrorExtension on PasswordError {
   String toMessage(BuildContext context) => switch (this) {
-        PasswordError.invalid => Localiser.of(context).passwordInvalid,
-        PasswordError.empty => Localiser.of(context).passwordEmpty,
+        PasswordError.invalid => Localiser.of(context).fieldPasswordInvalid,
+        PasswordError.empty => Localiser.of(context).fieldPasswordEmpty,
       };
 }

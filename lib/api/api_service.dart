@@ -28,38 +28,32 @@ class ApiService {
     bool hasMask = true,
   }) async =>
       _handleMask(request, AppMaskStatus.on, hasMask)
-          .then((_) => _doRequest<T>(request, serialiser))
+          .then((_) => _handleRequest<T>(request))
+          .then((response) => _handleRespose<T>(request, response, serialiser))
           .onError<Exception>((err, stack) => _handleError(request, err, stack))
           .whenComplete(
             () => _handleMask(request, AppMaskStatus.off, hasMask),
           );
 
-  Future<ApiResponse<T>> _doRequest<T>(
+  Future<Response> _handleRequest<T>(
     ApiRequest request,
-    T Function(Object value) serialiser,
   ) async =>
       _connectivity
           .checkConnectivity()
-          .then((value) => _handleRequest(request))
-          .timeout(Duration(seconds: _envCubit.state.apiTimeout))
-          .then((response) => _handleRespose(request, response, serialiser));
-
-  Future<Response> _handleRequest(
-    ApiRequest request,
-  ) {
-    _logger.t('ApiService $request');
-
-    switch (request.method) {
-      case ApiMethod.post:
-        return post(
-          request.reqURI,
-          headers: request.reqHeader,
-          body: request.reqBody,
-        );
-      case ApiMethod.get:
-        return get(request.reqURI);
-    }
-  }
+          .then((_) => _logger.t('ApiService $request'))
+          .then(
+            (_) => switch (request.method) {
+              ApiMethod.post => post(
+                  request.reqURI,
+                  headers: request.reqHeader,
+                  body: request.reqBody,
+                ),
+              ApiMethod.get => get(
+                  request.reqURI,
+                ),
+            },
+          )
+          .timeout(Duration(seconds: _envCubit.state.apiTimeout));
 
   ApiResponse<T> _handleRespose<T>(
     ApiRequest request,
@@ -71,7 +65,7 @@ class ApiService {
     final reason = response.reasonPhrase;
 
     if (status.startsWith('2')) {
-      final res = request.handleResponse(response, serialiser);
+      final res = request.handleResponse<T>(response, serialiser);
       _logger.d('ApiService $res');
       return res;
     } else if (status.startsWith('5')) {

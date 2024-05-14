@@ -18,15 +18,15 @@ sealed class LoginState with EquatableMixin {
       LoginInstance(
         passwordField: passwordField ?? this.passwordField,
       );
+
+  @override
+  List<Object?> get props => [
+        passwordField,
+      ];
 }
 
 final class LoginInstance extends LoginState {
   LoginInstance({
     required super.passwordField,
   });
-
-  @override
-  List<Object?> get props => [
-        passwordField,
-      ];
 }

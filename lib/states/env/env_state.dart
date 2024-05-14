@@ -21,18 +21,26 @@ sealed class EnvState with EquatableMixin {
         apiDomain: '',
       );
 
-  factory EnvState.copyWith({
-    required String appEnv,
-    required String appName,
-    required int apiTimeout,
-    required String apiDomain,
+  EnvState copyWith({
+    String? appEnv,
+    String? appName,
+    int? apiTimeout,
+    String? apiDomain,
   }) =>
       EnvInstance(
-        appEnv: appEnv,
-        appName: appName,
-        apiTimeout: apiTimeout,
-        apiDomain: apiDomain,
+        appEnv: appEnv ?? this.appEnv,
+        appName: appName ?? this.appName,
+        apiTimeout: apiTimeout ?? this.apiTimeout,
+        apiDomain: apiDomain ?? this.apiDomain,
       );
+
+  @override
+  List<Object?> get props => [
+        appEnv,
+        appName,
+        apiTimeout,
+        apiDomain,
+      ];
 }
 
 final class EnvInstance extends EnvState {
@@ -42,12 +50,4 @@ final class EnvInstance extends EnvState {
     required super.apiTimeout,
     required super.apiDomain,
   });
-
-  @override
-  List<Object?> get props => [
-        super.appEnv,
-        super.appName,
-        super.apiTimeout,
-        super.apiDomain,
-      ];
 }

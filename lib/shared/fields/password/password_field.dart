@@ -9,13 +9,17 @@ class PasswordField extends FormzInput<String, PasswordError> {
   final TextEditingController controller;
   final FocusNode focusNode;
 
+  final _passwordRegex = RegExp(
+    r'^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$',
+  );
+
   factory PasswordField.init() => PasswordField.pure(
         key: GlobalKey<FormFieldState>(),
         controller: TextEditingController(),
         focusNode: FocusNode(),
       );
 
-  const PasswordField.pure({
+  PasswordField.pure({
     required this.key,
     required this.controller,
     required this.focusNode,
@@ -28,10 +32,6 @@ class PasswordField extends FormzInput<String, PasswordError> {
         controller = field.controller,
         focusNode = field.focusNode,
         super.dirty(value);
-
-  static final _passwordRegex = RegExp(
-    r'^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$',
-  );
 
   @override
   PasswordError? validator(String value) {

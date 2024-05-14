@@ -12,21 +12,21 @@ sealed class AuthState with EquatableMixin {
         isAuthenticated: false,
       );
 
-  factory AuthState.copyWith({
-    required bool isAuthenticated,
+  AuthState copyWith({
+    bool? isAuthenticated,
   }) =>
       AuthInstance(
-        isAuthenticated: isAuthenticated,
+        isAuthenticated: isAuthenticated ?? this.isAuthenticated,
       );
+
+  @override
+  List<Object?> get props => [
+        isAuthenticated,
+      ];
 }
 
 final class AuthInstance extends AuthState {
   const AuthInstance({
     required super.isAuthenticated,
   });
-
-  @override
-  List<Object?> get props => [
-        super.isAuthenticated,
-      ];
 }

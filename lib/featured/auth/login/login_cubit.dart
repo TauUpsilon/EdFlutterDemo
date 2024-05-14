@@ -20,8 +20,8 @@ class LoginCubit extends Cubit<LoginState> with CommonFuncable {
   Future<void> login(Uri? redirect) async {
     if (!formKey.currentState!.validate()) return;
 
-    // authCubit.login();
+    authCubit.login();
 
-    // router.replace(redirect?.path ?? AppRoutes.home.fullpath);
+    router.replace(redirect?.path ?? AppRoutes.home.fullpath);
   }
 }

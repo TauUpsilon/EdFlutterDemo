@@ -11,9 +11,9 @@ class HomeCubit extends Cubit<HomeState> with CommonFuncable {
   void onInit() {
     FirebaseMessaging.onMessage.listen((event) {
       emit(
-        HomeState.copyWith(
-          title: event.notification?.title ?? state.title,
-          body: event.notification?.body ?? state.body,
+        state.copyWith(
+          title: event.notification?.title,
+          body: event.notification?.body,
         ),
       );
     });

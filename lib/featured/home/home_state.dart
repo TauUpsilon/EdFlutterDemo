@@ -15,14 +15,20 @@ sealed class HomeState with EquatableMixin {
         body: '',
       );
 
-  factory HomeState.copyWith({
-    required String title,
-    required String body,
+  HomeState copyWith({
+    String? title,
+    String? body,
   }) =>
       HomeInstance(
-        title: title,
-        body: body,
+        title: title ?? this.title,
+        body: body ?? this.body,
       );
+
+  @override
+  List<Object?> get props => [
+        title,
+        body,
+      ];
 }
 
 final class HomeInstance extends HomeState {
@@ -30,10 +36,4 @@ final class HomeInstance extends HomeState {
     required super.title,
     required super.body,
   });
-
-  @override
-  List<Object?> get props => [
-        super.title,
-        super.body,
-      ];
 }

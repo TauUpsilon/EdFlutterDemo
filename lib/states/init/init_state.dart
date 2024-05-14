@@ -6,7 +6,7 @@ sealed class InitState with EquatableMixin {
 
   factory InitState.init() => InitInstance();
 
-  factory InitState.copyWith() => InitInstance();
+  InitState copyWith() => InitInstance();
 
   @override
   List<Object> get props => [];

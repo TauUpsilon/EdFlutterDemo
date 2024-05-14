@@ -102,11 +102,11 @@ class AppAlert extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           ElevatedButton(
-            child: Text(Localiser.of(context).confirm),
+            child: Text(Localiser.of(context).wordConfirm),
             onPressed: () => context.read<AppAlertCubit>().onConfirm(),
           ),
           ElevatedButton(
-            child: Text(Localiser.of(context).cancel),
+            child: Text(Localiser.of(context).wordCancel),
             onPressed: () => context.read<AppAlertCubit>().onCancel(),
           ),
         ],

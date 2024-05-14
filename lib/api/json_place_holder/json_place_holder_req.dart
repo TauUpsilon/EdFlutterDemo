@@ -78,7 +78,7 @@ class JsonPlaceHolderReq extends ApiRequest {
     Exception error,
   ) {
     if (error is! JsonPlaceHolderExc) return null;
-    _logger.e('EzwtExc $error\n\n${error.stackTrace}');
+    _logger.e('JsonPlaceHolder $error\n\n${error.stackTrace}');
     return error;
   }
 }

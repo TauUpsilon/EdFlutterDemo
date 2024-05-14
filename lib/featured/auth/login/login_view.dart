@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:eyr/apn/app_routes.dart';
 import 'package:eyr/app/app_widget.dart';
 import 'package:eyr/localised/localiser.g.dart';
 import 'package:eyr/shared/fields/password/password_field.dart';
@@ -43,52 +44,8 @@ class LoginView extends StatelessWidget with CommonViewable {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Text('Redirect URL: $redirectUrl'),
-                  Form(
-                    key: context.read<LoginCubit>().formKey,
-                    child: Column(
-                      children: [
-                        Focus(
-                          focusNode: state.passwordField.focusNode,
-                          child: TextFormField(
-                            key: state.passwordField.key,
-                            controller: state.passwordField.controller,
-                            decoration: InputDecoration(
-                              helperText: Localiser.of(context).passwordHint,
-                              helperMaxLines: 2,
-                              labelText: Localiser.of(context).passwordLabel,
-                              errorMaxLines: 2,
-                            ),
-                            validator: (value) => state.passwordField
-                                .validator(value ?? '')
-                                ?.toMessage(context),
-                            obscureText: true,
-                            textInputAction: TextInputAction.done,
-                            onChanged: (value) => context
-                                .read<LoginCubit>()
-                                .onPasswordChange(value),
-                            onFieldSubmitted: (_) async =>
-                                context.read<LoginCubit>().login(redirectUrl),
-                            onTapOutside: (_) =>
-                                state.passwordField.focusNode.unfocus(),
-                          ),
-                          onFocusChange: (value) => !value
-                              ? state.passwordField.key.currentState?.validate()
-                              : null,
-                        ),
-                      ],
-                    ),
-                  ),
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: TextButton(
-                      onPressed: () async => context.read<LoginCubit>().login(
-                            redirectUrl,
-                          ),
-                      child: Text(
-                        Localiser.of(context).login,
-                      ),
-                    ),
-                  ),
+                  _form,
+                  _loginButton,
                 ],
               ),
             ),
@@ -97,6 +54,63 @@ class LoginView extends StatelessWidget with CommonViewable {
       ),
     );
   }
+
+  Widget get _form => BlocBuilder<LoginCubit, LoginState>(
+        builder: (context, state) => Form(
+          key: context.read<LoginCubit>().formKey,
+          child: Column(
+            children: [
+              _passwordInput,
+            ],
+          ),
+        ),
+      );
+
+  Widget get _passwordInput => BlocBuilder<LoginCubit, LoginState>(
+        builder: (context, state) => Focus(
+          focusNode: state.passwordField.focusNode,
+          child: TextFormField(
+            key: state.passwordField.key,
+            controller: state.passwordField.controller,
+            decoration: InputDecoration(
+              helperText: Localiser.of(context).fieldPasswordHint,
+              helperMaxLines: 2,
+              labelText: Localiser.of(context).fieldPasswordLabel,
+              errorMaxLines: 2,
+            ),
+            validator: (value) =>
+                state.passwordField.validator(value ?? '')?.toMessage(
+                      context,
+                    ),
+            obscureText: true,
+            textInputAction: TextInputAction.done,
+            onChanged: (value) => context.read<LoginCubit>().onPasswordChange(
+                  value,
+                ),
+            onFieldSubmitted: (_) async => context.read<LoginCubit>().login(
+                  redirectUrl,
+                ),
+            onTapOutside: (_) => state.passwordField.focusNode.unfocus(),
+          ),
+          onFocusChange: (hasFocus) => !hasFocus
+              ? state.passwordField.key.currentState?.validate()
+              : null,
+        ),
+      );
+
+  Widget get _loginButton => BlocBuilder<LoginCubit, LoginState>(
+        builder: (context, state) => Align(
+          alignment: Alignment.centerRight,
+          child: TextButton(
+            onPressed: () async => context.read<LoginCubit>().login(
+                  redirectUrl,
+                ),
+            child: Text(
+              Localiser.of(context).wordLogin,
+            ),
+          ),
+        ),
+      );
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
