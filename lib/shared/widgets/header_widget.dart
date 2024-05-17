@@ -6,10 +6,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 
-class HeaderBarWidget extends StatelessWidget with CommonFuncable {
+class HeaderBar extends StatelessWidget with CommonFuncable {
   final String title;
 
-  HeaderBarWidget({
+  HeaderBar({
     required this.title,
     super.key,
   });

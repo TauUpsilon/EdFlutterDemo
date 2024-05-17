@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 final router = GoRouter.routingConfig(
-  navigatorKey: AppNavigator.rootKey,
+  navigatorKey: AppNavigator.key,
   debugLogDiagnostics: true,
   routingConfig: appRoutingConfig,
 );

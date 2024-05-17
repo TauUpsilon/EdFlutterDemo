@@ -12,6 +12,6 @@ class NetworkCubit extends Cubit<NetworkState> with CommonFuncable {
   Future<void> onTodosRequest() async {
     final res = await _todosService.requestTodos();
 
-    emit(NetworkState.copyWith(todos: res.data));
+    emit(state.copyWith(todos: res.data));
   }
 }

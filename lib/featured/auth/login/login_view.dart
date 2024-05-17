@@ -33,7 +33,7 @@ class LoginView extends StatelessWidget with CommonViewable {
       child: Scaffold(
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(80),
-          child: HeaderBarWidget(title: AppConfig.appTitle),
+          child: HeaderBar(title: AppConfig.appTitle),
         ),
         body: BlocBuilder<LoginCubit, LoginState>(
           builder: (context, state) => SizedBox(

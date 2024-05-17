@@ -12,19 +12,19 @@ sealed class NetworkState with EquatableMixin {
         todos: [],
       );
 
-  factory NetworkState.copyWith({
-    required List<TodosGetRes> todos,
+  NetworkState copyWith({
+    List<TodosGetRes>? todos,
   }) =>
       NetworkInstance(
-        todos: todos,
+        todos: todos ?? this.todos,
       );
+
+  @override
+  List<Object?> get props => [
+        todos,
+      ];
 }
 
 final class NetworkInstance extends NetworkState {
   const NetworkInstance({required super.todos});
-
-  @override
-  List<Object?> get props => [
-        super.todos,
-      ];
 }

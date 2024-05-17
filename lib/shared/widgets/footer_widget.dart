@@ -2,7 +2,7 @@ import 'package:eyr/shared/mixins/common_funcable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-class FooterBarWidget extends StatelessWidget with CommonFuncable {
+class FooterBar extends StatelessWidget with CommonFuncable {
   // Dependency Variable
   final int selectedItem;
   final Function(int index) onNavBarTapped;
@@ -26,7 +26,7 @@ class FooterBarWidget extends StatelessWidget with CommonFuncable {
     ),
   ];
 
-  FooterBarWidget({
+  FooterBar({
     required this.selectedItem,
     required this.onNavBarTapped,
     super.key,

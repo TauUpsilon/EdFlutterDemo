@@ -27,7 +27,7 @@ class NetworkView extends StatelessWidget with CommonFuncable {
       child: Scaffold(
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(80),
-          child: HeaderBarWidget(title: AppConfig.appTitle),
+          child: HeaderBar(title: AppConfig.appTitle),
         ),
         body: SafeArea(
           child: Center(

@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:eyr/apn/app_routes.dart';
+import 'package:eyr/app/app_navigator.dart';
 import 'package:eyr/app/app_widget.dart';
 import 'package:eyr/shared/mixins/common_funcable.dart';
 import 'package:eyr/shared/widgets/header_widget.dart';
@@ -47,7 +48,7 @@ class HomeView extends StatelessWidget with CommonFuncable {
       child: Scaffold(
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(80),
-          child: HeaderBarWidget(title: AppConfig.appTitle),
+          child: HeaderBar(title: AppConfig.appTitle),
         ),
         body: SafeArea(
           child: Center(
@@ -56,11 +57,11 @@ class HomeView extends StatelessWidget with CommonFuncable {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   TextButton(
-                    onPressed: context.read<HomeCubit>().navigateToNetwork,
+                    onPressed: context.read<HomeCubit>().onNavigateToNetwork,
                     child: const Text('Network'),
                   ),
                   TextButton(
-                    onPressed: context.read<HomeCubit>().navigateToTry,
+                    onPressed: () => context.read<HomeCubit>().onTry(),
                     child: const Text('Try'),
                   ),
                   // TextButton(

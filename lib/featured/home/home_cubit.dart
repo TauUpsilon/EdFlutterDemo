@@ -3,11 +3,6 @@ part of 'home_view.dart';
 class HomeCubit extends Cubit<HomeState> with CommonFuncable {
   HomeCubit() : super(HomeState.init());
 
-  @override
-  Future<void> close() async {
-    await super.close();
-  }
-
   void onInit() {
     FirebaseMessaging.onMessage.listen((event) {
       emit(
@@ -19,12 +14,37 @@ class HomeCubit extends Cubit<HomeState> with CommonFuncable {
     });
   }
 
-  Future<void> navigateToNetwork() async {
+  Future<void> onNavigateToNetwork() async {
     router.pushNamed(AppRoutes.network.name);
   }
 
-  Future<void> navigateToTry() async {
-    router.pushNamed(AppRoutes.network.todoDetail.name);
+  Future<void> onTry() async {
+    // ScaffoldMessenger.of(AppNavigator.context).showSnackBar(
+    //   SnackBar(
+    //     backgroundColor: Colors.white,
+    //     content: const Text(
+    //       'content',
+    //       style: TextStyle(color: Colors.black),
+    //     ),
+    //     behavior: SnackBarBehavior.floating,
+    //     margin: EdgeInsets.only(
+    //       bottom: MediaQuery.of(AppNavigator.context).size.height - 100,
+    //       right: 20,
+    //       left: 20,
+    //     ),
+    //   ),
+    // );
+    showDialog(
+      context: AppNavigator.key.currentContext!,
+      builder: (_) => BlocProvider.value(
+        value: this,
+        child: DecisionDialog(
+          content: 'Test',
+          onConfirm: () => logger.d('onConfirm'),
+          onCancel: () => logger.d('onCancel'),
+        ),
+      ),
+    );
   }
 
   // void rsaRequest() {
@@ -64,9 +84,5 @@ class HomeCubit extends Cubit<HomeState> with CommonFuncable {
   //       .listen(
   //         _onDoneTwo,
   //       );
-  // }
-
-  // void _onDoneTwo(ApiModeller event) {
-  //   print('edward');
   // }
 }
