@@ -19,6 +19,8 @@ class HomeCubit extends Cubit<HomeState> with CommonFuncable {
   }
 
   Future<void> onTry() async {
+    await sendToDecrypt();
+
     // ScaffoldMessenger.of(AppNavigator.context).showSnackBar(
     //   SnackBar(
     //     backgroundColor: Colors.white,
@@ -34,55 +36,30 @@ class HomeCubit extends Cubit<HomeState> with CommonFuncable {
     //     ),
     //   ),
     // );
-    showDialog(
-      context: AppNavigator.key.currentContext!,
-      builder: (_) => BlocProvider.value(
-        value: this,
-        child: DecisionDialog(
-          content: 'Test',
-          onConfirm: () => logger.d('onConfirm'),
-          onCancel: () => logger.d('onCancel'),
-        ),
+
+    // showDialog(
+    //   context: AppNavigator.key.currentContext!,
+    //   builder: (_) => BlocProvider.value(
+    //     value: this,
+    //     child: DecisionDialog(
+    //       content: 'Test',
+    //       onConfirm: () => logger.d('onConfirm'),
+    //       onCancel: () => logger.d('onCancel'),
+    //     ),
+    //   ),
+    // );
+  }
+
+  Future<void> sendToDecrypt() async {
+    final res = await GetIt.I<Api000Service>().api000003();
+    final publicKey = GetIt.I<CryptoService>().loadRSAPublicKey(
+      res.data.pubKey,
+    );
+
+    await GetIt.I<Api000Service>().api000004(
+      base64.encode(
+        GetIt.I<CryptoService>().doRSAEncryption('Edward', publicKey),
       ),
     );
   }
-
-  // void rsaRequest() {
-  //   GetIt.I<ApiService>()
-  //       .request(
-  //         LocalRequest(
-  //           method: ApiMethod.post,
-  //           uri: 'api/auth/request-auth',
-  //         ),
-  //       )
-  //       .listen(
-  //         _onDone,
-  //       );
-  // }
-
-  // void _onDone(ApiModeller event) {
-  //   final done = event.model as ApiDone<dynamic>;
-  //   final pkpemStr = (done.value as Map<String, dynamic>)['pkpem'];
-  //   final pkpemBase64 = Base64Decoder().convert(pkpemStr);
-  //   final pkpemUtf8 = Utf8Decoder().convert(pkpemBase64).trim();
-  //   final publicKey = rsaService.parsePublicKeyFromPem(pkpemUtf8);
-  //   final data = Uint8List.fromList(Utf8Encoder().convert('string'));
-  //   final dataEncrypted = rsaService.encrypt(publicKey, data);
-  //   // final dataEncryptedBase64 = Utf8Encoder().convert(dataEncrypted);
-  //   final dataEncryptedUtf8 = Base64Encoder().convert(dataEncrypted);
-
-  //   GetIt.I<ApiService>()
-  //       .request(
-  //         LocalRequest(
-  //           method: ApiMethod.post,
-  //           uri: 'api/auth/do-auth',
-  //           body: {
-  //             'encryptedData': dataEncryptedUtf8,
-  //           },
-  //         ),
-  //       )
-  //       .listen(
-  //         _onDoneTwo,
-  //       );
-  // }
 }

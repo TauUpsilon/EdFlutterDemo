@@ -1,14 +1,17 @@
+import 'dart:convert';
+
 import 'package:equatable/equatable.dart';
+import 'package:eyr/api/eyr_spring_boot/api000/api000_service.dart';
 import 'package:eyr/apn/app_routes.dart';
-import 'package:eyr/app/app_navigator.dart';
 import 'package:eyr/app/app_widget.dart';
 import 'package:eyr/shared/mixins/common_funcable.dart';
-import 'package:eyr/shared/widgets/decision_dialog.dart';
+import 'package:eyr/shared/services/crypto_service.dart';
 import 'package:eyr/shared/widgets/header_widget.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:page_route_annotation/page_route.annotation.dart';
 
