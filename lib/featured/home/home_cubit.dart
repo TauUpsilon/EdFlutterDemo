@@ -51,15 +51,36 @@ class HomeCubit extends Cubit<HomeState> with CommonFuncable {
   }
 
   Future<void> sendToDecrypt() async {
-    final res = await GetIt.I<Api000Service>().api000003();
-    final publicKey = GetIt.I<CryptoService>().loadRSAPublicKey(
-      res.data.pubKey,
+    final frontendKeyPair = GetIt.I<CryptoService>().genRSAKeyPair(
+      seed: 'YourSeedString',
     );
 
-    await GetIt.I<Api000Service>().api000004(
+    logger.d('Edward Test ${frontendKeyPair.public.join(', ')}');
+
+    final res000003 = await GetIt.I<Api000Service>().api000003(
+      base64.encode(frontendKeyPair.public),
+    );
+
+    GetIt.I<CryptoService>().setBackendPublicKeyByte(
+      base64.decode(res000003.data.pubKey),
+    );
+
+    final res000004 = await GetIt.I<Api000Service>().api000004(
       base64.encode(
-        GetIt.I<CryptoService>().doRSAEncryption('Edward', publicKey),
+        GetIt.I<CryptoService>().doRSAEncryption(
+          'Hello, Backend!',
+        ),
       ),
     );
+
+    final encrypted = utf8.decode(
+      GetIt.I<CryptoService>().doRSADecryption(
+        base64.decode(res000004.data.encryptedData),
+      ),
+    );
+
+    final decrypted = utf8.decode(base64.decode(res000004.data.decryptedData));
+
+    logger.d('Edward Test\n\n$encrypted\n$decrypted');
   }
 }

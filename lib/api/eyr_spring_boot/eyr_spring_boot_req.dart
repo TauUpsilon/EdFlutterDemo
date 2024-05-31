@@ -17,11 +17,16 @@ class EYRSpringBootReq extends ApiRequest {
 
   @override
   Uri get reqURI {
-    return Uri.parse(
-      'http://10.0.2.2:8080/api/v1/$uri',
-    ).replace(
-      queryParameters: toJson(),
-    );
+    return switch (method) {
+      ApiMethod.get => Uri.parse(
+          'http://10.0.2.2:8080/api/v1/$uri',
+        ).replace(
+          queryParameters: toJson(),
+        ),
+      _ => Uri.parse(
+          'http://10.0.2.2:8080/api/v1/$uri',
+        ),
+    };
   }
 
   @override

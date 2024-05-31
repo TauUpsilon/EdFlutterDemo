@@ -6,36 +6,134 @@ import 'package:asn1lib/asn1lib.dart';
 import 'package:pointycastle/export.dart';
 
 class CryptoService {
-  AsymmetricKeyPair<RSAPublicKey, RSAPrivateKey> genRSAKeyPair(
-    SecureRandom secureRandom, {
-    int bitLength = 2048,
+  late AsymmetricKeyPair<RSAPublicKey, RSAPrivateKey> _frontenddKeyPair;
+
+  late Uint8List _backendPublicKeyByte;
+
+  Uint8List get encodedPublicKey {
+    final publicKey = _frontenddKeyPair.publicKey;
+
+    final algorithmAsn1Obj = ASN1Object.fromBytes(
+      Uint8List.fromList(
+        [0x6, 0x9, 0x2a, 0x86, 0x48, 0x86, 0xf7, 0xd, 0x1, 0x1, 0x1],
+      ),
+    );
+
+    final paramsAsn1Obj = ASN1Object.fromBytes(
+      Uint8List.fromList([0x5, 0x0]),
+    );
+
+    final algorithmSeq = ASN1Sequence()
+      ..add(algorithmAsn1Obj)
+      ..add(paramsAsn1Obj);
+
+    final publicKeySeq = ASN1Sequence()
+      ..add(ASN1Integer(publicKey.modulus!))
+      ..add(ASN1Integer(publicKey.exponent!));
+
+    final publicKeySeqBitString = ASN1BitString(
+      Uint8List.fromList(publicKeySeq.encodedBytes),
+    );
+
+    final topLevelSeq = ASN1Sequence()
+      ..add(algorithmSeq)
+      ..add(publicKeySeqBitString);
+
+    return topLevelSeq.encodedBytes;
+  }
+
+  Uint8List get encodedPrivateKey {
+    final privateKey = _frontenddKeyPair.privateKey;
+
+    final version = ASN1Integer(BigInt.from(0));
+
+    final algorithmAsn1Obj = ASN1Object.fromBytes(
+      Uint8List.fromList(
+        [0x6, 0x9, 0x2a, 0x86, 0x48, 0x86, 0xf7, 0xd, 0x1, 0x1, 0x1],
+      ),
+    );
+
+    final paramsAsn1Obj = ASN1Object.fromBytes(Uint8List.fromList([0x5, 0x0]));
+
+    final algorithmSeq = ASN1Sequence()
+      ..add(algorithmAsn1Obj)
+      ..add(paramsAsn1Obj);
+
+    final privateKeySeq = ASN1Sequence();
+    final modulus = ASN1Integer(privateKey.n!);
+    final publicExponent = ASN1Integer(BigInt.parse('65537'));
+    final privateExponent = ASN1Integer(privateKey.privateExponent!);
+    final p = ASN1Integer(privateKey.p!);
+    final q = ASN1Integer(privateKey.q!);
+    final dP = privateKey.privateExponent! % (privateKey.p! - BigInt.from(1));
+    final exp1 = ASN1Integer(dP);
+    final dQ = privateKey.privateExponent! % (privateKey.q! - BigInt.from(1));
+    final exp2 = ASN1Integer(dQ);
+    final iQ = privateKey.q!.modInverse(privateKey.p!);
+    final co = ASN1Integer(iQ);
+
+    privateKeySeq
+      ..add(version)
+      ..add(modulus)
+      ..add(publicExponent)
+      ..add(privateExponent)
+      ..add(p)
+      ..add(q)
+      ..add(exp1)
+      ..add(exp2)
+      ..add(co);
+
+    final publicKeySeqOctetString = ASN1OctetString(
+      Uint8List.fromList(privateKeySeq.encodedBytes),
+    );
+
+    final topLevelSeq = ASN1Sequence()
+      ..add(version)
+      ..add(algorithmSeq)
+      ..add(publicKeySeqOctetString);
+
+    return topLevelSeq.encodedBytes;
+  }
+
+  // ignore: use_setters_to_change_properties
+  void setBackendPublicKeyByte(Uint8List value) {
+    _backendPublicKeyByte = value;
+  }
+
+  SecureRandom genSecureRandom() {
+    final random = Random.secure();
+    final seed = List<int>.generate(32, (_) => random.nextInt(256));
+    final secureRandom = FortunaRandom()
+      ..seed(
+        KeyParameter(
+          Uint8List.fromList(seed),
+        ),
+      );
+    return secureRandom;
+  }
+
+  KeyPair<Uint8List, Uint8List> genRSAKeyPair({
+    required String seed,
   }) {
     final keyGen = RSAKeyGenerator()
       ..init(
         ParametersWithRandom(
-          RSAKeyGeneratorParameters(
-            BigInt.parse('65537'),
-            bitLength,
-            64,
-          ),
-          secureRandom,
+          RSAKeyGeneratorParameters(BigInt.parse('65537'), 2048, 64),
+          genSecureRandom(),
         ),
       );
 
     final pair = keyGen.generateKeyPair();
-
     final public = pair.publicKey as RSAPublicKey;
     final private = pair.privateKey as RSAPrivateKey;
 
-    return AsymmetricKeyPair<RSAPublicKey, RSAPrivateKey>(
-      public,
-      private,
-    );
+    _frontenddKeyPair = AsymmetricKeyPair(public, private);
+
+    return KeyPair(encodedPublicKey, encodedPrivateKey);
   }
 
-  RSAPublicKey loadRSAPublicKey(String pubKey) {
-    final bytes = base64.decode(pubKey);
-    final asn1Parser = ASN1Parser(bytes);
+  RSAPublicKey _getRSAPublicKey() {
+    final asn1Parser = ASN1Parser(_backendPublicKeyByte);
     final topLevelSeq = asn1Parser.nextObject() as ASN1Sequence;
     final publicKeyBitString = topLevelSeq.elements[1];
 
@@ -52,26 +150,24 @@ class CryptoService {
     return rsaPublicKey;
   }
 
-  Uint8List doRSAEncryption(String data, PublicKey key) {
+  Uint8List doRSAEncryption(String data) {
     final engine = PKCS1Encoding(RSAEngine())
       ..init(
         true,
-        PublicKeyParameter<RSAPublicKey>(key),
+        PublicKeyParameter<RSAPublicKey>(_getRSAPublicKey()),
       );
 
     return engine.process(utf8.encode(data));
   }
 
-  SecureRandom simpleSecureRandom() {
-    final random = Random.secure();
-    final seed = List<int>.generate(32, (_) => random.nextInt(256));
-    final secureRandom = SecureRandom('Fortuna')
-      ..seed(
-        KeyParameter(
-          Uint8List.fromList(seed),
-        ),
-      );
-    return secureRandom;
+  Uint8List doRSADecryption(Uint8List data) {
+    final engine = PKCS1Encoding(RSAEngine())
+      ..init(
+        false,
+        PrivateKeyParameter<RSAPrivateKey>(_frontenddKeyPair.privateKey),
+      ); // false=decrypt
+
+    return engine.process(data);
   }
 
   Uint8List sign(RSAPrivateKey privateKey, Uint8List dataToSign) {
@@ -104,16 +200,6 @@ class CryptoService {
     return verifier.verifySignature(signedData, sig);
   }
 
-  Uint8List decrypt(RSAPrivateKey privateKey, Uint8List cipherText) {
-    final decryptor = OAEPEncoding(RSAEngine())
-      ..init(
-        false,
-        PrivateKeyParameter<RSAPrivateKey>(privateKey),
-      ); // false=decrypt
-
-    return _processInBlocks(decryptor, cipherText);
-  }
-
   Uint8List _processInBlocks(AsymmetricBlockCipher engine, Uint8List input) {
     final numBlocks = input.length ~/ engine.inputBlockSize +
         ((input.length % engine.inputBlockSize != 0) ? 1 : 0);
@@ -141,86 +227,6 @@ class CryptoService {
     return output.length == outputOffset
         ? output
         : output.sublist(0, outputOffset);
-  }
-
-  String encodePublicKeyToPem(RSAPublicKey publicKey) {
-    final algorithmAsn1Obj = ASN1Object.fromBytes(
-      Uint8List.fromList(
-        [0x6, 0x9, 0x2a, 0x86, 0x48, 0x86, 0xf7, 0xd, 0x1, 0x1, 0x1],
-      ),
-    );
-    final paramsAsn1Obj = ASN1Object.fromBytes(Uint8List.fromList([0x5, 0x0]));
-
-    final algorithmSeq = ASN1Sequence()
-      ..add(algorithmAsn1Obj)
-      ..add(paramsAsn1Obj);
-
-    final publicKeySeq = ASN1Sequence()
-      ..add(ASN1Integer(publicKey.modulus!))
-      ..add(ASN1Integer(publicKey.exponent!));
-
-    final publicKeySeqBitString = ASN1BitString(
-      Uint8List.fromList(publicKeySeq.encodedBytes),
-    );
-
-    final topLevelSeq = ASN1Sequence()
-      ..add(algorithmSeq)
-      ..add(publicKeySeqBitString);
-
-    final dataBase64 = base64.encode(topLevelSeq.encodedBytes);
-
-    return '''-----BEGIN PUBLIC KEY-----\r\n$dataBase64\r\n-----END PUBLIC KEY-----''';
-  }
-
-  String encodePrivateKeyToPem(RSAPrivateKey privateKey) {
-    final version = ASN1Integer(BigInt.from(0));
-
-    final algorithmAsn1Obj = ASN1Object.fromBytes(
-      Uint8List.fromList(
-        [0x6, 0x9, 0x2a, 0x86, 0x48, 0x86, 0xf7, 0xd, 0x1, 0x1, 0x1],
-      ),
-    );
-    final paramsAsn1Obj = ASN1Object.fromBytes(Uint8List.fromList([0x5, 0x0]));
-
-    final algorithmSeq = ASN1Sequence()
-      ..add(algorithmAsn1Obj)
-      ..add(paramsAsn1Obj);
-
-    final privateKeySeq = ASN1Sequence();
-    final modulus = ASN1Integer(privateKey.n!);
-    final publicExponent = ASN1Integer(BigInt.parse('65537'));
-    final privateExponent = ASN1Integer(privateKey.privateExponent!);
-    final p = ASN1Integer(privateKey.p!);
-    final q = ASN1Integer(privateKey.q!);
-    final dP = privateKey.privateExponent! % (privateKey.p! - BigInt.from(1));
-    final exp1 = ASN1Integer(dP);
-    final dQ = privateKey.privateExponent! % (privateKey.q! - BigInt.from(1));
-    final exp2 = ASN1Integer(dQ);
-    final iQ = privateKey.q!.modInverse(privateKey.p!);
-    final co = ASN1Integer(iQ);
-
-    privateKeySeq
-      ..add(version)
-      ..add(modulus)
-      ..add(publicExponent)
-      ..add(privateExponent)
-      ..add(p)
-      ..add(q)
-      ..add(exp1)
-      ..add(exp2)
-      ..add(co);
-
-    final publicKeySeqOctetString =
-        ASN1OctetString(Uint8List.fromList(privateKeySeq.encodedBytes));
-
-    final topLevelSeq = ASN1Sequence()
-      ..add(version)
-      ..add(algorithmSeq)
-      ..add(publicKeySeqOctetString);
-
-    final dataBase64 = base64.encode(topLevelSeq.encodedBytes);
-
-    return '''-----BEGIN PRIVATE KEY-----\r\n$dataBase64\r\n-----END PRIVATE KEY-----''';
   }
 
   RSAPrivateKey parsePrivateKeyFromPem(Uint8List bytes) {
@@ -286,6 +292,16 @@ class CryptoService {
 
     return base64.decode(pem);
   }
+}
+
+class KeyPair<T, U> {
+  final T public;
+  final U private;
+
+  KeyPair(this.public, this.private);
+
+  @override
+  String toString() => 'KeyPair($public, $private)';
 }
 
 

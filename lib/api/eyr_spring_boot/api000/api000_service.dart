@@ -8,8 +8,8 @@ import 'package:get_it/get_it.dart';
 class Api000Service {
   ApiService get _apiService => GetIt.I<ApiService>();
 
-  Future<ApiResponse<Api000003Res>> api000003() {
-    final req = Api000003Req(pubKey: 'test');
+  Future<ApiResponse<Api000003Res>> api000003(String frontendPubKey) {
+    final req = Api000003Req(pubKey: frontendPubKey);
 
     return _apiService.request<Api000003Res>(
       req,

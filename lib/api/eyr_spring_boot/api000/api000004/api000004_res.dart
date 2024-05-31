@@ -5,15 +5,19 @@ part 'api000004_res.g.dart';
 
 @JsonSerializable()
 class Api000004Res with EquatableMixin {
-  @JsonKey(name: 'data')
-  String data;
+  @JsonKey(name: 'encryptedData')
+  String encryptedData;
+
+  @JsonKey(name: 'decryptedData')
+  String decryptedData;
 
   Api000004Res({
-    required this.data,
+    required this.encryptedData,
+    required this.decryptedData,
   });
 
   @override
-  List<Object?> get props => [data];
+  List<Object?> get props => [encryptedData, decryptedData];
 
   factory Api000004Res.fromJson(Map<String, dynamic> json) =>
       _$Api000004ResFromJson(json);
