@@ -150,14 +150,32 @@ class CryptoService {
     return rsaPublicKey;
   }
 
-  Uint8List doRSAEncryption(String data) {
+  Uint8List doRSAEncryption(Uint8List data, [RSAPublicKey? key]) {
     final engine = PKCS1Encoding(RSAEngine())
       ..init(
         true,
-        PublicKeyParameter<RSAPublicKey>(_getRSAPublicKey()),
+        PublicKeyParameter<RSAPublicKey>(key ?? _getRSAPublicKey()),
       );
 
-    return engine.process(utf8.encode(data));
+    return engine.process(data);
+  }
+
+  Uint8List doAESEncryption(Uint8List data, [Uint8List? key]) {
+    final ivParams = ParametersWithIV(
+      KeyParameter(key ?? Uint8List(16)),
+      key ?? Uint8List(16),
+    );
+
+    final engine = PaddedBlockCipher('AES/CBC/PKCS7')
+      ..init(
+        true,
+        PaddedBlockCipherParameters<CipherParameters?, CipherParameters?>(
+          ivParams,
+          null,
+        ),
+      );
+
+    return engine.process(data);
   }
 
   Uint8List doRSADecryption(Uint8List data) {
@@ -165,7 +183,25 @@ class CryptoService {
       ..init(
         false,
         PrivateKeyParameter<RSAPrivateKey>(_frontenddKeyPair.privateKey),
-      ); // false=decrypt
+      );
+
+    return engine.process(data);
+  }
+
+  Uint8List doAESDecryption(Uint8List data, [Uint8List? key]) {
+    final ivParams = ParametersWithIV(
+      KeyParameter(key ?? Uint8List(16)),
+      key ?? Uint8List(16),
+    );
+
+    final engine = PaddedBlockCipher('AES/CBC/PKCS7')
+      ..init(
+        false,
+        PaddedBlockCipherParameters<CipherParameters?, CipherParameters?>(
+          ivParams,
+          null,
+        ),
+      );
 
     return engine.process(data);
   }

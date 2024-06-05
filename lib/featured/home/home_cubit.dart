@@ -55,8 +55,6 @@ class HomeCubit extends Cubit<HomeState> with CommonFuncable {
       seed: 'YourSeedString',
     );
 
-    logger.d('Edward Test ${frontendKeyPair.public.join(', ')}');
-
     final res000003 = await GetIt.I<Api000Service>().api000003(
       base64.encode(frontendKeyPair.public),
     );
@@ -65,21 +63,43 @@ class HomeCubit extends Cubit<HomeState> with CommonFuncable {
       base64.decode(res000003.data.pubKey),
     );
 
+    const data = '''
+Hello, Backend! Hello, Backend! Hello, Backend! Hello, Backend!
+Hello, Backend! Hello, Backend! Hello, Backend! Hello, Backend!
+    ''';
+
+    final key = Uint8List(16);
+    final encryptedData = GetIt.I<CryptoService>().doAESEncryption(
+      utf8.encode(data),
+      key,
+    );
+    final encryptedKey = GetIt.I<CryptoService>().doRSAEncryption(
+      key,
+    );
     final res000004 = await GetIt.I<Api000Service>().api000004(
       base64.encode(
-        GetIt.I<CryptoService>().doRSAEncryption(
-          'Hello, Backend!',
+        Uint8List.fromList(
+          [encryptedKey, encryptedData].expand((x) => x).toList(),
         ),
       ),
     );
-
-    final encrypted = utf8.decode(
-      GetIt.I<CryptoService>().doRSADecryption(
-        base64.decode(res000004.data.encryptedData),
-      ),
+    final decrypted = utf8.decode(
+      base64.decode(res000004.data.decryptedData),
     );
 
-    final decrypted = utf8.decode(base64.decode(res000004.data.decryptedData));
+    // --------
+    final encryptedBytes = base64.decode(res000004.data.encryptedData);
+    final resEncryptedKey = encryptedBytes.sublist(0, 256);
+    final resEncryptedData = encryptedBytes.sublist(256);
+    final decryptedKey = GetIt.I<CryptoService>().doRSADecryption(
+      resEncryptedKey,
+    );
+    final encrypted = utf8.decode(
+      GetIt.I<CryptoService>().doAESDecryption(
+        resEncryptedData,
+        decryptedKey,
+      ),
+    );
 
     logger.d('Edward Test\n\n$encrypted\n$decrypted');
   }

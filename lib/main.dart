@@ -22,5 +22,5 @@ Future<void> onStart() async {
 }
 
 void onError(Object err, StackTrace stackTrace) {
-  GetIt.I<LoggingService>().e(err);
+  GetIt.I<LoggingService>().e('$err\n\n$stackTrace');
 }
