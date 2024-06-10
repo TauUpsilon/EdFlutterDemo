@@ -6,7 +6,7 @@ part 'api000004_req.g.dart';
 
 @JsonSerializable()
 class Api000004Req extends EYRSpringBootReq {
-  @JsonKey(name: 'data')
+  @JsonKey(name: 'data', toJson: EYRSpringBootReq.doCryptoEncryptionToJsonKey)
   String data;
 
   Api000004Req({

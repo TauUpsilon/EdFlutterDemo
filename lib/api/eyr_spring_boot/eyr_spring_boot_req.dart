@@ -1,8 +1,10 @@
 import 'dart:convert';
+import 'dart:typed_data';
 
 import 'package:eyr/api/api_service.dart';
 import 'package:eyr/api/eyr_spring_boot/eyr_spring_boot_exc.dart';
 import 'package:eyr/api/eyr_spring_boot/eyr_spring_boot_res.dart';
+import 'package:eyr/shared/services/crypto_service.dart';
 import 'package:eyr/shared/services/logging_service.dart';
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart';
@@ -19,12 +21,14 @@ class EYRSpringBootReq extends ApiRequest {
   Uri get reqURI {
     return switch (method) {
       ApiMethod.get => Uri.parse(
-          'http://10.0.2.2:8080/api/v1/$uri',
+          'http://localhost:8080/api/v1/$uri',
+          // 'http://10.0.2.2:8080/api/v1/$uri',
         ).replace(
           queryParameters: toJson(),
         ),
       _ => Uri.parse(
-          'http://10.0.2.2:8080/api/v1/$uri',
+          'http://localhost:8080/api/v1/$uri',
+          // 'http://10.0.2.2:8080/api/v1/$uri',
         ),
     };
   }
@@ -67,5 +71,22 @@ class EYRSpringBootReq extends ApiRequest {
     if (error is! EYRSpringBootExc) return null;
     _logger.e('EYRSpringBoot $error\n\n${error.stackTrace}');
     return error;
+  }
+
+  static String doCryptoEncryptionToJsonKey(String value) {
+    final cryptoService = GetIt.I<CryptoService>();
+    final key = Uint8List(16);
+    final encryptedData = cryptoService.doAESEncryption(
+      utf8.encode(value),
+      key,
+    );
+    final encryptedKey = cryptoService.doRSAEncryption(
+      key,
+    );
+    return base64.encode(
+      Uint8List.fromList(
+        [encryptedKey, encryptedData].expand((x) => x).toList(),
+      ),
+    );
   }
 }

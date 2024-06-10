@@ -236,34 +236,34 @@ class CryptoService {
     return verifier.verifySignature(signedData, sig);
   }
 
-  Uint8List _processInBlocks(AsymmetricBlockCipher engine, Uint8List input) {
-    final numBlocks = input.length ~/ engine.inputBlockSize +
-        ((input.length % engine.inputBlockSize != 0) ? 1 : 0);
+  // Uint8List _processInBlocks(AsymmetricBlockCipher engine, Uint8List input) {
+  //   final numBlocks = input.length ~/ engine.inputBlockSize +
+  //       ((input.length % engine.inputBlockSize != 0) ? 1 : 0);
 
-    final output = Uint8List(numBlocks * engine.outputBlockSize);
+  //   final output = Uint8List(numBlocks * engine.outputBlockSize);
 
-    var inputOffset = 0;
-    var outputOffset = 0;
-    while (inputOffset < input.length) {
-      final chunkSize = (inputOffset + engine.inputBlockSize <= input.length)
-          ? engine.inputBlockSize
-          : input.length - inputOffset;
+  //   var inputOffset = 0;
+  //   var outputOffset = 0;
+  //   while (inputOffset < input.length) {
+  //     final chunkSize = (inputOffset + engine.inputBlockSize <= input.length)
+  //         ? engine.inputBlockSize
+  //         : input.length - inputOffset;
 
-      outputOffset += engine.processBlock(
-        input,
-        inputOffset,
-        chunkSize,
-        output,
-        outputOffset,
-      );
+  //     outputOffset += engine.processBlock(
+  //       input,
+  //       inputOffset,
+  //       chunkSize,
+  //       output,
+  //       outputOffset,
+  //     );
 
-      inputOffset += chunkSize;
-    }
+  //     inputOffset += chunkSize;
+  //   }
 
-    return output.length == outputOffset
-        ? output
-        : output.sublist(0, outputOffset);
-  }
+  //   return output.length == outputOffset
+  //       ? output
+  //       : output.sublist(0, outputOffset);
+  // }
 
   RSAPrivateKey parsePrivateKeyFromPem(Uint8List bytes) {
     // final privateKeyDER = decodePEM(pemString);

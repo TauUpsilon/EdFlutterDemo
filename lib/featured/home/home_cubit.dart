@@ -68,38 +68,22 @@ Hello, Backend! Hello, Backend! Hello, Backend! Hello, Backend!
 Hello, Backend! Hello, Backend! Hello, Backend! Hello, Backend!
     ''';
 
-    final key = Uint8List(16);
-    final encryptedData = GetIt.I<CryptoService>().doAESEncryption(
-      utf8.encode(data),
-      key,
-    );
-    final encryptedKey = GetIt.I<CryptoService>().doRSAEncryption(
-      key,
-    );
     final res000004 = await GetIt.I<Api000Service>().api000004(
-      base64.encode(
-        Uint8List.fromList(
-          [encryptedKey, encryptedData].expand((x) => x).toList(),
-        ),
-      ),
-    );
-    final decrypted = utf8.decode(
-      base64.decode(res000004.data.decryptedData),
+      data,
     );
 
+    const encrypted = 'test';
+
+    // utf8.decode(
+    //   GetIt.I<CryptoService>().doAESDecryption(
+    //     base64.decode(res000004.data.encryptedData),
+    //     key,
+    //   ),
+    // );
+
     // --------
-    final encryptedBytes = base64.decode(res000004.data.encryptedData);
-    final resEncryptedKey = encryptedBytes.sublist(0, 256);
-    final resEncryptedData = encryptedBytes.sublist(256);
-    final decryptedKey = GetIt.I<CryptoService>().doRSADecryption(
-      resEncryptedKey,
-    );
-    final encrypted = utf8.decode(
-      GetIt.I<CryptoService>().doAESDecryption(
-        resEncryptedData,
-        decryptedKey,
-      ),
-    );
+
+    final decrypted = res000004.data.decryptedData;
 
     logger.d('Edward Test\n\n$encrypted\n$decrypted');
   }

@@ -65,9 +65,7 @@ class ApiService {
     final reason = response.reasonPhrase;
 
     if (status.startsWith('2')) {
-      final res = request.handleResponse<T>(response, serialiser);
-      _logger.d('ApiService $res');
-      return res;
+      return request.handleResponse<T>(response, serialiser);
     } else if (status.startsWith('5')) {
       throw ServerException(status, from, reason);
     } else if (status.startsWith('4')) {
