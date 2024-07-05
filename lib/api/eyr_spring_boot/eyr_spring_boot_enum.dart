@@ -1,3 +1,5 @@
+part of 'package:eyr/api/eyr_spring_boot/eyr_spring_boot_service.dart';
+
 enum EYRSpringBoot {
   ezwt0000,
 }

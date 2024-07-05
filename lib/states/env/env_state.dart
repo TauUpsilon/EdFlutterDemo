@@ -4,34 +4,46 @@ part of 'env_cubit.dart';
 sealed class EnvState with EquatableMixin {
   final String appEnv;
   final String appName;
+
+  final String apiEyrDomain;
   final int apiTimeout;
-  final String apiDomain;
+
+  final bool cryptoEnabled;
+  final String cryptoAesAg;
 
   const EnvState({
     required this.appEnv,
     required this.appName,
+    required this.apiEyrDomain,
     required this.apiTimeout,
-    required this.apiDomain,
+    required this.cryptoEnabled,
+    required this.cryptoAesAg,
   });
 
   factory EnvState.init() => const EnvInstance(
         appEnv: '',
         appName: '',
         apiTimeout: 0,
-        apiDomain: '',
+        apiEyrDomain: '',
+        cryptoEnabled: false,
+        cryptoAesAg: '',
       );
 
   EnvState copyWith({
     String? appEnv,
     String? appName,
     int? apiTimeout,
-    String? apiDomain,
+    String? apiEyrDomain,
+    bool? cryptoEnabled,
+    String? cryptoAesAg,
   }) =>
       EnvInstance(
         appEnv: appEnv ?? this.appEnv,
         appName: appName ?? this.appName,
         apiTimeout: apiTimeout ?? this.apiTimeout,
-        apiDomain: apiDomain ?? this.apiDomain,
+        apiEyrDomain: apiEyrDomain ?? this.apiEyrDomain,
+        cryptoEnabled: cryptoEnabled ?? this.cryptoEnabled,
+        cryptoAesAg: cryptoAesAg ?? this.cryptoAesAg,
       );
 
   @override
@@ -39,7 +51,7 @@ sealed class EnvState with EquatableMixin {
         appEnv,
         appName,
         apiTimeout,
-        apiDomain,
+        apiEyrDomain,
       ];
 }
 
@@ -48,6 +60,8 @@ final class EnvInstance extends EnvState {
     required super.appEnv,
     required super.appName,
     required super.apiTimeout,
-    required super.apiDomain,
+    required super.apiEyrDomain,
+    required super.cryptoEnabled,
+    required super.cryptoAesAg,
   });
 }

@@ -2,6 +2,12 @@
   "version": "2.0.0",
   "tasks": [
     {
+      "label": "Emulator launch",
+      "type": "shell",
+      "problemMatcher": [],
+      "command": "emulator -avd Pixel_7_API_34 -feature -Vulkan"
+  },
+    {
       "label": "Generate files",
       "type": "dart",
       "command": "dart",

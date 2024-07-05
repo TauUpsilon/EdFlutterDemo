@@ -1,9 +1,17 @@
 part of 'home_view.dart';
 
-class HomeCubit extends Cubit<HomeState> with CommonFuncable {
+class HomeCubit extends Cubit<HomeState> with CommonFuncable, HttpRestable {
+  final cryptoService = GetIt.I<CryptoService>();
+
   HomeCubit() : super(HomeState.init());
 
-  void onInit() {
+  Future<void> onInit() async {
+    final res000003 = await api000Service.api000003();
+
+    cryptoService.currentRSAPublicKeyByte = base64.decode(
+      res000003.data.pubKey,
+    );
+
     FirebaseMessaging.onMessage.listen((event) {
       emit(
         state.copyWith(
@@ -51,38 +59,11 @@ class HomeCubit extends Cubit<HomeState> with CommonFuncable {
   }
 
   Future<void> sendToDecrypt() async {
-    final frontendKeyPair = GetIt.I<CryptoService>().genRSAKeyPair(
-      seed: 'YourSeedString',
+    final res000004 = await api000Service.api000004(
+      'Hello, Backend! Hello, Backend! Hello, Backend! Hello, Backend!',
     );
 
-    final res000003 = await GetIt.I<Api000Service>().api000003(
-      base64.encode(frontendKeyPair.public),
-    );
-
-    GetIt.I<CryptoService>().setBackendPublicKeyByte(
-      base64.decode(res000003.data.pubKey),
-    );
-
-    const data = '''
-Hello, Backend! Hello, Backend! Hello, Backend! Hello, Backend!
-Hello, Backend! Hello, Backend! Hello, Backend! Hello, Backend!
-    ''';
-
-    final res000004 = await GetIt.I<Api000Service>().api000004(
-      data,
-    );
-
-    const encrypted = 'test';
-
-    // utf8.decode(
-    //   GetIt.I<CryptoService>().doAESDecryption(
-    //     base64.decode(res000004.data.encryptedData),
-    //     key,
-    //   ),
-    // );
-
-    // --------
-
+    final encrypted = res000004.data.encryptedData;
     final decrypted = res000004.data.decryptedData;
 
     logger.d('Edward Test\n\n$encrypted\n$decrypted');

@@ -1,15 +1,13 @@
 import 'package:eyr/api/api_service.dart';
-import 'package:eyr/api/eyr_spring_boot/api000/api000003/api000003_req.dart';
-import 'package:eyr/api/eyr_spring_boot/api000/api000003/api000003_res.dart';
-import 'package:eyr/api/eyr_spring_boot/api000/api000004/api000004_req.dart';
-import 'package:eyr/api/eyr_spring_boot/api000/api000004/api000004_res.dart';
+import 'package:eyr/api/eyr_spring_boot/api000/api000003/api000003.dart';
+import 'package:eyr/api/eyr_spring_boot/api000/api000004/api000004.dart';
 import 'package:get_it/get_it.dart';
 
 class Api000Service {
   ApiService get _apiService => GetIt.I<ApiService>();
 
-  Future<ApiResponse<Api000003Res>> api000003(String frontendPubKey) {
-    final req = Api000003Req(pubKey: frontendPubKey);
+  Future<ApiResponse<Api000003Res>> api000003() {
+    final req = Api000003Req();
 
     return _apiService.request<Api000003Res>(
       req,

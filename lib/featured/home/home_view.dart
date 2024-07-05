@@ -1,10 +1,10 @@
 import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
-import 'package:eyr/api/eyr_spring_boot/api000/api000_service.dart';
 import 'package:eyr/apn/app_routes.dart';
 import 'package:eyr/app/app_widget.dart';
 import 'package:eyr/shared/mixins/common_funcable.dart';
+import 'package:eyr/shared/mixins/http_restable.dart';
 import 'package:eyr/shared/services/crypto_service.dart';
 import 'package:eyr/shared/widgets/header_widget.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -37,7 +37,7 @@ class HomeView extends StatelessWidget with CommonFuncable {
   final String? testfour;
   final VoidCallback? testthree;
 
-  const HomeView({
+  HomeView({
     required this.testone,
     required this.testtwo,
     this.testfour = 'test',
@@ -68,10 +68,6 @@ class HomeView extends StatelessWidget with CommonFuncable {
                     onPressed: () => context.read<HomeCubit>().onTry(),
                     child: const Text('Try'),
                   ),
-                  // TextButton(
-                  //   onPressed: homeCubit.rsaRequest,
-                  //   child: const Text('RsaRequest'),
-                  // ),
                   Text(state.title),
                   Text(state.body),
                 ],

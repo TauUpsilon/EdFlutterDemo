@@ -1,14 +1,19 @@
-import 'dart:convert';
 import 'dart:math';
 import 'dart:typed_data';
 
 import 'package:asn1lib/asn1lib.dart';
+import 'package:eyr/states/env/env_cubit.dart';
+import 'package:get_it/get_it.dart';
 import 'package:pointycastle/export.dart';
 
 class CryptoService {
   late AsymmetricKeyPair<RSAPublicKey, RSAPrivateKey> _frontenddKeyPair;
 
-  late Uint8List _backendPublicKeyByte;
+  late Uint8List currentRSAPublicKeyByte;
+
+  final Map<String, Uint8List> aesKeyMap = {};
+
+  final envCubit = GetIt.I<EnvCubit>();
 
   Uint8List get encodedPublicKey {
     final publicKey = _frontenddKeyPair.publicKey;
@@ -95,11 +100,6 @@ class CryptoService {
     return topLevelSeq.encodedBytes;
   }
 
-  // ignore: use_setters_to_change_properties
-  void setBackendPublicKeyByte(Uint8List value) {
-    _backendPublicKeyByte = value;
-  }
-
   SecureRandom genSecureRandom() {
     final random = Random.secure();
     final seed = List<int>.generate(32, (_) => random.nextInt(256));
@@ -133,7 +133,7 @@ class CryptoService {
   }
 
   RSAPublicKey _getRSAPublicKey() {
-    final asn1Parser = ASN1Parser(_backendPublicKeyByte);
+    final asn1Parser = ASN1Parser(currentRSAPublicKeyByte);
     final topLevelSeq = asn1Parser.nextObject() as ASN1Sequence;
     final publicKeyBitString = topLevelSeq.elements[1];
 
@@ -166,7 +166,7 @@ class CryptoService {
       key ?? Uint8List(16),
     );
 
-    final engine = PaddedBlockCipher('AES/CBC/PKCS7')
+    final engine = PaddedBlockCipher(envCubit.state.cryptoAesAg)
       ..init(
         true,
         PaddedBlockCipherParameters<CipherParameters?, CipherParameters?>(
@@ -194,7 +194,7 @@ class CryptoService {
       key ?? Uint8List(16),
     );
 
-    final engine = PaddedBlockCipher('AES/CBC/PKCS7')
+    final engine = PaddedBlockCipher(envCubit.state.cryptoAesAg)
       ..init(
         false,
         PaddedBlockCipherParameters<CipherParameters?, CipherParameters?>(
@@ -206,35 +206,35 @@ class CryptoService {
     return engine.process(data);
   }
 
-  Uint8List sign(RSAPrivateKey privateKey, Uint8List dataToSign) {
-    final signer = RSASigner(SHA256Digest(), '0609608648016503040201')
-      ..init(
-        true,
-        PrivateKeyParameter<RSAPrivateKey>(privateKey),
-      );
+  // Uint8List sign(RSAPrivateKey privateKey, Uint8List dataToSign) {
+  //   final signer = RSASigner(SHA256Digest(), '0609608648016503040201')
+  //     ..init(
+  //       true,
+  //       PrivateKeyParameter<RSAPrivateKey>(privateKey),
+  //     );
 
-    final sig = signer.generateSignature(dataToSign);
+  //   final sig = signer.generateSignature(dataToSign);
 
-    return sig.bytes;
-  }
+  //   return sig.bytes;
+  // }
 
-  bool verify(
-    RSAPublicKey publicKey,
-    Uint8List signedData,
-    Uint8List signature,
-  ) {
-    //final signer = Signer('SHA-256/RSA'); // Get using registry
-    final sig = RSASignature(signature);
+  // bool verify(
+  //   RSAPublicKey publicKey,
+  //   Uint8List signedData,
+  //   Uint8List signature,
+  // ) {
+  //   //final signer = Signer('SHA-256/RSA'); // Get using registry
+  //   final sig = RSASignature(signature);
 
-    // initialize with false, which means verify
-    final verifier = RSASigner(SHA256Digest(), '0609608648016503040201')
-      ..init(
-        false,
-        PublicKeyParameter<RSAPublicKey>(publicKey),
-      );
+  //   // initialize with false, which means verify
+  //   final verifier = RSASigner(SHA256Digest(), '0609608648016503040201')
+  //     ..init(
+  //       false,
+  //       PublicKeyParameter<RSAPublicKey>(publicKey),
+  //     );
 
-    return verifier.verifySignature(signedData, sig);
-  }
+  //   return verifier.verifySignature(signedData, sig);
+  // }
 
   // Uint8List _processInBlocks(AsymmetricBlockCipher engine, Uint8List input) {
   //   final numBlocks = input.length ~/ engine.inputBlockSize +
@@ -265,69 +265,69 @@ class CryptoService {
   //       : output.sublist(0, outputOffset);
   // }
 
-  RSAPrivateKey parsePrivateKeyFromPem(Uint8List bytes) {
-    // final privateKeyDER = decodePEM(pemString);
-    var asn1Parser = ASN1Parser(bytes);
-    final topLevelSeq = asn1Parser.nextObject() as ASN1Sequence;
-    final privateKey = topLevelSeq.elements[2];
+  // RSAPrivateKey parsePrivateKeyFromPem(Uint8List bytes) {
+  //   // final privateKeyDER = decodePEM(pemString);
+  //   var asn1Parser = ASN1Parser(bytes);
+  //   final topLevelSeq = asn1Parser.nextObject() as ASN1Sequence;
+  //   final privateKey = topLevelSeq.elements[2];
 
-    asn1Parser = ASN1Parser(privateKey.contentBytes());
-    final pkSeq = asn1Parser.nextObject() as ASN1Sequence;
+  //   asn1Parser = ASN1Parser(privateKey.contentBytes());
+  //   final pkSeq = asn1Parser.nextObject() as ASN1Sequence;
 
-    final modulus = pkSeq.elements[1] as ASN1Integer;
-    final privateExponent = pkSeq.elements[3] as ASN1Integer;
-    final p = pkSeq.elements[4] as ASN1Integer;
-    final q = pkSeq.elements[5] as ASN1Integer;
+  //   final modulus = pkSeq.elements[1] as ASN1Integer;
+  //   final privateExponent = pkSeq.elements[3] as ASN1Integer;
+  //   final p = pkSeq.elements[4] as ASN1Integer;
+  //   final q = pkSeq.elements[5] as ASN1Integer;
 
-    final rsaPrivateKey = RSAPrivateKey(
-      modulus.valueAsBigInteger,
-      privateExponent.valueAsBigInteger,
-      p.valueAsBigInteger,
-      q.valueAsBigInteger,
-    );
+  //   final rsaPrivateKey = RSAPrivateKey(
+  //     modulus.valueAsBigInteger,
+  //     privateExponent.valueAsBigInteger,
+  //     p.valueAsBigInteger,
+  //     q.valueAsBigInteger,
+  //   );
 
-    return rsaPrivateKey;
-  }
+  //   return rsaPrivateKey;
+  // }
 
-  Uint8List decodePEM(String pemToDecode) {
-    var pem = pemToDecode;
+  // Uint8List decodePEM(String pemToDecode) {
+  //   var pem = pemToDecode;
 
-    final startsWith = [
-      '-----BEGIN PUBLIC KEY-----',
-      '-----BEGIN PRIVATE KEY-----',
-      '-----BEGIN PGP PUBLIC KEY BLOCK-----\r\nVersion: React-Native-OpenPGP.js 0.1\r\nComment: http://openpgpjs.org\r\n\r\n',
-      '-----BEGIN PGP PRIVATE KEY BLOCK-----\r\nVersion: React-Native-OpenPGP.js 0.1\r\nComment: http://openpgpjs.org\r\n\r\n',
-    ];
-    final endsWith = [
-      '-----END PUBLIC KEY-----',
-      '-----END PRIVATE KEY-----',
-      '-----END PGP PUBLIC KEY BLOCK-----',
-      '-----END PGP PRIVATE KEY BLOCK-----',
-    ];
-    final isOpenPgp = pem.contains('BEGIN PGP');
+  //   final startsWith = [
+  //     '-----BEGIN PUBLIC KEY-----',
+  //     '-----BEGIN PRIVATE KEY-----',
+  //     '-----BEGIN PGP PUBLIC KEY BLOCK-----\r\nVersion: React-Native-OpenPGP.js 0.1\r\nComment: http://openpgpjs.org\r\n\r\n',
+  //     '-----BEGIN PGP PRIVATE KEY BLOCK-----\r\nVersion: React-Native-OpenPGP.js 0.1\r\nComment: http://openpgpjs.org\r\n\r\n',
+  //   ];
+  //   final endsWith = [
+  //     '-----END PUBLIC KEY-----',
+  //     '-----END PRIVATE KEY-----',
+  //     '-----END PGP PUBLIC KEY BLOCK-----',
+  //     '-----END PGP PRIVATE KEY BLOCK-----',
+  //   ];
+  //   final isOpenPgp = pem.contains('BEGIN PGP');
 
-    for (final s in startsWith) {
-      if (pem.startsWith(s)) {
-        pem = pem.substring(s.length);
-      }
-    }
+  //   for (final s in startsWith) {
+  //     if (pem.startsWith(s)) {
+  //       pem = pem.substring(s.length);
+  //     }
+  //   }
 
-    for (final s in endsWith) {
-      if (pem.endsWith(s)) {
-        pem = pem.substring(0, pem.length - s.length);
-      }
-    }
+  //   for (final s in endsWith) {
+  //     if (pem.endsWith(s)) {
+  //       pem = pem.substring(0, pem.length - s.length);
+  //     }
+  //   }
 
-    if (isOpenPgp) {
-      final index = pem.indexOf('\r\n');
-      pem = pem.substring(0, index);
-    }
+  //   if (isOpenPgp) {
+  //     final index = pem.indexOf('\r\n');
+  //     pem = pem.substring(0, index);
+  //   }
 
-    pem = pem.replaceAll('\n', '');
-    pem = pem.replaceAll('\r', '');
+  //   pem = pem.replaceAll('\n', '');
+  //   pem = pem.replaceAll('\r', '');
 
-    return base64.decode(pem);
-  }
+  //   return base64.decode(pem);
+  // }
 }
 
 class KeyPair<T, U> {
@@ -339,34 +339,3 @@ class KeyPair<T, U> {
   @override
   String toString() => 'KeyPair($public, $private)';
 }
-
-
-// class CryptoService {
-//   static EnvCubit get envCubit => GetIt.I<EnvCubit>();
-
-//   static String encrypt(String text) {
-//     final key = Key.fromBase64(envCubit.state.hsbcApiKY);
-//     final iv = IV.fromBase64(envCubit.state.hsbcApiIV);
-//     final encrypter = Encrypter(AES(key, mode: AESMode.cbc));
-//     return encrypter.encrypt(text, iv: iv).base64;
-//   }
-
-//   static String encryptAsReq(String text) {
-//     if (!envCubit.state.cryptoEnabled) return text;
-//     final req = CryptoData(payload: encrypt(text));
-//     return jsonEncode(req.toJson());
-//   }
-
-//   static String decrypt(String encryptedText) {
-//     final key = Key.fromBase64(envCubit.state.hsbcApiKY);
-//     final iv = IV.fromBase64(envCubit.state.hsbcApiIV);
-//     final decrypt = Encrypter(AES(key, mode: AESMode.cbc));
-//     return decrypt.decrypt64(encryptedText, iv: iv);
-//   }
-
-//   static String decryptAsRes(String encryptedRes) {
-//     if (!envCubit.state.cryptoEnabled) return encryptedRes;
-//     final res = CryptoData.fromJson(jsonDecode(encryptedRes));
-//     return decrypt(res.payload);
-//   }
-// }

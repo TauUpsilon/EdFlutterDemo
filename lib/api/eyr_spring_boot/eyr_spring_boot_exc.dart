@@ -1,5 +1,4 @@
-import 'package:eyr/api/api_service.dart';
-import 'package:eyr/shared/utils/string_util.dart';
+part of 'package:eyr/api/eyr_spring_boot/eyr_spring_boot_service.dart';
 
 class EYRSpringBootExc extends ApiException {
   String? stackTrace;

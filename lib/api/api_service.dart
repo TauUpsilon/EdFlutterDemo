@@ -57,15 +57,17 @@ class ApiService {
 
   ApiResponse<T> _handleRespose<T>(
     ApiRequest request,
-    Response response,
+    Response res,
     T Function(Object value) serialiser,
   ) {
-    final status = '${response.statusCode}'.trim();
+    final status = '${res.statusCode}'.trim();
     final from = '${request.reqURI}'.trim();
-    final reason = response.reasonPhrase;
+    final reason = res.reasonPhrase;
 
     if (status.startsWith('2')) {
-      return request.handleResponse<T>(response, serialiser);
+      final response = request.handleResponse<T>(res, serialiser);
+      _logger.d('ApiService $response');
+      return response;
     } else if (status.startsWith('5')) {
       throw ServerException(status, from, reason);
     } else if (status.startsWith('4')) {

@@ -1,6 +1,5 @@
 import 'package:eyr/apn/app_routes.dart';
 import 'package:eyr/featured/auth/login/login_view.dart';
-import 'package:eyr/featured/network/network_todos_detail/network_todos_detail_view.dart';
 import 'package:eyr/featured/network/network_view.dart';
 import 'package:eyr/states/auth/auth_cubit.dart';
 import 'package:get_it/get_it.dart';
@@ -23,13 +22,6 @@ final networkRouter = ShellRoute(
         return null;
       },
       builder: (context, state) => NetworkView(test: 'test'),
-      routes: [
-        GoRoute(
-          path: AppRoutes.network.todoDetail.path,
-          name: AppRoutes.network.todoDetail.name,
-          builder: (context, state) => NetworkTodosDetailView(),
-        ),
-      ],
     ),
   ],
 );
