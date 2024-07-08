@@ -1,0 +1,3 @@
+class JsonParamable {
+  const JsonParamable();
+}

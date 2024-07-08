@@ -1,4 +1,4 @@
-name: page_route_generator
+name: json_paramable_generator
 description: A new Flutter package project.
 version: 0.0.1
 publish_to: "none"
@@ -13,8 +13,8 @@ dependencies:
 
   build:
   source_gen:
-  page_route_annotation:
-    path: ../page_route_annotation/
+  json_paramable_annotation:
+    path: ../json_paramable_annotation/
 
 dev_dependencies:
   flutter_test:

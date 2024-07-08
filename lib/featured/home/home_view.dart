@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:equatable/equatable.dart';
 import 'package:eyr/apn/app_routes.dart';
 import 'package:eyr/app/app_widget.dart';
+import 'package:eyr/featured/network/network_view.dart';
 import 'package:eyr/shared/mixins/common_funcable.dart';
 import 'package:eyr/shared/mixins/http_restable.dart';
 import 'package:eyr/shared/services/crypto_service.dart';
@@ -13,35 +14,31 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:page_route_annotation/page_route.annotation.dart';
+import 'package:json_paramable_annotation/json_paramable_annotation.dart';
 
 part 'home_cubit.dart';
 part 'home_state.dart';
 part 'home_view.g.dart';
 
-@JsonSerializable()
-class Test {
-  final String subtest;
-
-  Test({
-    required this.subtest,
-  });
-
-  factory Test.fromJson(Map json) => Test(subtest: json['subtest']);
-}
-
-@RouteParamGenerable()
+@JsonSerializable(
+  ignoreUnannotated: true,
+  explicitToJson: true,
+)
+@JsonParamable()
 class HomeView extends StatelessWidget with CommonFuncable {
+  @JsonKey()
   final String testone;
+
+  @JsonKey()
   final Test testtwo;
+
+  @JsonKey()
   final String? testfour;
-  final VoidCallback? testthree;
 
   HomeView({
     required this.testone,
     required this.testtwo,
     this.testfour = 'test',
-    this.testthree,
     super.key,
   });
 
@@ -85,7 +82,19 @@ class HomeView extends StatelessWidget with CommonFuncable {
     properties
       ..add(StringProperty('testone', testone))
       ..add(DiagnosticsProperty<Test>('testtwo', testtwo))
-      ..add(ObjectFlagProperty<VoidCallback?>.has('testthree', testthree))
       ..add(StringProperty('testfour', testfour));
   }
+}
+
+@JsonSerializable()
+class Test {
+  final String subtest;
+
+  Test({
+    required this.subtest,
+  });
+
+  factory Test.fromJson(Map<String, dynamic> json) => _$TestFromJson(json);
+
+  Map<String, dynamic> toJson() => _$TestToJson(this);
 }

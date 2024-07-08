@@ -14,14 +14,8 @@ final authRouter = ShellRoute(
           path: AppRoutes.auth.login.path,
           name: AppRoutes.auth.login.name,
           builder: (context, state) {
-            final extra = state.extra;
-
-            if (extra is! LoginRouteParam) {
-              throw Exception('LoginRouteParam');
-            }
-
-            return LoginView(
-              redirectUrl: extra.redirectUrl,
+            return LoginParam.getView(
+              state.extra! as Map<String, dynamic>,
             );
           },
         ),

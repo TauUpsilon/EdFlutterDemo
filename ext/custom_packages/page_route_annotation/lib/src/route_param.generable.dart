@@ -1,3 +1,0 @@
-class RouteParamGenerable {
-  const RouteParamGenerable();
-}

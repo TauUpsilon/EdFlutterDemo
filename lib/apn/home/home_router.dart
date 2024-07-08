@@ -8,9 +8,8 @@ final homeRouter = ShellRoute(
     GoRoute(
       path: '/${AppRoutes.home.path}',
       name: AppRoutes.home.name,
-      builder: (context, state) => HomeView(
-        testone: '',
-        testtwo: Test(subtest: 'subtest'),
+      builder: (context, state) => HomeParam.getView(
+        state.extra! as Map<String, dynamic>,
       ),
     ),
   ],

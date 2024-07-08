@@ -5,17 +5,25 @@ import 'package:eyr/shared/widgets/header_widget.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:page_route_annotation/page_route.annotation.dart';
+import 'package:json_annotation/json_annotation.dart';
+import 'package:json_paramable_annotation/json_paramable_annotation.dart';
 
 part 'network_cubit.dart';
 part 'network_state.dart';
 part 'network_view.g.dart';
 
-@RouteParamGenerable()
+@JsonSerializable(
+  ignoreUnannotated: true,
+)
+@JsonParamable()
 class NetworkView extends StatelessWidget with CommonFuncable {
-  NetworkView({required this.test, super.key});
-
+  @JsonKey()
   final String test;
+
+  NetworkView({
+    required this.test,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -11,19 +11,28 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
-import 'package:page_route_annotation/page_route.annotation.dart';
+import 'package:json_annotation/json_annotation.dart';
+import 'package:json_paramable_annotation/json_paramable_annotation.dart';
 
 part 'login_cubit.dart';
 part 'login_state.dart';
 part 'login_view.g.dart';
 
-@RouteParamGenerable()
+@JsonSerializable(
+  ignoreUnannotated: true,
+)
+@JsonParamable()
 class LoginView extends StatelessWidget with CommonViewable {
-  final Uri? redirectUrl;
+  @JsonKey()
+  final String redirectUrl;
+
+  @JsonKey()
+  final Map<String, dynamic>? redirectExtra;
 
   const LoginView({
+    this.redirectUrl = '',
+    this.redirectExtra,
     super.key,
-    this.redirectUrl,
   });
 
   @override
@@ -88,7 +97,8 @@ class LoginView extends StatelessWidget with CommonViewable {
                   value,
                 ),
             onFieldSubmitted: (_) async => context.read<LoginCubit>().login(
-                  redirectUrl,
+                  Uri.tryParse(redirectUrl),
+                  redirectExtra,
                 ),
             onTapOutside: (_) => state.passwordField.focusNode.unfocus(),
           ),
@@ -103,7 +113,8 @@ class LoginView extends StatelessWidget with CommonViewable {
           alignment: Alignment.centerRight,
           child: TextButton(
             onPressed: () async => context.read<LoginCubit>().login(
-                  redirectUrl,
+                  Uri.tryParse(redirectUrl),
+                  redirectExtra,
                 ),
             child: Text(
               Localiser.of(context).wordLogin,
@@ -115,6 +126,13 @@ class LoginView extends StatelessWidget with CommonViewable {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<Uri?>('redirectUrl', redirectUrl));
+    properties
+      ..add(StringProperty('redirectUrl', redirectUrl))
+      ..add(
+        DiagnosticsProperty<Map<String, dynamic>>(
+          'redirectExtra',
+          redirectExtra,
+        ),
+      );
   }
 }

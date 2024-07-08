@@ -9,9 +9,9 @@
   },
     {
       "label": "Generate files",
-      "type": "dart",
-      "command": "dart",
-      "args": ["run", "build_runner", "build"]
+      "type": "shell",
+      "problemMatcher": [],
+      "command": "dart run build_runner build"
     },
     {
       "label": "Set launcher icon",

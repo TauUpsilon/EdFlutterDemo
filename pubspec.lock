@@ -37,10 +37,10 @@ packages:
     dependency: "direct main"
     description:
       name: asn1lib
-      sha256: c9c85fedbe2188b95133cbe960e16f5f448860f7133330e272edbbca5893ddc6
+      sha256: "58082b3f0dca697204dbab0ef9ff208bfaea7767ea771076af9a343488428dda"
       url: "https://pub.dev"
     source: hosted
-    version: "1.5.2"
+    version: "1.5.3"
   async:
     dependency: transitive
     description:
@@ -205,10 +205,10 @@ packages:
     dependency: transitive
     description:
       name: coverage
-      sha256: "8acabb8306b57a409bf4c83522065672ee13179297a6bb0cb9ead73948df7c76"
+      sha256: "3945034e86ea203af7a056d98e98e42a5518fff200d6e8e6647e1886b07e936e"
       url: "https://pub.dev"
     source: hosted
-    version: "1.7.2"
+    version: "1.8.0"
   crypto:
     dependency: transitive
     description:
@@ -316,10 +316,10 @@ packages:
     dependency: transitive
     description:
       name: firebase_core_platform_interface
-      sha256: c437ae5d17e6b5cc7981cf6fd458a5db4d12979905f9aafd1fea930428a9fe63
+      sha256: "1003a5a03a61fc9a22ef49f37cbcb9e46c86313a7b2e7029b9390cf8c6fc32cb"
       url: "https://pub.dev"
     source: hosted
-    version: "5.0.0"
+    version: "5.1.0"
   firebase_core_web:
     dependency: transitive
     description:
@@ -369,10 +369,10 @@ packages:
     dependency: "direct main"
     description:
       name: flutter_bloc
-      sha256: f0ecf6e6eb955193ca60af2d5ca39565a86b8a142452c5b24d96fb477428f4d2
+      sha256: b594505eac31a0518bdcb4b5b79573b8d9117b193cc80cc12e17d639b10aa27a
       url: "https://pub.dev"
     source: hosted
-    version: "8.1.5"
+    version: "8.1.6"
   flutter_lints:
     dependency: "direct dev"
     description:
@@ -432,10 +432,10 @@ packages:
     dependency: "direct main"
     description:
       name: go_router
-      sha256: "07ee2436909f749d606f53521dc1725dd738dc5196e5ff815bc254253c594075"
+      sha256: b465e99ce64ba75e61c8c0ce3d87b66d8ac07f0b35d0a7e0263fcfc10f99e836
       url: "https://pub.dev"
     source: hosted
-    version: "13.1.0"
+    version: "13.2.5"
   graphs:
     dependency: transitive
     description:
@@ -508,6 +508,20 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.9.0"
+  json_paramable_annotation:
+    dependency: "direct main"
+    description:
+      path: "ext/custom_packages/json_paramable_annotation"
+      relative: true
+    source: path
+    version: "0.0.1"
+  json_paramable_generator:
+    dependency: "direct dev"
+    description:
+      path: "ext/custom_packages/json_paramable_generator"
+      relative: true
+    source: path
+    version: "0.0.1"
   json_serializable:
     dependency: "direct dev"
     description:
@@ -528,10 +542,10 @@ packages:
     dependency: "direct main"
     description:
       name: logger
-      sha256: "8c94b8c219e7e50194efc8771cd0e9f10807d8d3e219af473d89b06cc2ee4e04"
+      sha256: af05cc8714f356fd1f3888fb6741cbe9fbe25cdb6eedbab80e1a6db21047d4a4
       url: "https://pub.dev"
     source: hosted
-    version: "2.2.0"
+    version: "2.3.0"
   logging:
     dependency: transitive
     description:
@@ -604,20 +618,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.0"
-  page_route_annotation:
-    dependency: "direct main"
-    description:
-      path: "ext/custom_packages/page_route_annotation"
-      relative: true
-    source: path
-    version: "0.0.1"
-  page_route_generator:
-    dependency: "direct dev"
-    description:
-      path: "ext/custom_packages/page_route_generator"
-      relative: true
-    source: path
-    version: "0.0.1"
   path:
     dependency: transitive
     description:
@@ -646,10 +646,10 @@ packages:
     dependency: "direct main"
     description:
       name: pointycastle
-      sha256: "79fbafed02cfdbe85ef3fd06c7f4bc2cbcba0177e61b765264853d4253b21744"
+      sha256: "4be0097fcf3fd3e8449e53730c631200ebc7b88016acecab2b0da2f0149222fe"
       url: "https://pub.dev"
     source: hosted
-    version: "3.9.0"
+    version: "3.9.1"
   pool:
     dependency: transitive
     description:
@@ -678,10 +678,10 @@ packages:
     dependency: transitive
     description:
       name: pubspec_parse
-      sha256: c63b2876e58e194e4b0828fcb080ad0e06d051cb607a6be51a9e084f47cb9367
+      sha256: c799b721d79eb6ee6fa56f00c04b472dcd44a30d258fac2174a6ec57302678f8
       url: "https://pub.dev"
     source: hosted
-    version: "1.2.3"
+    version: "1.3.0"
   shelf:
     dependency: transitive
     description:
@@ -905,4 +905,4 @@ packages:
     version: "3.1.2"
 sdks:
   dart: ">=3.2.0 <4.0.0"
-  flutter: ">=3.10.0"
+  flutter: ">=3.16.0"

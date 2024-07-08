@@ -15,13 +15,18 @@ final networkRouter = ShellRoute(
         if (!GetIt.I<AuthCubit>().state.isAuthenticated) {
           return GetIt.I<GoRouter>().pushNamed(
             AppRoutes.auth.login.name,
-            extra: LoginRouteParam(redirectUrl: state.uri),
+            extra: LoginParam(
+              redirectUrl: state.uri.path,
+              redirectExtra: state.extra as Map<String, dynamic>?,
+            ).toExtra(),
           );
         }
 
         return null;
       },
-      builder: (context, state) => NetworkView(test: 'test'),
+      builder: (context, state) => NetworkParam.getView(
+        state.extra! as Map<String, dynamic>,
+      ),
     ),
   ],
 );

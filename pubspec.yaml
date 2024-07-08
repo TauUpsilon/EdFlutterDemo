@@ -18,8 +18,8 @@ dependencies:
   custom_math:
     path: ext/custom_plugins/custom_math
 
-  page_route_annotation:
-    path: ext/custom_packages/page_route_annotation
+  json_paramable_annotation:
+    path: ext/custom_packages/json_paramable_annotation
 
   logger: ^2.0.2+1
   json_annotation: ^4.8.1
@@ -43,8 +43,8 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  page_route_generator:
-    path: ext/custom_packages/page_route_generator
+  json_paramable_generator:
+    path: ext/custom_packages/json_paramable_generator
 
   flutter_lints: ^3.0.0
   json_serializable: ^6.7.1

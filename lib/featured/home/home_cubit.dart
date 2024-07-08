@@ -23,7 +23,10 @@ class HomeCubit extends Cubit<HomeState> with CommonFuncable, HttpRestable {
   }
 
   Future<void> onNavigateToNetwork() async {
-    router.pushNamed(AppRoutes.network.name);
+    router.pushNamed(
+      AppRoutes.network.name,
+      extra: const NetworkParam(test: 'Edward test').toExtra(),
+    );
   }
 
   Future<void> onTry() async {
