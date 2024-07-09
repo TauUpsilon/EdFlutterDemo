@@ -9,7 +9,6 @@ import 'package:eyr/shared/mixins/http_restable.dart';
 import 'package:eyr/shared/services/crypto_service.dart';
 import 'package:eyr/shared/widgets/header_widget.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
@@ -26,19 +25,7 @@ part 'home_view.g.dart';
 )
 @JsonParamable()
 class HomeView extends StatelessWidget with CommonFuncable {
-  @JsonKey()
-  final String testone;
-
-  @JsonKey()
-  final Test testtwo;
-
-  @JsonKey()
-  final String? testfour;
-
   HomeView({
-    required this.testone,
-    required this.testtwo,
-    this.testfour = 'test',
     super.key,
   });
 
@@ -74,15 +61,6 @@ class HomeView extends StatelessWidget with CommonFuncable {
         ),
       ),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(StringProperty('testone', testone))
-      ..add(DiagnosticsProperty<Test>('testtwo', testtwo))
-      ..add(StringProperty('testfour', testfour));
   }
 }
 

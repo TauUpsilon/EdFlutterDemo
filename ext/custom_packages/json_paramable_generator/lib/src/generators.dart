@@ -64,6 +64,7 @@ class JsonParamableGenerator extends GeneratorForAnnotation<JsonParamable> {
   void writeConstructor(StringBuffer buffer) {
     if (_visitor.params.isEmpty) {
       buffer.writeln('const $className();');
+
       return;
     }
 
@@ -88,14 +89,14 @@ class JsonParamableGenerator extends GeneratorForAnnotation<JsonParamable> {
   }
 
   void writeGetViewMethod(StringBuffer buffer) {
-    if (_visitor.fields.isEmpty) return;
-
     // static View toView(Map<String, dynamic> json) =>
-    //   _$ViewFromJson(json);
+    //    _$ViewFromJson(json);
 
     buffer.writeln('static $viewName getView(Map<String, dynamic> json) => ');
 
     buffer.write('_\$${viewName}FromJson(json);');
+
+    // if (_visitor.fields.isEmpty) return;
 
     // buffer.writeln(
     //   'factory $className.fromJson(Map<String, dynamic> json,) => ',
@@ -147,8 +148,6 @@ class JsonParamableGenerator extends GeneratorForAnnotation<JsonParamable> {
   }
 
   void writeToExtraMethod(StringBuffer buffer) {
-    if (_visitor.fields.isEmpty) return;
-
     // Map<String, dynamic> toParam() => _$ViewToJson(
     //     View(
     //       param: param,
@@ -166,6 +165,8 @@ class JsonParamableGenerator extends GeneratorForAnnotation<JsonParamable> {
     buffer.writeln('),');
 
     buffer.writeln(');');
+
+    // if (_visitor.fields.isEmpty) return;
 
     // buffer.writeln(
     //   'Map<String, dynamic> toJson($className instance) => ',

@@ -15,7 +15,7 @@ final authRouter = ShellRoute(
           name: AppRoutes.auth.login.name,
           builder: (context, state) {
             return LoginParam.getView(
-              state.extra! as Map<String, dynamic>,
+              state.extra as Map<String, dynamic>? ?? {},
             );
           },
         ),

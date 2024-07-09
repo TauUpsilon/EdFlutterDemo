@@ -9,7 +9,7 @@ final homeRouter = ShellRoute(
       path: '/${AppRoutes.home.path}',
       name: AppRoutes.home.name,
       builder: (context, state) => HomeParam.getView(
-        state.extra! as Map<String, dynamic>,
+        state.extra as Map<String, dynamic>? ?? {},
       ),
     ),
   ],
