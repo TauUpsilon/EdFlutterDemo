@@ -16,6 +16,12 @@ mixin AppTheme {
       onSecondary: _onSecondary,
       onBackground: _onBackground,
     ),
+    pageTransitionsTheme: const PageTransitionsTheme(
+      builders: <TargetPlatform, PageTransitionsBuilder>{
+        TargetPlatform.android: ZoomPageTransitionsBuilder(),
+        TargetPlatform.iOS: ZoomPageTransitionsBuilder(),
+      },
+    ),
     textTheme: const TextTheme(
       displayLarge: TextStyle(
         fontSize: 84,

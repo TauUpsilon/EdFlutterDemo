@@ -21,7 +21,7 @@ abstract class ApiRequest with EquatableMixin {
 
   ApiResponse<T> handleResponse<T>(
     Response response,
-    T Function(Object value) serialiser,
+    T Function(Map<String, dynamic> value) serialiser,
   );
 
   ApiException? handleError(

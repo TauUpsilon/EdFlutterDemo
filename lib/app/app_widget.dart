@@ -8,6 +8,7 @@ import 'package:eyr/states/auth/auth_cubit.dart';
 import 'package:eyr/states/env/env_cubit.dart';
 import 'package:eyr/states/init/init_cubit.dart';
 import 'package:eyr/states/locale/locale_cubit.dart';
+import 'package:eyr/states/mask/mask_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
@@ -22,6 +23,7 @@ class App extends StatelessWidget with CommonFuncable, AppRouterObserver {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => GetIt.I<AppMaskCubit>()),
+        BlocProvider(create: (context) => GetIt.I<MaskCubit>()),
         BlocProvider(create: (context) => GetIt.I<AppAlertCubit>()),
         BlocProvider(create: (context) => GetIt.I<InitCubit>()),
         BlocProvider(create: (context) => GetIt.I<EnvCubit>()),
@@ -45,15 +47,15 @@ class App extends StatelessWidget with CommonFuncable, AppRouterObserver {
               debugShowCheckedModeBanner: false,
             ),
             // Alert
-            AppAlert(
-              locale: state.locale,
-              localizationsDelegates: Localiser.localizationsDelegates,
-              supportedLocales: Localiser.supportedLocales,
-            ),
+            // AppAlert(
+            //   locale: state.locale,
+            //   localizationsDelegates: Localiser.localizationsDelegates,
+            //   supportedLocales: Localiser.supportedLocales,
+            // ),
             // Mask
-            AppMask(
-              locale: state.locale,
-            ),
+            // AppMask(
+            //   locale: state.locale,
+            // ),
           ],
         ),
       ),

@@ -5,8 +5,8 @@ import 'package:equatable/equatable.dart';
 import 'package:eyr/shared/services/logging_service.dart';
 import 'package:eyr/shared/utils/string_util.dart';
 import 'package:eyr/shared/widgets/app_mask/app_mask_enum.dart';
-import 'package:eyr/shared/widgets/app_mask/app_mask_view.dart';
 import 'package:eyr/states/env/env_cubit.dart';
+import 'package:eyr/states/mask/mask_cubit.dart';
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart';
 import 'package:json_annotation/json_annotation.dart';
@@ -18,13 +18,13 @@ part 'api_response.dart';
 
 class ApiService {
   EnvCubit get _envCubit => GetIt.I<EnvCubit>();
-  AppMaskCubit get _maskCubit => GetIt.I<AppMaskCubit>();
+  MaskCubit get _maskCubit => GetIt.I<MaskCubit>();
   LoggingService get _logger => GetIt.I<LoggingService>();
   Connectivity get _connectivity => GetIt.I<Connectivity>();
 
   Future<ApiResponse<T>> request<T>(
     ApiRequest request,
-    T Function(Object value) serialiser, {
+    T Function(Map<String, dynamic> value) serialiser, {
     bool hasMask = true,
   }) async =>
       _handleMask(request, AppMaskStatus.on, hasMask)
@@ -58,22 +58,21 @@ class ApiService {
   ApiResponse<T> _handleRespose<T>(
     ApiRequest request,
     Response res,
-    T Function(Object value) serialiser,
+    T Function(Map<String, dynamic> value) serialiser,
   ) {
     final status = '${res.statusCode}'.trim();
     final from = '${request.reqURI}'.trim();
-    final reason = res.reasonPhrase;
 
     if (status.startsWith('2')) {
       final response = request.handleResponse<T>(res, serialiser);
       _logger.d('ApiService $response');
       return response;
     } else if (status.startsWith('5')) {
-      throw ServerException(status, from, reason);
+      throw ServerException(status: status, from: from, response: res);
     } else if (status.startsWith('4')) {
-      throw ClientException(status, from, reason);
+      throw ClientException(status: status, from: from, response: res);
     } else {
-      throw UnknownException(status, from, reason);
+      throw UnknownException(status: status, from: from, response: res);
     }
   }
 
@@ -84,7 +83,6 @@ class ApiService {
   ) {
     final customErr = request.handleError(error);
     if (customErr != null) throw customErr;
-    _logger.e('ApiService $error\n\n$stackTrace');
     throw error;
   }
 

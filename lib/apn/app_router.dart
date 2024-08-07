@@ -1,5 +1,6 @@
 import 'package:eyr/apn/app_routes.dart';
 import 'package:eyr/apn/auth/auth_router.dart';
+import 'package:eyr/apn/common/common_router.dart';
 import 'package:eyr/apn/home/home_router.dart';
 import 'package:eyr/apn/network/network_router.dart';
 import 'package:eyr/app/app_navigator.dart';
@@ -22,6 +23,7 @@ final appRoutingConfig = ValueNotifier<RoutingConfig>(
           AppRoutes.home.name,
         ),
       ),
+      commonRouter,
       authRouter,
       homeRouter,
       networkRouter,

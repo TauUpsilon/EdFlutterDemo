@@ -4,7 +4,6 @@ import 'dart:typed_data';
 
 import 'package:eyr/api/api_service.dart';
 import 'package:eyr/shared/services/crypto_service.dart';
-import 'package:eyr/shared/services/logging_service.dart';
 import 'package:eyr/shared/utils/string_util.dart';
 import 'package:eyr/states/env/env_cubit.dart';
 import 'package:get_it/get_it.dart';

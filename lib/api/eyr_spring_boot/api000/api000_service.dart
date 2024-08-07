@@ -15,8 +15,8 @@ class Api000Service {
     );
   }
 
-  Api000003Res _serialiseApi000003(Object res) {
-    return Api000003Res.fromJson((res as Map<String, dynamic>)['payload']);
+  Api000003Res _serialiseApi000003(Map<String, dynamic> res) {
+    return Api000003Res.fromJson(res);
   }
 
   Future<ApiResponse<Api000004Res>> api000004(String data) {
@@ -28,7 +28,7 @@ class Api000Service {
     );
   }
 
-  Api000004Res _serialiseApi000004(Object res) {
-    return Api000004Res.fromJson((res as Map<String, dynamic>)['payload']);
+  Api000004Res _serialiseApi000004(Map<String, dynamic> res) {
+    return Api000004Res.fromJson(res);
   }
 }

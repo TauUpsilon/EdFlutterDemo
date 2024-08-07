@@ -3,9 +3,13 @@ part of 'api_service.dart';
 class ApiException implements Exception {
   final String? status;
   final String? from;
-  final String? reason;
+  final Response? response;
 
-  ApiException(this.status, [this.from, this.reason]);
+  ApiException({
+    this.status,
+    this.from,
+    this.response,
+  });
 
   @override
   String toString() => StringUtil.prettyLog(
@@ -13,19 +17,19 @@ class ApiException implements Exception {
         {
           'Status': status,
           'From': from,
-          'Reason': reason,
+          'Reason': response?.reasonPhrase,
         },
       );
 }
 
 class ServerException extends ApiException {
-  ServerException(super.status, [super.from, super.reason]);
+  ServerException({super.status, super.from, super.response});
 }
 
 class ClientException extends ApiException {
-  ClientException(super.status, [super.from, super.reason]);
+  ClientException({super.status, super.from, super.response});
 }
 
 class UnknownException extends ApiException {
-  UnknownException(super.status, [super.from, super.reason]);
+  UnknownException({super.status, super.from, super.response});
 }

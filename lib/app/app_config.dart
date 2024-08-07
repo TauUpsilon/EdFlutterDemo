@@ -3,8 +3,10 @@ part of 'app_widget.dart';
 class AppConfig {
   String test = '';
 
-  static const String appTitle =
-      String.fromEnvironment('APP_TITLE', defaultValue: 'App');
+  static const String appTitle = String.fromEnvironment(
+    'APP_TITLE',
+    defaultValue: 'App',
+  );
   static const String currentENV = String.fromEnvironment('CURRENT_ENV');
   static const int timeoutSec = int.fromEnvironment(
     'TIMEOUT_SEC',

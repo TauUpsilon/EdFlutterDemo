@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:eyr/api/api_service.dart';
 import 'package:eyr/app/app_locator.dart';
 import 'package:eyr/app/app_util.dart';
 import 'package:eyr/app/app_widget.dart';
@@ -22,5 +23,9 @@ Future<void> onStart() async {
 }
 
 void onError(Object err, StackTrace stackTrace) {
-  GetIt.I<LoggingService>().e('$err\n\n$stackTrace');
+  if (err is ApiException) {
+    GetIt.I<LoggingService>().e('$err');
+  } else {
+    GetIt.I<LoggingService>().e('$err\nStackTrace:\n$stackTrace');
+  }
 }

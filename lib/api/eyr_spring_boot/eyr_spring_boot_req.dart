@@ -1,7 +1,6 @@
 part of 'package:eyr/api/eyr_spring_boot/eyr_spring_boot_service.dart';
 
 class EYRSpringBootReq extends ApiRequest {
-  final _logger = GetIt.I<LoggingService>();
   final _env = GetIt.I<EnvCubit>();
 
   EYRSpringBootReq({
@@ -41,14 +40,14 @@ class EYRSpringBootReq extends ApiRequest {
   @override
   ApiResponse<T> handleResponse<T>(
     Response response,
-    T Function(Object value) serialiser,
+    T Function(Map<String, dynamic> value) serialiser,
   ) {
-    final resJson = jsonDecode(response.body);
+    final resJson = jsonDecode(response.body) as Map<String, dynamic>;
 
     return EYRSpringBootRes<T>(
       uri: reqURI,
       status: '${response.statusCode}',
-      data: serialiser(resJson),
+      data: serialiser(resJson['payload']),
     );
   }
 
@@ -56,8 +55,12 @@ class EYRSpringBootReq extends ApiRequest {
   ApiException? handleError(
     Exception error,
   ) {
-    if (error is! EYRSpringBootExc) return null;
-    _logger.e('EYRSpringBoot $error\n\n${error.stackTrace}');
-    return error;
+    if (error is! ApiException) return null;
+
+    return EYRSpringBootExc(
+      status: error.status,
+      from: error.from,
+      response: error.response,
+    );
   }
 }
