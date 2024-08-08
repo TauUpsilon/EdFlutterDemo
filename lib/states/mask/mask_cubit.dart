@@ -10,68 +10,114 @@ part 'mask_state.dart';
 class MaskCubit extends Cubit<MaskState> {
   MaskCubit() : super(MaskState.init()) {
     stream.listen((state) {
-      if (state.clients.length > 1) return;
-
       final context = AppNavigator.context;
 
+      if (state.isON && state.isForciblyChange) {
+        Navigator.pop(context);
+
+        _putOnMask(context);
+
+        return;
+      }
+
+      if (state.clients.length > 1) return;
+
       if (state.clients.length == 1 && !state.isON) {
-        switch (state.type) {
-          case MaskType.loading:
-            emit(
-              MaskState.copyWith(
-                state.clients,
-                state.type,
-                isON: true,
-              ),
-            );
+        _putOnMask(context);
 
-            Navigator.push(
-              context,
-              PageRouteBuilder(
-                opaque: false,
-                pageBuilder: (
-                  context,
-                  oAnimation,
-                  sAnimation,
-                ) {
-                  return const FadeUpwardsPageTransitionsBuilder()
-                      .buildTransitions(
-                    null,
-                    context,
-                    oAnimation,
-                    sAnimation,
-                    Scaffold(
-                      backgroundColor: const Color.fromARGB(200, 0, 0, 0),
-                      body: Center(
-                        child: LoadingAnimationWidget.halfTriangleDot(
-                          color: Colors.white,
-                          size: 120,
-                        ),
-                      ),
-                    ),
-                  );
-                },
-              ),
-            );
-
-          case MaskType.covering:
-            break;
-        }
+        emit(
+          MaskState.copyWith(
+            state.clients,
+            type: state.type,
+            isON: true,
+          ),
+        );
       } else if (state.clients.isEmpty && state.isON) {
         Navigator.pop(context);
 
         emit(
           MaskState.copyWith(
             state.clients,
-            state.type,
-            isON: false,
+            type: state.type,
           ),
         );
       }
     });
   }
 
-  void addMaskClient(String clientName, [MaskType? type]) {
+  void _putOnMask(BuildContext context) {
+    switch (state.type) {
+      case MaskType.loading:
+        Navigator.push(
+          context,
+          PageRouteBuilder(
+            opaque: false,
+            pageBuilder: _loadingPageBuilder,
+          ),
+        );
+
+      case MaskType.covering:
+        Navigator.push(
+          context,
+          PageRouteBuilder(
+            opaque: false,
+            pageBuilder: _coveringPageBuilder,
+          ),
+        );
+    }
+  }
+
+  Widget _loadingPageBuilder(
+    BuildContext context,
+    Animation<double> oAnimation,
+    Animation<double> sAnimation,
+  ) {
+    return const FadeUpwardsPageTransitionsBuilder().buildTransitions(
+      null,
+      context,
+      oAnimation,
+      sAnimation,
+      Scaffold(
+        backgroundColor: const Color.fromARGB(220, 0, 0, 0),
+        body: Center(
+          child: LoadingAnimationWidget.halfTriangleDot(
+            color: Colors.white,
+            size: 150,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _coveringPageBuilder(
+    BuildContext context,
+    Animation<double> oAnimation,
+    Animation<double> sAnimation,
+  ) {
+    return const FadeUpwardsPageTransitionsBuilder().buildTransitions(
+      PageRouteBuilder(
+        pageBuilder: (context, animation, secondaryAnimation) => Container(),
+      ),
+      context,
+      oAnimation,
+      sAnimation,
+      Scaffold(
+        backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+        body: Center(
+          child: LoadingAnimationWidget.beat(
+            color: const Color.fromARGB(255, 37, 37, 37),
+            size: 150,
+          ),
+        ),
+      ),
+    );
+  }
+
+  void addMaskClient(
+    String clientName, {
+    MaskType? type,
+    bool isForciblyChange = false,
+  }) {
     final newClients = [...state.clients];
 
     if (!newClients.contains(clientName)) {
@@ -81,19 +127,19 @@ class MaskCubit extends Cubit<MaskState> {
     emit(
       MaskState.copyWith(
         newClients,
-        type ?? MaskType.loading,
+        type: type ?? state.type,
         isON: state.isON,
+        isForciblyChange: isForciblyChange,
       ),
     );
   }
 
-  void popMaskClient(String clientName, [MaskType? type]) {
+  void popMaskClient(
+    String clientName, {
+    MaskType? type,
+    bool isForciblyChange = false,
+  }) {
     final newClients = [...state.clients];
-
-    if (clientName != MaskConst.persistentClient.name &&
-        newClients.contains(MaskConst.persistentClient.name)) {
-      return;
-    }
 
     if (newClients.contains(clientName)) {
       newClients.remove(clientName);
@@ -102,8 +148,9 @@ class MaskCubit extends Cubit<MaskState> {
     emit(
       MaskState.copyWith(
         newClients,
-        type ?? MaskType.loading,
+        type: type ?? state.type,
         isON: state.isON,
+        isForciblyChange: isForciblyChange,
       ),
     );
   }

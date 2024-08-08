@@ -4,8 +4,8 @@ import 'package:equatable/equatable.dart';
 import 'package:eyr/shared/mixins/common_funcable.dart';
 import 'package:eyr/shared/mixins/subscribable.dart';
 import 'package:eyr/shared/observers/app_router_observer.dart';
-import 'package:eyr/shared/widgets/app_mask/app_mask_enum.dart';
-import 'package:eyr/shared/widgets/app_mask/app_mask_view.dart';
+import 'package:eyr/states/mask/mask_cubit.dart';
+import 'package:eyr/states/mask/mask_enum.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
@@ -18,7 +18,7 @@ class InitCubit extends Cubit<void>
         AppRouterObserver,
         CommonFuncable,
         Subscribable {
-  final _maskCubit = GetIt.I<AppMaskCubit>();
+  final _maskCubit = GetIt.I<MaskCubit>();
   final _appLifecycle = StreamController<AppLifecycleState>();
 
   bool isAppLifeCycleWatched = false;
@@ -39,17 +39,23 @@ class InitCubit extends Cubit<void>
       (event) => switch (event) {
         AppLifecycleState.detached || AppLifecycleState.resumed => () {
             _maskCubit.popMaskClient(
-              AppMaskConst.persistentClient.name,
-              AppMaskType.covering,
+              MaskConst.persistentClient.name,
+              type: MaskType.loading,
+              isForciblyChange: _maskCubit.state.isForciblyChange,
             );
-          },
+          }.call(),
         AppLifecycleState.inactive => () {
             _maskCubit.addMaskClient(
-              AppMaskConst.persistentClient.name,
-              AppMaskType.covering,
+              MaskConst.persistentClient.name,
+              type: MaskType.covering,
+              isForciblyChange: _maskCubit.state.isON,
             );
-          },
-        AppLifecycleState.hidden || AppLifecycleState.paused => () {}
+          }.call(),
+        AppLifecycleState.hidden || AppLifecycleState.paused => () {
+            _maskCubit.popMaskClient(
+              MaskConst.persistentClient.name,
+            );
+          }.call()
       },
       onError: (err) {
         logger.e('WatchAppLifeCycle $err');

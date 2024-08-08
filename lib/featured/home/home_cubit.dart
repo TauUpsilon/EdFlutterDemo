@@ -48,8 +48,10 @@ class HomeCubit extends Cubit<HomeState> with CommonFuncable, HttpRestable {
     //   ),
     // );
 
+    // if (!AppNavigator.context.mounted) return;
+
     // showDialog(
-    //   context: AppNavigator.key.currentContext!,
+    //   context: AppNavigator.context,
     //   builder: (_) => BlocProvider.value(
     //     value: this,
     //     child: DecisionDialog(

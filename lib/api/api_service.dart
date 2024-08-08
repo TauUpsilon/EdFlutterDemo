@@ -7,6 +7,7 @@ import 'package:eyr/shared/utils/string_util.dart';
 import 'package:eyr/shared/widgets/app_mask/app_mask_enum.dart';
 import 'package:eyr/states/env/env_cubit.dart';
 import 'package:eyr/states/mask/mask_cubit.dart';
+import 'package:eyr/states/mask/mask_enum.dart';
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart';
 import 'package:json_annotation/json_annotation.dart';
@@ -95,9 +96,9 @@ class ApiService {
 
     switch (status) {
       case AppMaskStatus.on:
-        _maskCubit.addMaskClient(request.reqURI.toString());
+        _maskCubit.addMaskClient('${request.reqURI}', type: MaskType.loading);
       case AppMaskStatus.off:
-        _maskCubit.popMaskClient(request.reqURI.toString());
+        _maskCubit.popMaskClient('${request.reqURI}');
     }
   }
 }
