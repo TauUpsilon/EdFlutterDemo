@@ -29,11 +29,30 @@ class ApiService {
     bool hasMask = true,
   }) async =>
       _handleMask(request, AppMaskStatus.on, hasMask)
-          .then((_) => _handleRequest<T>(request))
-          .then((response) => _handleRespose<T>(request, response, serialiser))
-          .onError<Exception>((err, stack) => _handleError(request, err, stack))
+          .then(
+            (_) => _handleRequest<T>(request),
+          )
+          .then(
+            (response) => _handleRespose<T>(
+              request,
+              response,
+              serialiser,
+            ),
+          )
+          .onError<Exception>(
+            (err, stack) => _handleError(
+              err,
+              request,
+              serialiser,
+              hasMask: hasMask,
+            ),
+          )
           .whenComplete(
-            () => _handleMask(request, AppMaskStatus.off, hasMask),
+            () => _handleMask(
+              request,
+              AppMaskStatus.off,
+              hasMask,
+            ),
           );
 
   Future<Response> _handleRequest<T>(
@@ -41,7 +60,7 @@ class ApiService {
   ) async =>
       _connectivity
           .checkConnectivity()
-          .then((_) => _logger.t('ApiService $request'))
+          .then((_) => _logger.t('$runtimeType $request'))
           .then(
             (_) => switch (request.method) {
               ApiMethod.post => post(
@@ -64,27 +83,45 @@ class ApiService {
     final status = '${res.statusCode}'.trim();
     final from = '${request.reqURI}'.trim();
 
-    if (status.startsWith('2')) {
+    if (status.startsWith('200')) {
       final response = request.handleResponse<T>(res, serialiser);
-      _logger.d('ApiService $response');
+      _logger.d('$runtimeType $response');
       return response;
-    } else if (status.startsWith('5')) {
-      throw ServerException(status: status, from: from, response: res);
-    } else if (status.startsWith('4')) {
+    } else if (status.startsWith('400')) {
       throw ClientException(status: status, from: from, response: res);
+    } else if (status.startsWith('420')) {
+      throw CryptoExpiredException(status: status, from: from, response: res);
+    } else if (status.startsWith('500')) {
+      throw ServerException(status: status, from: from, response: res);
     } else {
       throw UnknownException(status: status, from: from, response: res);
     }
   }
 
-  ApiResponse<T> _handleError<T>(
-    ApiRequest request,
+  Future<ApiResponse<T>> _handleError<T>(
     Exception error,
-    StackTrace stackTrace,
-  ) {
-    final customErr = request.handleError(error);
-    if (customErr != null) throw customErr;
-    throw error;
+    ApiRequest request,
+    T Function(Map<String, dynamic> value) serialiser, {
+    bool hasMask = true,
+  }) async {
+    try {
+      final errorResult = await request.handleError<T>(
+        error,
+        () => this.request<T>(
+          request,
+          serialiser,
+          hasMask: hasMask,
+        ),
+      );
+
+      if (errorResult != null) {
+        return errorResult;
+      }
+
+      throw error;
+    } on ApiException {
+      rethrow;
+    }
   }
 
   Future<void> _handleMask(

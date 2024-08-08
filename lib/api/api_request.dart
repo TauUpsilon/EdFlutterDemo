@@ -24,8 +24,9 @@ abstract class ApiRequest with EquatableMixin {
     T Function(Map<String, dynamic> value) serialiser,
   );
 
-  ApiException? handleError(
+  Future<ApiResponse<T>?> handleError<T>(
     Exception error,
+    Future<ApiResponse<T>> Function() tryRequestAgain,
   );
 
   @override

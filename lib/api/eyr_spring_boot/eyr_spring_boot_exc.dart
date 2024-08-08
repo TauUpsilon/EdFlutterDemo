@@ -16,9 +16,10 @@ class EYRSpringBootExc extends ApiException {
         .split(',');
 
     return StringUtil.prettyLog(
-      'Error -> EYRSpringBoot',
+      'Error -> $runtimeType',
       {
         'From': from,
+        'Status': response?.statusCode,
         'Code': error['code'],
         'Reason': error['msg'],
         'StackTrace': '[\n   ${stacktrace.sublist(0, 15).join('\n  ')}\n]',

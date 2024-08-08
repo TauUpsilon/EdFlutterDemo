@@ -39,6 +39,7 @@ dependencies:
   intl: ^0.18.1
   formz: ^0.7.0
   loading_animation_widget: ^1.2.1
+  flutter_animate: ^4.5.0
 
 dev_dependencies:
   flutter_test:

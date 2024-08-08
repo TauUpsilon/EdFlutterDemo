@@ -2,6 +2,9 @@ part of 'package:eyr/api/eyr_spring_boot/eyr_spring_boot_service.dart';
 
 class EYRSpringBootReq extends ApiRequest {
   final _env = GetIt.I<EnvCubit>();
+  final _logger = GetIt.I<LoggingService>();
+  final _cryptoService = GetIt.I<CryptoService>();
+  final _api000Service = GetIt.I<Api000Service>();
 
   EYRSpringBootReq({
     required super.method,
@@ -52,12 +55,27 @@ class EYRSpringBootReq extends ApiRequest {
   }
 
   @override
-  ApiException? handleError(
+  Future<ApiResponse<T>?> handleError<T>(
     Exception error,
-  ) {
+    Future<ApiResponse<T>> Function() tryRequestAgain,
+  ) async {
     if (error is! ApiException) return null;
 
-    return EYRSpringBootExc(
+    if (error is CryptoExpiredException) {
+      _logger
+        ..e('$error')
+        ..d('Crypto refreshing pub key');
+
+      final res000003 = await _api000Service.api000003();
+
+      _cryptoService.currentRSAPublicKeyByte = base64.decode(
+        res000003.data.pubKey,
+      );
+
+      return tryRequestAgain.call();
+    }
+
+    throw EYRSpringBootExc(
       status: error.status,
       from: error.from,
       response: error.response,

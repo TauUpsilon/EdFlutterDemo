@@ -13,7 +13,7 @@ class ApiException implements Exception {
 
   @override
   String toString() => StringUtil.prettyLog(
-        'Error -> ApiException',
+        'Error -> $runtimeType',
         {
           'Status': status,
           'From': from,
@@ -28,6 +28,10 @@ class ServerException extends ApiException {
 
 class ClientException extends ApiException {
   ClientException({super.status, super.from, super.response});
+}
+
+class CryptoExpiredException extends ApiException {
+  CryptoExpiredException({super.status, super.from, super.response});
 }
 
 class UnknownException extends ApiException {

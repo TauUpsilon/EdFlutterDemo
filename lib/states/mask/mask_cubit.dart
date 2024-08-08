@@ -78,7 +78,7 @@ class MaskCubit extends Cubit<MaskState> {
       oAnimation,
       sAnimation,
       Scaffold(
-        backgroundColor: const Color.fromARGB(220, 0, 0, 0),
+        backgroundColor: const Color.fromARGB(235, 0, 0, 0),
         body: Center(
           child: LoadingAnimationWidget.halfTriangleDot(
             color: Colors.white,
@@ -95,17 +95,15 @@ class MaskCubit extends Cubit<MaskState> {
     Animation<double> sAnimation,
   ) {
     return const FadeUpwardsPageTransitionsBuilder().buildTransitions(
-      PageRouteBuilder(
-        pageBuilder: (context, animation, secondaryAnimation) => Container(),
-      ),
+      null,
       context,
       oAnimation,
       sAnimation,
       Scaffold(
         backgroundColor: const Color.fromARGB(255, 255, 255, 255),
         body: Center(
-          child: LoadingAnimationWidget.beat(
-            color: const Color.fromARGB(255, 37, 37, 37),
+          child: LoadingAnimationWidget.halfTriangleDot(
+            color: const Color.fromARGB(255, 0, 0, 0),
             size: 150,
           ),
         ),
