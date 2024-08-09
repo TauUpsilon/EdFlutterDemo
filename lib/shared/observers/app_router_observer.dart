@@ -3,7 +3,7 @@ import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 
 mixin class AppRouterObserver {
-  GoRouter get router => GetIt.I<GoRouter>();
+  final router = GetIt.I<GoRouter>();
 
   void didRouteChanged() {
     final routingInfo = router.routeInformationProvider.value;

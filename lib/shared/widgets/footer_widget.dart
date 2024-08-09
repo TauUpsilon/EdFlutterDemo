@@ -1,36 +1,33 @@
-import 'package:eyr/shared/mixins/common_funcable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-class FooterBar extends StatelessWidget with CommonFuncable {
-  // Dependency Variable
+class FooterBar extends StatelessWidget {
   final int selectedItem;
   final Function(int index) onNavBarTapped;
 
-  // Local Variables
-  final _barItems = const [
-    BottomNavigationBarItem(
-      icon: Icon(Icons.network_check),
-      label: 'Network',
-      tooltip: '/network',
-    ),
-    BottomNavigationBarItem(
-      icon: Icon(Icons.home),
-      label: 'Home',
-      tooltip: '/',
-    ),
-    BottomNavigationBarItem(
-      icon: Icon(Icons.widgets),
-      label: 'Component',
-      tooltip: '/component',
-    ),
-  ];
-
-  FooterBar({
+  const FooterBar({
     required this.selectedItem,
     required this.onNavBarTapped,
     super.key,
   });
+
+  List<BottomNavigationBarItem> get _barItems => [
+        const BottomNavigationBarItem(
+          icon: Icon(Icons.network_check),
+          label: 'Network',
+          tooltip: '/network',
+        ),
+        const BottomNavigationBarItem(
+          icon: Icon(Icons.home),
+          label: 'Home',
+          tooltip: '/',
+        ),
+        const BottomNavigationBarItem(
+          icon: Icon(Icons.widgets),
+          label: 'Component',
+          tooltip: '/component',
+        ),
+      ];
 
   @override
   Widget build(BuildContext context) {

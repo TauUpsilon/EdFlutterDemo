@@ -9,13 +9,13 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 
 Future<void> main() async {
-  AppLocator.registerCommonServices();
-
   await runZonedGuarded(onStart, onError);
 }
 
 Future<void> onStart() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  AppLocator.registerCommonServices();
 
   await AppUtil.initialise();
 

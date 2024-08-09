@@ -1,6 +1,5 @@
 import 'package:equatable/equatable.dart';
 import 'package:eyr/app/app_widget.dart';
-import 'package:eyr/shared/mixins/common_funcable.dart';
 import 'package:eyr/shared/widgets/header_widget.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -16,11 +15,11 @@ part 'network_view.g.dart';
   ignoreUnannotated: true,
 )
 @JsonParamable()
-class NetworkView extends StatelessWidget with CommonFuncable {
+class NetworkView extends StatelessWidget {
   @JsonKey()
   final String test;
 
-  NetworkView({
+  const NetworkView({
     required this.test,
     super.key,
   });

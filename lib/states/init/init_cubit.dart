@@ -1,9 +1,9 @@
 import 'dart:async';
 
 import 'package:equatable/equatable.dart';
-import 'package:eyr/shared/mixins/common_funcable.dart';
 import 'package:eyr/shared/mixins/subscribable.dart';
 import 'package:eyr/shared/observers/app_router_observer.dart';
+import 'package:eyr/shared/services/logging_service.dart';
 import 'package:eyr/states/mask/mask_cubit.dart';
 import 'package:eyr/states/mask/mask_enum.dart';
 import 'package:flutter/material.dart';
@@ -13,21 +13,19 @@ import 'package:get_it/get_it.dart';
 part 'init_state.dart';
 
 class InitCubit extends Cubit<void>
-    with
-        WidgetsBindingObserver,
-        AppRouterObserver,
-        CommonFuncable,
-        Subscribable {
-  final _maskCubit = GetIt.I<MaskCubit>();
-  final _appLifecycle = StreamController<AppLifecycleState>();
-
-  bool isAppLifeCycleWatched = false;
-  bool isDeeplinkListened = false;
-
+    with WidgetsBindingObserver, AppRouterObserver, Subscribable {
   InitCubit() : super(null) {
     WidgetsBinding.instance.addObserver(this);
     WidgetsBinding.instance.addRouterObserver(this);
   }
+
+  final _mask = GetIt.I<MaskCubit>();
+  final _logger = GetIt.I<LoggingService>();
+
+  final _appLifecycle = StreamController<AppLifecycleState>();
+
+  bool isAppLifeCycleWatched = false;
+  bool isDeeplinkListened = false;
 
   Future<void> prepare() async {
     if (!isAppLifeCycleWatched) await _watchAppLifeCycle();
@@ -39,27 +37,27 @@ class InitCubit extends Cubit<void>
       _appLifecycle.stream.listen(
         (event) => switch (event) {
           AppLifecycleState.detached || AppLifecycleState.resumed => () {
-              _maskCubit.popMaskClient(
+              _mask.popMaskClient(
                 MaskConst.persistentClient.name,
                 type: MaskType.loading,
-                isForciblyChange: _maskCubit.state.isForciblyChange,
+                isForciblyChange: _mask.state.isForciblyChange,
               );
             }.call(),
           AppLifecycleState.inactive => () {
-              _maskCubit.addMaskClient(
+              _mask.addMaskClient(
                 MaskConst.persistentClient.name,
                 type: MaskType.covering,
-                isForciblyChange: _maskCubit.state.isON,
+                isForciblyChange: _mask.state.isON,
               );
             }.call(),
           AppLifecycleState.hidden || AppLifecycleState.paused => () {
-              _maskCubit.popMaskClient(
+              _mask.popMaskClient(
                 MaskConst.persistentClient.name,
               );
             }.call()
         },
         onError: (err) {
-          logger.e('WatchAppLifeCycle $err');
+          _logger.e('WatchAppLifeCycle $err');
         },
       ),
     );

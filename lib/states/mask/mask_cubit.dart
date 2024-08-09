@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:eyr/app/app_navigator.dart';
 import 'package:eyr/states/mask/mask_enum.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,10 +7,12 @@ import 'package:loading_animation_widget/loading_animation_widget.dart';
 part 'mask_state.dart';
 
 class MaskCubit extends Cubit<MaskState> {
-  MaskCubit() : super(MaskState.init()) {
-    stream.listen((state) {
-      final context = AppNavigator.context;
+  final BuildContext Function() getContext;
 
+  MaskCubit({
+    required this.getContext,
+  }) : super(MaskState.init()) {
+    stream.listen((state) {
       if (state.isON && state.isForciblyChange) {
         Navigator.pop(context);
 
@@ -44,6 +45,8 @@ class MaskCubit extends Cubit<MaskState> {
       }
     });
   }
+
+  BuildContext get context => getContext();
 
   void _putOnMask(BuildContext context) {
     switch (state.type) {

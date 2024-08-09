@@ -1,18 +1,20 @@
 import 'package:eyr/apn/app_routes.dart';
-import 'package:eyr/shared/mixins/common_funcable.dart';
 import 'package:eyr/states/auth/auth_cubit.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:go_router/go_router.dart';
 
-class HeaderBar extends StatelessWidget with CommonFuncable {
+class HeaderBar extends StatelessWidget {
   final String title;
 
   HeaderBar({
     required this.title,
     super.key,
   });
+
+  final _router = GetIt.I.get<GoRouter>();
 
   @override
   Widget build(BuildContext context) => AppBar(
@@ -27,10 +29,10 @@ class HeaderBar extends StatelessWidget with CommonFuncable {
         ),
         backgroundColor: Colors.black,
         elevation: 20,
-        leading: router.canPop()
+        leading: _router.canPop()
             ? IconButton(
                 icon: const Icon(Icons.arrow_back),
-                onPressed: router.pop,
+                onPressed: _router.pop,
               )
             : null,
         shape: RoundedRectangleBorder(
@@ -48,7 +50,7 @@ class HeaderBar extends StatelessWidget with CommonFuncable {
                     onPressed: () {
                       GetIt.I<AuthCubit>().logout();
 
-                      router.goNamed(AppRoutes.home.fullpath);
+                      _router.goNamed(AppRoutes.home.fullpath);
                     },
                     icon: const Icon(Icons.logout),
                   )

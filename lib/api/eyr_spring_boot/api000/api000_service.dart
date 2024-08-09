@@ -4,7 +4,7 @@ import 'package:eyr/api/eyr_spring_boot/api000/api000004/api000004.dart';
 import 'package:get_it/get_it.dart';
 
 class Api000Service {
-  ApiService get _apiService => GetIt.I<ApiService>();
+  final _apiService = GetIt.I<ApiService>();
 
   Future<ApiResponse<Api000003Res>> api000003() {
     final req = Api000003Req();

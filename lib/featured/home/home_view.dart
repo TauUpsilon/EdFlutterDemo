@@ -1,17 +1,18 @@
 import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
+import 'package:eyr/api/eyr_spring_boot/api000/api000_service.dart';
 import 'package:eyr/apn/app_routes.dart';
 import 'package:eyr/app/app_widget.dart';
 import 'package:eyr/featured/network/network_view.dart';
-import 'package:eyr/shared/mixins/common_funcable.dart';
-import 'package:eyr/shared/mixins/http_restable.dart';
 import 'package:eyr/shared/services/crypto_service.dart';
+import 'package:eyr/shared/services/logging_service.dart';
 import 'package:eyr/shared/widgets/header_widget.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:go_router/go_router.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:json_paramable_annotation/json_paramable_annotation.dart';
 
@@ -24,8 +25,8 @@ part 'home_view.g.dart';
   explicitToJson: true,
 )
 @JsonParamable()
-class HomeView extends StatelessWidget with CommonFuncable {
-  HomeView({
+class HomeView extends StatelessWidget {
+  const HomeView({
     super.key,
   });
 

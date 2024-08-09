@@ -11,7 +11,7 @@ class CryptoService {
 
   late Uint8List currentRSAPublicKeyByte;
 
-  final _envCubit = GetIt.I<EnvCubit>();
+  final _env = GetIt.I<EnvCubit>();
 
   final Map<String, Uint8List> aesKeyMap = {};
 
@@ -166,7 +166,7 @@ class CryptoService {
       Uint8List.fromList(key.sublist(16, key.length)),
     );
 
-    final engine = PaddedBlockCipher(_envCubit.state.cryptoAesAg)
+    final engine = PaddedBlockCipher(_env.state.cryptoAesAg)
       ..init(
         true,
         PaddedBlockCipherParameters<CipherParameters?, CipherParameters?>(
@@ -194,7 +194,7 @@ class CryptoService {
       Uint8List.fromList(key.sublist(16, key.length)),
     );
 
-    final engine = PaddedBlockCipher(_envCubit.state.cryptoAesAg)
+    final engine = PaddedBlockCipher(_env.state.cryptoAesAg)
       ..init(
         false,
         PaddedBlockCipherParameters<CipherParameters?, CipherParameters?>(

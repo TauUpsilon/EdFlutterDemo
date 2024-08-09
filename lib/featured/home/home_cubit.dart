@@ -1,14 +1,17 @@
 part of 'home_view.dart';
 
-class HomeCubit extends Cubit<HomeState> with CommonFuncable, HttpRestable {
-  final cryptoService = GetIt.I<CryptoService>();
+class HomeCubit extends Cubit<HomeState> {
+  final _router = GetIt.I<GoRouter>();
+  final _logger = GetIt.I<LoggingService>();
+  final _cryptoService = GetIt.I<CryptoService>();
+  final _api000Service = GetIt.I<Api000Service>();
 
   HomeCubit() : super(HomeState.init());
 
   Future<void> onInit() async {
-    final res000003 = await api000Service.api000003();
+    final res000003 = await _api000Service.api000003();
 
-    cryptoService.currentRSAPublicKeyByte = base64.decode(
+    _cryptoService.currentRSAPublicKeyByte = base64.decode(
       res000003.data.pubKey,
     );
 
@@ -23,7 +26,7 @@ class HomeCubit extends Cubit<HomeState> with CommonFuncable, HttpRestable {
   }
 
   Future<void> onNavigateToNetwork() async {
-    router.pushNamed(
+    _router.pushNamed(
       AppRoutes.network.name,
       extra: const NetworkParam(test: 'Edward test').toExtra(),
     );
@@ -64,13 +67,13 @@ class HomeCubit extends Cubit<HomeState> with CommonFuncable, HttpRestable {
   }
 
   Future<void> sendToDecrypt() async {
-    final res000004 = await api000Service.api000004(
+    final res000004 = await _api000Service.api000004(
       'Hello, Backend! Hello, Backend! Hello, Backend! Hello, Backend!',
     );
 
     final encrypted = res000004.data.encryptedData;
     final decrypted = res000004.data.decryptedData;
 
-    logger.d('Edward Test\n\n$encrypted\n$decrypted');
+    _logger.d('Edward Test\n\n$encrypted\n$decrypted');
   }
 }

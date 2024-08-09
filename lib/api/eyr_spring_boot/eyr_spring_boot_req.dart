@@ -1,15 +1,15 @@
 part of 'package:eyr/api/eyr_spring_boot/eyr_spring_boot_service.dart';
 
 class EYRSpringBootReq extends ApiRequest {
-  final _env = GetIt.I<EnvCubit>();
-  final _logger = GetIt.I<LoggingService>();
-  final _cryptoService = GetIt.I<CryptoService>();
-  final _api000Service = GetIt.I<Api000Service>();
-
   EYRSpringBootReq({
     required super.method,
     required super.uri,
   });
+
+  final _env = GetIt.I<EnvCubit>();
+  final _logger = GetIt.I<LoggingService>();
+  final _cryptoService = GetIt.I<CryptoService>();
+  final _api000Service = GetIt.I<Api000Service>();
 
   @override
   Uri get reqURI {

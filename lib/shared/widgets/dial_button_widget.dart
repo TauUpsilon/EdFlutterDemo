@@ -1,12 +1,11 @@
-import 'package:eyr/shared/mixins/common_funcable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-class DialButtonWidget extends StatelessWidget with CommonFuncable {
+class DialButtonWidget extends StatelessWidget {
   final String text;
   final Function(String) onPress;
 
-  DialButtonWidget({
+  const DialButtonWidget({
     required this.text,
     required this.onPress,
     super.key,

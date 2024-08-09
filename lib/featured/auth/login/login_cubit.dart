@@ -1,10 +1,12 @@
 part of 'login_view.dart';
 
-class LoginCubit extends Cubit<LoginState> with CommonFuncable {
-  final formKey = GlobalKey<FormState>();
-  final authCubit = GetIt.I<AuthCubit>();
-
+class LoginCubit extends Cubit<LoginState> {
   LoginCubit() : super(LoginState.init());
+
+  final _auth = GetIt.I<AuthCubit>();
+  final _router = GetIt.I<GoRouter>();
+
+  final _formKey = GlobalKey<FormState>();
 
   void onPasswordChange(String value) {
     emit(
@@ -21,11 +23,11 @@ class LoginCubit extends Cubit<LoginState> with CommonFuncable {
     Uri? redirectUrl,
     Map<String, dynamic>? redirectExtra,
   ) async {
-    if (!formKey.currentState!.validate()) return;
+    if (!_formKey.currentState!.validate()) return;
 
-    authCubit.login();
+    _auth.login();
 
-    router.replace(
+    _router.replace(
       redirectUrl?.path ?? AppRoutes.home.fullpath,
       extra: redirectExtra,
     );

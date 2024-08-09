@@ -18,10 +18,10 @@ part 'api_request.dart';
 part 'api_response.dart';
 
 class ApiService {
-  EnvCubit get _envCubit => GetIt.I<EnvCubit>();
-  MaskCubit get _maskCubit => GetIt.I<MaskCubit>();
-  LoggingService get _logger => GetIt.I<LoggingService>();
-  Connectivity get _connectivity => GetIt.I<Connectivity>();
+  final _envCubit = GetIt.I<EnvCubit>();
+  final _maskCubit = GetIt.I<MaskCubit>();
+  final _logger = GetIt.I<LoggingService>();
+  final _connectivity = GetIt.I<Connectivity>();
 
   Future<ApiResponse<T>> request<T>(
     ApiRequest request,

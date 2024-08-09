@@ -34,7 +34,7 @@ class LoggingService extends Logger {
 }
 
 class AppConsoleOutput extends ConsoleOutput {
-  EnvCubit get _envCubit => GetIt.I<EnvCubit>();
+  final _envCubit = GetIt.I<EnvCubit>();
 
   @override
   void output(OutputEvent event) {

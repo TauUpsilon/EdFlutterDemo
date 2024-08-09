@@ -22,6 +22,7 @@ final appRoutingConfig = ValueNotifier<RoutingConfig>(
         path: '/',
         redirect: (context, state) async {
           await GetIt.I<InitCubit>().prepare();
+
           return GetIt.I<GoRouter>().pushNamed(
             AppRoutes.home.name,
           );

@@ -1,6 +1,5 @@
 import 'package:eyr/app/app_theme.dart';
 import 'package:eyr/localised/localiser.g.dart';
-import 'package:eyr/shared/mixins/common_funcable.dart';
 import 'package:eyr/shared/observers/app_router_observer.dart';
 import 'package:eyr/shared/widgets/app_alert/app_alert_view.dart';
 import 'package:eyr/shared/widgets/app_mask/app_mask_view.dart';
@@ -15,7 +14,7 @@ import 'package:get_it/get_it.dart';
 
 part 'app_config.dart';
 
-class App extends StatelessWidget with CommonFuncable, AppRouterObserver {
+class App extends StatelessWidget with AppRouterObserver {
   App({super.key});
 
   @override
