@@ -35,32 +35,34 @@ class InitCubit extends Cubit<void>
   }
 
   Future<void> _watchAppLifeCycle() async {
-    _appLifecycle.stream.listen(
-      (event) => switch (event) {
-        AppLifecycleState.detached || AppLifecycleState.resumed => () {
-            _maskCubit.popMaskClient(
-              MaskConst.persistentClient.name,
-              type: MaskType.loading,
-              isForciblyChange: _maskCubit.state.isForciblyChange,
-            );
-          }.call(),
-        AppLifecycleState.inactive => () {
-            _maskCubit.addMaskClient(
-              MaskConst.persistentClient.name,
-              type: MaskType.covering,
-              isForciblyChange: _maskCubit.state.isON,
-            );
-          }.call(),
-        AppLifecycleState.hidden || AppLifecycleState.paused => () {
-            _maskCubit.popMaskClient(
-              MaskConst.persistentClient.name,
-            );
-          }.call()
-      },
-      onError: (err) {
-        logger.e('WatchAppLifeCycle $err');
-      },
-    ).subscribe(this);
+    addSubscription(
+      _appLifecycle.stream.listen(
+        (event) => switch (event) {
+          AppLifecycleState.detached || AppLifecycleState.resumed => () {
+              _maskCubit.popMaskClient(
+                MaskConst.persistentClient.name,
+                type: MaskType.loading,
+                isForciblyChange: _maskCubit.state.isForciblyChange,
+              );
+            }.call(),
+          AppLifecycleState.inactive => () {
+              _maskCubit.addMaskClient(
+                MaskConst.persistentClient.name,
+                type: MaskType.covering,
+                isForciblyChange: _maskCubit.state.isON,
+              );
+            }.call(),
+          AppLifecycleState.hidden || AppLifecycleState.paused => () {
+              _maskCubit.popMaskClient(
+                MaskConst.persistentClient.name,
+              );
+            }.call()
+        },
+        onError: (err) {
+          logger.e('WatchAppLifeCycle $err');
+        },
+      ),
+    );
 
     isAppLifeCycleWatched = true;
   }
@@ -97,7 +99,7 @@ class InitCubit extends Cubit<void>
     WidgetsBinding.instance.removeObserver(this);
     WidgetsBinding.instance.removeRouterObserver(this);
 
-    unsubscribe();
+    cancelSubscriptions();
 
     return super.close();
   }

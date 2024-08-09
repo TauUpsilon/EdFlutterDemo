@@ -11,9 +11,9 @@ class CryptoService {
 
   late Uint8List currentRSAPublicKeyByte;
 
-  final Map<String, Uint8List> aesKeyMap = {};
+  final _envCubit = GetIt.I<EnvCubit>();
 
-  final envCubit = GetIt.I<EnvCubit>();
+  final Map<String, Uint8List> aesKeyMap = {};
 
   Uint8List get encodedPublicKey {
     final publicKey = _frontenddKeyPair.publicKey;
@@ -118,7 +118,7 @@ class CryptoService {
     final keyGen = RSAKeyGenerator()
       ..init(
         ParametersWithRandom(
-          RSAKeyGeneratorParameters(BigInt.parse('65537'), 2048, 64),
+          RSAKeyGeneratorParameters(BigInt.parse(seed), 2048, 64),
           genSecureRandom(),
         ),
       );
@@ -160,13 +160,13 @@ class CryptoService {
     return engine.process(data);
   }
 
-  Uint8List doAESEncryption(Uint8List data, [Uint8List? key]) {
+  Uint8List doAESEncryption(Uint8List data, {required Uint8List key}) {
     final ivParams = ParametersWithIV(
-      KeyParameter(key ?? Uint8List(16)),
-      key ?? Uint8List(16),
+      KeyParameter(key),
+      Uint8List.fromList(key.sublist(16, key.length)),
     );
 
-    final engine = PaddedBlockCipher(envCubit.state.cryptoAesAg)
+    final engine = PaddedBlockCipher(_envCubit.state.cryptoAesAg)
       ..init(
         true,
         PaddedBlockCipherParameters<CipherParameters?, CipherParameters?>(
@@ -188,13 +188,13 @@ class CryptoService {
     return engine.process(data);
   }
 
-  Uint8List doAESDecryption(Uint8List data, [Uint8List? key]) {
+  Uint8List doAESDecryption(Uint8List data, {required Uint8List key}) {
     final ivParams = ParametersWithIV(
-      KeyParameter(key ?? Uint8List(16)),
-      key ?? Uint8List(16),
+      KeyParameter(key),
+      Uint8List.fromList(key.sublist(16, key.length)),
     );
 
-    final engine = PaddedBlockCipher(envCubit.state.cryptoAesAg)
+    final engine = PaddedBlockCipher(_envCubit.state.cryptoAesAg)
       ..init(
         false,
         PaddedBlockCipherParameters<CipherParameters?, CipherParameters?>(

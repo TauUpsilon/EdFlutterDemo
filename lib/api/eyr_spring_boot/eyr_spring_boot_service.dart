@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:math';
 import 'dart:typed_data';
 
 import 'package:eyr/api/api_service.dart';
@@ -27,14 +26,12 @@ class EyrSpringBootService {
     final cryptoService = GetIt.I<CryptoService>();
 
     final key = cryptoService.aesKeyMap['${model.hashCode}'] ??
-        Uint8List.fromList(
-          List.generate(16, (_) => Random().nextInt(256)),
-        );
+        cryptoService.genSecureRandom().nextBytes(32);
 
     // Using the AES key to encrypt data
     final encryptedData = cryptoService.doAESEncryption(
       utf8.encode(data),
-      key,
+      key: key,
     );
 
     // Using RSA to encrypt AES key
@@ -76,7 +73,7 @@ class EyrSpringBootService {
     // Using the AES key saved in request to decrypt data from backend
     final decryptedData = cryptoService.doAESDecryption(
       base64.decode(data),
-      key,
+      key: key,
     );
 
     return utf8.decode(decryptedData);
