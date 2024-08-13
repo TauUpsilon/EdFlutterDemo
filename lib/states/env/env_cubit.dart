@@ -12,7 +12,7 @@ class EnvCubit extends Cubit<EnvState> {
   void loadEnv() {
     const appEnv = String.fromEnvironment(
       'APP_ENV',
-      defaultValue: 'LOCAL',
+      defaultValue: 'DEV',
     );
 
     const appName = String.fromEnvironment(
@@ -25,7 +25,7 @@ class EnvCubit extends Cubit<EnvState> {
       defaultValue: 1,
     );
 
-    final apiEyrDomain = appEnv == 'LOCAL' && Platform.isAndroid
+    final apiEyrDomain = appEnv == 'DEV' && Platform.isAndroid
         ? '10.0.2.2:8080'
         : const String.fromEnvironment(
             'API_EYR_DOMAIN',

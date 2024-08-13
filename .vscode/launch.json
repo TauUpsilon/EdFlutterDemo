@@ -5,33 +5,33 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Local",
+      "name": "Dev",
       "request": "launch",
       "type": "dart",
       "noDebug": true,
       "args": [
-        "--no-enable-impeller",
-        "--dart-define-from-file=ext/env/local.env"
+        "--flavor", "dev",
+        "--dart-define-from-file=ext/env/dev.env"
       ]
     },
     {
-      "name": "Stage",
+      "name": "Pre",
       "request": "launch",
       "type": "dart",
       "noDebug": true,
       "args": [
-        "--no-enable-impeller",
-        "--dart-define-from-file=ext/env/stage.env"
+        "--flavor", "pre",
+        "--dart-define-from-file=ext/env/pre.env"
       ]
     },
     {
-      "name": "Public",
+      "name": "Pub",
       "request": "launch",
       "type": "dart",
       "noDebug": true,
       "args": [
-        "--no-enable-impeller",
-        "--dart-define-from-file=ext/env/public.env"
+        "--flavor", "pub",
+        "--dart-define-from-file=ext/env/pub.env"
       ]
     }
   ]

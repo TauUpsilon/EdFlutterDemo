@@ -46,5 +46,6 @@ void onError(Object exception, StackTrace stacktrace) {
     exception,
     stack,
     fatal: true,
+    printDetails: false,
   );
 }
