@@ -11,15 +11,37 @@ class ApiException implements Exception {
     this.response,
   });
 
-  @override
-  String toString() => StringUtil.prettyLog(
-        'Error -> $runtimeType',
-        {
-          'Status': status,
-          'From': from,
-          'Reason': response?.reasonPhrase,
-        },
+  Map<String, dynamic> get error {
+    final body = jsonDecode(response?.body ?? '') as Map<String, dynamic>;
+    return body['error'] as Map<String, dynamic>;
+  }
+
+  List<String> get stack {
+    return (error['stacktrace'] as String)
+        .replaceAll(RegExp(r'[\[\]]'), '')
+        .split(',');
+  }
+
+  String toLog() {
+    return StringUtil.prettyLog(
+      'Error -> $runtimeType',
+      {
+        'Status': status,
+        'From': from,
+        'Reason': response?.reasonPhrase,
+      },
+    );
+  }
+
+  StackTrace toCrashlytics() => StackTrace.fromString(
+        List.generate(
+          stack.length,
+          (i) => '#$i ${stack[i].trim()}'.replaceAll(RegExp(r'\('), ' ('),
+        ).sublist(0, 5).join('\n'),
       );
+
+  @override
+  String toString() => 'ApiException: ${response?.reasonPhrase}';
 }
 
 class ServerException extends ApiException {

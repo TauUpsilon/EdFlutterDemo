@@ -8,12 +8,11 @@ class EYRSpringBootExc extends ApiException {
   });
 
   @override
-  String toString() {
-    final body = jsonDecode(response?.body ?? '') as Map<String, dynamic>;
-    final error = body['error'] as Map<String, dynamic>;
-    final stacktrace = (error['stacktrace'] as String)
-        .replaceAll(RegExp(r'[\[\]]'), '')
-        .split(',');
+  String toLog() {
+    final stacktrace =
+        List.generate(stack.length, (i) => '#$i\t${stack[i].trim()}')
+            .sublist(0, 10)
+            .join('\n');
 
     return StringUtil.prettyLog(
       'Error -> $runtimeType',
@@ -22,8 +21,13 @@ class EYRSpringBootExc extends ApiException {
         'Status': response?.statusCode,
         'Code': error['code'],
         'Reason': error['msg'],
-        'StackTrace': '[\n   ${stacktrace.sublist(0, 15).join('\n  ')}\n]',
+        'StackTrace': '\n$stacktrace',
       },
     );
+  }
+
+  @override
+  String toString() {
+    return 'EYRSpringBootException: ${error['code']}';
   }
 }

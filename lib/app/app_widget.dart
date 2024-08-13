@@ -2,7 +2,6 @@ import 'package:eyr/app/app_theme.dart';
 import 'package:eyr/localised/localiser.g.dart';
 import 'package:eyr/shared/observers/app_router_observer.dart';
 import 'package:eyr/shared/widgets/app_alert/app_alert_view.dart';
-import 'package:eyr/shared/widgets/app_mask/app_mask_view.dart';
 import 'package:eyr/states/auth/auth_cubit.dart';
 import 'package:eyr/states/env/env_cubit.dart';
 import 'package:eyr/states/init/init_cubit.dart';
@@ -21,7 +20,6 @@ class App extends StatelessWidget with AppRouterObserver {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => GetIt.I<AppMaskCubit>()),
         BlocProvider(create: (context) => GetIt.I<MaskCubit>()),
         BlocProvider(create: (context) => GetIt.I<AppAlertCubit>()),
         BlocProvider(create: (context) => GetIt.I<InitCubit>()),
@@ -50,10 +48,6 @@ class App extends StatelessWidget with AppRouterObserver {
             //   locale: state.locale,
             //   localizationsDelegates: Localiser.localizationsDelegates,
             //   supportedLocales: Localiser.supportedLocales,
-            // ),
-            // Mask
-            // AppMask(
-            //   locale: state.locale,
             // ),
           ],
         ),

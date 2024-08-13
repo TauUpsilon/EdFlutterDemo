@@ -6,7 +6,6 @@ import 'package:eyr/app/app_navigator.dart';
 import 'package:eyr/shared/services/crypto_service.dart';
 import 'package:eyr/shared/services/logging_service.dart';
 import 'package:eyr/shared/widgets/app_alert/app_alert_view.dart';
-import 'package:eyr/shared/widgets/app_mask/app_mask_view.dart';
 import 'package:eyr/states/auth/auth_cubit.dart';
 import 'package:eyr/states/env/env_cubit.dart';
 import 'package:eyr/states/init/init_cubit.dart';
@@ -39,7 +38,6 @@ mixin AppLocator {
           ..registerLazySingleton(
             () => MaskCubit(getContext: () => AppNavigator.context),
           )
-          ..registerLazySingleton(AppMaskCubit.new)
           ..registerLazySingleton(AppAlertCubit.new),
       };
 }
