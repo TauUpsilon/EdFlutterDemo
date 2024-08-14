@@ -72,11 +72,11 @@ android {
     productFlavors {
         dev {
             dimension flutterVersionName
-            applicationId "com.example.flutter_proj.dev"
+            applicationId "com.example.flutter_proj"
         }
         pre {
             dimension flutterVersionName
-            applicationId "com.example.flutter_proj.pre"
+            applicationId "com.example.flutter_proj"
         }
         pub {
             dimension flutterVersionName
