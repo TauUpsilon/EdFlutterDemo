@@ -1,6 +1,7 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:eyr/api/api_service.dart';
 import 'package:eyr/api/eyr_spring_boot/api000/api000_service.dart';
+import 'package:eyr/api/eyr_spring_boot/api001/api001_service.dart';
 import 'package:eyr/apn/app_router.dart';
 import 'package:eyr/app/app_navigator.dart';
 import 'package:eyr/shared/services/crypto_service.dart';
@@ -29,6 +30,7 @@ mixin AppLocator {
 
           // Api Services
           ..registerLazySingleton(Api000Service.new)
+          ..registerLazySingleton(Api001Service.new)
 
           // Global Cubits
           ..registerLazySingleton(AuthCubit.new)

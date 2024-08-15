@@ -23,7 +23,7 @@ Future<void> onStart() async {
 
   await Firebase.initializeApp();
 
-  FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
+  FirebaseCrashlytics.instance.setUserIdentifier('12345');
 
   runApp(App());
 }
@@ -46,6 +46,6 @@ void onError(Object exception, StackTrace stacktrace) {
     exception,
     stack,
     fatal: true,
-    printDetails: false,
+    printDetails: true,
   );
 }

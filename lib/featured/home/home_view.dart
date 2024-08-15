@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
 import 'package:eyr/api/eyr_spring_boot/api000/api000_service.dart';
+import 'package:eyr/api/eyr_spring_boot/api001/api001_service.dart';
 import 'package:eyr/apn/app_routes.dart';
 import 'package:eyr/app/app_widget.dart';
 import 'package:eyr/featured/network/network_view.dart';

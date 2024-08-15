@@ -5,6 +5,7 @@ class HomeCubit extends Cubit<HomeState> {
   final _logger = GetIt.I<LoggingService>();
   final _cryptoService = GetIt.I<CryptoService>();
   final _api000Service = GetIt.I<Api000Service>();
+  final _api001Service = GetIt.I<Api001Service>();
 
   HomeCubit() : super(HomeState.init());
 
@@ -67,6 +68,10 @@ class HomeCubit extends Cubit<HomeState> {
   }
 
   Future<void> sendToDecrypt() async {
+    // throw Exception('Edward Error');
+
+    await _api001Service.api001001();
+
     final res000004 = await _api000Service.api000004(
       'Hello, Backend! Hello, Backend! Hello, Backend! Hello, Backend!',
     );
