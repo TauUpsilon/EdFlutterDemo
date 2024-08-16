@@ -33,12 +33,20 @@ class ApiException implements Exception {
     );
   }
 
-  StackTrace toCrashlytics() => StackTrace.fromString(
-        List.generate(
-          stack.length,
-          (i) => '#$i ${stack[i].trim()}'.replaceAll(RegExp(r'\('), ' ('),
-        ).sublist(0, 5).join('\n'),
-      );
+  StackTrace? toCrashlytics() {
+    final errList = List.generate(
+      stack.length,
+      (i) => '#$i ${stack[i].trim()}'.replaceAll(RegExp(r'\('), ' ('),
+    );
+
+    if (from == null || errList.isEmpty) return null;
+
+    return StackTrace.fromString(
+      errList.length >= 5
+          ? errList.sublist(0, 5).join('\n')
+          : errList.join('\n'),
+    );
+  }
 
   @override
   String toString() => 'ApiException: ${response?.reasonPhrase}';

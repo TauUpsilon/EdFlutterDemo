@@ -7,6 +7,7 @@ import 'package:eyr/app/app_widget.dart';
 import 'package:eyr/shared/services/logging_service.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 
@@ -23,7 +24,11 @@ Future<void> onStart() async {
 
   await Firebase.initializeApp();
 
-  FirebaseCrashlytics.instance.setUserIdentifier('12345');
+  await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(
+    !kDebugMode,
+  );
+
+  await FirebaseCrashlytics.instance.setUserIdentifier('12345');
 
   runApp(App());
 }
@@ -34,7 +39,7 @@ void onError(Object exception, StackTrace stacktrace) {
 
   if (exception is ApiException) {
     log = exception.toLog();
-    stack = exception.toCrashlytics();
+    stack = exception.toCrashlytics() ?? stacktrace;
   } else {
     log = '$exception\nStackTrace:\n$stacktrace';
     stack = stacktrace;
@@ -46,6 +51,6 @@ void onError(Object exception, StackTrace stacktrace) {
     exception,
     stack,
     fatal: true,
-    printDetails: true,
+    printDetails: kDebugMode,
   );
 }
