@@ -2,38 +2,34 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "Emulator launch",
+      "label": "Launch emulator",
       "type": "shell",
       "problemMatcher": [],
       "command": "emulator -avd Pixel_7_API_34 -feature -Vulkan"
-  },
+    },
     {
-      "label": "Generate files",
+      "label": "Generate annotated files",
       "type": "shell",
       "problemMatcher": [],
-      "command": "dart run build_runner build"
+      "command": "dart run build_runner build -d"
     },
     {
       "label": "Set launcher icon",
-      "type": "dart",
-      "command": "dart",
-      "args": [
-        "run",
-        "flutter_launcher_icons",
-        "-f",
-        "flutter_launcher_icon.yaml"
-      ]
+      "type": "shell",
+      "problemMatcher": [],
+      "command": "dart run flutter_launcher_icons -f flutter_launcher_icon.yaml"
     },
     {
       "label": "Set splash screen",
-      "type": "dart",
-      "command": "dart",
-      "args": [
-        "run",
-        "flutter_native_splash:create",
-        "--path",
-        "flutter_splash_screen.yaml"
-      ]
+      "type": "shell",
+      "problemMatcher": [],
+      "command": "dart run flutter_native_splash:create --path flutter_splash_screen.yaml"
+    },
+    {
+      "label": "Clean",
+      "type": "shell",
+      "problemMatcher": [],
+      "command": "flutter clean;dart pub get"
     }
   ]
 }

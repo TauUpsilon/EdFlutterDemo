@@ -9,30 +9,21 @@
       "request": "launch",
       "type": "dart",
       "noDebug": true,
-      "args": [
-        "--flavor", "dev",
-        "--dart-define-from-file=ext/env/dev.env"
-      ]
+      "args": ["--flavor", "dev", "--dart-define-from-file=ext/env/dev.env"]
     },
     {
       "name": "Pre",
       "request": "launch",
       "type": "dart",
       "noDebug": true,
-      "args": [
-        "--flavor", "pre",
-        "--dart-define-from-file=ext/env/pre.env"
-      ]
+      "args": ["--flavor", "pre", "--dart-define-from-file=ext/env/pre.env"]
     },
     {
       "name": "Pub",
       "request": "launch",
       "type": "dart",
       "noDebug": true,
-      "args": [
-        "--flavor", "pub",
-        "--dart-define-from-file=ext/env/pub.env"
-      ]
+      "args": ["--flavor", "pub", "--dart-define-from-file=ext/env/pub.env"]
     }
   ]
 }
