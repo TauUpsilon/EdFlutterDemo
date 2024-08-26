@@ -54,6 +54,7 @@ dev_dependencies:
   build_runner: ^2.4.6
   build_verify: ^3.1.0
   husky: ^0.1.6
+  flutter_launcher_icons: ^0.13.1
 
 flutter:
   generate: true
