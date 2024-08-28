@@ -18,6 +18,9 @@ dependencies:
   custom_math:
     path: ext/custom_plugins/custom_math
 
+  eyr_tools:
+    path: ext/custom_plugins/eyr_tools
+
   json_paramable_annotation:
     path: ext/custom_packages/json_paramable_annotation
 

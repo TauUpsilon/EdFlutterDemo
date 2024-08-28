@@ -34,7 +34,12 @@ class HomeCubit extends Cubit<HomeState> {
   }
 
   Future<void> onTry() async {
-    await sendToDecrypt();
+    final air = EyrTools.getOnTheAir().listen(_logger.w);
+
+    await Future.delayed(Durations.extralong4 * 5);
+
+    air.cancel();
+    // await sendToDecrypt();
 
     // ScaffoldMessenger.of(AppNavigator.context).showSnackBar(
     //   SnackBar(

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:equatable/equatable.dart';
 import 'package:eyr/api/eyr_spring_boot/api000/api000_service.dart';
@@ -9,6 +10,7 @@ import 'package:eyr/featured/network/network_view.dart';
 import 'package:eyr/shared/services/crypto_service.dart';
 import 'package:eyr/shared/services/logging_service.dart';
 import 'package:eyr/shared/widgets/header_widget.dart';
+import 'package:eyr_tools/eyr_tools.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
