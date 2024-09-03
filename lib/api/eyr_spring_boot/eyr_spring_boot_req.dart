@@ -12,8 +12,36 @@ class EYRSpringBootReq extends ApiRequest {
   final _api000Service = GetIt.I<Api000Service>();
 
   @override
+  Future<IOClient> get client async {
+    final sslCert = await rootBundle.load('ext/certs/client.p12');
+    final remoteCert = await rootBundle.load('ext/certs/server.crt');
+    final securityContext = SecurityContext()
+      ..usePrivateKeyBytes(
+        sslCert.buffer.asInt8List(),
+        password: 'abab12',
+      )
+      ..useCertificateChainBytes(
+        sslCert.buffer.asInt8List(),
+        password: 'abab12',
+      )
+      ..setTrustedCertificatesBytes(
+        remoteCert.buffer.asInt8List(),
+      );
+
+    final client = HttpClient(context: securityContext)
+      ..badCertificateCallback = (
+        cert,
+        host,
+        port,
+      ) =>
+          true;
+
+    return IOClient(client);
+  }
+
+  @override
   Uri get reqURI {
-    final url = 'http://${_env.state.apiEyrDomain}/api/v1/$uri';
+    final url = 'https://${_env.state.apiEyrDomain}/api/v1/$uri';
 
     return switch (method) {
       ApiMethod.get => Uri.parse(url).replace(

@@ -11,6 +11,7 @@ import 'package:eyr/states/mask/mask_cubit.dart';
 import 'package:eyr/states/mask/mask_enum.dart';
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart';
+import 'package:http/io_client.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'api_enum.dart';
@@ -62,14 +63,15 @@ class ApiService {
       _connectivity
           .checkConnectivity()
           .then((_) => _logger.t('$runtimeType $request'))
+          .then((_) => request.client)
           .then(
-            (_) => switch (request.method) {
-              ApiMethod.post => post(
+            (client) => switch (request.method) {
+              ApiMethod.post => client.post(
                   request.reqURI,
                   headers: request.reqHeader,
                   body: request.reqBody,
                 ),
-              ApiMethod.get => get(
+              ApiMethod.get => client.get(
                   request.reqURI,
                 ),
             },

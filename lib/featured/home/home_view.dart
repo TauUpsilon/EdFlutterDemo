@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:equatable/equatable.dart';
 import 'package:eyr/api/eyr_spring_boot/api000/api000_service.dart';

@@ -39,6 +39,7 @@ class HomeCubit extends Cubit<HomeState> {
     await Future.delayed(Durations.extralong4 * 5);
 
     air.cancel();
+
     // await sendToDecrypt();
 
     // ScaffoldMessenger.of(AppNavigator.context).showSnackBar(

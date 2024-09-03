@@ -11,6 +11,8 @@ abstract class ApiRequest with EquatableMixin {
     required this.uri,
   });
 
+  Future<IOClient> get client;
+
   Uri get reqURI;
 
   Map<String, String> get reqHeader;

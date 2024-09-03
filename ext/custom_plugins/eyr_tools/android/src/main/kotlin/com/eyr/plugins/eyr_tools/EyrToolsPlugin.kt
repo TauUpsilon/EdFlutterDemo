@@ -37,17 +37,13 @@ class EyrToolsPlugin: FlutterPlugin, MethodCallHandler {
   }
 
   object OnTheAirHandler : EventChannel.StreamHandler {
-    // Handle event in main thread.
     private var handler = Handler(Looper.getMainLooper())
-
-    // Declare our eventSink later it will be initialized
     private var eventSink: EventChannel.EventSink? = null
 
     @SuppressLint("SimpleDateFormat")
     override fun onListen(p0: Any?, sink: EventChannel.EventSink) {
       eventSink = sink
 
-      // every second send the time
       val r: Runnable = object : Runnable {
         override fun run() {
           handler.post {
@@ -58,6 +54,7 @@ class EyrToolsPlugin: FlutterPlugin, MethodCallHandler {
           handler.postDelayed(this, 1000)
         }
       }
+      
       handler.postDelayed(r, 1000)
     }
 

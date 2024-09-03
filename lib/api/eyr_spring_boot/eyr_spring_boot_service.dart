@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'dart:typed_data';
+import 'dart:io';
 
 import 'package:eyr/api/api_service.dart';
 import 'package:eyr/api/eyr_spring_boot/api000/api000_service.dart';
@@ -7,8 +7,10 @@ import 'package:eyr/shared/services/crypto_service.dart';
 import 'package:eyr/shared/services/logging_service.dart';
 import 'package:eyr/shared/utils/string_util.dart';
 import 'package:eyr/states/env/env_cubit.dart';
+import 'package:flutter/services.dart';
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart';
+import 'package:http/io_client.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:meta/meta_meta.dart';
 
