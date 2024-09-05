@@ -15,9 +15,6 @@ dependencies:
   flutter_localizations:
     sdk: flutter
 
-  custom_math:
-    path: ext/custom_plugins/custom_math
-
   eyr_tools:
     path: ext/custom_plugins/eyr_tools
 
