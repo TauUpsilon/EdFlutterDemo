@@ -1,21 +1,16 @@
-import 'package:equatable/equatable.dart';
-import 'package:eyr/apn/app_routes.dart';
 import 'package:eyr/app/app_widget.dart';
+import 'package:eyr/featured/auth/login/login_cubit.dart';
+import 'package:eyr/featured/auth/login/login_state.dart';
 import 'package:eyr/localised/localiser.g.dart';
 import 'package:eyr/shared/fields/password/password_field.dart';
 import 'package:eyr/shared/mixins/common_viewable.dart';
 import 'package:eyr/shared/widgets/header_widget.dart';
-import 'package:eyr/states/auth/auth_cubit.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get_it/get_it.dart';
-import 'package:go_router/go_router.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:json_paramable_annotation/json_paramable_annotation.dart';
 
-part 'login_cubit.dart';
-part 'login_state.dart';
 part 'login_view.g.dart';
 
 @JsonSerializable(
@@ -66,7 +61,7 @@ class LoginView extends StatelessWidget with CommonViewable {
 
   Widget get _form => BlocBuilder<LoginCubit, LoginState>(
         builder: (context, state) => Form(
-          key: context.read<LoginCubit>()._formKey,
+          key: context.read<LoginCubit>().formKey,
           child: Column(
             children: [
               _passwordInput,
