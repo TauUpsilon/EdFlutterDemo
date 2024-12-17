@@ -1,35 +1,459 @@
 {
-  "version": "2.0.0",
-  "tasks": [
-    {
-      "label": "Launch emulator",
-      "type": "shell",
-      "problemMatcher": [],
-      "command": "emulator -avd Pixel_7_API_34 -feature -Vulkan"
-    },
-    {
-      "label": "Generate annotated files",
-      "type": "shell",
-      "problemMatcher": [],
-      "command": "dart run build_runner build -d"
-    },
-    {
-      "label": "Set launcher icon",
-      "type": "shell",
-      "problemMatcher": [],
-      "command": "dart run flutter_launcher_icons -f flutter_launcher_icon.yaml"
-    },
-    {
-      "label": "Set splash screen",
-      "type": "shell",
-      "problemMatcher": [],
-      "command": "dart run flutter_native_splash:create --path flutter_splash_screen.yaml"
-    },
-    {
-      "label": "Clean",
-      "type": "shell",
-      "problemMatcher": [],
-      "command": "flutter clean;dart pub get"
-    }
-  ]
+	"version": "2.0.0",
+	"inputs": [
+		{
+			"id": "env",
+			"description": "Build environment (sit OR uat)",
+			"type": "pickString",
+			"default": "sit",
+			"options": ["sit", "uat", "prod"]
+		},
+		{
+			"id": "firebase-distribution-note",
+			"description": "Firebase distribution note",
+			"type": "promptString",
+			"default": "You have forgotten you distribution note"
+		},
+		{
+			"id": "firebase-distribution-group",
+			"description": "Firebase distribution tester group",
+			"type": "pickString",
+			"default": "wl-internal-sit-test",
+			"options": [
+				"wl-internal-sit-test",
+				"hsbc",
+				"nta",
+				{
+					"label": "HSBC",
+					"value": "wl-internal-sit-test, hsbc"
+				},
+				{
+					"label": "All",
+					"value": "wl-internal-sit-test, hsbc, nta"
+				}
+			]
+		},
+		{
+			"id": "Env-IP-group",
+			"description": "Select env IP",
+			"type": "pickString",
+			"default": "sit",
+			"options": [
+				{
+					"label": "sit",
+					"value": "10.129.61.23:8085"
+				},
+				{
+					"label": "sit_proxy_http",
+					"value": "10.129.61.11:8185"
+				},
+				{
+					"label": "sit_proxy_https",
+					"value": "10.129.61.11:8085"
+				},
+				{
+					"label": "uat",
+					"value": "10.129.71.23:8085"
+				},
+				{
+					"label": "uat_proxy_http",
+					"value": "10.129.71.11:8185"
+				},
+				{
+					"label": "uat_proxy_https",
+					"value": "10.129.71.11:8085"
+				},
+				{
+					"label": "prod",
+					"value": "card-mob.hsbc.com.tw:443"
+				}
+			]
+		},
+		{
+			"id": "TLSEnabled",
+			"type": "promptString",
+			"description": "Enter your mTLS enable or not",
+			"default": "true"
+		},
+		{
+			"id": "gitUserName",
+			"type": "promptString",
+			"description": "Enter your Git username",
+			"default": ""
+		},
+		{
+			"id": "gitUserEmail",
+			"type": "promptString",
+			"description": "Enter your Git email",
+			"default": ""
+		}
+	],
+	"tasks": [
+		{
+			"label": "Launch emulator",
+			"type": "shell",
+			"problemMatcher": [],
+			"command": "emulator -avd Pixel_7_API_34 -feature -Vulkan"
+		},
+		{
+			"label": "Generate annotated files",
+			"type": "shell",
+			"problemMatcher": [],
+			"command": "dart run build_runner build -d"
+		},
+		{
+			"label": "Set launcher icon",
+			"type": "shell",
+			"problemMatcher": [],
+			"command": "dart run flutter_launcher_icons -f flutter_launcher_icon.yaml"
+		},
+		{
+			"label": "Set splash screen",
+			"type": "shell",
+			"problemMatcher": [],
+			"command": "dart run flutter_native_splash:create --path flutter_splash_screen.yaml"
+		},
+		{
+			"label": "Clean",
+			"type": "shell",
+			"problemMatcher": [],
+			"command": "flutter clean;dart pub get"
+		},
+
+		{
+			"label": "Emulator launch Pixel_5_API_34",
+			"type": "shell",
+			"problemMatcher": [],
+			"command": "emulator -avd Pixel_5_API_34 -feature -Vulkan"
+		},
+		{
+			"label": "Emulator launch Pixel_7_API_34",
+			"type": "shell",
+			"problemMatcher": [],
+			"command": "emulator -avd Pixel_7_API_34 -feature -Vulkan"
+		},
+		{
+			"label": "Emulator screenshot",
+			"type": "shell",
+			"problemMatcher": [],
+			"command": "adb shell input keyevent 120"
+		},
+		{
+			"label": "Generate Annotation Files",
+			"type": "shell",
+			"problemMatcher": [],
+			"command": "dart run build_runner build -d"
+		},
+		{
+			"label": "Generate Translations",
+			"type": "shell",
+			"problemMatcher": [],
+			"command": "dart run easy_localization:generate -S \"assets/translations\" -O \"lib/translations\""
+		},
+		{
+			"label": "Generate Locale Keys",
+			"type": "shell",
+			"problemMatcher": [],
+			"command": "dart run easy_localization:generate -S \"assets/translations\" -O \"lib/translations\" -o \"locale_keys.g.dart\" -f keys"
+		},
+		{
+			"label": "Generate Translation Files",
+			"dependsOn": ["Generate Translations", "Generate Locale Keys"],
+			"dependsOrder": "sequence",
+			"problemMatcher": []
+		},
+		{
+			"label": "Clean",
+			"type": "shell",
+			"problemMatcher": [],
+			"command": "flutter clean;flutter pub get"
+		},
+		{
+			"label": "Pre Build",
+			"type": "shell",
+			"problemMatcher": [],
+			"command": "echo 'Build -> ${input:env}';echo 'set TLSEnabled -> ${input:TLSEnabled}';echo 'set Env-IP-group -> ${input:Env-IP-group}';flutter clean;flutter pub get"
+		},
+		{
+			"label": "Pre Build and Distribute",
+			"type": "shell",
+			"problemMatcher": [],
+			"command": "echo 'Build -> ${input:env}';echo 'set TLSEnabled -> ${input:TLSEnabled}';echo 'set Env-IP-group -> ${input:Env-IP-group}'echo 'Note -> ${input:firebase-distribution-note}';echo 'Group -> ${input:firebase-distribution-group}';flutter clean;flutter pub get"
+		},
+		{
+			"label": "Build IPA",
+			"type": "shell",
+			"problemMatcher": [],
+			"command": "flutter build ipa --release --flavor ${input:env} --obfuscate --split-debug-info=build/symbols --dart-define-from-file=environments/${input:env}.env --dart-define=MTLS_ENABLED=${input:TLSEnabled} --dart-define=HSBC_BASE_URI=${input:Env-IP-group} --export-options-plist=ios/ExportOptions-Release.plist"
+		},
+		{
+			"label": "Build Prod IOS",
+			"type": "shell",
+			"problemMatcher": [],
+			"command": "flutter build ios --release --flavor prod --obfuscate --split-debug-info=build/symbols --dart-define-from-file=environments/prod.env"
+		},
+		{
+			"label": "Archive Prod IOS",
+			"type": "shell",
+			"problemMatcher": [],
+			"command": "xcodebuild -workspace ios/Runner.xcworkspace -scheme prod -archivePath ./build/ios/archives/hsbc-prod.xcarchive clean archive"
+		},
+		{
+			"label": "Firebase IPA Upload Symbols",
+			"type": "shell",
+			"command": "${workspaceFolder}/.vscode/scripts/firebase-upload-symbols.sh",
+			"args": ["${input:env}", "ios"],
+			"problemMatcher": []
+		},
+		{
+			"label": "Firebase IPA Distribution",
+			"type": "shell",
+			"problemMatcher": [],
+			"command": "firebase appdistribution:distribute build/ios/ipa/hsbc_mobile_frontend.ipa --app 1:958693986569:ios:960f5e85886039a6d3c3d8 --release-notes '${input:firebase-distribution-note}' --groups '${input:firebase-distribution-group}'"
+		},
+		{
+			"label": "Open IPA Folder On Unix",
+			"type": "shell",
+			"problemMatcher": [],
+			"command": "open ./build/ios/ipa"
+		},
+		{
+			"label": "Open IOS Archives Folder On Unix",
+			"type": "shell",
+			"problemMatcher": [],
+			"command": "open ./build/ios/archives"
+		},
+		{
+			"label": "Archive Prod IOS On Unix",
+			"dependsOn": [
+				"Clean",
+				"Generate Annotation Files",
+				"Generate Translation Files",
+				"Build Prod IOS",
+				"Archive Prod IOS",
+				"Open IOS Archives Folder On Unix"
+			],
+			"dependsOrder": "sequence",
+			"problemMatcher": []
+		},
+		{
+			"label": "Build IPA On Unix",
+			"dependsOn": [
+				"Pre Build",
+				"Generate Annotation Files",
+				"Generate Translation Files",
+				"Build IPA",
+				"Open IPA Folder On Unix"
+			],
+			"dependsOrder": "sequence",
+			"problemMatcher": []
+		},
+		{
+			"label": "Build and Distribute IPA On Unix",
+			"dependsOn": [
+				"Pre Build and Distribute",
+				"Generate Annotation Files",
+				"Generate Translation Files",
+				"Build IPA",
+				"Firebase IPA Distribution",
+				"Open IPA Folder On Unix"
+			],
+			"dependsOrder": "sequence",
+			"problemMatcher": []
+		},
+		{
+			"label": "Build APK",
+			"type": "shell",
+			"problemMatcher": [],
+			"command": "flutter build apk --release --flavor ${input:env} --obfuscate --split-debug-info=build/symbols --dart-define-from-file=environments/${input:env}.env --dart-define=MTLS_ENABLED=${input:TLSEnabled} --dart-define=HSBC_BASE_URI=${input:Env-IP-group}"
+		},
+		{
+			"label": "Build Prod AAB",
+			"type": "shell",
+			"problemMatcher": [],
+			"command": "flutter build appbundle --release --flavor prod --obfuscate --split-debug-info=build/symbols --dart-define-from-file=environments/prod.env"
+		},
+		{
+			"label": "Firebase APK Upload Symbols",
+			"type": "shell",
+			"command": "${workspaceFolder}/.vscode/scripts/firebase-upload-symbols.sh",
+			"args": ["${input:env}", "android"],
+			"dependsOrder": "sequence",
+			"problemMatcher": []
+		},
+		{
+			"label": "Firebase APK Distribution",
+			"type": "shell",
+			"problemMatcher": [],
+			"command": "firebase appdistribution:distribute build/app/outputs/flutter-apk/app-${input:env}-release.apk --app 1:958693986569:android:5af6a3980c1685dbd3c3d8 --release-notes '${input:firebase-distribution-note}' --groups '${input:firebase-distribution-group}'"
+		},
+		{
+			"label": "Open APK Folder On Unix",
+			"type": "shell",
+			"problemMatcher": [],
+			"command": "open ./build/app/outputs/flutter-apk"
+		},
+		{
+			"label": "Open Bundle Folder On Unix",
+			"type": "shell",
+			"problemMatcher": [],
+			"command": "open ./build/app/outputs/bundle/prodRelease"
+		},
+		{
+			"label": "Open APK Folder On Wins",
+			"type": "shell",
+			"problemMatcher": [],
+			"command": "explorer.exe .\\build\\app\\outputs\\flutter-apk\\"
+		},
+		{
+			"label": "Open Bundle Folder On Wins",
+			"type": "shell",
+			"problemMatcher": [],
+			"command": "explorer.exe .\\build\\app\\outputs\\bundle\\prodRelease\\"
+		},
+		{
+			"label": "Build Prod AAB On Unix",
+			"dependsOn": [
+				"Clean",
+				"Generate Annotation Files",
+				"Generate Translation Files",
+				"Build Prod AAB",
+				"Open Bundle Folder On Unix"
+			],
+			"dependsOrder": "sequence",
+			"problemMatcher": []
+		},
+		{
+			"label": "Build APK On Unix",
+			"dependsOn": [
+				"Pre Build",
+				"Generate Annotation Files",
+				"Generate Translation Files",
+				"Build APK",
+				"Open APK Folder On Unix"
+			],
+			"dependsOrder": "sequence",
+			"problemMatcher": []
+		},
+		{
+			"label": "Build and Distribute APK On Unix",
+			"dependsOn": [
+				"Pre Build and Distribute",
+				"Generate Annotation Files",
+				"Generate Translation Files",
+				"Build APK",
+				"Firebase APK Upload Symbols",
+				"Firebase APK Distribution",
+				"Open APK Folder On Unix"
+			],
+			"dependsOrder": "sequence",
+			"problemMatcher": []
+		},
+		{
+			"label": "Build Prod AAB On Wins",
+			"dependsOn": [
+				"Clean",
+				"Generate Annotation Files",
+				"Generate Translation Files",
+				"Build Prod AAB",
+				"Open Bundle Folder On Wins"
+			],
+			"dependsOrder": "sequence",
+			"problemMatcher": []
+		},
+		{
+			"label": "Build APK On Wins",
+			"dependsOn": [
+				"Pre Build",
+				"Generate Annotation Files",
+				"Generate Translation Files",
+				"Build APK",
+				"Open APK Folder On Wins"
+			],
+			"dependsOrder": "sequence",
+			"problemMatcher": []
+		},
+		{
+			"label": "Build and Distribute APK On Wins",
+			"dependsOn": [
+				"Pre Build and Distribute",
+				"Generate Annotation Files",
+				"Generate Translation Files",
+				"Build APK",
+				"Firebase APK Upload Symbols",
+				"Firebase APK Distribution",
+				"Open APK Folder On Wins"
+			],
+			"dependsOrder": "sequence",
+			"problemMatcher": []
+		},
+		{
+			"label": "Build Prod Both On Unix",
+			"dependsOn": [
+				"Clean",
+				"Generate Annotation Files",
+				"Generate Translation Files",
+				"Build Prod IOS",
+				"Archive Prod IOS",
+				"Build Prod AAB",
+				"Open IOS Archives Folder On Unix",
+				"Open Bundle Folder On Unix"
+			],
+			"dependsOrder": "sequence",
+			"problemMatcher": []
+		},
+		{
+			"label": "Build Both On Unix",
+			"dependsOn": [
+				"Pre Build",
+				"Generate Annotation Files",
+				"Generate Translation Files",
+				"Build IPA",
+				"Build APK",
+				"Open IPA Folder On Unix",
+				"Open APK Folder On Unix"
+			],
+			"dependsOrder": "sequence",
+			"problemMatcher": []
+		},
+		{
+			"label": "Build and Distribute Both On Unix",
+			"dependsOn": [
+				"Pre Build and Distribute",
+				"Generate Annotation Files",
+				"Generate Translation Files",
+				"Build IPA",
+				"Build APK",
+				"Firebase APK Upload Symbols",
+				"Firebase IPA Distribution",
+				"Firebase APK Distribution",
+				"Open IPA Folder On Unix",
+				"Open APK Folder On Unix"
+			],
+			"dependsOrder": "sequence",
+			"problemMatcher": []
+		},
+		//Git control
+		{
+			"label": "Git login",
+			"type": "shell",
+			"problemMatcher": [],
+			"command": "git config user.name '${input:gitUserName}'; git config user.email '${input:gitUserEmail}'",
+			"detail": "Configure Git username and email"
+		},
+		{
+			"label": "Git Logout",
+			"type": "shell",
+			"problemMatcher": [],
+			"command": "git config --unset user.name; git config --unset user.email",
+			"detail": "Unset Git username and email"
+		},
+		{
+			"label": "Git Account Check",
+			"type": "shell",
+			"problemMatcher": [],
+			"command": "git config user.name; git config user.email",
+			"detail": "Check Git username and email"
+		}
+	]
 }
