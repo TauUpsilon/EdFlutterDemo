@@ -1,4 +1,4 @@
-import 'package:eyr/apn/app_routes.dart';
+import 'package:eyr/apn/app/app_routes.dart';
 import 'package:eyr/featured/home/home_view.dart';
 import 'package:go_router/go_router.dart';
 

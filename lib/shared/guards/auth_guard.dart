@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:eyr/apn/app_routes.dart';
+import 'package:eyr/apn/app/app_routes.dart';
 import 'package:eyr/featured/auth/login/login_view.dart';
 import 'package:eyr/shared/abstracts/route_guard.dart';
 import 'package:eyr/states/auth/auth_cubit.dart';

@@ -1,25 +1,13 @@
-import 'dart:convert';
-
-import 'package:equatable/equatable.dart';
-import 'package:eyr/api/eyr_spring_boot/api000/api000_service.dart';
-import 'package:eyr/api/eyr_spring_boot/api001/api001_service.dart';
-import 'package:eyr/apn/app_routes.dart';
 import 'package:eyr/app/app_widget.dart';
-import 'package:eyr/featured/network/network_view.dart';
-import 'package:eyr/shared/services/crypto_service.dart';
-import 'package:eyr/shared/services/logging_service.dart';
+import 'package:eyr/featured/home/classes/application.dart';
+import 'package:eyr/featured/home/home_cubit.dart';
+import 'package:eyr/featured/home/home_state.dart';
 import 'package:eyr/shared/widgets/header_widget.dart';
-import 'package:eyr_tools/eyr_tools.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get_it/get_it.dart';
-import 'package:go_router/go_router.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:json_paramable_annotation/json_paramable_annotation.dart';
 
-part 'home_cubit.dart';
-part 'home_state.dart';
 part 'home_view.g.dart';
 
 @JsonSerializable(
@@ -44,20 +32,20 @@ class HomeView extends StatelessWidget {
         body: SafeArea(
           child: Center(
             child: BlocBuilder<HomeCubit, HomeState>(
-              builder: (context, state) => Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  TextButton(
-                    onPressed: context.read<HomeCubit>().onNavigateToNetwork,
-                    child: const Text('Network'),
+              builder: (context, state) => Padding(
+                padding: const EdgeInsets.fromLTRB(10, 30, 10, 10),
+                child: GridView.builder(
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 4, // Number of columns in the grid
+                    crossAxisSpacing: 10, // Spacing between columns
+                    mainAxisSpacing: 10, // Spacing between rows
+                    childAspectRatio: 0.75,
                   ),
-                  TextButton(
-                    onPressed: () => context.read<HomeCubit>().onTry(),
-                    child: const Text('Try'),
+                  itemCount: context.read<HomeCubit>().apps.length,
+                  itemBuilder: (context, index) => _buildAppInfoTile(
+                    context.read<HomeCubit>().apps[index],
                   ),
-                  Text(state.title),
-                  Text(state.body),
-                ],
+                ),
               ),
             ),
           ),
@@ -65,17 +53,51 @@ class HomeView extends StatelessWidget {
       ),
     );
   }
-}
 
-@JsonSerializable()
-class Test {
-  final String subtest;
+  Widget _buildAppInfoTile(Application app) {
+    return BlocBuilder<HomeCubit, HomeState>(
+      builder: (context, state) => GestureDetector(
+        onTap: () => context.read<HomeCubit>().onApplicationClicked(app),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            // Square container for the icon
+            Container(
+              width: 80, // Width of the box (adjust as needed)
+              height: 80, // Height of the box (adjust as needed)
+              decoration: BoxDecoration(
+                color: Colors.white,
+                border: Border.all(),
+                borderRadius: BorderRadius.circular(20),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.2), // Shadow color
+                    spreadRadius: 4, // Spread effect of shadow
+                    blurRadius: 5, // Blur radius of the shadow
+                    offset: const Offset(2, 2), // Offset of the shadow (x, y)
+                  ),
+                ],
+              ),
+              child: Icon(
+                app.icon,
+                size: 50, // Size of the app icon
+              ),
+            ),
 
-  Test({
-    required this.subtest,
-  });
+            const SizedBox(height: 6),
 
-  factory Test.fromJson(Map<String, dynamic> json) => _$TestFromJson(json);
-
-  Map<String, dynamic> toJson() => _$TestToJson(this);
+            Text(
+              app.label,
+              overflow: TextOverflow.ellipsis, // Truncate with ellipsis
+              maxLines: 1, // Only show one line of text
+              style: const TextStyle(
+                color: Colors.black,
+                fontSize: 16,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 }

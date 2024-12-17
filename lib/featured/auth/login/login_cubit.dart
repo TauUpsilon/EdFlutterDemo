@@ -1,4 +1,11 @@
-part of 'login_view.dart';
+import 'package:eyr/apn/app/app_routes.dart';
+import 'package:eyr/featured/auth/login/login_state.dart';
+import 'package:eyr/shared/fields/password/password_field.dart';
+import 'package:eyr/states/auth/auth_cubit.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
+import 'package:go_router/go_router.dart';
 
 class LoginCubit extends Cubit<LoginState> {
   LoginCubit() : super(LoginState.init());
@@ -6,7 +13,7 @@ class LoginCubit extends Cubit<LoginState> {
   final _auth = GetIt.I<AuthCubit>();
   final _router = GetIt.I<GoRouter>();
 
-  final _formKey = GlobalKey<FormState>();
+  final formKey = GlobalKey<FormState>();
 
   void onPasswordChange(String value) {
     emit(
@@ -23,7 +30,7 @@ class LoginCubit extends Cubit<LoginState> {
     Uri? redirectUrl,
     Map<String, dynamic>? redirectExtra,
   ) async {
-    if (!_formKey.currentState!.validate()) return;
+    if (!formKey.currentState!.validate()) return;
 
     _auth.login();
 

@@ -1,4 +1,6 @@
-part of 'login_view.dart';
+import 'package:equatable/equatable.dart';
+import 'package:eyr/shared/fields/password/password_field.dart';
+import 'package:meta/meta.dart';
 
 @immutable
 sealed class LoginState with EquatableMixin {

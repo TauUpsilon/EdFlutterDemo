@@ -7,22 +7,22 @@
     {
       "name": "Dev",
       "request": "launch",
-      "type": "dart",
       "noDebug": true,
+      "type": "dart",
       "args": ["--flavor", "dev", "--dart-define-from-file=ext/env/dev.env"]
     },
     {
       "name": "Pre",
       "request": "launch",
-      "type": "dart",
       "noDebug": true,
+      "type": "dart",
       "args": ["--flavor", "pre", "--dart-define-from-file=ext/env/pre.env"]
     },
     {
       "name": "Pub",
       "request": "launch",
-      "type": "dart",
       "noDebug": true,
+      "type": "dart",
       "args": ["--flavor", "pub", "--dart-define-from-file=ext/env/pub.env"]
     }
   ]

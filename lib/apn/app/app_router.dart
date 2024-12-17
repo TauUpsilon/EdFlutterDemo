@@ -1,8 +1,7 @@
-import 'package:eyr/apn/app_routes.dart';
+import 'package:eyr/apn/app/app_routes.dart';
 import 'package:eyr/apn/auth/auth_router.dart';
 import 'package:eyr/apn/common/common_router.dart';
 import 'package:eyr/apn/home/home_router.dart';
-import 'package:eyr/apn/network/network_router.dart';
 import 'package:eyr/app/app_navigator.dart';
 import 'package:eyr/states/init/init_cubit.dart';
 import 'package:flutter/material.dart';
@@ -28,10 +27,9 @@ final appRoutingConfig = ValueNotifier<RoutingConfig>(
           );
         },
       ),
-      commonRouter,
       authRouter,
       homeRouter,
-      networkRouter,
+      commonRouter,
     ],
   ),
 );
